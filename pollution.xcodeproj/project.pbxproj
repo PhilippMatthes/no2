@@ -7,14 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22C2171FA34D2B008D7659 /* Constants.swift */; };
+		BE988FB01FA1F015007C24CF /* PollutionDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */; };
+		BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */; };
+		BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */; };
+		BE992FC21FA20B4000727BC0 /* DatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */; };
+		BE992FC41FA21D5D00727BC0 /* ColorCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FC31FA21D5D00727BC0 /* ColorCircle.swift */; };
+		BEDA12001FA2324400A3EF51 /* JDSwiftHeatMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDA12011FA2324400A3EF51 /* JDSwiftHeatMap.framework */; };
 		BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */; };
 		BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */; };
 		BEE82D8E1FA1C35600BEBAF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE82D8C1FA1C35600BEBAF4 /* Main.storyboard */; };
 		BEE82D901FA1C35600BEBAF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEE82D8F1FA1C35600BEBAF4 /* Assets.xcassets */; };
 		BEE82D931FA1C35600BEBAF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE82D911FA1C35600BEBAF4 /* LaunchScreen.storyboard */; };
+		F316DA5655435BED9DC5FF47 /* Pods_pollution.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78997E7465D6932446FC3389 /* Pods_pollution.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		17EFE4498692B5A74E153168 /* Pods-pollution.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pollution.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pollution/Pods-pollution.debug.xcconfig"; sourceTree = "<group>"; };
+		78997E7465D6932446FC3389 /* Pods_pollution.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pollution.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE22C2171FA34D2B008D7659 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionDataEntry.swift; sourceTree = "<group>"; };
+		BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionMeasurement.swift; sourceTree = "<group>"; };
+		BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionAnnotation.swift; sourceTree = "<group>"; };
+		BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseCaller.swift; sourceTree = "<group>"; };
+		BE992FC31FA21D5D00727BC0 /* ColorCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCircle.swift; sourceTree = "<group>"; };
+		BEDA11FF1FA22B9100A3EF51 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEDA12011FA2324400A3EF51 /* JDSwiftHeatMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JDSwiftHeatMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE82D851FA1C35600BEBAF4 /* pollution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pollution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +40,7 @@
 		BEE82D8F1FA1C35600BEBAF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEE82D921FA1C35600BEBAF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEE82D941FA1C35600BEBAF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F95E6C92C1F242651009C969 /* Pods-pollution.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pollution.release.xcconfig"; path = "Pods/Target Support Files/Pods-pollution/Pods-pollution.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +48,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEDA12001FA2324400A3EF51 /* JDSwiftHeatMap.framework in Frameworks */,
+				F316DA5655435BED9DC5FF47 /* Pods_pollution.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A934949B0D42C0E0CDE14F4F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				17EFE4498692B5A74E153168 /* Pods-pollution.debug.xcconfig */,
+				F95E6C92C1F242651009C969 /* Pods-pollution.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		BEE82D7C1FA1C35600BEBAF4 = {
 			isa = PBXGroup;
 			children = (
 				BEE82D871FA1C35600BEBAF4 /* pollution */,
 				BEE82D861FA1C35600BEBAF4 /* Products */,
+				A934949B0D42C0E0CDE14F4F /* Pods */,
+				C355A3DFC11229856E2E997C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +88,28 @@
 			children = (
 				BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */,
 				BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */,
+				BE22C2171FA34D2B008D7659 /* Constants.swift */,
+				BE992FC31FA21D5D00727BC0 /* ColorCircle.swift */,
+				BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */,
+				BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */,
+				BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */,
+				BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */,
 				BEE82D8C1FA1C35600BEBAF4 /* Main.storyboard */,
 				BEE82D8F1FA1C35600BEBAF4 /* Assets.xcassets */,
 				BEE82D911FA1C35600BEBAF4 /* LaunchScreen.storyboard */,
 				BEE82D941FA1C35600BEBAF4 /* Info.plist */,
 			);
 			path = pollution;
+			sourceTree = "<group>";
+		};
+		C355A3DFC11229856E2E997C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BEDA12011FA2324400A3EF51 /* JDSwiftHeatMap.framework */,
+				BEDA11FF1FA22B9100A3EF51 /* DTMHeatmap.framework */,
+				78997E7465D6932446FC3389 /* Pods_pollution.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +119,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BEE82D971FA1C35600BEBAF4 /* Build configuration list for PBXNativeTarget "pollution" */;
 			buildPhases = (
+				6D827D2A8F832212020F9E30 /* [CP] Check Pods Manifest.lock */,
 				BEE82D811FA1C35600BEBAF4 /* Sources */,
 				BEE82D821FA1C35600BEBAF4 /* Frameworks */,
 				BEE82D831FA1C35600BEBAF4 /* Resources */,
+				A741B6C8BE74149C12C9F2F4 /* [CP] Embed Pods Frameworks */,
+				FBEC8143DBDCDFEBC6433396 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,13 +182,73 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6D827D2A8F832212020F9E30 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-pollution-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A741B6C8BE74149C12C9F2F4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-pollution/Pods-pollution-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JDSwiftHeatMap/JDSwiftHeatMap.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDSwiftHeatMap.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pollution/Pods-pollution-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBEC8143DBDCDFEBC6433396 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-pollution/Pods-pollution-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BEE82D811FA1C35600BEBAF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE992FC41FA21D5D00727BC0 /* ColorCircle.swift in Sources */,
 				BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */,
+				BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */,
+				BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */,
+				BE988FB01FA1F015007C24CF /* PollutionDataEntry.swift in Sources */,
 				BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */,
+				BE992FC21FA20B4000727BC0 /* DatabaseCaller.swift in Sources */,
+				BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,13 +383,15 @@
 		};
 		BEE82D981FA1C35600BEBAF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17EFE4498692B5A74E153168 /* Pods-pollution.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S36925NV4E;
 				INFOPLIST_FILE = pollution/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.pollution;
+				PRODUCT_BUNDLE_IDENTIFIER = pollution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -287,13 +400,15 @@
 		};
 		BEE82D991FA1C35600BEBAF4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F95E6C92C1F242651009C969 /* Pods-pollution.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S36925NV4E;
 				INFOPLIST_FILE = pollution/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.pollution;
+				PRODUCT_BUNDLE_IDENTIFIER = pollution;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
