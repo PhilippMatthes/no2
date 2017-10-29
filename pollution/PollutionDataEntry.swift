@@ -38,4 +38,16 @@ class PollutionDataEntry: Hashable {
         return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
     }
     
+    func getMostRecentMeasurement() -> PollutionMeasurement? {
+        var mostRecentMeasurement: PollutionMeasurement?
+        var mostRecentTimeDifference = Date().timeIntervalSince1970
+        for measurement in measurements! {
+            let measurementTimeDifference = measurement.timeDifferenceInSeconds(toDate: Date())
+            if  measurementTimeDifference < mostRecentTimeDifference {
+                mostRecentTimeDifference = measurementTimeDifference
+                mostRecentMeasurement = measurement
+            }
+        }
+        return mostRecentMeasurement
+    }
 }

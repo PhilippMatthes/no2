@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "530831188.081782"
+            timestampString = "530994040.724628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
             landmarkName = "updateAnnotations(withType:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "530831188.082375"
+            timestampString = "530994040.724701"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
             landmarkName = "ViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "530831188.082843"
+            timestampString = "530994040.724755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "530831188.083306"
+            timestampString = "530994040.724803"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,12 +74,92 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "530831188.083768"
+            timestampString = "530994040.724851"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/ViewController.swift"
+            timestampString = "530994040.724897"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "didTypMapView(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DetailController.swift"
+            timestampString = "530994040.724945"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "updateChart(withType:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DetailController.swift"
+            timestampString = "530994040.725518"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "updateChart(withType:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DetailController.swift"
+            timestampString = "530994040.725972"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "updateChart(withType:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DetailController.swift"
+            timestampString = "530994040.726429"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "updateChart(withType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,13 +169,221 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "pollution/ViewController.swift"
-            timestampString = "530831188.084217"
+            filePath = "pollution/DatabaseCaller.swift"
+            timestampString = "530994040.726842"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "didTypMapView(_:)"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "makeLocalRequest(forLocation:withLimit:toDate:fromDetailController:withPreviousController:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DatabaseCaller.swift"
+            timestampString = "530994040.7269"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "makeLocalRequest(forLocation:withLimit:toDate:fromDetailController:withPreviousController:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in static pollution.DatabaseCaller.makeLocalRequest(forLongitude: Swift.Double, forLatitude: Swift.Double, forRadius: Swift.Int, withLimit: Swift.Int, toDate: Swift.String, fromDetailController: pollution.DetailController, withPreviousController: pollution.ViewController) -&gt; Swift.Array&lt;pollution.PollutionDataEntry&gt;"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/DatabaseCaller.swift"
+                  timestampString = "530972960.158656"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "183"
+                  endingLineNumber = "183"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #3 () -&gt; () in static pollution.DatabaseCaller.makeLocalRequest(forLongitude: Swift.Double, forLatitude: Swift.Double, forRadius: Swift.Int, withLimit: Swift.Int, toDate: Swift.String, fromDetailController: pollution.DetailController, withPreviousController: pollution.ViewController) -&gt; Swift.Array&lt;pollution.PollutionDataEntry&gt;"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/DatabaseCaller.swift"
+                  timestampString = "530972960.160023"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "184"
+                  endingLineNumber = "184"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DatabaseCaller.swift"
+            timestampString = "530994040.726946"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "makeLocalRequest(forLocation:withLimit:toDate:fromDetailController:withPreviousController:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DatabaseCaller.swift"
+            timestampString = "530994040.726991"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "makeLocalRequest(forLocation:withLimit:toDate:fromDetailController:withPreviousController:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static pollution.DatabaseCaller.makeLocalRequest(forLongitude: Swift.Double, forLatitude: Swift.Double, forRadius: Swift.Int, withLimit: Swift.Int, toDate: Swift.String, fromDetailController: pollution.DetailController, withPreviousController: pollution.ViewController) -&gt; Swift.Array&lt;pollution.PollutionDataEntry&gt;"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/DatabaseCaller.swift"
+                  timestampString = "530972960.16562"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "10308">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in static pollution.DatabaseCaller.makeLocalRequest(forLongitude: Swift.Double, forLatitude: Swift.Double, forRadius: Swift.Int, withLimit: Swift.Int, toDate: Swift.String, fromDetailController: pollution.DetailController, withPreviousController: pollution.ViewController) -&gt; Swift.Array&lt;pollution.PollutionDataEntry&gt;"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/DatabaseCaller.swift"
+                  timestampString = "530972960.167093"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "183"
+                  endingLineNumber = "183"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DatabaseCaller.swift"
+            timestampString = "530994040.727036"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "makeLocalRequest(forLocation:withLimit:toDate:fromDetailController:withPreviousController:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DatabaseCaller.swift"
+            timestampString = "530994040.727078"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "makeLocalRequest(forLocation:withLimit:toDate:fromDetailController:withPreviousController:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DatabaseCaller.swift"
+            timestampString = "530994040.72712"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "makeLocalRequest(forLocation:withLimit:toDate:fromDetailController:withPreviousController:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in static pollution.DatabaseCaller.makeLocalRequest(forLongitude: Swift.Double, forLatitude: Swift.Double, forRadius: Swift.Int, withLimit: Swift.Int, toDate: Swift.String, fromDetailController: pollution.DetailController, withPreviousController: pollution.ViewController) -&gt; Swift.Array&lt;pollution.PollutionDataEntry&gt;"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/DatabaseCaller.swift"
+                  timestampString = "530972960.175834"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "212">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #3 () -&gt; () in static pollution.DatabaseCaller.makeLocalRequest(forLongitude: Swift.Double, forLatitude: Swift.Double, forRadius: Swift.Int, withLimit: Swift.Int, toDate: Swift.String, fromDetailController: pollution.DetailController, withPreviousController: pollution.ViewController) -&gt; Swift.Array&lt;pollution.PollutionDataEntry&gt;"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/DatabaseCaller.swift"
+                  timestampString = "530972960.177193"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "92">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/DatabaseCaller.swift"
+            timestampString = "530994040.727164"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
+            landmarkName = "makeLocalRequest(forLocation:withLimit:toDate:fromDetailController:withPreviousController:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

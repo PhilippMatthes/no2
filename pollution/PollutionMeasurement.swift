@@ -27,4 +27,20 @@ class PollutionMeasurement {
     }
     
     init() {}
+    
+    func timeDifferenceInSeconds(toDate referenceDate: Date) -> Double {
+        let dateFormatter = DateFormatter()
+        let checkDate = String(self.date!.prefix(10))
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: checkDate)
+        return referenceDate.timeIntervalSince(date!)
+    }
+    
+    func wasUpdatedToday() -> Bool {
+        let dateFormatter = DateFormatter()
+        let checkDate = String(self.date!.prefix(10))
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.date(from: checkDate)
+        return Date().timeIntervalSince(date!) <= 86400
+    }
 }

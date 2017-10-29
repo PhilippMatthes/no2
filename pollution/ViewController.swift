@@ -8,11 +8,12 @@
 
 import UIKit
 import MapKit
+import Foundation
 
 class ViewController: UIViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchButtonBackground: UIView!
-    @IBOutlet weak var unitLabelBackground: UIView!
+    @IBOutlet weak var unitLabelBackground: UIProgressView!
     @IBOutlet weak var unitLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     
@@ -20,6 +21,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var overlays = [MKCircle]()
     var maxvalue: Double?
     var currentType: String?
+    var requestSent = false
     
     fileprivate var searchController: UISearchController!
     fileprivate var localSearchRequest: MKLocalSearchRequest!
@@ -30,6 +32,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     fileprivate var locationManager: CLLocationManager!
     fileprivate var isCurrentLocation: Bool = false
     fileprivate var activityIndicator: UIActivityIndicatorView!
+    
+    var selectedAnnotation: PollutionAnnotation?
 
 
     override func viewDidLoad() {
@@ -70,14 +74,80 @@ class ViewController: UIViewController, UISearchBarDelegate {
         for polygon in 0..<mapView.overlays.count {
             if let circle = mapView.overlays[polygon] as? MKCircle {
                 if circle.intersects(mapRect) {
-                    print("found")
                     let newCircle = MKCircle(center: circle.coordinate, radius: circle.radius+(circle.radius/10))
+                    
+                    let alertController = UIAlertController(title: "Measurement selection.", message: "Select the corresponding measurement to display more information.", preferredStyle: UIAlertControllerStyle.actionSheet)
+                    
+                    alertController.view.tintColor = UIColor.gray
+                    
+                    for annotation in map {
+                        if annotation.coordinate.latitude == circle.coordinate.latitude {
+                            if annotation.coordinate.longitude == circle.coordinate.longitude {
+                                let mostRecentMeasurement = annotation.entry!.getMostRecentMeasurement()!
+                                
+                                let dateString = String(mostRecentMeasurement.date!.prefix(10))
+                                
+                                var titleString = "\(annotation.title!) (\(dateString))"
+                                if mostRecentMeasurement.wasUpdatedToday() {
+                                    titleString = "\(annotation.title!) (Today)"
+                                }
+                                
+                                let menuAction = UIAlertAction (
+                                    title: titleString,
+                                    style: UIAlertActionStyle.default
+                                ) {
+                                    (action) -> Void in
+                                    self.selectedAnnotation = annotation
+                                    self.performSegue(withIdentifier: "showDetail", sender: self)
+                                }
+                                
+                                var locationAlreadyInController = false
+                                for action in alertController.actions {
+                                    if action.title! == titleString {
+                                        locationAlreadyInController = true
+                                    }
+                                }
+                                if !locationAlreadyInController {
+                                    alertController.addAction(menuAction)
+                                }
+                                
+                                
+                            }
+                        }
+                    }
+                    
+                    let cancelButtonAction = UIAlertAction (
+                        title: "Cancel",
+                        style: UIAlertActionStyle.cancel
+                    ) {
+                        (action) -> Void in
+                    }
+                    
+                    alertController.addAction(cancelButtonAction)
+                    
+                    let popOver = alertController.popoverPresentationController
+                    popOver?.sourceView = view
+                    popOver?.sourceRect = view.bounds
+                    popOver?.permittedArrowDirections = UIPopoverArrowDirection.any
+                    
                     newCircle.title = circle.title
                     newCircle.subtitle = circle.subtitle
                     mapView.add(newCircle)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                         self.mapView.remove(newCircle)
                     })
+                    
+                    if presentedViewController == nil {
+                        self.present(alertController, animated: true, completion: nil)
+                        return
+                    } else{
+                        self.dismiss(animated: true) { () -> Void in
+                            self.present(alertController, animated: true, completion: nil)
+                            return
+                        }
+                    }
+                    
+                    
                 }
             }
         }
@@ -128,7 +198,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
 
     @IBAction func infoButtonClicked(_ sender: UIButton) {
-        print("Display info")
+        performSegue(withIdentifier: "showUnitInformation", sender: sender)
     }
     
     @objc func calloutTapped(sender:UITapGestureRecognizer) {
@@ -139,6 +209,12 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func initUI() {
+        
+        unitLabelBackground.progressViewStyle = .bar
+        unitLabelBackground.setProgress(0.0, animated: true)
+        unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
+        unitLabelBackground.clipsToBounds = true
+        
         currentType = Constants.units.first
         unitLabel.text = currentType?.capitalized
         unitLabelBackground.layer.backgroundColor = Constants.colors[currentType!]!.cgColor
@@ -179,8 +255,13 @@ class ViewController: UIViewController, UISearchBarDelegate {
         })
     }
     
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+        updateAnnotations(withType: currentType!)
+    }
+    
     func updateAnnotations(withType type: String) {
-        print("Updating annotations")
+        
+        unitLabelBackground.setProgress(0.8, animated: true)
         
         mapView.removeAnnotations(map)
         map.removeAll()
@@ -191,13 +272,31 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         
         DispatchQueue.global(qos: .default).async {
-            for entry in DatabaseCaller.makeRequest(forLongitude: self.mapView.region.center.longitude,
-                                                    forLatitude: self.mapView.region.center.latitude,
-                                                    forRadius: Int(radius),
-                                                    withLimit: 1000) {
-                                                        let annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
-                                                        self.mapView.addAnnotation(annotation)
-                                                        self.map.append(annotation)
+            self.requestSent = true
+            var currentProgress = 0.0 as Float
+            DispatchQueue.main.async {
+                currentProgress = self.unitLabelBackground.progress
+            }
+            
+            let limit = 1000
+            
+            let request = DatabaseCaller.makeLatestRequest(forLongitude: self.mapView.region.center.longitude,
+                                       forLatitude: self.mapView.region.center.latitude,
+                                       forRadius: Int(radius),
+                                       withLimit: limit)
+            
+            let progressIncrement = (1-currentProgress)/Float(request.count)
+            
+            
+            for entry in request{
+                currentProgress += progressIncrement
+                DispatchQueue.main.async {
+                    self.unitLabelBackground.setProgress(currentProgress, animated: false)
+                }
+                
+                let annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
+                self.mapView.addAnnotation(annotation)
+                self.map.append(annotation)
             }
             
             DispatchQueue.main.async {
@@ -215,7 +314,13 @@ class ViewController: UIViewController, UISearchBarDelegate {
                         }
                     }
                 }
+                
+                self.requestSent = false
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.unitLabelBackground.setProgress(0.0, animated: true)
+            })
+            
         }
     }
     
@@ -245,6 +350,20 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showUnitInformation" {
+            let vc = segue.destination as! UnitInformationController
+            vc.previousViewController = self
+            vc.initDesign(withColor: Constants.colors[currentType!]!, andUnit: currentType!)
+        }
+        if segue.identifier == "showDetail" {
+            let vc = segue.destination as! DetailController
+            vc.previousViewController = self
+            vc.annotationThatWasClicked = selectedAnnotation
+            vc.initDesign(withColor: Constants.colors[currentType!]!, andUnit: currentType!)
+        }
     }
 
 }

@@ -8,16 +8,18 @@
 
 import Foundation
 import MapKit
-
+import SwiftSpinner
 
 class DatabaseCaller {
     
-
-    static func makeRequest(forLongitude longitude: Double, forLatitude latitude: Double, forRadius radius: Int, withLimit limit: Int) -> [PollutionDataEntry] {
+    
+    static func makeLatestRequest(forLongitude longitude: Double, forLatitude latitude: Double, forRadius radius: Int, withLimit limit: Int) -> [PollutionDataEntry] {
         
         var output = [PollutionDataEntry]()
         
         let request = URLRequest(url: NSURL(string: "https://api.openaq.org/v1/latest?has_geo=true&coordinates=\(latitude),\(longitude)&limit=\(limit)&radius=\(radius)")! as URL)
+        
+
         do {
             // Perform the request
             
@@ -88,6 +90,101 @@ class DatabaseCaller {
             }
         } catch {
             print(error)
+        }
+        return output
+    }
+    
+    static func makeLocalRequest(forLocation location: String, withLimit limit: Int, toDate dateTo: String, fromDetailController controller: DetailController, withPreviousController previousController: ViewController) -> [PollutionDataEntry] {
+        
+        var didRespond: Bool = false
+        
+        DispatchQueue.main.async {
+            SwiftSpinner.show("Loading\ndata").addTapHandler({
+                SwiftSpinner.hide()
+                controller.performSegueToReturnBack()
+            }, subtitle: "Tap to cancel.")
+        }
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
+            if !didRespond {
+                SwiftSpinner.show("Loading\ndata").addTapHandler({
+                    SwiftSpinner.hide()
+                    controller.performSegueToReturnBack()
+                }, subtitle: "Our request is taking longer than expected. Server load may be too high. Tap to cancel.")
+            }
+        })
+        
+        var output = [PollutionDataEntry]()
+        
+        let request = URLRequest(url: NSURL(string: "https://api.openaq.org/v1/measurements?has_geo=true&location=\(location)&limit=\(limit)")! as URL)
+        
+        
+        do {
+            // Perform the request
+            
+            let response: AutoreleasingUnsafeMutablePointer<URLResponse?>? = nil
+            let data = try NSURLConnection.sendSynchronousRequest(request, returning: response)
+            
+            // Convert the data to JSON
+            if let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
+                if let results = jsonSerialized["results"]{
+                    if let resultsSerialized = results as? (Array<[String : Any]>) {
+                        let entry = PollutionDataEntry()
+                        entry.measurements = [PollutionMeasurement]()
+                        for result in resultsSerialized {
+                            if let city = result["city"] as? String {
+                                entry.city = city
+                            }
+                            if let coordinates = result["coordinates"] as? [String : Any] {
+                                if let latitude = coordinates["latitude"] as? Double {
+                                    entry.latitude = latitude
+                                }
+                                if let longitude = coordinates["longitude"] as? Double {
+                                    entry.longitude = longitude
+                                }
+                            }
+                            entry.distance = 0
+                            if let location = result["location"] as? String {
+                                entry.location = location
+                            }
+                            if let country = result["country"] as? String {
+                                entry.country = country
+                            }
+                            let measurement = PollutionMeasurement()
+                            if let value = result["value"] as? Double {
+                                measurement.value = value
+                            }
+                            if let unit = result["unit"] as? String {
+                                measurement.unit = unit
+                            }
+                            if let parameter = result["parameter"] as? String {
+                                measurement.type = parameter
+                            }
+                            if let date = result["date"] as? [String: Any] {
+                                if let local = date["local"] as? String {
+                                    measurement.date = local
+                                }
+                            }
+                            entry.measurements!.append(measurement)
+                        }
+                        output.append(entry)
+                    }
+                }
+            }
+            didRespond = true
+            SwiftSpinner.hide()
+        } catch {
+            print(error)
+            didRespond = false
+        }
+        if !didRespond {
+            DispatchQueue.main.async {
+                SwiftSpinner.show("Failed to\nload data", animated: false).addTapHandler({
+                    SwiftSpinner.hide()
+                    controller.performSegueToReturnBack()
+                }, subtitle: "Tap to return.")
+            }
         }
         return output
     }
