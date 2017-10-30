@@ -12,7 +12,6 @@ import SwiftSpinner
 
 class DatabaseCaller {
     
-    
     static func makeLatestRequest(forLongitude longitude: Double, forLatitude latitude: Double, forRadius radius: Int, withLimit limit: Int) -> [PollutionDataEntry] {
         
         var output = [PollutionDataEntry]()
@@ -96,8 +95,6 @@ class DatabaseCaller {
     
     static func makeLocalRequest(forLocation location: String, withLimit limit: Int, toDate dateTo: String, fromDetailController controller: DetailController, withPreviousController previousController: ViewController) -> [PollutionDataEntry] {
         
-        var didRespond: Bool = false
-        
         DispatchQueue.main.async {
             SwiftSpinner.show("Loading\ndata").addTapHandler({
                 SwiftSpinner.hide()
@@ -105,19 +102,13 @@ class DatabaseCaller {
             }, subtitle: "Tap to cancel.")
         }
         
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: {
-            if !didRespond {
-                SwiftSpinner.show("Loading\ndata").addTapHandler({
-                    SwiftSpinner.hide()
-                    controller.performSegueToReturnBack()
-                }, subtitle: "Our request is taking longer than expected. Server load may be too high. Tap to cancel.")
-            }
-        })
-        
         var output = [PollutionDataEntry]()
         
-        let request = URLRequest(url: NSURL(string: "https://api.openaq.org/v1/measurements?has_geo=true&location=\(location)&limit=\(limit)")! as URL)
+        let locationEncoded = location.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        let urlString = "https://api.openaq.org/v1/measurements?has_geo=true&location=\(locationEncoded)&limit=\(limit)&date_to=\(dateTo)"
+        
+        let request = URLRequest(url: NSURL(string: urlString)! as URL)
         
         
         do {
@@ -172,18 +163,18 @@ class DatabaseCaller {
                     }
                 }
             }
-            didRespond = true
             SwiftSpinner.hide()
         } catch {
             print(error)
-            didRespond = false
-        }
-        if !didRespond {
             DispatchQueue.main.async {
-                SwiftSpinner.show("Failed to\nload data", animated: false).addTapHandler({
-                    SwiftSpinner.hide()
-                    controller.performSegueToReturnBack()
-                }, subtitle: "Tap to return.")
+                if controller.isViewLoaded && (controller.view.window != nil) {
+                    DispatchQueue.main.async {
+                        SwiftSpinner.show("Failed to\nload data", animated: false).addTapHandler({
+                            SwiftSpinner.hide()
+                            controller.performSegueToReturnBack()
+                        }, subtitle: "Tap to return.")
+                    }
+                }
             }
         }
         return output
@@ -192,11 +183,6 @@ class DatabaseCaller {
     static func generateMapAnnotation(entry: PollutionDataEntry) -> PollutionAnnotation {
         let annotation = PollutionAnnotation()
         annotation.setCoordinate(newCoordinate: CLLocationCoordinate2D(latitude: entry.latitude!, longitude: entry.longitude!))
-        var subtitle = ""
-        for measurement in entry.measurements! {
-            subtitle += String(measurement.value!)+" "+measurement.unit!+", "
-        }
-        annotation.subtitle = subtitle
         annotation.title = entry.location
         annotation.entry = entry
         return annotation

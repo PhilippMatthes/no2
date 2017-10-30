@@ -10,9 +10,14 @@ import Foundation
 import Charts
 import SwiftSpinner
 import UIKit
+import Dropper
+
 
 class DetailController: UIViewController, ChartViewDelegate {
     
+    @IBOutlet weak var timeLabelButton: UIButton!
+    @IBOutlet weak var timeLabelBackground: UIProgressView!
+    @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var unitLabel: UILabel!
     @IBOutlet weak var infoButton: UIButton!
     @IBOutlet weak var unitLabelBackground: UIProgressView!
@@ -21,6 +26,9 @@ class DetailController: UIViewController, ChartViewDelegate {
     var annotationThatWasClicked: PollutionAnnotation?
     var previousViewController: ViewController?
     var currentType: String?
+    var showsIntradayInformation = true
+    
+    let dropper = Dropper(width: 75, height: 200)
     
     @IBOutlet weak var emissionChart: LineChartView!
     @IBOutlet weak var reflectionChart: LineChartView!
@@ -32,15 +40,20 @@ class DetailController: UIViewController, ChartViewDelegate {
         
         currentType = previousViewController!.currentType
         
-        let date = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
+        getData(fromDaysAgo: 0, intraday: showsIntradayInformation)
+        
+    }
+    
+    func getData(fromDaysAgo days: Int, intraday: Bool) {
+        let date = Calendar.current.date(byAdding: .day, value: -days, to: Date())!
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from:date as Date)
         DispatchQueue.global(qos: .default).async {
-            self.measurements = DatabaseCaller.makeLocalRequest(forLocation: self.annotationThatWasClicked!.entry!.location!,                                                   withLimit: 100, toDate:  dateString, fromDetailController: self, withPreviousController: self.previousViewController!)
+            self.measurements = DatabaseCaller.makeLocalRequest(forLocation: self.annotationThatWasClicked!.entry!.location!,                                                   withLimit: 10000, toDate:  dateString, fromDetailController: self, withPreviousController: self.previousViewController!)
             DispatchQueue.main.async {
                 if !self.view.isHidden {
-                    self.setUpChart(withType: self.currentType!)
+                    self.setUpChart(withType: self.currentType!, intraday: intraday)
                 }
             }
         }
@@ -55,8 +68,23 @@ class DetailController: UIViewController, ChartViewDelegate {
         unitLabelBackground.setProgress(0.0, animated: true)
         unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
         unitLabelBackground.clipsToBounds = true
+        
+        let timeButtonRecognizer = UITapGestureRecognizer(target: self, action:  #selector (self.timeButtonClicked(sender:)))
+        timeLabelBackground.addGestureRecognizer(timeButtonRecognizer)
+        timeLabelBackground.layer.cornerRadius = Constants.cornerRadius
+        timeLabelBackground.progressViewStyle = .bar
+        timeLabelBackground.setProgress(0.0, animated: true)
+        timeLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
+        timeLabelBackground.clipsToBounds = true
+        
         infoButton.layer.cornerRadius = 12
         view.addSubview(unitLabelBackground)
+        
+        dropper.items = [String] (Constants.timeSpaces.keys)
+        dropper.cellBackgroundColor = UIColor.white
+        dropper.cornerRadius = Constants.cornerRadius
+        dropper.delegate = self
+        
         changeColor(to: color)
     }
     
@@ -66,19 +94,35 @@ class DetailController: UIViewController, ChartViewDelegate {
         currentType = Constants.units[index]
         changeColor(to: Constants.colors[currentType!]!)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.updateChart(withType: self.currentType!)
+            self.updateChart(withType: self.currentType!, intraday: self.showsIntradayInformation)
         })
-        
         
         unitLabelBackground.animateButtonPress(withBorderColor: Constants.colors[currentType!]!, width: 4.0, andDuration: 0.1)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
             self.unitLabelBackground.animateButtonRelease(withBorderColor: Constants.colors[self.currentType!]!, width: 4.0, andDuration: 0.1)
         })
     }
+    @objc func timeButtonClicked(sender:UITapGestureRecognizer) {
+        
+        if dropper.status == .hidden {
+            dropper.showWithAnimation(0.15, options: .left, button: timeLabelButton)
+        } else {
+            dropper.hideWithAnimation(0.1)
+        }
+        
+        
+        timeLabelBackground.animateButtonPress(withBorderColor: Constants.colors[currentType!]!, width: 4.0, andDuration: 0.1)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            self.timeLabelBackground.animateButtonRelease(withBorderColor: Constants.colors[self.currentType!]!, width: 4.0, andDuration: 0.1)
+        })
+    }
     
     func changeColor(to color: UIColor) {
+        dropper.cellColor = Constants.colors[currentType!]
+        
         unitLabel.text = currentType!.capitalized
         unitLabel.textColor = Constants.colors[currentType!]
+        timeLabel.textColor = Constants.colors[currentType!]
         infoButton.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
         
         SwiftSpinner.sharedInstance.innerColor = color
@@ -115,7 +159,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         return true
     }
     
-    func updateChart(withType type: String) {
+    func updateChart(withType type: String, intraday: Bool) {
         var backgroundLog = [Double]()
         var emissionLog = [Double]()
         var dateLog = [String]()
@@ -128,11 +172,11 @@ class DetailController: UIViewController, ChartViewDelegate {
                     let cutOff = String(measurement.date!.dropFirst(11))
                     let time = String(cutOff.prefix(5))
                     let date = String(measurement.date!.prefix(10))
-                    if time == "00:00:00" {
-                        dateLog.append(date)
+                    if intraday {
+                        dateLog.append(time)
                     }
                     else {
-                        dateLog.append(time)
+                        dateLog.append(date)
                     }
                 }
             }
@@ -142,7 +186,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         }
         
         emissionChart.xAxis.valueFormatter = IndexAxisValueFormatter(values:dateLog)
-        emissionChart.xAxis.setLabelCount(dateLog.count/4, force: false)
+        emissionChart.xAxis.setLabelCount(dateLog.count/10, force: false)
         emissionChart.xAxis.labelRotationAngle = 45
         emissionChart.xAxis.labelTextColor = UIColor.white
         
@@ -216,7 +260,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         reflectionChart.notifyDataSetChanged()
     }
     
-    func setUpChart(withType type: String) {
+    func setUpChart(withType type: String, intraday: Bool) {
         var backgroundLog = [Double]()
         var emissionLog = [Double]()
         var dateLog = [String]()
@@ -229,11 +273,11 @@ class DetailController: UIViewController, ChartViewDelegate {
                     let cutOff = String(measurement.date!.dropFirst(11))
                     let time = String(cutOff.prefix(5))
                     let date = String(measurement.date!.prefix(10))
-                    if time == "00:00:00" {
-                        dateLog.append(date)
+                    if intraday {
+                        dateLog.append(time)
                     }
                     else {
-                        dateLog.append(time)
+                        dateLog.append(date)
                     }
                 }
             }
@@ -362,3 +406,15 @@ class DetailController: UIViewController, ChartViewDelegate {
     
 }
 
+extension DetailController: DropperDelegate {
+    func DropperSelectedRow(_ path: IndexPath, contents: String) {
+        if contents == "1 Day" {
+            showsIntradayInformation = true
+        }
+        else {
+            showsIntradayInformation = false
+        }
+        getData(fromDaysAgo: Constants.timeSpaces[contents]!, intraday: showsIntradayInformation)
+        timeLabel.text = contents.capitalized
+    }
+}

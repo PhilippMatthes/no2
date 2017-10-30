@@ -138,16 +138,19 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     })
                     
                     if presentedViewController == nil {
-                        self.present(alertController, animated: true, completion: nil)
-                        return
-                    } else{
-                        self.dismiss(animated: true) { () -> Void in
+                        if alertController.actions.count != 1 {
                             self.present(alertController, animated: true, completion: nil)
                             return
                         }
+                        
+                    } else{
+                        if alertController.actions.count != 1 {
+                            self.dismiss(animated: true) { () -> Void in
+                                self.present(alertController, animated: true, completion: nil)
+                                return
+                            }
+                        }
                     }
-                    
-                    
                 }
             }
         }
@@ -261,14 +264,14 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func updateAnnotations(withType type: String) {
         
-        unitLabelBackground.setProgress(0.8, animated: true)
+        self.mapView.removeAnnotations(self.map)
+        self.map.removeAll()
         
-        mapView.removeAnnotations(map)
-        map.removeAll()
+        unitLabelBackground.setProgress(0.8, animated: true)
         
         let radius = getRadius(ofRegion: mapView.region)
         let span = mapView.region.span
-        let delta = (span.latitudeDelta + span.longitudeDelta) * 10
+        let delta = (span.latitudeDelta + span.longitudeDelta) * 5
         
         
         DispatchQueue.global(qos: .default).async {
@@ -286,7 +289,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
                                        withLimit: limit)
             
             let progressIncrement = (1-currentProgress)/Float(request.count)
-            
             
             for entry in request{
                 currentProgress += progressIncrement
@@ -383,10 +385,6 @@ extension ViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        // Don't want to show a custom image if the annotation is the user's location.
-        guard !(annotation is MKUserLocation) else {
-            return nil
-        }
         
         // Better to make this class property
         let annotationIdentifier = "AnnotationIdentifier"
@@ -398,7 +396,6 @@ extension ViewController: MKMapViewDelegate {
         }
         else {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
-            annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         
         if let annotationView = annotationView {
@@ -414,16 +411,16 @@ extension ViewController: MKMapViewDelegate {
         if let colorOverlay = overlay as? MKCircle {
             let circle = MKCircleRenderer(overlay: colorOverlay)
             
-            var percentage = max(0.6, Double(colorOverlay.title!)!)
-            percentage = min(1, Double(colorOverlay.title!)!)
+            var percentage = max(0.5, Double(colorOverlay.title!)!)
+            percentage = min(0.8, Double(colorOverlay.title!)!)
             
-            circle.strokeColor = Constants.colorLowStroke.interpolateRGBColorTo(end: Constants.colorHighStroke, fraction: CGFloat(percentage))
+            circle.strokeColor = UIColor.white.withAlphaComponent(CGFloat(percentage))
             circle.fillColor = Constants.colors[colorOverlay.subtitle!]?.withAlphaComponent(CGFloat(percentage))
             
             circle.lineWidth = 1
             return circle
         } else {
-            return MKPolylineRenderer()
+            return MKOverlayRenderer(overlay: overlay)
         }
     }
 }
