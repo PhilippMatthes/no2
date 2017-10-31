@@ -11,10 +11,14 @@ import Charts
 import SwiftSpinner
 import UIKit
 import Dropper
+import MapKit
 
 
 class DetailController: UIViewController, ChartViewDelegate {
     
+    @IBOutlet weak var stationLabel: UILabel!
+    @IBOutlet weak var sourceLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var timeLabelButton: UIButton!
     @IBOutlet weak var timeLabelBackground: UIProgressView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -28,15 +32,17 @@ class DetailController: UIViewController, ChartViewDelegate {
     var currentType: String?
     var showsIntradayInformation = true
     
-    let dropper = Dropper(width: 75, height: 200)
+    let dropper = Dropper(width: 100, height: 200)
     
     @IBOutlet weak var emissionChart: LineChartView!
-    @IBOutlet weak var reflectionChart: LineChartView!
     
     var measurements: [PollutionDataEntry]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateLabels(withSource: annotationThatWasClicked!.entry!.measurements!.first!.source!,
+                     andLocation: annotationThatWasClicked!.entry!.location!)
         
         currentType = previousViewController!.currentType
         
@@ -57,6 +63,16 @@ class DetailController: UIViewController, ChartViewDelegate {
                 }
             }
         }
+    }
+    
+    func updateLabels(withSource source: String, andLocation location: String) {
+        let coordinateLocation = CLLocation(latitude: annotationThatWasClicked!.coordinate.latitude,
+                                  longitude: annotationThatWasClicked!.coordinate.longitude)
+        CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
+            self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): \(city) (\(country))"
+        }
+        self.sourceLabel.text = "\(NSLocalizedString("source", comment: "Source")): \(source)"
+        self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(location)"
     }
     
     func initDesign(withColor color: UIColor, andUnit unit: String) {
@@ -80,7 +96,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         infoButton.layer.cornerRadius = 12
         view.addSubview(unitLabelBackground)
         
-        dropper.items = [String] (Constants.timeSpaces.keys)
+        dropper.items = Constants.timeList
         dropper.cellBackgroundColor = UIColor.white
         dropper.cornerRadius = Constants.cornerRadius
         dropper.delegate = self
@@ -119,6 +135,8 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     func changeColor(to color: UIColor) {
         dropper.cellColor = Constants.colors[currentType!]
+        dropper.tintColor = Constants.colors[currentType!]
+        dropper.refresh()
         
         unitLabel.text = currentType!.capitalized
         unitLabel.textColor = Constants.colors[currentType!]
@@ -126,7 +144,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         infoButton.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
         
         SwiftSpinner.sharedInstance.innerColor = color
-        let navigationItem = UINavigationItem(title: "Detail")
+        let navigationItem = UINavigationItem(title: NSLocalizedString("detailViewTitle", comment: "Detail"))
         
         let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.stop, target: self, action: #selector (self.closeButtonPressed (_:)))
         doneItem.tintColor = color
@@ -148,6 +166,11 @@ class DetailController: UIViewController, ChartViewDelegate {
     }
     
     func performSegueToReturnBack()  {
+        previousViewController!.currentType = currentType!
+        previousViewController!.unitLabel.text = currentType!.capitalized
+        previousViewController!.unitLabelBackground.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
+        previousViewController!.searchButtonBackground.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
+        previousViewController!.updateAnnotations(withType: currentType!)
         if let nav = self.navigationController {
             nav.popViewController(animated: true)
         } else {
@@ -176,7 +199,10 @@ class DetailController: UIViewController, ChartViewDelegate {
                         dateLog.append(time)
                     }
                     else {
-                        dateLog.append(date)
+                        let convertedDateString = DateTranslator.translateDate(fromDateFormat: "yyyy-MM-dd",
+                                                                               toDateFormat: NSLocalizedString("shortDateFormat", comment: "Date format"),
+                                                                               withDate: date)
+                        dateLog.append(convertedDateString)
                     }
                 }
             }
@@ -186,8 +212,8 @@ class DetailController: UIViewController, ChartViewDelegate {
         }
         
         emissionChart.xAxis.valueFormatter = IndexAxisValueFormatter(values:dateLog)
-        emissionChart.xAxis.setLabelCount(dateLog.count/10, force: false)
-        emissionChart.xAxis.labelRotationAngle = 45
+        emissionChart.xAxis.setLabelCount(5, force: false)
+        emissionChart.xAxis.labelRotationAngle = 0
         emissionChart.xAxis.labelTextColor = UIColor.white
         
         let maxValue = Double(emissionLog.max()!)
@@ -195,7 +221,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         var yAxisValues = [String]()
         for i in 0..<Int(max(Constants.maxValues[currentType!]!, maxValue)) {
             if i == Int(Constants.maxValues[currentType!]!) {
-                yAxisValues.append("High")
+                yAxisValues.append(NSLocalizedString("high", comment: "High"))
             }
             else {
                 yAxisValues.append("\(i) µg/m³")
@@ -203,14 +229,9 @@ class DetailController: UIViewController, ChartViewDelegate {
         }
         
         emissionChart.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
-        emissionChart.leftAxis.setLabelCount(dateLog.count/5, force: false)
+        emissionChart.leftAxis.setLabelCount(10, force: false)
         emissionChart.leftAxis.labelTextColor = UIColor.white
         emissionChart.leftAxis.axisMaximum = max(Constants.maxValues[currentType!]!, maxValue)
-        
-        reflectionChart.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
-        reflectionChart.leftAxis.setLabelCount(dateLog.count/5, force: false)
-        reflectionChart.leftAxis.labelTextColor = UIColor.white
-        reflectionChart.leftAxis.axisMaximum = max(Constants.maxValues[currentType!]!, maxValue)
         
         var barChartEntries = [BarChartDataEntry]()
         var backgroundChartEntries = [BarChartDataEntry]()
@@ -225,7 +246,7 @@ class DetailController: UIViewController, ChartViewDelegate {
             
             var fraction = CGFloat(0.0)
             if maxValue != 0.0 {
-                fraction = CGFloat(Double(emission)/maxValue)
+                fraction = min(0.7,CGFloat(Double(emission)/maxValue))
             }
             let color = UIColor.white.withAlphaComponent(fraction)
             barChartColors.insert(color, at: 0)
@@ -252,12 +273,9 @@ class DetailController: UIViewController, ChartViewDelegate {
         data.setDrawValues(false)
         
         emissionChart.animate(xAxisDuration: 2.0, easingOption: ChartEasingOption.easeInOutCubic)
-        reflectionChart.animate(xAxisDuration: 2.0, easingOption: ChartEasingOption.easeInOutCubic)
         
         emissionChart.data = data
-        reflectionChart.data = data
         emissionChart.notifyDataSetChanged()
-        reflectionChart.notifyDataSetChanged()
     }
     
     func setUpChart(withType type: String, intraday: Bool) {
@@ -277,7 +295,10 @@ class DetailController: UIViewController, ChartViewDelegate {
                         dateLog.append(time)
                     }
                     else {
-                        dateLog.append(date)
+                        let convertedDateString = DateTranslator.translateDate(fromDateFormat: "yyyy-MM-dd",
+                                                                               toDateFormat: NSLocalizedString("shortDateFormat", comment: "Date format"),
+                                                                               withDate: date)
+                        dateLog.append(convertedDateString)
                     }
                 }
             }
@@ -287,8 +308,8 @@ class DetailController: UIViewController, ChartViewDelegate {
         }
         
         emissionChart.xAxis.valueFormatter = IndexAxisValueFormatter(values:dateLog)
-        emissionChart.xAxis.setLabelCount(dateLog.count/4, force: false)
-        emissionChart.xAxis.labelRotationAngle = 45
+        emissionChart.xAxis.setLabelCount(5, force: false)
+        emissionChart.xAxis.labelRotationAngle = 0
         emissionChart.xAxis.labelTextColor = UIColor.white
         
         let maxValue = Double(emissionLog.max()!)
@@ -296,7 +317,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         var yAxisValues = [String]()
         for i in 0..<Int(max(Constants.maxValues[currentType!]!, maxValue)) {
             if i == Int(Constants.maxValues[currentType!]!) {
-                yAxisValues.append("High")
+                yAxisValues.append(NSLocalizedString("high", comment: "High"))
             }
             else {
                 yAxisValues.append("\(i) µg/m³")
@@ -304,7 +325,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         }
         
         emissionChart.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
-        emissionChart.leftAxis.setLabelCount(dateLog.count/5, force: false)
+        emissionChart.leftAxis.setLabelCount(10, force: false)
         emissionChart.leftAxis.labelTextColor = UIColor.white
         
         emissionChart.delegate = self
@@ -322,28 +343,6 @@ class DetailController: UIViewController, ChartViewDelegate {
         emissionChart.xAxis.drawGridLinesEnabled = false
         emissionChart.xAxis.drawAxisLineEnabled = false
         
-        reflectionChart.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
-        reflectionChart.leftAxis.setLabelCount(dateLog.count/5, force: false)
-        reflectionChart.leftAxis.labelTextColor = UIColor.white
-        
-        reflectionChart.delegate = self
-        reflectionChart.alpha = 0.2
-        reflectionChart.layer.transform = CATransform3DMakeRotation(CGFloat(Double.pi), 1.0, 0.0, 0.0)
-        reflectionChart.chartDescription?.text = nil
-        reflectionChart.leftAxis.axisMinimum = 0
-        reflectionChart.rightAxis.enabled = false
-        reflectionChart.leftAxis.drawGridLinesEnabled = true
-        reflectionChart.leftAxis.gridColor = UIColor.white
-        reflectionChart.leftAxis.labelTextColor = UIColor.white
-        reflectionChart.leftAxis.axisLineColor = UIColor.white
-        reflectionChart.xAxis.enabled = false
-        reflectionChart.drawBordersEnabled = false
-        reflectionChart.legend.enabled = false
-        reflectionChart.isUserInteractionEnabled = false
-        reflectionChart.leftAxis.axisMaximum = max(Constants.maxValues[currentType!]!, maxValue)
-        reflectionChart.xAxis.drawGridLinesEnabled = false
-        reflectionChart.xAxis.drawAxisLineEnabled = false
-        
         var barChartEntries = [BarChartDataEntry]()
         var backgroundChartEntries = [BarChartDataEntry]()
         var barChartColors = [UIColor]()
@@ -357,7 +356,7 @@ class DetailController: UIViewController, ChartViewDelegate {
             
             var fraction = CGFloat(0.0)
             if maxValue != 0.0 {
-                fraction = CGFloat(Double(emission)/maxValue)
+                fraction = min(0.7,CGFloat(Double(emission)/maxValue))
             }
             let color = UIColor.white.withAlphaComponent(fraction)
             barChartColors.insert(color, at: 0)
@@ -384,12 +383,9 @@ class DetailController: UIViewController, ChartViewDelegate {
         data.setDrawValues(false)
         
         emissionChart.animate(xAxisDuration: 2.0, easingOption: ChartEasingOption.easeInOutCubic)
-        reflectionChart.animate(xAxisDuration: 2.0, easingOption: ChartEasingOption.easeInOutCubic)
         
         emissionChart.data = data
-        reflectionChart.data = data
         emissionChart.notifyDataSetChanged()
-        reflectionChart.notifyDataSetChanged()
     }
     
     @IBAction func infoButtonClicked(_ sender: UIButton) {
@@ -408,13 +404,13 @@ class DetailController: UIViewController, ChartViewDelegate {
 
 extension DetailController: DropperDelegate {
     func DropperSelectedRow(_ path: IndexPath, contents: String) {
-        if contents == "1 Day" {
+        if contents == NSLocalizedString("1 Day", comment: "1 Day") {
             showsIntradayInformation = true
         }
         else {
             showsIntradayInformation = false
         }
         getData(fromDaysAgo: Constants.timeSpaces[contents]!, intraday: showsIntradayInformation)
-        timeLabel.text = contents.capitalized
+        timeLabel.text = contents
     }
 }

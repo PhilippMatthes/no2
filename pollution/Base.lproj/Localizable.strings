@@ -1,0 +1,49 @@
+/*
+ Localizable.strings
+ pollution
+ 
+ Created by Philipp Matthes on 31.10.17.
+ Copyright © 2017 Philipp Matthes. All rights reserved.
+ */
+
+"no2info" = "https://en.wikipedia.org/wiki/Nitrogen_dioxide";
+
+"coinfo" = "https://en.wikipedia.org/wiki/Carbon_monoxide";
+
+"pm10info" = "https://en.wikipedia.org/wiki/Particulates";
+
+"pm25info" = "https://en.wikipedia.org/wiki/Particulates";
+
+"so2info" = "https://en.wikipedia.org/wiki/Sulfur_dioxide";
+
+"o3info" = "https://en.wikipedia.org/wiki/Ozone";
+
+"1 Day" = "1 Day";
+"3 Days" = "3 Days";
+"7 Days" = "7 Days";
+"30 Days" = "30 Days";
+"60 Days" = "60 Days";
+"All Data" = "All Data";
+"365 Days" = "365 Days";
+
+"failedToLoad" = "Failed to\nload data";
+"loadingData" = "Loading\ndata";
+"tapToCancel" = "Tap to cancel";
+"tapToReturn" = "Tap to return";
+
+"measurementSelection" = "Measurement selection";
+"selectMeasurement" = "Select the corresponding measurement to display more information.";
+"today" = "Today";
+"cancel" = "Cancel";
+"noLocationFound" = "No location found.";
+"searchQueryDidNotResult" = "Your search query did not result in any locations to be displayed. Please try again.";
+"detailViewTitle" = "Detail";
+"high" = "High";
+"information" = "Information";
+
+"station" = "Station";
+
+"source" = "Source";
+"location" = "Location";
+"dateFormat" = "yyyy-MM-dd";
+"shortDateFormat" = "MM-dd";

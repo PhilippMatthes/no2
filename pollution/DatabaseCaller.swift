@@ -96,17 +96,20 @@ class DatabaseCaller {
     static func makeLocalRequest(forLocation location: String, withLimit limit: Int, toDate dateTo: String, fromDetailController controller: DetailController, withPreviousController previousController: ViewController) -> [PollutionDataEntry] {
         
         DispatchQueue.main.async {
-            SwiftSpinner.show("Loading\ndata").addTapHandler({
+            SwiftSpinner.show(NSLocalizedString("loadingData", comment: "Loading\ndata")).addTapHandler({
                 SwiftSpinner.hide()
                 controller.performSegueToReturnBack()
-            }, subtitle: "Tap to cancel.")
+            }, subtitle: NSLocalizedString("tapToCancel", comment: "Tap to cancel."))
         }
         
         var output = [PollutionDataEntry]()
         
         let locationEncoded = location.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         
-        let urlString = "https://api.openaq.org/v1/measurements?has_geo=true&location=\(locationEncoded)&limit=\(limit)&date_to=\(dateTo)"
+
+        let urlString = "https://api.openaq.org/v1/measurements?has_geo=true&location=\(locationEncoded)&limit=\(limit)&date_from=\(dateTo)"
+        
+        print(urlString)
         
         let request = URLRequest(url: NSURL(string: urlString)! as URL)
         
@@ -169,10 +172,10 @@ class DatabaseCaller {
             DispatchQueue.main.async {
                 if controller.isViewLoaded && (controller.view.window != nil) {
                     DispatchQueue.main.async {
-                        SwiftSpinner.show("Failed to\nload data", animated: false).addTapHandler({
+                        SwiftSpinner.show(NSLocalizedString("failedToLoad", comment: "Failed to load data"), animated: false).addTapHandler({
                             SwiftSpinner.hide()
                             controller.performSegueToReturnBack()
-                        }, subtitle: "Tap to return.")
+                        }, subtitle: NSLocalizedString("tapToReturn", comment: "Tap to return."))
                     }
                 }
             }

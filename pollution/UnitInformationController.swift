@@ -8,12 +8,12 @@
 
 import Foundation
 import UIKit
+import WebKit
 
 class UnitInformationController: UIViewController {
     
+    @IBOutlet weak var webView: UIWebView!
     @IBOutlet var viewBackground: UIView!
-    @IBOutlet weak var unitLabel: UILabel!
-    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
     var previousViewController: ViewController?
@@ -24,7 +24,7 @@ class UnitInformationController: UIViewController {
     
     func initDesign(withColor color: UIColor, andUnit unit: String) {
         self.view.addSubview(navigationBar)
-        let navigationItem = UINavigationItem(title: "Information")
+        let navigationItem = UINavigationItem(title: NSLocalizedString("information", comment: "Information"))
         
         let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.stop, target: self, action: #selector (self.closeButtonPressed (_:)))
         doneItem.tintColor = color
@@ -33,12 +33,10 @@ class UnitInformationController: UIViewController {
         
         navigationBar.tintColor = color
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:Constants.colors[unit]!]
-        
-        textView.text = Constants.information[unit]!
-        
+
         viewBackground.backgroundColor = color
         
-        unitLabel.text = unit.capitalized
+        webView.loadRequest(URLRequest(url: NSURL(string: NSLocalizedString(unit+"info", comment: "Link"))! as URL))
     }
     
     override var prefersStatusBarHidden: Bool {

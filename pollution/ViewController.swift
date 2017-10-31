@@ -76,7 +76,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 if circle.intersects(mapRect) {
                     let newCircle = MKCircle(center: circle.coordinate, radius: circle.radius+(circle.radius/10))
                     
-                    let alertController = UIAlertController(title: "Measurement selection.", message: "Select the corresponding measurement to display more information.", preferredStyle: UIAlertControllerStyle.actionSheet)
+                    let alertController = UIAlertController(title: NSLocalizedString("measurementSelection", comment: "Measurement selection."), message: NSLocalizedString("selectMeasurement", comment: "Select the corresponding measurement to display more information."), preferredStyle: UIAlertControllerStyle.actionSheet)
                     
                     alertController.view.tintColor = UIColor.gray
                     
@@ -86,10 +86,13 @@ class ViewController: UIViewController, UISearchBarDelegate {
                                 let mostRecentMeasurement = annotation.entry!.getMostRecentMeasurement()!
                                 
                                 let dateString = String(mostRecentMeasurement.date!.prefix(10))
+                                let convertedDateString = DateTranslator.translateDate(fromDateFormat: "yyyy-MM-dd",
+                                                                                       toDateFormat: NSLocalizedString("dateFormat", comment: "Date format"),
+                                                                                       withDate: dateString)
                                 
-                                var titleString = "\(annotation.title!) (\(dateString))"
+                                var titleString = "\(annotation.title!) (\(convertedDateString))"
                                 if mostRecentMeasurement.wasUpdatedToday() {
-                                    titleString = "\(annotation.title!) (Today)"
+                                    titleString = "\(annotation.title!) (\(NSLocalizedString("today", comment: "Today")))"
                                 }
                                 
                                 let menuAction = UIAlertAction (
@@ -117,7 +120,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     }
                     
                     let cancelButtonAction = UIAlertAction (
-                        title: "Cancel",
+                        title: NSLocalizedString("cancel", comment: "Cancel"),
                         style: UIAlertActionStyle.cancel
                     ) {
                         (action) -> Void in
@@ -172,7 +175,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         localSearch.start { [weak self] (localSearchResponse, error) -> Void in
             
             if localSearchResponse == nil {
-                let alertController = UIAlertController(title: "No location found.", message: "Your search query did not result in any locations to be displayed. Please try again.", preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
+                let alertController = UIAlertController(title: NSLocalizedString("noLocationFound", comment: "No location found."), message: NSLocalizedString("searchQueryDidNotResult", comment: "Your search query did not result in any locations to be displayed. Please try again."), preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
                 
                 // Replace UIAlertActionStyle.Default by UIAlertActionStyle.default
                 

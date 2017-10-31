@@ -1,0 +1,49 @@
+/*
+ Localizable.strings
+ pollution
+ 
+ Created by Philipp Matthes on 31.10.17.
+ Copyright © 2017 Philipp Matthes. All rights reserved.
+ */
+
+"no2info" = "https://de.wikipedia.org/wiki/Stickstoffdioxid";
+
+"coinfo" = "https://de.wikipedia.org/wiki/Kohlenstoffmonoxid";
+
+"pm10info" = "https://de.wikipedia.org/wiki/Feinstaub";
+
+"pm25info" = "https://de.wikipedia.org/wiki/Feinstaub";
+
+"so2info" = "https://de.wikipedia.org/wiki/Schwefeldioxid";
+
+"o3info" = "https://de.wikipedia.org/wiki/Ozon";
+
+"1 Day" = "1 Tag";
+"3 Days" = "3 Tage";
+"7 Days" = "7 Tage";
+"30 Days" = "30 Tage";
+"60 Days" = "60 Tage";
+"All Data" = "Alle Daten";
+"365 Days" = "365 Tage";
+
+"failedToLoad" = "Laden fehl-\ngeschlagen";
+"loadingData" = "Lädt\nDaten";
+"tapToCancel" = "Zum Abbruch antippen";
+"tapToReturn" = "Zum Zurückkehren antippen";
+
+"measurementSelection" = "Messungen auswählen";
+"selectMeasurement" = "Wählen Sie eine Messung aus, um mehr Informationen anzuzeigen";
+"today" = "Heute";
+"cancel" = "Abbruch";
+"noLocationFound" = "Keinen Ort gefunden.";
+"searchQueryDidNotResult" = "Ihre Suche war leider erfolglos. Bitte versuchen Sie es erneut.";
+"detailViewTitle" = "Detailansicht";
+"high" = "Grenzw.";
+"information" = "Information";
+
+"station" = "Station";
+
+"source"="Quelle";
+"location"="Ort";
+"dateFormat" = "dd.MM.yyyy";
+"shortDateFormat" = "dd.MM.";

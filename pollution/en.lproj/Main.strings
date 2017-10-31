@@ -1,0 +1,30 @@
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "2Um-Sm-Wh6"; */
+"2Um-Sm-Wh6.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
+/* Class = "UINavigationItem"; title = "Information"; ObjectID = "4BN-Bf-rLD"; */
+"4BN-Bf-rLD.title" = "Information";
+
+/* Class = "UILabel"; text = "Source"; ObjectID = "EHC-rH-4dH"; */
+"EHC-rH-4dH.text" = "Source";
+
+/* Class = "UINavigationItem"; title = "Detail"; ObjectID = "Hsw-5r-Hi7"; */
+"Hsw-5r-Hi7.title" = "Detail";
+
+/* Class = "UILabel"; text = "NO2"; ObjectID = "YYX-y4-AEQ"; */
+"YYX-y4-AEQ.text" = "NO2";
+
+/* Class = "UILabel"; text = "1 Day"; ObjectID = "btC-wX-Lf2"; */
+"btC-wX-Lf2.text" = "1 Day";
+
+/* Class = "UILabel"; text = "NO2"; ObjectID = "fEM-h9-hUO"; */
+"fEM-h9-hUO.text" = "NO2";
+
+/* Class = "UIViewController"; title = "UnitInformation"; ObjectID = "hdF-k9-pUe"; */
+"hdF-k9-pUe.title" = "UnitInformation";
+
+/* Class = "UILabel"; text = "Location"; ObjectID = "pHu-YG-FaH"; */
+"pHu-YG-FaH.text" = "Location";
+
+/* Class = "UILabel"; text = "NO2"; ObjectID = "pqW-vF-Y15"; */
+"pqW-vF-Y15.text" = "NO2";
