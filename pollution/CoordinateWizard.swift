@@ -10,7 +10,6 @@ import Foundation
 import MapKit
 
 class CoordinateWizard {
-    
     static func fetchCountryAndCity(location: CLLocation, completion: @escaping (String, String) -> ()) {
         CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
             if let error = error {
@@ -21,6 +20,4 @@ class CoordinateWizard {
             }
         }
     }
-    
-    
 }

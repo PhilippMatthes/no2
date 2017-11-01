@@ -22,6 +22,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var maxvalue: Double?
     var currentType: String?
     var requestSent = false
+    var tileRenderer: MKTileOverlayRenderer?
     
     fileprivate var searchController: UISearchController!
     fileprivate var localSearchRequest: MKLocalSearchRequest!
@@ -35,12 +36,25 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     var selectedAnnotation: PollutionAnnotation?
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Constants.drawCustomMap {
+            setupTileRenderer()
+        }
+        
         mapView.delegate = self
+        
+        
         initUI()
         self.updateAnnotations(withType: currentType!)
+    }
+    
+    func setupTileRenderer() {
+        let overlay = CustomMapOverlay()
+        
+        overlay.canReplaceMapContent = true
+        mapView.add(overlay, level: .aboveLabels)
+        tileRenderer = MKTileOverlayRenderer(tileOverlay: overlay)
     }
 
     
@@ -69,30 +83,37 @@ class ViewController: UIViewController, UISearchBarDelegate {
         let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
         
         let point = MKMapPointForCoordinate(locationCoordinate)
-        let mapRect = MKMapRectMake(point.x, point.y, 0, 0);
+        let mapRect = MKMapRectMake(point.x, point.y, 0, 0)
+        
+        let alertController = UIAlertController(title: NSLocalizedString("measurementSelection", comment: "Measurement selection."), message: NSLocalizedString("selectMeasurement", comment: "Select the corresponding measurement to display more information."), preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        alertController.view.tintColor = UIColor.gray
+        
+        var alertsWithDistances = [(UIAlertAction, Double)]()
         
         for polygon in 0..<mapView.overlays.count {
             if let circle = mapView.overlays[polygon] as? MKCircle {
                 if circle.intersects(mapRect) {
                     let newCircle = MKCircle(center: circle.coordinate, radius: circle.radius+(circle.radius/10))
                     
-                    let alertController = UIAlertController(title: NSLocalizedString("measurementSelection", comment: "Measurement selection."), message: NSLocalizedString("selectMeasurement", comment: "Select the corresponding measurement to display more information."), preferredStyle: UIAlertControllerStyle.actionSheet)
-                    
-                    alertController.view.tintColor = UIColor.gray
-                    
                     for annotation in map {
                         if annotation.coordinate.latitude == circle.coordinate.latitude {
                             if annotation.coordinate.longitude == circle.coordinate.longitude {
                                 let mostRecentMeasurement = annotation.entry!.getMostRecentMeasurement()!
-                                
+                                let annotationLocation = CLLocation(latitude: annotation.coordinate.latitude,
+                                                                    longitude: annotation.coordinate.longitude)
+                                let tapLocation = CLLocation(latitude: locationCoordinate.latitude,
+                                                             longitude: locationCoordinate.longitude)
+                                let preciseDistance = annotationLocation.distance(from: tapLocation)
+                                let distance = round(preciseDistance/10)/10
                                 let dateString = String(mostRecentMeasurement.date!.prefix(10))
                                 let convertedDateString = DateTranslator.translateDate(fromDateFormat: "yyyy-MM-dd",
                                                                                        toDateFormat: NSLocalizedString("dateFormat", comment: "Date format"),
                                                                                        withDate: dateString)
                                 
-                                var titleString = "\(annotation.title!) (\(convertedDateString))"
+                                var titleString = "\(annotation.title!) (\(convertedDateString), \(distance) km)"
                                 if mostRecentMeasurement.wasUpdatedToday() {
-                                    titleString = "\(annotation.title!) (\(NSLocalizedString("today", comment: "Today")))"
+                                    titleString = "\(annotation.title!) (\(NSLocalizedString("today", comment: "Today")), \(distance) km)"
                                 }
                                 
                                 let menuAction = UIAlertAction (
@@ -104,56 +125,58 @@ class ViewController: UIViewController, UISearchBarDelegate {
                                     self.performSegue(withIdentifier: "showDetail", sender: self)
                                 }
                                 
-                                var locationAlreadyInController = false
-                                for action in alertController.actions {
-                                    if action.title! == titleString {
-                                        locationAlreadyInController = true
-                                    }
-                                }
-                                if !locationAlreadyInController {
-                                    alertController.addAction(menuAction)
-                                }
-                                
-                                
+                                alertsWithDistances.append((menuAction, distance))
                             }
                         }
                     }
-                    
-                    let cancelButtonAction = UIAlertAction (
-                        title: NSLocalizedString("cancel", comment: "Cancel"),
-                        style: UIAlertActionStyle.cancel
-                    ) {
-                        (action) -> Void in
-                    }
-                    
-                    alertController.addAction(cancelButtonAction)
-                    
-                    let popOver = alertController.popoverPresentationController
-                    popOver?.sourceView = view
-                    popOver?.sourceRect = view.bounds
-                    popOver?.permittedArrowDirections = UIPopoverArrowDirection.any
-                    
                     newCircle.title = circle.title
                     newCircle.subtitle = circle.subtitle
                     mapView.add(newCircle)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
                         self.mapView.remove(newCircle)
                     })
-                    
-                    if presentedViewController == nil {
-                        if alertController.actions.count != 1 {
-                            self.present(alertController, animated: true, completion: nil)
-                            return
-                        }
-                        
-                    } else{
-                        if alertController.actions.count != 1 {
-                            self.dismiss(animated: true) { () -> Void in
-                                self.present(alertController, animated: true, completion: nil)
-                                return
-                            }
-                        }
-                    }
+                }
+            }
+        }
+        
+        // Sort alerts
+        for alert in alertsWithDistances.sorted(by: {$0.1 < $1.1}) {
+            var alertExistsAlready = false
+            for action in alertController.actions {
+                if alert.0.title! == action.title! {
+                    alertExistsAlready = true
+                }
+            }
+            if !alertExistsAlready {
+                alertController.addAction(alert.0)
+            }
+        }
+        
+        let cancelButtonAction = UIAlertAction (
+            title: NSLocalizedString("cancel", comment: "Cancel"),
+            style: UIAlertActionStyle.cancel
+        ) {
+            (action) -> Void in
+        }
+        
+        alertController.addAction(cancelButtonAction)
+        
+        let popOver = alertController.popoverPresentationController
+        popOver?.sourceView = view
+        popOver?.sourceRect = view.bounds
+        popOver?.permittedArrowDirections = UIPopoverArrowDirection.any
+
+        if presentedViewController == nil {
+            if alertController.actions.count != 1 {
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            
+        } else {
+            if alertController.actions.count != 1 {
+                self.dismiss(animated: true) { () -> Void in
+                    self.present(alertController, animated: true, completion: nil)
+                    return
                 }
             }
         }
@@ -217,7 +240,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     func initUI() {
         
         unitLabelBackground.progressViewStyle = .bar
-        unitLabelBackground.setProgress(0.0, animated: true)
+        unitLabelBackground.setProgress(0.0, animated: false)
         unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
         unitLabelBackground.clipsToBounds = true
         
@@ -250,8 +273,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
         let index = (Constants.units.index(of: currentType!)! + 1) % Constants.units.count
         currentType = Constants.units[index]
         unitLabel.text = currentType!.capitalized
-        unitLabelBackground.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
-        searchButtonBackground.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
+        unitLabelBackground.animate(toBackgroundColor: Constants.colors[currentType!]!, withDuration: 2.0)
+        searchButtonBackground.animate(toBackgroundColor: Constants.colors[currentType!]!, withDuration: 2.0)
         
         updateAnnotations(withType: currentType!)
         
@@ -274,7 +297,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         let radius = getRadius(ofRegion: mapView.region)
         let span = mapView.region.span
-        let delta = (span.latitudeDelta + span.longitudeDelta) * 5
+        let delta = (span.latitudeDelta + span.longitudeDelta)
         
         
         DispatchQueue.global(qos: .default).async {
@@ -348,7 +371,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         let circle = MKCircle(center: location.coordinate, radius: radius)
         circle.title = String(percentage)
         circle.subtitle = type
-        self.mapView.add(circle)
+        mapView.add(circle, level: .aboveRoads)
         self.overlays.append(circle)
     }
     
@@ -412,44 +435,30 @@ extension ViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         if let colorOverlay = overlay as? MKCircle {
-            let circle = MKCircleRenderer(overlay: colorOverlay)
+            
             
             var percentage = max(0.5, Double(colorOverlay.title!)!)
             percentage = min(0.8, Double(colorOverlay.title!)!)
             
-            circle.strokeColor = UIColor.white.withAlphaComponent(CGFloat(percentage))
-            circle.fillColor = Constants.colors[colorOverlay.subtitle!]?.withAlphaComponent(CGFloat(percentage))
+            let color = Constants.colors[colorOverlay.subtitle!]!.withAlphaComponent(CGFloat(percentage))
+            
+            let circle = CustomCircleRenderer(withOverlay: overlay, withGradientFillColor: color)
+            
+//            circle.strokeColor = UIColor.white.withAlphaComponent(CGFloat(percentage))
             
             circle.lineWidth = 1
             return circle
         } else {
-            return MKOverlayRenderer(overlay: overlay)
+            if Constants.drawCustomMap {
+                return tileRenderer!
+            }
+            else {
+                return MKOverlayRenderer()
+            }
         }
     }
 }
 
-extension UIView {
-    func animateButtonPress(withBorderColor color: UIColor, width: Double, andDuration duration: Double) {
-        let borderWidth:CABasicAnimation = CABasicAnimation(keyPath: "borderWidth")
-        borderWidth.fromValue = 0
-        borderWidth.toValue = width
-        borderWidth.duration = duration
-        self.layer.borderWidth = 0.0
-        self.layer.borderColor = color.cgColor as CGColor
-        self.layer.add(borderWidth, forKey: "Width")
-        self.layer.borderWidth = 4.0
-    }
-    
-    func animateButtonRelease(withBorderColor color: UIColor, width: Double, andDuration duration: Double) {
-        let borderWidth:CABasicAnimation = CABasicAnimation(keyPath: "borderWidth")
-        borderWidth.fromValue = width
-        borderWidth.toValue = 0
-        borderWidth.duration = duration
-        self.layer.borderWidth = 4.0
-        self.layer.borderColor = color.cgColor as CGColor
-        self.layer.add(borderWidth, forKey: "Width")
-        self.layer.borderWidth = 0.0
-    }
-}
+
 
 

@@ -158,7 +158,7 @@ class DetailController: UIViewController, ChartViewDelegate {
     }
     
     @IBAction func userSwipedDown(_ sender: UISwipeGestureRecognizer) {
-        performSegueToReturnBack()
+//        performSegueToReturnBack()
     }
     
     @objc func closeButtonPressed(_ sender:UITapGestureRecognizer){
