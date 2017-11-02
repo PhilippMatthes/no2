@@ -134,14 +134,14 @@ class DetailController: UIViewController, ChartViewDelegate {
     }
     
     func changeColor(to color: UIColor) {
-        dropper.cellColor = Constants.colors[currentType!]
-        dropper.tintColor = Constants.colors[currentType!]
+        dropper.cellColor = color
+        dropper.tintColor = color
         dropper.refresh()
         
         unitLabel.text = currentType!.capitalized
-        unitLabel.textColor = Constants.colors[currentType!]
-        timeLabel.textColor = Constants.colors[currentType!]
-        infoButton.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
+        unitLabel.textColor = color
+        timeLabel.textColor = color
+        infoButton.animate(toBackgroundColor: color, withDuration: 2.0)
         
         SwiftSpinner.sharedInstance.innerColor = color
         let navigationItem = UINavigationItem(title: NSLocalizedString("detailViewTitle", comment: "Detail"))
@@ -154,7 +154,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         navigationBar.tintColor = color
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:color]
         
-        viewBackground.backgroundColor = color
+        viewBackground.animate(toBackgroundColor: color, withDuration: 2.0)
     }
     
     @IBAction func userSwipedDown(_ sender: UISwipeGestureRecognizer) {
@@ -170,6 +170,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         previousViewController!.unitLabel.text = currentType!.capitalized
         previousViewController!.unitLabelBackground.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
         previousViewController!.searchButtonBackground.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
+        previousViewController!.tabBarController!.tabBar.barTintColor = Constants.colors[currentType!]
         previousViewController!.updateAnnotations(withType: currentType!)
         if let nav = self.navigationController {
             nav.popViewController(animated: true)
@@ -276,6 +277,9 @@ class DetailController: UIViewController, ChartViewDelegate {
         
         emissionChart.data = data
         emissionChart.notifyDataSetChanged()
+        
+        emissionChart.noDataTextColor = UIColor.white
+        emissionChart.noDataText = NSLocalizedString("noData", comment: "No Data available")
     }
     
     func setUpChart(withType type: String, intraday: Bool) {
@@ -342,6 +346,8 @@ class DetailController: UIViewController, ChartViewDelegate {
         emissionChart.leftAxis.axisMaximum = max(Constants.maxValues[currentType!]!, maxValue)
         emissionChart.xAxis.drawGridLinesEnabled = false
         emissionChart.xAxis.drawAxisLineEnabled = false
+        emissionChart.noDataTextColor = UIColor.white
+        emissionChart.noDataText = NSLocalizedString("noData", comment: "No Data available")
         
         var barChartEntries = [BarChartDataEntry]()
         var backgroundChartEntries = [BarChartDataEntry]()

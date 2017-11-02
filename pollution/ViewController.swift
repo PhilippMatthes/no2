@@ -38,23 +38,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if Constants.drawCustomMap {
-            setupTileRenderer()
-        }
         
         mapView.delegate = self
         
-        
         initUI()
         self.updateAnnotations(withType: currentType!)
-    }
-    
-    func setupTileRenderer() {
-        let overlay = CustomMapOverlay()
-        
-        overlay.canReplaceMapContent = true
-        mapView.add(overlay, level: .aboveLabels)
-        tileRenderer = MKTileOverlayRenderer(tileOverlay: overlay)
     }
 
     
@@ -105,7 +93,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
                                 let tapLocation = CLLocation(latitude: locationCoordinate.latitude,
                                                              longitude: locationCoordinate.longitude)
                                 let preciseDistance = annotationLocation.distance(from: tapLocation)
-                                let distance = round(preciseDistance/10)/10
+                                let distance = round(preciseDistance/100)/10
                                 let dateString = String(mostRecentMeasurement.date!.prefix(10))
                                 let convertedDateString = DateTranslator.translateDate(fromDateFormat: "yyyy-MM-dd",
                                                                                        toDateFormat: NSLocalizedString("dateFormat", comment: "Date format"),
@@ -239,12 +227,22 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     func initUI() {
         
+        currentType = Constants.units.first
+
+        let tabBar = tabBarController!.tabBar
+        tabBar.clipsToBounds = true
+        tabBar.tintColor = UIColor.white
+        tabBar.barTintColor = Constants.colors[currentType!]
+        tabBar.backgroundColor = UIColor.clear
+        tabBar.setTintColor(ofUnselectedItemsWithColor: UIColor.white.withAlphaComponent(0.5),
+                            andSelectedItemsWithColor: UIColor.white)
+        
+        
         unitLabelBackground.progressViewStyle = .bar
         unitLabelBackground.setProgress(0.0, animated: false)
         unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
         unitLabelBackground.clipsToBounds = true
         
-        currentType = Constants.units.first
         unitLabel.text = currentType?.capitalized
         unitLabelBackground.layer.backgroundColor = Constants.colors[currentType!]!.cgColor
         searchButtonBackground.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
@@ -273,6 +271,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         let index = (Constants.units.index(of: currentType!)! + 1) % Constants.units.count
         currentType = Constants.units[index]
         unitLabel.text = currentType!.capitalized
+        tabBarController!.tabBar.animate(toBarTintColor: Constants.colors[currentType!]!, withDuration: 2.0)
         unitLabelBackground.animate(toBackgroundColor: Constants.colors[currentType!]!, withDuration: 2.0)
         searchButtonBackground.animate(toBackgroundColor: Constants.colors[currentType!]!, withDuration: 2.0)
         

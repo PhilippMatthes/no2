@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22C2171FA34D2B008D7659 /* Constants.swift */; };
+		BE2EC6251FAAFED40052BF6A /* MapKitGoogleStyler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2EC6261FAAFED40052BF6A /* MapKitGoogleStyler.framework */; };
+		BE2EC6281FAB61000052BF6A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2EC6271FAB61000052BF6A /* TabBarController.swift */; };
+		BE2EC6311FAB65B70052BF6A /* TabBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */; };
 		BE4D909E1FA5E5D30080B812 /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4D909F1FA5E5D30080B812 /* SwiftSpinner.framework */; };
 		BE4D90A01FA6177C0080B812 /* Dropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4D90A11FA6177C0080B812 /* Dropper.framework */; };
 		BE50FBDF1FA4AB5400187750 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE50FBE01FA4AB5400187750 /* Charts.framework */; };
@@ -15,6 +18,7 @@
 		BE56BCE01FA9274A00303B70 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE56BCDE1FA9274A00303B70 /* Localizable.strings */; };
 		BE56BCE51FA92C1C00303B70 /* DateTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */; };
 		BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */; };
+		BE900FC01FAB84A40023FF05 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */; };
 		BE9394AE1FA9DB220017407E /* CustomMapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */; };
 		BE9394B01FA9DF7E0017407E /* CustomCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9394AF1FA9DF7E0017407E /* CustomCircleRenderer.swift */; };
 		BE9394B21FA9FFC00017407E /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9394B11FA9FFC00017407E /* UIViewExtension.swift */; };
@@ -37,6 +41,9 @@
 		17EFE4498692B5A74E153168 /* Pods-pollution.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pollution.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pollution/Pods-pollution.debug.xcconfig"; sourceTree = "<group>"; };
 		78997E7465D6932446FC3389 /* Pods_pollution.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pollution.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE22C2171FA34D2B008D7659 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BE2EC6261FAAFED40052BF6A /* MapKitGoogleStyler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MapKitGoogleStyler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE2EC6271FAB61000052BF6A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarExtension.swift; sourceTree = "<group>"; };
 		BE4D909F1FA5E5D30080B812 /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4D90A11FA6177C0080B812 /* Dropper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Dropper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE50FBE01FA4AB5400187750 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +55,7 @@
 		BE56BCE31FA9275C00303B70 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTranslator.swift; sourceTree = "<group>"; };
 		BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateWizard.swift; sourceTree = "<group>"; };
+		BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapOverlay.swift; sourceTree = "<group>"; };
 		BE9394AF1FA9DF7E0017407E /* CustomCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCircleRenderer.swift; sourceTree = "<group>"; };
 		BE9394B11FA9FFC00017407E /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
@@ -75,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2EC6251FAAFED40052BF6A /* MapKitGoogleStyler.framework in Frameworks */,
 				BE4D90A01FA6177C0080B812 /* Dropper.framework in Frameworks */,
 				BE4D909E1FA5E5D30080B812 /* SwiftSpinner.framework in Frameworks */,
 				BE50FBDF1FA4AB5400187750 /* Charts.framework in Frameworks */,
@@ -92,6 +101,49 @@
 				F95E6C92C1F242651009C969 /* Pods-pollution.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		BE2EC6291FAB61350052BF6A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BE9394B31FA9FFE40017407E /* UIColorExtension.swift */,
+				BE9394B11FA9FFC00017407E /* UIViewExtension.swift */,
+				BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */,
+				BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		BE2EC62D1FAB61B50052BF6A /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */,
+				BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */,
+				BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */,
+			);
+			name = DataModels;
+			sourceTree = "<group>";
+		};
+		BE2EC62E1FAB61DC0052BF6A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */,
+				BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */,
+				BE2EC6271FAB61000052BF6A /* TabBarController.swift */,
+				BE50FBE31FA4AC3F00187750 /* DetailController.swift */,
+				BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BE2EC62F1FAB61F20052BF6A /* MapKit */ = {
+			isa = PBXGroup;
+			children = (
+				BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */,
+				BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */,
+				BE9394AF1FA9DF7E0017407E /* CustomCircleRenderer.swift */,
+			);
+			name = MapKit;
 			sourceTree = "<group>";
 		};
 		BEE82D7C1FA1C35600BEBAF4 = {
@@ -117,20 +169,12 @@
 			isa = PBXGroup;
 			children = (
 				BE22C2171FA34D2B008D7659 /* Constants.swift */,
-				BE9394B31FA9FFE40017407E /* UIColorExtension.swift */,
-				BE9394B11FA9FFC00017407E /* UIViewExtension.swift */,
-				BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */,
 				BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */,
-				BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */,
-				BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */,
-				BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */,
-				BE9394AF1FA9DF7E0017407E /* CustomCircleRenderer.swift */,
-				BE50FBE31FA4AC3F00187750 /* DetailController.swift */,
 				BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */,
-				BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */,
-				BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */,
-				BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */,
-				BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */,
+				BE2EC62F1FAB61F20052BF6A /* MapKit */,
+				BE2EC6291FAB61350052BF6A /* Extensions */,
+				BE2EC62E1FAB61DC0052BF6A /* Controllers */,
+				BE2EC62D1FAB61B50052BF6A /* DataModels */,
 				BEE82D8C1FA1C35600BEBAF4 /* Main.storyboard */,
 				BE56BCDE1FA9274A00303B70 /* Localizable.strings */,
 				BEE82D8F1FA1C35600BEBAF4 /* Assets.xcassets */,
@@ -143,6 +187,7 @@
 		C355A3DFC11229856E2E997C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE2EC6261FAAFED40052BF6A /* MapKitGoogleStyler.framework */,
 				BE4D90A11FA6177C0080B812 /* Dropper.framework */,
 				BE4D909F1FA5E5D30080B812 /* SwiftSpinner.framework */,
 				BE50FBE01FA4AB5400187750 /* Charts.framework */,
@@ -254,12 +299,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-pollution/Pods-pollution-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/Dropper/Dropper.framework",
+				"${BUILT_PRODUCTS_DIR}/MapKitGoogleStyler/MapKitGoogleStyler.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dropper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapKitGoogleStyler.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,8 +337,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEBBB2CB1FA496D9005439EB /* UnitInformationController.swift in Sources */,
+				BE2EC6281FAB61000052BF6A /* TabBarController.swift in Sources */,
 				BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */,
+				BE2EC6311FAB65B70052BF6A /* TabBarExtension.swift in Sources */,
 				BE9394B41FA9FFE40017407E /* UIColorExtension.swift in Sources */,
+				BE900FC01FAB84A40023FF05 /* UIImageExtension.swift in Sources */,
 				BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */,
 				BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */,
 				BE9394B21FA9FFC00017407E /* UIViewExtension.swift in Sources */,

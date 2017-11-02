@@ -47,3 +47,4 @@
 "location"="Ort";
 "dateFormat" = "dd.MM.yyyy";
 "shortDateFormat" = "dd.MM.";
+"noData" = "Keine Daten für den ausgewählten Zeitraum verfügbar.";

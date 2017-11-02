@@ -47,3 +47,5 @@
 "location" = "Location";
 "dateFormat" = "yyyy-MM-dd";
 "shortDateFormat" = "MM-dd";
+
+"noData" = "No specific data available for the selected time range.";

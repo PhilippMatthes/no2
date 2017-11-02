@@ -12,7 +12,7 @@ import UIKit
 struct Constants {
     static let cornerRadius = CGFloat(10.0)
     
-    static let drawCustomMap = false
+    static let drawCustomMap = true
     
     static let colorLowStroke = UIColor(rgb: 0xFFFFFF, alpha: 0.5)
     static let colorHighStroke = UIColor(rgb: 0x000000, alpha: 0.0)
