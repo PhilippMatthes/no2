@@ -7,10 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE1F69DF1FB0AF6E007A9C1A /* ExtensionDataBaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69DE1FB0AF6E007A9C1A /* ExtensionDataBaseCaller.swift */; };
+		BE1F69E01FB0AFBE007A9C1A /* PollutionAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */; };
+		BE1F69E11FB0AFE1007A9C1A /* DatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */; };
+		BE1F69E21FB0CF01007A9C1A /* CoordinateWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */; };
 		BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22C2171FA34D2B008D7659 /* Constants.swift */; };
+		BE2BDDF01FB0AC1C0076EF4B /* PollutionDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */; };
+		BE2BDDF11FB0AC1E0076EF4B /* PollutionMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */; };
 		BE2EC6251FAAFED40052BF6A /* MapKitGoogleStyler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2EC6261FAAFED40052BF6A /* MapKitGoogleStyler.framework */; };
 		BE2EC6281FAB61000052BF6A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2EC6271FAB61000052BF6A /* TabBarController.swift */; };
 		BE2EC6311FAB65B70052BF6A /* TabBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */; };
+		BE4A2DBA1FB061AA00044D90 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4A2DB91FB061AA00044D90 /* NotificationCenter.framework */; };
+		BE4A2DC41FB061AA00044D90 /* pollutionTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BE4A2DB81FB061AA00044D90 /* pollutionTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		BE4A2DCA1FB07AC200044D90 /* MeasurementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4A2DC91FB07AC200044D90 /* MeasurementCell.swift */; };
+		BE4A2DCC1FB07B2300044D90 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4A2DCB1FB07B2300044D90 /* TableController.swift */; };
+		BE4A2DD61FB0A31D00044D90 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4A2DC11FB061AA00044D90 /* Info.plist */; };
+		BE4A2DDC1FB0A49600044D90 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE4A2DBE1FB061AA00044D90 /* MainInterface.storyboard */; };
+		BE4A2DDD1FB0A5E500044D90 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22C2171FA34D2B008D7659 /* Constants.swift */; };
+		BE4A2DDE1FB0A60900044D90 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9394B31FA9FFE40017407E /* UIColorExtension.swift */; };
+		BE4A2DDF1FB0A7AF00044D90 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9394B11FA9FFC00017407E /* UIViewExtension.swift */; };
 		BE4D909E1FA5E5D30080B812 /* SwiftSpinner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4D909F1FA5E5D30080B812 /* SwiftSpinner.framework */; };
 		BE4D90A01FA6177C0080B812 /* Dropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4D90A11FA6177C0080B812 /* Dropper.framework */; };
 		BE50FBDF1FA4AB5400187750 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE50FBE01FA4AB5400187750 /* Charts.framework */; };
@@ -26,7 +41,6 @@
 		BE988FB01FA1F015007C24CF /* PollutionDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */; };
 		BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */; };
 		BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */; };
-		BE992FC21FA20B4000727BC0 /* DatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */; };
 		BEBBB2C91FA45977005439EB /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = BEBBB2C81FA45977005439EB /* Icons */; };
 		BEBBB2CB1FA496D9005439EB /* UnitInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */; };
 		BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */; };
@@ -37,13 +51,48 @@
 		F316DA5655435BED9DC5FF47 /* Pods_pollution.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78997E7465D6932446FC3389 /* Pods_pollution.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		BE4A2DC21FB061AA00044D90 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEE82D7D1FA1C35600BEBAF4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE4A2DB71FB061AA00044D90;
+			remoteInfo = pollutionTodayExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BE4A2DC81FB061AA00044D90 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BE4A2DC41FB061AA00044D90 /* pollutionTodayExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		17EFE4498692B5A74E153168 /* Pods-pollution.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pollution.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pollution/Pods-pollution.debug.xcconfig"; sourceTree = "<group>"; };
+		5D170178BDC76829245DA4F7 /* Pods_pollutionTodayExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pollutionTodayExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		78997E7465D6932446FC3389 /* Pods_pollution.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_pollution.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE1F69DC1FB0AEB4007A9C1A /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE1F69DE1FB0AF6E007A9C1A /* ExtensionDataBaseCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDataBaseCaller.swift; sourceTree = "<group>"; };
 		BE22C2171FA34D2B008D7659 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BE2BDDF41FB0AD130076EF4B /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2EC6261FAAFED40052BF6A /* MapKitGoogleStyler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MapKitGoogleStyler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2EC6271FAB61000052BF6A /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarExtension.swift; sourceTree = "<group>"; };
+		BE4A2DB81FB061AA00044D90 /* pollutionTodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = pollutionTodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE4A2DB91FB061AA00044D90 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		BE4A2DBF1FB061AA00044D90 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		BE4A2DC11FB061AA00044D90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE4A2DC91FB07AC200044D90 /* MeasurementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementCell.swift; sourceTree = "<group>"; };
+		BE4A2DCB1FB07B2300044D90 /* TableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableController.swift; sourceTree = "<group>"; };
+		BE4A2DE21FB0AB5D00044D90 /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4D909F1FA5E5D30080B812 /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE4D90A11FA6177C0080B812 /* Dropper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Dropper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE50FBE01FA4AB5400187750 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +128,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		BE4A2DB51FB061AA00044D90 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE4A2DBA1FB061AA00044D90 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BEE82D821FA1C35600BEBAF4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -146,11 +203,24 @@
 			name = MapKit;
 			sourceTree = "<group>";
 		};
+		BE4A2DBB1FB061AA00044D90 /* pollutionTodayExtension */ = {
+			isa = PBXGroup;
+			children = (
+				BE1F69DE1FB0AF6E007A9C1A /* ExtensionDataBaseCaller.swift */,
+				BE4A2DCB1FB07B2300044D90 /* TableController.swift */,
+				BE4A2DC91FB07AC200044D90 /* MeasurementCell.swift */,
+				BE4A2DBE1FB061AA00044D90 /* MainInterface.storyboard */,
+				BE4A2DC11FB061AA00044D90 /* Info.plist */,
+			);
+			path = pollutionTodayExtension;
+			sourceTree = "<group>";
+		};
 		BEE82D7C1FA1C35600BEBAF4 = {
 			isa = PBXGroup;
 			children = (
 				BEBBB2C81FA45977005439EB /* Icons */,
 				BEE82D871FA1C35600BEBAF4 /* pollution */,
+				BE4A2DBB1FB061AA00044D90 /* pollutionTodayExtension */,
 				BEE82D861FA1C35600BEBAF4 /* Products */,
 				A934949B0D42C0E0CDE14F4F /* Pods */,
 				C355A3DFC11229856E2E997C /* Frameworks */,
@@ -161,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				BEE82D851FA1C35600BEBAF4 /* pollution.app */,
+				BE4A2DB81FB061AA00044D90 /* pollutionTodayExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -187,6 +258,9 @@
 		C355A3DFC11229856E2E997C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE1F69DC1FB0AEB4007A9C1A /* SwiftSpinner.framework */,
+				BE2BDDF41FB0AD130076EF4B /* SwiftSpinner.framework */,
+				BE4A2DE21FB0AB5D00044D90 /* SwiftSpinner.framework */,
 				BE2EC6261FAAFED40052BF6A /* MapKitGoogleStyler.framework */,
 				BE4D90A11FA6177C0080B812 /* Dropper.framework */,
 				BE4D909F1FA5E5D30080B812 /* SwiftSpinner.framework */,
@@ -194,6 +268,8 @@
 				BEDA12011FA2324400A3EF51 /* JDSwiftHeatMap.framework */,
 				BEDA11FF1FA22B9100A3EF51 /* DTMHeatmap.framework */,
 				78997E7465D6932446FC3389 /* Pods_pollution.framework */,
+				BE4A2DB91FB061AA00044D90 /* NotificationCenter.framework */,
+				5D170178BDC76829245DA4F7 /* Pods_pollutionTodayExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -201,6 +277,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		BE4A2DB71FB061AA00044D90 /* pollutionTodayExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE4A2DC51FB061AA00044D90 /* Build configuration list for PBXNativeTarget "pollutionTodayExtension" */;
+			buildPhases = (
+				BE4A2DB41FB061AA00044D90 /* Sources */,
+				BE4A2DB51FB061AA00044D90 /* Frameworks */,
+				BE4A2DB61FB061AA00044D90 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = pollutionTodayExtension;
+			productName = pollutionTodayExtension;
+			productReference = BE4A2DB81FB061AA00044D90 /* pollutionTodayExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		BEE82D841FA1C35600BEBAF4 /* pollution */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BEE82D971FA1C35600BEBAF4 /* Build configuration list for PBXNativeTarget "pollution" */;
@@ -211,10 +304,12 @@
 				BEE82D831FA1C35600BEBAF4 /* Resources */,
 				A741B6C8BE74149C12C9F2F4 /* [CP] Embed Pods Frameworks */,
 				FBEC8143DBDCDFEBC6433396 /* [CP] Copy Pods Resources */,
+				BE4A2DC81FB061AA00044D90 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				BE4A2DC31FB061AA00044D90 /* PBXTargetDependency */,
 			);
 			name = pollution;
 			productName = pollution;
@@ -227,13 +322,22 @@
 		BEE82D7D1FA1C35600BEBAF4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 0910;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Philipp Matthes";
 				TargetAttributes = {
+					BE4A2DB71FB061AA00044D90 = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
 					BEE82D841FA1C35600BEBAF4 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -252,11 +356,21 @@
 			projectRoot = "";
 			targets = (
 				BEE82D841FA1C35600BEBAF4 /* pollution */,
+				BE4A2DB71FB061AA00044D90 /* pollutionTodayExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		BE4A2DB61FB061AA00044D90 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE4A2DD61FB0A31D00044D90 /* Info.plist in Resources */,
+				BE4A2DDC1FB0A49600044D90 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BEE82D831FA1C35600BEBAF4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -332,6 +446,23 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		BE4A2DB41FB061AA00044D90 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE1F69DF1FB0AF6E007A9C1A /* ExtensionDataBaseCaller.swift in Sources */,
+				BE4A2DDD1FB0A5E500044D90 /* Constants.swift in Sources */,
+				BE4A2DCC1FB07B2300044D90 /* TableController.swift in Sources */,
+				BE4A2DCA1FB07AC200044D90 /* MeasurementCell.swift in Sources */,
+				BE2BDDF11FB0AC1E0076EF4B /* PollutionMeasurement.swift in Sources */,
+				BE4A2DDF1FB0A7AF00044D90 /* UIViewExtension.swift in Sources */,
+				BE1F69E21FB0CF01007A9C1A /* CoordinateWizard.swift in Sources */,
+				BE2BDDF01FB0AC1C0076EF4B /* PollutionDataEntry.swift in Sources */,
+				BE1F69E01FB0AFBE007A9C1A /* PollutionAnnotation.swift in Sources */,
+				BE4A2DDE1FB0A60900044D90 /* UIColorExtension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BEE82D811FA1C35600BEBAF4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,9 +478,9 @@
 				BE9394B21FA9FFC00017407E /* UIViewExtension.swift in Sources */,
 				BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */,
 				BE9394B01FA9DF7E0017407E /* CustomCircleRenderer.swift in Sources */,
+				BE1F69E11FB0AFE1007A9C1A /* DatabaseCaller.swift in Sources */,
 				BE988FB01FA1F015007C24CF /* PollutionDataEntry.swift in Sources */,
 				BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */,
-				BE992FC21FA20B4000727BC0 /* DatabaseCaller.swift in Sources */,
 				BE9394AE1FA9DB220017407E /* CustomMapOverlay.swift in Sources */,
 				BE50FBE41FA4AC3F00187750 /* DetailController.swift in Sources */,
 				BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */,
@@ -359,7 +490,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		BE4A2DC31FB061AA00044D90 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE4A2DB71FB061AA00044D90 /* pollutionTodayExtension */;
+			targetProxy = BE4A2DC21FB061AA00044D90 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		BE4A2DBE1FB061AA00044D90 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE4A2DBF1FB061AA00044D90 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		BE56BCDE1FA9274A00303B70 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -391,6 +538,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		BE4A2DC61FB061AA00044D90 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S36925NV4E;
+				INFOPLIST_FILE = pollutionTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pollution.pollutionTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BE4A2DC71FB061AA00044D90 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = S36925NV4E;
+				INFOPLIST_FILE = pollutionTodayExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = pollution.pollutionTodayExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		BEE82D951FA1C35600BEBAF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -440,7 +619,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -492,7 +671,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -504,6 +683,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17EFE4498692B5A74E153168 /* Pods-pollution.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S36925NV4E;
@@ -521,6 +701,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F95E6C92C1F242651009C969 /* Pods-pollution.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = S36925NV4E;
@@ -537,6 +718,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		BE4A2DC51FB061AA00044D90 /* Build configuration list for PBXNativeTarget "pollutionTodayExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE4A2DC61FB061AA00044D90 /* Debug */,
+				BE4A2DC71FB061AA00044D90 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		BEE82D801FA1C35600BEBAF4 /* Build configuration list for PBXProject "pollution" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

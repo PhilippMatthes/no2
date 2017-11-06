@@ -16,7 +16,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        
+        application.beginBackgroundTask(withName: "showNotification", expirationHandler: nil)
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [UIUserNotificationType.alert, UIUserNotificationType.badge], categories: nil))
+        
         return true
+    }
+    
+    // Support for background fetch
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if let message = createMessage(forStation: "DESN061") {
+            pushNotification(withMessage: message)
+            completionHandler(.newData)
+        }
+        else {
+            completionHandler(.failed)
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -39,6 +57,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func createMessage(forStation station: String) -> String? {
+        let entries = DatabaseCaller.makeNotificationRequest(forLocation: station, withLimit: 10)
+        if let entry = entries.first {
+            var output = "Air quality for \(entry.city!):"
+            for measurement in entry.measurements! {
+                output += " \(String(measurement.value!)) \(String(measurement.unit!)) \(String(measurement.type!))"
+            }
+            return output
+        } else {
+            return nil
+        }
+        
+    }
+    
+    func pushNotification(withMessage message: String) {
+        
+        let notification = UILocalNotification()
+        notification.alertAction = "View detailled information in the App"
+        notification.alertBody = message
+        notification.fireDate = NSDate(timeIntervalSinceNow: 1) as Date
+        UIApplication.shared.scheduleLocalNotification(notification)
     }
 
 

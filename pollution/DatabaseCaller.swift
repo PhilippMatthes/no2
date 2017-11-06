@@ -183,6 +183,79 @@ class DatabaseCaller {
         return output
     }
     
+    static func makeNotificationRequest(forLocation location: String, withLimit limit: Int) -> [PollutionDataEntry] {
+        
+        var output = [PollutionDataEntry]()
+        
+        let locationEncoded = location.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+       
+        
+        let urlString = "https://api.openaq.org/v1/measurements?has_geo=true&location=\(locationEncoded)&limit=\(limit)"
+        
+        print(urlString)
+        
+        let request = URLRequest(url: NSURL(string: urlString)! as URL)
+        
+        
+        do {
+            // Perform the request
+            
+            let response: AutoreleasingUnsafeMutablePointer<URLResponse?>? = nil
+            let data = try NSURLConnection.sendSynchronousRequest(request, returning: response)
+            
+            // Convert the data to JSON
+            if let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
+                if let results = jsonSerialized["results"]{
+                    if let resultsSerialized = results as? (Array<[String : Any]>) {
+                        let entry = PollutionDataEntry()
+                        entry.measurements = [PollutionMeasurement]()
+                        for result in resultsSerialized {
+                            if let city = result["city"] as? String {
+                                entry.city = city
+                            }
+                            if let coordinates = result["coordinates"] as? [String : Any] {
+                                if let latitude = coordinates["latitude"] as? Double {
+                                    entry.latitude = latitude
+                                }
+                                if let longitude = coordinates["longitude"] as? Double {
+                                    entry.longitude = longitude
+                                }
+                            }
+                            entry.distance = 0
+                            if let location = result["location"] as? String {
+                                entry.location = location
+                            }
+                            if let country = result["country"] as? String {
+                                entry.country = country
+                            }
+                            let measurement = PollutionMeasurement()
+                            if let value = result["value"] as? Double {
+                                measurement.value = value
+                            }
+                            if let unit = result["unit"] as? String {
+                                measurement.unit = unit
+                            }
+                            if let parameter = result["parameter"] as? String {
+                                measurement.type = parameter
+                            }
+                            if let date = result["date"] as? [String: Any] {
+                                if let local = date["local"] as? String {
+                                    measurement.date = local
+                                }
+                            }
+                            entry.measurements!.append(measurement)
+                        }
+                        output.append(entry)
+                    }
+                }
+            }
+            SwiftSpinner.hide()
+        } catch {
+            print(error)
+        }
+        return output
+    }
+    
     static func generateMapAnnotation(entry: PollutionDataEntry) -> PollutionAnnotation {
         let annotation = PollutionAnnotation()
         annotation.setCoordinate(newCoordinate: CLLocationCoordinate2D(latitude: entry.latitude!, longitude: entry.longitude!))
