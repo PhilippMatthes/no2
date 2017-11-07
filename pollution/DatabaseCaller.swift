@@ -91,12 +91,11 @@ class DatabaseCaller {
         }.resume()
     }
     
-    static func makeLocalRequest(forLocation location: String, withLimit limit: Int, toDate dateTo: String, fromDetailController controller: DetailController, withPreviousController previousController: ViewController, completionHandler: @escaping (_ entries: [PollutionDataEntry]) -> ()) {
+    static func makeLocalRequest(forLocation location: String, withLimit limit: Int, toDate dateTo: String, completionHandler: @escaping (_ entries: [PollutionDataEntry]) -> ()) {
         
         DispatchQueue.main.async {
             SwiftSpinner.show(NSLocalizedString("loadingData", comment: "Loading\ndata")).addTapHandler({
                 SwiftSpinner.hide()
-                controller.performSegueToReturnBack()
             }, subtitle: NSLocalizedString("tapToCancel", comment: "Tap to cancel."))
         }
         
@@ -165,16 +164,6 @@ class DatabaseCaller {
                 }
             } catch {
                 print(error)
-                DispatchQueue.main.async {
-                    if controller.isViewLoaded && (controller.view.window != nil) {
-                        DispatchQueue.main.async {
-                            SwiftSpinner.show(NSLocalizedString("failedToLoad", comment: "Failed to load data"), animated: false).addTapHandler({
-                                SwiftSpinner.hide()
-                                controller.performSegueToReturnBack()
-                            }, subtitle: NSLocalizedString("tapToReturn", comment: "Tap to return."))
-                        }
-                    }
-                }
             }
             completionHandler(output)
         }.resume()

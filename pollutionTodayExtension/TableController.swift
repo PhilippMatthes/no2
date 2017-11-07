@@ -30,7 +30,7 @@ class TableController: UITableViewController, NCWidgetProviding {
     }
     
     func loadData() {
-        entries = ExtensionDatabaseCaller.makeLatestRequest(forLongitude: 13.737262, forLatitude: 51.050407, forRadius: 10000, withLimit: 10)
+        
     }
     
     @available(iOS 10.0, *)

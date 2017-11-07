@@ -16,8 +16,6 @@ class UnitInformationController: UIViewController {
     @IBOutlet var viewBackground: UIView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
-    var previousViewController: ViewController?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

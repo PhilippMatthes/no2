@@ -20,7 +20,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var map = [PollutionAnnotation]()
     var overlays = [MKCircle]()
     var maxvalue: Double?
-    var currentType: String?
     var requestSent = false
     var tileRenderer: MKTileOverlayRenderer?
     
@@ -43,9 +42,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         mapView.delegate = self
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         initUI()
-        
-        self.updateAnnotations(withType: currentType!)
+        self.updateAnnotations(withType: State.shared.currentType)
     }
 
     
@@ -62,7 +63,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         searchController.searchBar.barStyle = .default
         searchController.searchBar.searchBarStyle = .default
         searchController.searchBar.showsCancelButton = false
-        searchController.searchBar.tintColor = Constants.colors[currentType!]!
+        searchController.searchBar.tintColor = Constants.colors[State.shared.currentType]!
         searchController.searchBar.barTintColor = UIColor.white
         let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = UIColor.gray
@@ -229,13 +230,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func initUI() {
-        
-        currentType = Constants.units.first
 
         let tabBar = tabBarController!.tabBar
         tabBar.clipsToBounds = true
         tabBar.tintColor = UIColor.white
-        tabBar.barTintColor = Constants.colors[currentType!]
+        tabBar.barTintColor = Constants.colors[State.shared.currentType]
         tabBar.backgroundColor = UIColor.clear
         tabBar.setTintColor(ofUnselectedItemsWithColor: UIColor.white.withAlphaComponent(0.5),
                             andSelectedItemsWithColor: UIColor.white)
@@ -246,10 +245,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
         unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
         unitLabelBackground.clipsToBounds = true
         
-        unitLabel.text = currentType?.capitalized
-        unitLabelBackground.layer.backgroundColor = Constants.colors[currentType!]!.cgColor
-        searchButtonBackground.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
-        maxvalue = Constants.maxValues[currentType!]
+        unitLabel.text = State.shared.currentType.capitalized
+        unitLabelBackground.layer.backgroundColor = Constants.colors[State.shared.currentType]!.cgColor
+        searchButtonBackground.layer.backgroundColor = Constants.colors[State.shared.currentType]!.cgColor
+        maxvalue = Constants.maxValues[State.shared.currentType]
         
         unitLabelBackground.layer.cornerRadius = Constants.cornerRadius
         searchButtonBackground.layer.cornerRadius = Constants.cornerRadius
@@ -271,14 +270,14 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     @objc func unitButtonClicked(sender:UITapGestureRecognizer) {
         
-        let index = (Constants.units.index(of: currentType!)! + 1) % Constants.units.count
-        currentType = Constants.units[index]
-        unitLabel.text = currentType!.capitalized
-        tabBarController!.tabBar.animate(toBarTintColor: Constants.colors[currentType!]!, withDuration: 2.0)
-        unitLabelBackground.animate(toBackgroundColor: Constants.colors[currentType!]!, withDuration: 2.0)
-        searchButtonBackground.animate(toBackgroundColor: Constants.colors[currentType!]!, withDuration: 2.0)
+        let index = (Constants.units.index(of: State.shared.currentType)! + 1) % Constants.units.count
+        State.shared.currentType = Constants.units[index]
+        unitLabel.text = State.shared.currentType.capitalized
+        tabBarController!.tabBar.animate(toBarTintColor: Constants.colors[State.shared.currentType]!, withDuration: 2.0)
+        unitLabelBackground.animate(toBackgroundColor: Constants.colors[State.shared.currentType]!, withDuration: 2.0)
+        searchButtonBackground.animate(toBackgroundColor: Constants.colors[State.shared.currentType]!, withDuration: 2.0)
         
-        updateAnnotations(withType: currentType!)
+        updateAnnotations(withType: State.shared.currentType)
         
         unitLabelBackground.animateButtonPress(withBorderColor: UIColor.white, width: 4.0, andDuration: 0.1)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
@@ -287,7 +286,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-        updateAnnotations(withType: currentType!)
+        updateAnnotations(withType: State.shared.currentType)
     }
     
     func updateAnnotations(withType type: String) {
@@ -382,14 +381,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showUnitInformation" {
             let vc = segue.destination as! UnitInformationController
-            vc.previousViewController = self
-            vc.initDesign(withColor: Constants.colors[currentType!]!, andUnit: currentType!)
+            vc.initDesign(withColor: Constants.colors[State.shared.currentType]!, andUnit: State.shared.currentType)
         }
         if segue.identifier == "showDetail" {
             let vc = segue.destination as! DetailController
-            vc.previousViewController = self
-            vc.annotationThatWasClicked = selectedAnnotation
-            vc.initDesign(withColor: Constants.colors[currentType!]!, andUnit: currentType!)
+            vc.annotationThatWasClicked = self.selectedAnnotation
         }
     }
 
@@ -397,7 +393,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
 
 extension ViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        self.updateAnnotations(withType: currentType!)
+        self.updateAnnotations(withType: State.shared.currentType)
     }
     
     func mapView(_ mapView: MKMapView, didSelect view:MKAnnotationView) {

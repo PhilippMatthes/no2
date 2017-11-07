@@ -15,6 +15,8 @@ class TableViewController: UITableViewController {
     var selectedStation: Station?
     var selector = IndexPath()
     
+    var annotation: PollutionAnnotation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .singleLineEtched
@@ -80,13 +82,22 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedStation = stations[indexPath.row]
-        print(indexPath.row)
+        DatabaseCaller.makeNotificationRequest(forLocation: self.selectedStation!.name!, withLimit: 1) {
+            entries in
+            if let entry = entries.first {
+                self.annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "showDetail", sender: self)
+                }
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.identifier == "showDetail" {
+            let vc = segue.destination as! DetailController
+            vc.annotationThatWasClicked = self.annotation
+        }
     }
-    
-    
 }
 

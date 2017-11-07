@@ -28,11 +28,9 @@ class DetailController: UIViewController, ChartViewDelegate {
     @IBOutlet var viewBackground: UIView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     var annotationThatWasClicked: PollutionAnnotation?
-    var previousViewController: ViewController?
-    var currentType: String?
     var showsIntradayInformation = true
     
-    let dropper = Dropper(width: 100, height: 200)
+    var dropper = Dropper(width: 100, height: 200)
     
     @IBOutlet weak var emissionChart: LineChartView!
     
@@ -40,14 +38,14 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        updateLabels(withSource: annotationThatWasClicked!.entry!.measurements!.first!.source,
-                     andLocation: annotationThatWasClicked!.entry!.location!)
-        
-        currentType = previousViewController!.currentType
-        
-        getData(fromDaysAgo: 0, intraday: showsIntradayInformation)
-        
+            
+        self.initDesign(withColor: Constants.colors[State.shared.currentType]!)
+            
+        self.updateLabels(withSource: self.annotationThatWasClicked!.entry!.measurements!.first!.source,
+                              andLocation: self.annotationThatWasClicked!.entry!.location!)
+            
+        self.getData(fromDaysAgo: 0, intraday: self.showsIntradayInformation)
+    
     }
     
     func getData(fromDaysAgo days: Int, intraday: Bool) {
@@ -56,12 +54,12 @@ class DetailController: UIViewController, ChartViewDelegate {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from:date as Date)
         DispatchQueue.global(qos: .default).async {
-            DatabaseCaller.makeLocalRequest(forLocation: self.annotationThatWasClicked!.entry!.location!,                                                   withLimit: 10000, toDate:  dateString, fromDetailController: self, withPreviousController: self.previousViewController!) {
+            DatabaseCaller.makeLocalRequest(forLocation: self.annotationThatWasClicked!.entry!.location!,                                                   withLimit: 10000, toDate:  dateString) {
                 entries in
                 self.measurements = entries
                 DispatchQueue.main.async {
                     if !self.view.isHidden {
-                        self.setUpChart(withType: self.currentType!, intraday: intraday)
+                        self.setUpChart(withType: State.shared.currentType, intraday: intraday)
                     }
                 }
             }
@@ -85,7 +83,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         
     }
     
-    func initDesign(withColor color: UIColor, andUnit unit: String) {
+    func initDesign(withColor color: UIColor) {
         view.addSubview(navigationBar)
         let unitButtonRecognizer = UITapGestureRecognizer(target: self, action:  #selector (self.unitButtonClicked(sender:)))
         unitLabelBackground.addGestureRecognizer(unitButtonRecognizer)
@@ -116,16 +114,16 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     @objc func unitButtonClicked(sender:UITapGestureRecognizer) {
         
-        let index = (Constants.units.index(of: currentType!)! + 1) % Constants.units.count
-        currentType = Constants.units[index]
-        changeColor(to: Constants.colors[currentType!]!)
+        let index = (Constants.units.index(of: State.shared.currentType)! + 1) % Constants.units.count
+        State.shared.currentType = Constants.units[index]
+        changeColor(to: Constants.colors[State.shared.currentType]!)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.updateChart(withType: self.currentType!, intraday: self.showsIntradayInformation)
+            self.updateChart(withType: State.shared.currentType, intraday: self.showsIntradayInformation)
         })
         
-        unitLabelBackground.animateButtonPress(withBorderColor: Constants.colors[currentType!]!, width: 4.0, andDuration: 0.1)
+        unitLabelBackground.animateButtonPress(withBorderColor: Constants.colors[State.shared.currentType]!, width: 4.0, andDuration: 0.1)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.unitLabelBackground.animateButtonRelease(withBorderColor: Constants.colors[self.currentType!]!, width: 4.0, andDuration: 0.1)
+            self.unitLabelBackground.animateButtonRelease(withBorderColor: Constants.colors[State.shared.currentType]!, width: 4.0, andDuration: 0.1)
         })
     }
     @objc func timeButtonClicked(sender:UITapGestureRecognizer) {
@@ -137,9 +135,9 @@ class DetailController: UIViewController, ChartViewDelegate {
         }
         
         
-        timeLabelBackground.animateButtonPress(withBorderColor: Constants.colors[currentType!]!, width: 4.0, andDuration: 0.1)
+        timeLabelBackground.animateButtonPress(withBorderColor: Constants.colors[State.shared.currentType]!, width: 4.0, andDuration: 0.1)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.timeLabelBackground.animateButtonRelease(withBorderColor: Constants.colors[self.currentType!]!, width: 4.0, andDuration: 0.1)
+            self.timeLabelBackground.animateButtonRelease(withBorderColor: Constants.colors[State.shared.currentType]!, width: 4.0, andDuration: 0.1)
         })
     }
     
@@ -148,7 +146,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         dropper.tintColor = color
         dropper.refresh()
         
-        unitLabel.text = currentType!.capitalized
+        unitLabel.text = State.shared.currentType.capitalized
         unitLabel.textColor = color
         timeLabel.textColor = color
         infoButton.animate(toBackgroundColor: color, withDuration: 2.0)
@@ -188,12 +186,6 @@ class DetailController: UIViewController, ChartViewDelegate {
     }
     
     func performSegueToReturnBack()  {
-        previousViewController!.currentType = currentType!
-        previousViewController!.unitLabel.text = currentType!.capitalized
-        previousViewController!.unitLabelBackground.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
-        previousViewController!.searchButtonBackground.layer.backgroundColor = Constants.colors[currentType!]?.cgColor
-        previousViewController!.tabBarController!.tabBar.barTintColor = Constants.colors[currentType!]
-        previousViewController!.updateAnnotations(withType: currentType!)
         if let nav = self.navigationController {
             nav.popViewController(animated: true)
         } else {
@@ -212,8 +204,8 @@ class DetailController: UIViewController, ChartViewDelegate {
         
         for measurementList in measurements! {
             for measurement in measurementList.measurements! {
-                if measurement.type == currentType! {
-                    backgroundLog.append(Constants.maxValues[currentType!]!)
+                if measurement.type == State.shared.currentType {
+                    backgroundLog.append(Constants.maxValues[State.shared.currentType]!)
                     emissionLog.append(measurement.value!)
                     let cutOff = String(measurement.date!.dropFirst(11))
                     let time = String(cutOff.prefix(5))
@@ -242,8 +234,8 @@ class DetailController: UIViewController, ChartViewDelegate {
         let maxValue = Double(emissionLog.max()!)
         
         var yAxisValues = [String]()
-        for i in 0..<Int(max(Constants.maxValues[currentType!]!, maxValue)) {
-            if i == Int(Constants.maxValues[currentType!]!) {
+        for i in 0..<Int(max(Constants.maxValues[State.shared.currentType]!, maxValue)) {
+            if i == Int(Constants.maxValues[State.shared.currentType]!) {
                 yAxisValues.append(NSLocalizedString("high", comment: "High"))
             }
             else {
@@ -254,7 +246,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         emissionChart.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
         emissionChart.leftAxis.setLabelCount(10, force: false)
         emissionChart.leftAxis.labelTextColor = UIColor.white
-        emissionChart.leftAxis.axisMaximum = max(Constants.maxValues[currentType!]!, maxValue)
+        emissionChart.leftAxis.axisMaximum = max(Constants.maxValues[State.shared.currentType]!, maxValue)
         
         var barChartEntries = [BarChartDataEntry]()
         var backgroundChartEntries = [BarChartDataEntry]()
@@ -311,8 +303,8 @@ class DetailController: UIViewController, ChartViewDelegate {
         
         for measurementList in measurements! {
             for measurement in measurementList.measurements! {
-                if measurement.type == currentType! {
-                    backgroundLog.append(Constants.maxValues[currentType!]!)
+                if measurement.type == State.shared.currentType {
+                    backgroundLog.append(Constants.maxValues[State.shared.currentType]!)
                     emissionLog.append(measurement.value!)
                     let cutOff = String(measurement.date!.dropFirst(11))
                     let time = String(cutOff.prefix(5))
@@ -341,8 +333,8 @@ class DetailController: UIViewController, ChartViewDelegate {
         let maxValue = Double(emissionLog.max()!)
         
         var yAxisValues = [String]()
-        for i in 0..<Int(max(Constants.maxValues[currentType!]!, maxValue)) {
-            if i == Int(Constants.maxValues[currentType!]!) {
+        for i in 0..<Int(max(Constants.maxValues[State.shared.currentType]!, maxValue)) {
+            if i == Int(Constants.maxValues[State.shared.currentType]!) {
                 yAxisValues.append(NSLocalizedString("high", comment: "High"))
             }
             else {
@@ -365,7 +357,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         emissionChart.leftAxis.labelTextColor = UIColor.white
         emissionChart.leftAxis.axisLineColor = UIColor.white
         emissionChart.isUserInteractionEnabled = false
-        emissionChart.leftAxis.axisMaximum = max(Constants.maxValues[currentType!]!, maxValue)
+        emissionChart.leftAxis.axisMaximum = max(Constants.maxValues[State.shared.currentType]!, maxValue)
         emissionChart.xAxis.drawGridLinesEnabled = false
         emissionChart.xAxis.drawAxisLineEnabled = false
         emissionChart.noDataTextColor = UIColor.white
@@ -423,8 +415,7 @@ class DetailController: UIViewController, ChartViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showUnitInformation" {
             let vc = segue.destination as! UnitInformationController
-            vc.previousViewController = previousViewController!
-            vc.initDesign(withColor: Constants.colors[currentType!]!, andUnit: currentType!)
+            vc.initDesign(withColor: Constants.colors[State.shared.currentType]!, andUnit: State.shared.currentType)
         }
     }
     
