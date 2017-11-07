@@ -43,18 +43,21 @@ class PollutionDataEntry: NSObject, NSCoding {
             let location = aDecoder.decodeObject(forKey: "location") as? String,
             let country = aDecoder.decodeObject(forKey: "country") as? String,
             let latitude = aDecoder.decodeObject(forKey: "latitude") as? Double,
-            let longitude = aDecoder.decodeObject(forKey: "longitude") as? Double,
-            let measurements = aDecoder.decodeObject(forKey: "measurements") as? [PollutionMeasurement]
+            let longitude = aDecoder.decodeObject(forKey: "longitude") as? Double
             else {
                 return nil
         }
-        self.init(city: city,
-                  distance: distance,
-                  location: location,
-                  country: country,
-                  measurements: measurements,
-                  latitude: latitude,
-                  longitude: longitude)
+        let data = UserDefaults.standard.object(forKey: "measurements") as! NSData
+        if let measurements = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [PollutionMeasurement] {
+            self.init(city: city,
+                      distance: distance,
+                      location: location,
+                      country: country,
+                      measurements: measurements,
+                      latitude: latitude,
+                      longitude: longitude)
+        }
+        return nil
     }
     
     func encode(with aCoder: NSCoder) {
@@ -64,7 +67,8 @@ class PollutionDataEntry: NSObject, NSCoding {
         aCoder.encode(country, forKey: "country")
         aCoder.encode(latitude, forKey: "latitude")
         aCoder.encode(longitude, forKey: "longitude")
-        aCoder.encode(measurements, forKey: "measurements")
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: measurements!)
+        UserDefaults.standard.set(encodedData, forKey: "measurements")
     }
     
     override public var hashValue: Int {

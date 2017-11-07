@@ -12,7 +12,7 @@ import MapKit
 import Foundation
 import UIKit
 
-class PollutionAnnotation : NSObject, MKAnnotation {
+class PollutionAnnotation : NSObject, NSCoding, MKAnnotation {
     private var coord: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     private var _title: String = String("")
     private var _subtitle: String = String("")
@@ -29,6 +29,31 @@ class PollutionAnnotation : NSObject, MKAnnotation {
         self._title = title
         self._subtitle = subtitle
         self.entry = entry
+    }
+    
+    convenience required init?(coder aDecoder: NSCoder) {
+        guard
+            let longitude = aDecoder.decodeObject(forKey: "longitude") as? Double,
+            let latitude = aDecoder.decodeObject(forKey: "latitude") as? Double,
+            let _title = aDecoder.decodeObject(forKey: "_title") as? String,
+            let _subtitle = aDecoder.decodeObject(forKey: "_subtitle") as? String,
+            let entry = aDecoder.decodeObject(forKey: "entry") as? PollutionDataEntry
+            else {
+                return nil
+        }
+        let coord = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        self.init(coord: coord,
+                  title: _title,
+                  subtitle: _subtitle,
+                  entry: entry)
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(coord.latitude, forKey: "latitude")
+        aCoder.encode(coord.longitude, forKey: "longitude")
+        aCoder.encode(_title, forKey: "_title")
+        aCoder.encode(_subtitle, forKey: "_subtitle")
+        aCoder.encode(entry, forKey: "entry")
     }
     
     var title: String? {

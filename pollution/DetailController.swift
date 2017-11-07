@@ -56,10 +56,13 @@ class DetailController: UIViewController, ChartViewDelegate {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateString = dateFormatter.string(from:date as Date)
         DispatchQueue.global(qos: .default).async {
-            self.measurements = DatabaseCaller.makeLocalRequest(forLocation: self.annotationThatWasClicked!.entry!.location!,                                                   withLimit: 10000, toDate:  dateString, fromDetailController: self, withPreviousController: self.previousViewController!)
-            DispatchQueue.main.async {
-                if !self.view.isHidden {
-                    self.setUpChart(withType: self.currentType!, intraday: intraday)
+            DatabaseCaller.makeLocalRequest(forLocation: self.annotationThatWasClicked!.entry!.location!,                                                   withLimit: 10000, toDate:  dateString, fromDetailController: self, withPreviousController: self.previousViewController!) {
+                entries in
+                self.measurements = entries
+                DispatchQueue.main.async {
+                    if !self.view.isHidden {
+                        self.setUpChart(withType: self.currentType!, intraday: intraday)
+                    }
                 }
             }
         }

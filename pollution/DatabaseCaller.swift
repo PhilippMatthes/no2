@@ -12,88 +12,86 @@ import SwiftSpinner
 
 class DatabaseCaller {
     
-    static func makeLatestRequest(forLongitude longitude: Double, forLatitude latitude: Double, forRadius radius: Int, withLimit limit: Int) -> [PollutionDataEntry] {
+    static func makeLatestRequest(forLongitude longitude: Double, forLatitude latitude: Double, forRadius radius: Int, withLimit limit: Int, completionHandler: @escaping (_ entries: [PollutionDataEntry]) -> ()) {
         
         var output = [PollutionDataEntry]()
         
         let request = URLRequest(url: NSURL(string: "https://api.openaq.org/v1/latest?has_geo=true&coordinates=\(latitude),\(longitude)&limit=\(limit)&radius=\(radius)")! as URL)
         
-
-        do {
-            // Perform the request
-            
-            let response: AutoreleasingUnsafeMutablePointer<URLResponse?>? = nil
-            let data = try NSURLConnection.sendSynchronousRequest(request, returning: response)
-            
-            // Convert the data to JSON
-            if let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
-                if let results = jsonSerialized["results"]{
-                    if let resultsSerialized = results as? (Array<[String : Any]>) {
-                        for result in resultsSerialized {
-                            let entry = PollutionDataEntry()
-                            if let city = result["city"] as? String {
-                                entry.city = city
-                            }
-                            if let coordinates = result["coordinates"] as? [String : Any] {
-                                if let latitude = coordinates["latitude"] as? Double {
-                                    entry.latitude = latitude
-                                }
-                                if let longitude = coordinates["longitude"] as? Double {
-                                    entry.longitude = longitude
-                                }
-                            }
-                            if let distance = result["distance"] as? Double {
-                                entry.distance = distance
-                            }
-                            if let location = result["location"] as? String {
-                                entry.location = location
-                            }
-                            if let country = result["country"] as? String {
-                                entry.country = country
-                            }
-                            if let measurements = result["measurements"] as? Array<Any> {
-                                entry.measurements = [PollutionMeasurement]()
-                                for measurement in measurements {
-                                    let measurementEntry = PollutionMeasurement()
-                                    if let measurementDict = measurement as? [String : Any] {
-                                        if let lastUpdated = measurementDict["lastUpdated"] as? String {
-                                            measurementEntry.date = lastUpdated
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) -> Void in
+            do {
+                if let taskData = data {
+                    if let jsonSerialized = try JSONSerialization.jsonObject(with: taskData, options: []) as? [String : Any] {
+                        if let results = jsonSerialized["results"]{
+                            if let resultsSerialized = results as? (Array<[String : Any]>) {
+                                for result in resultsSerialized {
+                                    let entry = PollutionDataEntry()
+                                    if let city = result["city"] as? String {
+                                        entry.city = city
+                                    }
+                                    if let coordinates = result["coordinates"] as? [String : Any] {
+                                        if let latitude = coordinates["latitude"] as? Double {
+                                            entry.latitude = latitude
                                         }
-                                        if let type = measurementDict["parameter"] as? String {
-                                            measurementEntry.type = type
-                                        }
-                                        if let value = measurementDict["value"] as? Double {
-                                            if let unit = measurementDict["unit"] as? String {
-                                                measurementEntry.unit = unit
-                                                measurementEntry.value = value
-                                            }
-                                        }
-                                        if let sourceName = measurementDict["sourceName"] as? String {
-                                            measurementEntry.source = sourceName
-                                        }
-                                        if let averagingPeriod = measurementDict["averagingPeriod"] as? [String : Any] {
-                                            if let value = averagingPeriod["value"] as? Double {
-                                                if let unit = averagingPeriod["unit"] as? String {
-                                                    measurementEntry.rate = String(value)+" "+unit
-                                                }
-                                            }
+                                        if let longitude = coordinates["longitude"] as? Double {
+                                            entry.longitude = longitude
                                         }
                                     }
-                                    entry.measurements?.append(measurementEntry)
+                                    if let distance = result["distance"] as? Double {
+                                        entry.distance = distance
+                                    }
+                                    if let location = result["location"] as? String {
+                                        entry.location = location
+                                    }
+                                    if let country = result["country"] as? String {
+                                        entry.country = country
+                                    }
+                                    if let measurements = result["measurements"] as? Array<Any> {
+                                        entry.measurements = [PollutionMeasurement]()
+                                        for measurement in measurements {
+                                            let measurementEntry = PollutionMeasurement()
+                                            if let measurementDict = measurement as? [String : Any] {
+                                                if let lastUpdated = measurementDict["lastUpdated"] as? String {
+                                                    measurementEntry.date = lastUpdated
+                                                }
+                                                if let type = measurementDict["parameter"] as? String {
+                                                    measurementEntry.type = type
+                                                }
+                                                if let value = measurementDict["value"] as? Double {
+                                                    if let unit = measurementDict["unit"] as? String {
+                                                        measurementEntry.unit = unit
+                                                        measurementEntry.value = value
+                                                    }
+                                                }
+                                                if let sourceName = measurementDict["sourceName"] as? String {
+                                                    measurementEntry.source = sourceName
+                                                }
+                                                if let averagingPeriod = measurementDict["averagingPeriod"] as? [String : Any] {
+                                                    if let value = averagingPeriod["value"] as? Double {
+                                                        if let unit = averagingPeriod["unit"] as? String {
+                                                            measurementEntry.rate = String(value)+" "+unit
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            entry.measurements?.append(measurementEntry)
+                                        }
+                                    }
+                                    output.append(entry)
                                 }
                             }
-                            output.append(entry)
                         }
                     }
                 }
+            } catch {
+                print(error)
             }
-        } catch {
-            print(error)
-        }
-        return output
+            completionHandler(output)
+        }.resume()
     }
     
-    static func makeLocalRequest(forLocation location: String, withLimit limit: Int, toDate dateTo: String, fromDetailController controller: DetailController, withPreviousController previousController: ViewController) -> [PollutionDataEntry] {
+    static func makeLocalRequest(forLocation location: String, withLimit limit: Int, toDate dateTo: String, fromDetailController controller: DetailController, withPreviousController previousController: ViewController, completionHandler: @escaping (_ entries: [PollutionDataEntry]) -> ()) {
         
         DispatchQueue.main.async {
             SwiftSpinner.show(NSLocalizedString("loadingData", comment: "Loading\ndata")).addTapHandler({
@@ -113,77 +111,76 @@ class DatabaseCaller {
         
         let request = URLRequest(url: NSURL(string: urlString)! as URL)
         
-        
-        do {
-            // Perform the request
-            
-            let response: AutoreleasingUnsafeMutablePointer<URLResponse?>? = nil
-            let data = try NSURLConnection.sendSynchronousRequest(request, returning: response)
-            
-            // Convert the data to JSON
-            if let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
-                if let results = jsonSerialized["results"]{
-                    if let resultsSerialized = results as? (Array<[String : Any]>) {
-                        let entry = PollutionDataEntry()
-                        entry.measurements = [PollutionMeasurement]()
-                        for result in resultsSerialized {
-                            if let city = result["city"] as? String {
-                                entry.city = city
-                            }
-                            if let coordinates = result["coordinates"] as? [String : Any] {
-                                if let latitude = coordinates["latitude"] as? Double {
-                                    entry.latitude = latitude
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) -> Void in
+            do {
+                if let taskData = data {
+                    // Convert the data to JSON
+                    if let jsonSerialized = try JSONSerialization.jsonObject(with: taskData, options: []) as? [String : Any] {
+                        if let results = jsonSerialized["results"]{
+                            if let resultsSerialized = results as? (Array<[String : Any]>) {
+                                let entry = PollutionDataEntry()
+                                entry.measurements = [PollutionMeasurement]()
+                                for result in resultsSerialized {
+                                    if let city = result["city"] as? String {
+                                        entry.city = city
+                                    }
+                                    if let coordinates = result["coordinates"] as? [String : Any] {
+                                        if let latitude = coordinates["latitude"] as? Double {
+                                            entry.latitude = latitude
+                                        }
+                                        if let longitude = coordinates["longitude"] as? Double {
+                                            entry.longitude = longitude
+                                        }
+                                    }
+                                    entry.distance = 0
+                                    if let location = result["location"] as? String {
+                                        entry.location = location
+                                    }
+                                    if let country = result["country"] as? String {
+                                        entry.country = country
+                                    }
+                                    let measurement = PollutionMeasurement()
+                                    if let value = result["value"] as? Double {
+                                        measurement.value = value
+                                    }
+                                    if let unit = result["unit"] as? String {
+                                        measurement.unit = unit
+                                    }
+                                    if let parameter = result["parameter"] as? String {
+                                        measurement.type = parameter
+                                    }
+                                    if let date = result["date"] as? [String: Any] {
+                                        if let local = date["local"] as? String {
+                                            measurement.date = local
+                                        }
+                                    }
+                                    entry.measurements!.append(measurement)
                                 }
-                                if let longitude = coordinates["longitude"] as? Double {
-                                    entry.longitude = longitude
-                                }
+                                output.append(entry)
                             }
-                            entry.distance = 0
-                            if let location = result["location"] as? String {
-                                entry.location = location
-                            }
-                            if let country = result["country"] as? String {
-                                entry.country = country
-                            }
-                            let measurement = PollutionMeasurement()
-                            if let value = result["value"] as? Double {
-                                measurement.value = value
-                            }
-                            if let unit = result["unit"] as? String {
-                                measurement.unit = unit
-                            }
-                            if let parameter = result["parameter"] as? String {
-                                measurement.type = parameter
-                            }
-                            if let date = result["date"] as? [String: Any] {
-                                if let local = date["local"] as? String {
-                                    measurement.date = local
-                                }
-                            }
-                            entry.measurements!.append(measurement)
                         }
-                        output.append(entry)
+                    }
+                    SwiftSpinner.hide()
+                }
+            } catch {
+                print(error)
+                DispatchQueue.main.async {
+                    if controller.isViewLoaded && (controller.view.window != nil) {
+                        DispatchQueue.main.async {
+                            SwiftSpinner.show(NSLocalizedString("failedToLoad", comment: "Failed to load data"), animated: false).addTapHandler({
+                                SwiftSpinner.hide()
+                                controller.performSegueToReturnBack()
+                            }, subtitle: NSLocalizedString("tapToReturn", comment: "Tap to return."))
+                        }
                     }
                 }
             }
-            SwiftSpinner.hide()
-        } catch {
-            print(error)
-            DispatchQueue.main.async {
-                if controller.isViewLoaded && (controller.view.window != nil) {
-                    DispatchQueue.main.async {
-                        SwiftSpinner.show(NSLocalizedString("failedToLoad", comment: "Failed to load data"), animated: false).addTapHandler({
-                            SwiftSpinner.hide()
-                            controller.performSegueToReturnBack()
-                        }, subtitle: NSLocalizedString("tapToReturn", comment: "Tap to return."))
-                    }
-                }
-            }
-        }
-        return output
+            completionHandler(output)
+        }.resume()
     }
     
-    static func makeNotificationRequest(forLocation location: String, withLimit limit: Int) -> [PollutionDataEntry] {
+    static func makeNotificationRequest(forLocation location: String, withLimit limit: Int, completionHandler: @escaping (_ entries: [PollutionDataEntry]) -> ()) {
         
         var output = [PollutionDataEntry]()
         
@@ -196,64 +193,65 @@ class DatabaseCaller {
         
         let request = URLRequest(url: NSURL(string: urlString)! as URL)
         
-        
-        do {
-            // Perform the request
-            
-            let response: AutoreleasingUnsafeMutablePointer<URLResponse?>? = nil
-            let data = try NSURLConnection.sendSynchronousRequest(request, returning: response)
-            
-            // Convert the data to JSON
-            if let jsonSerialized = try JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
-                if let results = jsonSerialized["results"]{
-                    if let resultsSerialized = results as? (Array<[String : Any]>) {
-                        let entry = PollutionDataEntry()
-                        entry.measurements = [PollutionMeasurement]()
-                        for result in resultsSerialized {
-                            if let city = result["city"] as? String {
-                                entry.city = city
-                            }
-                            if let coordinates = result["coordinates"] as? [String : Any] {
-                                if let latitude = coordinates["latitude"] as? Double {
-                                    entry.latitude = latitude
+        let session = URLSession.shared
+        session.dataTask(with: request) { (data, response, error) -> Void in
+            do {
+                if let taskData = data {
+                    // Convert the data to JSON
+                    if let jsonSerialized = try JSONSerialization.jsonObject(with: taskData, options: []) as? [String : Any] {
+                        if let results = jsonSerialized["results"]{
+                            if let resultsSerialized = results as? (Array<[String : Any]>) {
+                                let entry = PollutionDataEntry()
+                                entry.measurements = [PollutionMeasurement]()
+                                for result in resultsSerialized {
+                                    if let city = result["city"] as? String {
+                                        entry.city = city
+                                    }
+                                    if let coordinates = result["coordinates"] as? [String : Any] {
+                                        if let latitude = coordinates["latitude"] as? Double {
+                                            entry.latitude = latitude
+                                        }
+                                        if let longitude = coordinates["longitude"] as? Double {
+                                            entry.longitude = longitude
+                                        }
+                                    }
+                                    entry.distance = 0
+                                    if let location = result["location"] as? String {
+                                        entry.location = location
+                                    }
+                                    if let country = result["country"] as? String {
+                                        entry.country = country
+                                    }
+                                    let measurement = PollutionMeasurement()
+                                    if let value = result["value"] as? Double {
+                                        measurement.value = value
+                                    }
+                                    if let unit = result["unit"] as? String {
+                                        measurement.unit = unit
+                                    }
+                                    if let parameter = result["parameter"] as? String {
+                                        measurement.type = parameter
+                                    }
+                                    if let date = result["date"] as? [String: Any] {
+                                        if let local = date["local"] as? String {
+                                            measurement.date = local
+                                        }
+                                    }
+                                    entry.measurements!.append(measurement)
                                 }
-                                if let longitude = coordinates["longitude"] as? Double {
-                                    entry.longitude = longitude
-                                }
+                                output.append(entry)
                             }
-                            entry.distance = 0
-                            if let location = result["location"] as? String {
-                                entry.location = location
-                            }
-                            if let country = result["country"] as? String {
-                                entry.country = country
-                            }
-                            let measurement = PollutionMeasurement()
-                            if let value = result["value"] as? Double {
-                                measurement.value = value
-                            }
-                            if let unit = result["unit"] as? String {
-                                measurement.unit = unit
-                            }
-                            if let parameter = result["parameter"] as? String {
-                                measurement.type = parameter
-                            }
-                            if let date = result["date"] as? [String: Any] {
-                                if let local = date["local"] as? String {
-                                    measurement.date = local
-                                }
-                            }
-                            entry.measurements!.append(measurement)
                         }
-                        output.append(entry)
+                    }
+                    DispatchQueue.main.async {
+                        SwiftSpinner.hide()
                     }
                 }
+            } catch {
+                print(error)
             }
-            SwiftSpinner.hide()
-        } catch {
-            print(error)
-        }
-        return output
+            completionHandler(output)
+        }.resume()
     }
     
     static func generateMapAnnotation(entry: PollutionDataEntry) -> PollutionAnnotation {

@@ -15,6 +15,7 @@
 		BE1F69F51FB196CC007A9C1A /* DiskJockey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F41FB196CC007A9C1A /* DiskJockey.swift */; };
 		BE1F69F71FB1B1CB007A9C1A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */; };
 		BE1F69F91FB1B3B7007A9C1A /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */; };
+		BE1F69FB1FB1CA3B007A9C1A /* NSCoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69FA1FB1CA3B007A9C1A /* NSCoderExtension.swift */; };
 		BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22C2171FA34D2B008D7659 /* Constants.swift */; };
 		BE2BDDF01FB0AC1C0076EF4B /* PollutionDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */; };
 		BE2BDDF11FB0AC1E0076EF4B /* PollutionMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */; };
@@ -25,7 +26,6 @@
 		BE4A2DC41FB061AA00044D90 /* pollutionTodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BE4A2DB81FB061AA00044D90 /* pollutionTodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		BE4A2DCA1FB07AC200044D90 /* MeasurementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4A2DC91FB07AC200044D90 /* MeasurementCell.swift */; };
 		BE4A2DCC1FB07B2300044D90 /* TableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4A2DCB1FB07B2300044D90 /* TableController.swift */; };
-		BE4A2DD61FB0A31D00044D90 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE4A2DC11FB061AA00044D90 /* Info.plist */; };
 		BE4A2DDC1FB0A49600044D90 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE4A2DBE1FB061AA00044D90 /* MainInterface.storyboard */; };
 		BE4A2DDD1FB0A5E500044D90 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22C2171FA34D2B008D7659 /* Constants.swift */; };
 		BE4A2DDE1FB0A60900044D90 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9394B31FA9FFE40017407E /* UIColorExtension.swift */; };
@@ -89,6 +89,7 @@
 		BE1F69F41FB196CC007A9C1A /* DiskJockey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskJockey.swift; sourceTree = "<group>"; };
 		BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCell.swift; sourceTree = "<group>"; };
+		BE1F69FA1FB1CA3B007A9C1A /* NSCoderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSCoderExtension.swift; sourceTree = "<group>"; };
 		BE22C2171FA34D2B008D7659 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BE2BDDF41FB0AD130076EF4B /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2EC6261FAAFED40052BF6A /* MapKitGoogleStyler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MapKitGoogleStyler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +176,7 @@
 				BE9394B11FA9FFC00017407E /* UIViewExtension.swift */,
 				BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */,
 				BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */,
+				BE1F69FA1FB1CA3B007A9C1A /* NSCoderExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -378,7 +380,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE4A2DD61FB0A31D00044D90 /* Info.plist in Resources */,
 				BE4A2DDC1FB0A49600044D90 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +502,7 @@
 				BE50FBE41FA4AC3F00187750 /* DetailController.swift in Sources */,
 				BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */,
 				BE56BCE51FA92C1C00303B70 /* DateTranslator.swift in Sources */,
+				BE1F69FB1FB1CA3B007A9C1A /* NSCoderExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

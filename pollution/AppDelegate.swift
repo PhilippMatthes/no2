@@ -32,9 +32,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         if let stations = DiskJockey.getStations() {
             for station in stations {
-                if let message = createMessage(forStationName: station.name!) {
-                    pushNotification(withMessage: message, andStation: station.name!)
-                    completionHandler(.newData)
+                createMessage(forStationName: station.name!) {
+                    message in
+                    if let message = message {
+                        DispatchQueue.main.async {
+                            self.pushNotification(withMessage: message, andStation: station.name!)
+                            completionHandler(.newData)
+                        }
+                    } else {
+                        completionHandler(.failed)
+                    }
                 }
             }
         } else {
@@ -48,11 +55,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let tabBarController = self.window?.rootViewController as? TabBarController {
                 tabBarController.selectedIndex = 0
                 if let viewController = tabBarController.selectedViewController as? ViewController {
-                    let entries = DatabaseCaller.makeNotificationRequest(forLocation: identifier!, withLimit: 100)
-                    if let entry = entries.first {
-                        let annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
-                        viewController.selectedAnnotation = annotation
-                        viewController.performSegue(withIdentifier: "showDetail", sender: self)
+                    DatabaseCaller.makeNotificationRequest(forLocation: identifier!, withLimit: 100) {
+                        entries in
+                        if let entry = entries.first {
+                            let annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
+                            viewController.selectedAnnotation = annotation
+                            viewController.performSegue(withIdentifier: "showDetail", sender: self)
+                        }
                     }
                 }
             }
@@ -83,32 +92,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func createMessage(forStationName stationName: String) -> String? {
-        let entries = DatabaseCaller.makeNotificationRequest(forLocation: stationName, withLimit: 100)
-        if let entry = entries.first {
-            
-            notificationEntry = entry
-            
-            var output = "Air quality for \(entry.location!)"
-            if let date = entry.getMostRecentMeasurement()?.date?.dropFirst(11) {
-                output += " (last updated: \(date))\n\n"
-            }
-            else {
-                output += ":\n\n"
-            }
-            for key in Constants.units {
-                if let measurement = entry.getMostRecentMeasurement(forType: key) {
-                    let percentage = measurement.value! / Constants.maxValues[key]!
-                    let roundedPercentage = Double(round(percentage*1000)/10)
-                    output += "\(measurement.value!) \(measurement.unit!) (\(measurement.type!.capitalized)) - \(roundedPercentage) %% of RM\n"
+    func createMessage(forStationName stationName: String, completionHandler: @escaping (_ message: String?) -> ()) {
+        DatabaseCaller.makeNotificationRequest(forLocation: stationName, withLimit: 100) {
+            entries in
+            if let entry = entries.first {
+                
+                self.notificationEntry = entry
+                
+                var output = "Air quality for \(entry.location!)"
+                if let date = entry.getMostRecentMeasurement()?.date?.dropFirst(11) {
+                    output += " (last updated: \(date))\n\n"
                 }
+                else {
+                    output += ":\n\n"
+                }
+                for key in Constants.units {
+                    if let measurement = entry.getMostRecentMeasurement(forType: key) {
+                        let percentage = measurement.value! / Constants.maxValues[key]!
+                        let roundedPercentage = Double(round(percentage*1000)/10)
+                        output += "\(measurement.value!) \(measurement.unit!) (\(measurement.type!.capitalized)) - \(roundedPercentage) %% of RM\n"
+                    }
+                }
+                output += "\nRM: Recommended Maximum"
+                completionHandler(output)
+            } else {
+                completionHandler(nil)
             }
-            output += "\nRM: Recommended Maximum"
-            return output
-        } else {
-            return nil
         }
-        
     }
     
     func pushNotification(withMessage message: String, andStation station: String) {

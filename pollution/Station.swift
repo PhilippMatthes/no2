@@ -28,6 +28,7 @@ class Station: NSObject, NSCoding  {
         else {
             return nil
         }
+        
         self.init(name: name, latitude: latitude, longitude: longitude)
     }
     

@@ -311,46 +311,43 @@ class ViewController: UIViewController, UISearchBarDelegate {
             
             let limit = 1000
             
-            let request = DatabaseCaller.makeLatestRequest(forLongitude: self.mapView.region.center.longitude,
-                                       forLatitude: self.mapView.region.center.latitude,
-                                       forRadius: Int(radius),
-                                       withLimit: limit)
-            
-            let progressIncrement = (1-currentProgress)/Float(request.count)
-            
-            for entry in request{
-                currentProgress += progressIncrement
-                DispatchQueue.main.async {
-                    self.unitLabelBackground.setProgress(currentProgress, animated: false)
+            DatabaseCaller.makeLatestRequest(forLongitude: self.mapView.region.center.longitude, forLatitude: self.mapView.region.center.latitude, forRadius: Int(radius), withLimit: limit) {
+                entries in
+                let progressIncrement = (1-currentProgress)/Float(entries.count)
+                
+                for entry in entries {
+                    currentProgress += progressIncrement
+                    DispatchQueue.main.async {
+                        self.unitLabelBackground.setProgress(currentProgress, animated: false)
+                    }
+                    
+                    let annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
+                    self.mapView.addAnnotation(annotation)
+                    self.map.append(annotation)
                 }
                 
-                let annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
-                self.mapView.addAnnotation(annotation)
-                self.map.append(annotation)
-            }
-            
-            DispatchQueue.main.async {
-                self.mapView.removeOverlays(self.overlays)
-                self.overlays.removeAll()
-                
-                for annotation in self.map {
-                    for measurement in annotation.entry!.measurements! {
-                        if measurement.type! == type {
-                            self.addCircle(withRadius: radius/delta,
-                                           location: CLLocation(latitude: annotation.coordinate.latitude,
-                                                                longitude: annotation.coordinate.longitude),
-                                           andPercentage: measurement.value!/self.maxvalue!,
-                                           andType: type)
+                DispatchQueue.main.async {
+                    self.mapView.removeOverlays(self.overlays)
+                    self.overlays.removeAll()
+                    
+                    for annotation in self.map {
+                        for measurement in annotation.entry!.measurements! {
+                            if measurement.type! == type {
+                                self.addCircle(withRadius: radius/delta,
+                                               location: CLLocation(latitude: annotation.coordinate.latitude,
+                                                                    longitude: annotation.coordinate.longitude),
+                                               andPercentage: measurement.value!/self.maxvalue!,
+                                               andType: type)
+                            }
                         }
                     }
+                    
+                    self.requestSent = false
                 }
-                
-                self.requestSent = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    self.unitLabelBackground.setProgress(0.0, animated: true)
+                })
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                self.unitLabelBackground.setProgress(0.0, animated: true)
-            })
-            
         }
     }
     
