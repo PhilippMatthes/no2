@@ -19,6 +19,18 @@ class PollutionAnnotation : NSObject, MKAnnotation {
     
     var entry: PollutionDataEntry?
     
+    override init() {
+        super.init()
+    }
+    
+    init(coord: CLLocationCoordinate2D, title: String, subtitle: String, entry: PollutionDataEntry) {
+        super.init()
+        self.coord = coord
+        self._title = title
+        self._subtitle = subtitle
+        self.entry = entry
+    }
+    
     var title: String? {
         get {
             return _title

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MB2-id-E9Y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="MB2-id-E9Y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -326,19 +326,36 @@
         <!--Stations-->
         <scene sceneID="3D6-EE-zdP">
             <objects>
-                <tableViewController id="q5C-k5-V1D" sceneMemberID="viewController">
+                <tableViewController id="q5C-k5-V1D" customClass="TableViewController" customModule="pollution" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="d1f-DF-skh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="stationCell" id="Sik-bu-mSE">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StationCell" id="Sik-bu-mSE" customClass="StationCell" customModule="pollution" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sik-bu-mSE" id="aEq-Qe-t4h">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LsO-Th-lB8">
+                                            <rect key="frame" x="16" y="11" width="343" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="LsO-Th-lB8" secondAttribute="bottom" id="He9-VX-YC0"/>
+                                        <constraint firstItem="LsO-Th-lB8" firstAttribute="top" secondItem="aEq-Qe-t4h" secondAttribute="topMargin" id="eUw-25-nKa"/>
+                                        <constraint firstItem="LsO-Th-lB8" firstAttribute="leading" secondItem="aEq-Qe-t4h" secondAttribute="leadingMargin" id="g2F-WY-5Jd"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="LsO-Th-lB8" secondAttribute="trailing" id="lz2-hc-0Rp"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="stationLabel" destination="LsO-Th-lB8" id="xJB-8B-z3K"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -348,7 +365,7 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Stations" image="radio" id="VlE-bf-Pdr"/>
                     <connections>
-                        <segue destination="O3A-Es-cBn" kind="show" identifier="showStations" id="7FI-CM-LZC"/>
+                        <segue destination="O3A-Es-cBn" kind="show" identifier="showDetail" id="7FI-CM-LZC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aV6-uX-4iY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -416,7 +433,7 @@
         <image name="search" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E75-6X-NZL"/>
-        <segue reference="vWE-UL-rNF"/>
+        <segue reference="oz0-fV-CNd"/>
+        <segue reference="7FI-CM-LZC"/>
     </inferredMetricsTieBreakers>
 </document>

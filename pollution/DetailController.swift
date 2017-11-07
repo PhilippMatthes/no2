@@ -41,7 +41,7 @@ class DetailController: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateLabels(withSource: annotationThatWasClicked!.entry!.measurements!.first!.source!,
+        updateLabels(withSource: annotationThatWasClicked!.entry!.measurements!.first!.source,
                      andLocation: annotationThatWasClicked!.entry!.location!)
         
         currentType = previousViewController!.currentType
@@ -65,14 +65,21 @@ class DetailController: UIViewController, ChartViewDelegate {
         }
     }
     
-    func updateLabels(withSource source: String, andLocation location: String) {
+    func updateLabels(withSource source: String?, andLocation location: String) {
         let coordinateLocation = CLLocation(latitude: annotationThatWasClicked!.coordinate.latitude,
                                   longitude: annotationThatWasClicked!.coordinate.longitude)
         CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
             self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): \(city) (\(country))"
         }
-        self.sourceLabel.text = "\(NSLocalizedString("source", comment: "Source")): \(source)"
-        self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(location)"
+        if let source = source {
+            self.sourceLabel.text = "\(NSLocalizedString("source", comment: "Source")): \(source)"
+            self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(location)"
+        }
+        else {
+            self.sourceLabel.text = "\(NSLocalizedString("source", comment: "Source")): n/a"
+            self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(location)"
+        }
+        
     }
     
     func initDesign(withColor color: UIColor, andUnit unit: String) {
@@ -149,6 +156,11 @@ class DetailController: UIViewController, ChartViewDelegate {
         let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.stop, target: self, action: #selector (self.closeButtonPressed (_:)))
         doneItem.tintColor = color
         navigationItem.rightBarButtonItem = doneItem
+        
+        let receiveNotificationsItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.bookmarks, target: self, action: #selector (self.receiveNotificationsButtonPressed (_:)))
+        receiveNotificationsItem.tintColor = color
+        navigationItem.leftBarButtonItem = receiveNotificationsItem
+        
         navigationBar.setItems([navigationItem], animated: true)
         
         navigationBar.tintColor = color
@@ -163,6 +175,13 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     @objc func closeButtonPressed(_ sender:UITapGestureRecognizer){
         performSegueToReturnBack()
+    }
+    
+    @objc func receiveNotificationsButtonPressed(_ sender:UITapGestureRecognizer){
+        let station = Station(name: annotationThatWasClicked!.entry!.location!,
+                              latitude: annotationThatWasClicked!.coordinate.latitude,
+                              longitude: annotationThatWasClicked!.coordinate.longitude)
+        DiskJockey.extendStationsBy(station: station)
     }
     
     func performSegueToReturnBack()  {

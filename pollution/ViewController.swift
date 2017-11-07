@@ -35,6 +35,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     fileprivate var activityIndicator: UIActivityIndicatorView!
     
     var selectedAnnotation: PollutionAnnotation?
+    
+    var moveDirectlyToStation: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         mapView.delegate = self
         
         initUI()
+        
         self.updateAnnotations(withType: currentType!)
     }
 
@@ -425,7 +428,7 @@ extension ViewController: MKMapViewDelegate {
         
         if let annotationView = annotationView {
             // Configure your annotation view here
-            annotationView.canShowCallout = true
+            annotationView.canShowCallout = false
             annotationView.image = nil
         }
         
@@ -436,14 +439,12 @@ extension ViewController: MKMapViewDelegate {
         if let colorOverlay = overlay as? MKCircle {
             
             
-            var percentage = max(0.5, Double(colorOverlay.title!)!)
+            var percentage = max(0.2, Double(colorOverlay.title!)!)
             percentage = min(0.8, Double(colorOverlay.title!)!)
             
             let color = Constants.colors[colorOverlay.subtitle!]!.withAlphaComponent(CGFloat(percentage))
             
             let circle = CustomCircleRenderer(withOverlay: overlay, withGradientFillColor: color)
-            
-//            circle.strokeColor = UIColor.white.withAlphaComponent(CGFloat(percentage))
             
             circle.lineWidth = 1
             return circle

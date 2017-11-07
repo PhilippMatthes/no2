@@ -12,6 +12,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    var notificationEntry: PollutionDataEntry?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -26,16 +28,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    // Support for background fetch
+    // Perform background fetch. 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if let message = createMessage(forStation: "DESN061") {
-            pushNotification(withMessage: message)
-            completionHandler(.newData)
-        }
-        else {
+        if let stations = DiskJockey.getStations() {
+            for station in stations {
+                if let message = createMessage(forStationName: station.name!) {
+                    pushNotification(withMessage: message, andStation: station.name!)
+                    completionHandler(.newData)
+                }
+            }
+        } else {
             completionHandler(.failed)
         }
     }
+    
+    
+    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
+        if notification.category == "viewCategory" {
+            if let tabBarController = self.window?.rootViewController as? TabBarController {
+                tabBarController.selectedIndex = 0
+                if let viewController = tabBarController.selectedViewController as? ViewController {
+                    let entries = DatabaseCaller.makeNotificationRequest(forLocation: identifier!, withLimit: 100)
+                    if let entry = entries.first {
+                        let annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
+                        viewController.selectedAnnotation = annotation
+                        viewController.performSegue(withIdentifier: "showDetail", sender: self)
+                    }
+                }
+            }
+        }
+        completionHandler()
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -59,13 +83,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func createMessage(forStation station: String) -> String? {
-        let entries = DatabaseCaller.makeNotificationRequest(forLocation: station, withLimit: 10)
+    func createMessage(forStationName stationName: String) -> String? {
+        let entries = DatabaseCaller.makeNotificationRequest(forLocation: stationName, withLimit: 100)
         if let entry = entries.first {
-            var output = "Air quality for \(entry.city!):"
-            for measurement in entry.measurements! {
-                output += " \(String(measurement.value!)) \(String(measurement.unit!)) \(String(measurement.type!))"
+            
+            notificationEntry = entry
+            
+            var output = "Air quality for \(entry.location!)"
+            if let date = entry.getMostRecentMeasurement()?.date?.dropFirst(11) {
+                output += " (last updated: \(date))\n\n"
             }
+            else {
+                output += ":\n\n"
+            }
+            for key in Constants.units {
+                if let measurement = entry.getMostRecentMeasurement(forType: key) {
+                    let percentage = measurement.value! / Constants.maxValues[key]!
+                    let roundedPercentage = Double(round(percentage*1000)/10)
+                    output += "\(measurement.value!) \(measurement.unit!) (\(measurement.type!.capitalized)) - \(roundedPercentage) %% of RM\n"
+                }
+            }
+            output += "\nRM: Recommended Maximum"
             return output
         } else {
             return nil
@@ -73,12 +111,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    func pushNotification(withMessage message: String) {
+    func pushNotification(withMessage message: String, andStation station: String) {
+        let viewAction = UIMutableUserNotificationAction()
+        viewAction.identifier = station
+        viewAction.title = "\(station)"
+        viewAction.activationMode = UIUserNotificationActivationMode.background
+        viewAction.isAuthenticationRequired = true
+        viewAction.isDestructive = false
+        viewAction.activationMode = .foreground
+        
+        let viewCategory = UIMutableUserNotificationCategory()
+        viewCategory.identifier = "viewCategory"
+        
+        viewCategory.setActions([viewAction], for: UIUserNotificationActionContext.default)
+        viewCategory.setActions([viewAction], for: UIUserNotificationActionContext.minimal)
+        
+        let settings = UIUserNotificationSettings(types: [.alert, .badge], categories: NSSet(object: viewCategory) as? Set<UIUserNotificationCategory>)
+        UIApplication.shared.registerUserNotificationSettings(settings)
         
         let notification = UILocalNotification()
         notification.alertAction = "View detailled information in the App"
         notification.alertBody = message
-        notification.fireDate = NSDate(timeIntervalSinceNow: 1) as Date
+        notification.alertTitle = station
+        notification.category = "viewCategory"
+        notification.fireDate = Date()
         UIApplication.shared.scheduleLocalNotification(notification)
     }
 

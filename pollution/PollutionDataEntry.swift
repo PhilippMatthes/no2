@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PollutionDataEntry: Hashable {
+class PollutionDataEntry: NSObject, NSCoding {
     
     var city: String?
     var distance: Double?
@@ -18,7 +18,13 @@ class PollutionDataEntry: Hashable {
     var longitude: Double?
     var measurements: [PollutionMeasurement]?
     
-    init(city: String, distance: Double, location: String, country: String, measurements: [PollutionMeasurement], latitude: Double, longitude: Double) {
+    init(city: String,
+         distance: Double,
+         location: String,
+         country: String,
+         measurements: [PollutionMeasurement],
+         latitude: Double,
+         longitude: Double) {
         self.city = city
         self.distance = distance
         self.location = location
@@ -28,9 +34,40 @@ class PollutionDataEntry: Hashable {
         self.longitude = longitude
     }
     
-    init () {}
+    override init () {}
     
-    public var hashValue: Int {
+    convenience required init?(coder aDecoder: NSCoder) {
+        guard
+            let city = aDecoder.decodeObject(forKey: "city") as? String,
+            let distance = aDecoder.decodeObject(forKey: "distance") as? Double,
+            let location = aDecoder.decodeObject(forKey: "location") as? String,
+            let country = aDecoder.decodeObject(forKey: "country") as? String,
+            let latitude = aDecoder.decodeObject(forKey: "latitude") as? Double,
+            let longitude = aDecoder.decodeObject(forKey: "longitude") as? Double,
+            let measurements = aDecoder.decodeObject(forKey: "measurements") as? [PollutionMeasurement]
+            else {
+                return nil
+        }
+        self.init(city: city,
+                  distance: distance,
+                  location: location,
+                  country: country,
+                  measurements: measurements,
+                  latitude: latitude,
+                  longitude: longitude)
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(city, forKey: "city")
+        aCoder.encode(distance, forKey: "distance")
+        aCoder.encode(location, forKey: "location")
+        aCoder.encode(country, forKey: "country")
+        aCoder.encode(latitude, forKey: "latitude")
+        aCoder.encode(longitude, forKey: "longitude")
+        aCoder.encode(measurements, forKey: "measurements")
+    }
+    
+    override public var hashValue: Int {
         return ObjectIdentifier(self).hashValue
     }
     
@@ -46,6 +83,21 @@ class PollutionDataEntry: Hashable {
             if  measurementTimeDifference < mostRecentTimeDifference {
                 mostRecentTimeDifference = measurementTimeDifference
                 mostRecentMeasurement = measurement
+            }
+        }
+        return mostRecentMeasurement
+    }
+    
+    func getMostRecentMeasurement(forType type: String) -> PollutionMeasurement? {
+        var mostRecentMeasurement: PollutionMeasurement?
+        var mostRecentTimeDifference = Date().timeIntervalSince1970
+        for measurement in measurements! {
+            if measurement.type == type {
+                let measurementTimeDifference = measurement.timeDifferenceInSeconds(toDate: Date())
+                if  measurementTimeDifference < mostRecentTimeDifference {
+                    mostRecentTimeDifference = measurementTimeDifference
+                    mostRecentMeasurement = measurement
+                }
             }
         }
         return mostRecentMeasurement
