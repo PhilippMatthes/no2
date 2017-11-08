@@ -62,22 +62,36 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stations.count
+        return stations.count + 1
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return !(indexPath.row == 0)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 50
+        if indexPath.row == 0 {
+            return 130
+        }
+        return 100
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentifier = "StationCell"
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? StationCell else {
-            fatalError("The dequeued cell is not an instance of StationCell.")
+        if indexPath.row == 0 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "InformationCell", for: indexPath) as? InformationCell {
+                cell.informationLabel.text = NSLocalizedString("cellInformation", comment: "")
+                return cell
+            }
         }
-        let station = stations[indexPath.row]
-        cell.stationLabel.text = station.name
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as? StationCell {
+            let station = stations[indexPath.row - 1]
+            cell.stationLabel.text = station.name
+            return cell
+        } else {
+            fatalError()
+        }
+        
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -90,6 +104,9 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            return
+        }
         selectedStation = stations[indexPath.row]
         SwiftSpinner.sharedInstance.innerColor = Constants.colors[State.shared.currentType]!
         SwiftSpinner.show(NSLocalizedString("loadingLocation", comment: "Loading\nlocation"), animated: true)

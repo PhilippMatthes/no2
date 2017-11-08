@@ -5,8 +5,26 @@
 /* Class = "UILabel"; text = "Source"; ObjectID = "EHC-rH-4dH"; */
 "EHC-rH-4dH.text" = "Quelle";
 
+/* Class = "UILabel"; text = "Station"; ObjectID = "G1R-sB-BKL"; */
+"G1R-sB-BKL.text" = "Station";
+
 /* Class = "UINavigationItem"; title = "Detail"; ObjectID = "Hsw-5r-Hi7"; */
-"Hsw-5r-Hi7.title" = "Detail";
+"Hsw-5r-Hi7.title" = "Detailansicht";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "LsO-Th-lB8"; */
+"LsO-Th-lB8.text" = "Label";
+
+/* Class = "UITabBarController"; title = "TabBarController"; ObjectID = "MB2-id-E9Y"; */
+"MB2-id-E9Y.title" = "TabBarController";
+
+/* Class = "UITabBarItem"; title = "Map"; ObjectID = "Ufk-lE-7l0"; */
+"Ufk-lE-7l0.title" = "Karte";
+
+/* Class = "UITabBarItem"; title = "Stations"; ObjectID = "VlE-bf-Pdr"; */
+"VlE-bf-Pdr.title" = "Stationen";
+
+/* Class = "UITabBarItem"; title = "Detail"; ObjectID = "WZl-EJ-GpZ"; */
+"WZl-EJ-GpZ.title" = "Detailansicht";
 
 /* Class = "UILabel"; text = "1 Day"; ObjectID = "btC-wX-Lf2"; */
 "btC-wX-Lf2.text" = "1 Tag";
@@ -15,7 +33,7 @@
 "fEM-h9-hUO.text" = "NO2";
 
 /* Class = "UIViewController"; title = "UnitInformation"; ObjectID = "hdF-k9-pUe"; */
-"hdF-k9-pUe.title" = "UnitInformation";
+"hdF-k9-pUe.title" = "Einheiten-Information";
 
 /* Class = "UILabel"; text = "Location"; ObjectID = "pHu-YG-FaH"; */
 "pHu-YG-FaH.text" = "Ort";

@@ -43,6 +43,8 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = Constants.colors[State.shared.currentType]!
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -181,7 +183,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         doneItem.tintColor = color
         navigationItem.rightBarButtonItem = doneItem
         
-        let receiveNotificationsItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.bookmarks, target: self, action: #selector (self.receiveNotificationsButtonPressed (_:)))
+        let receiveNotificationsItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector (self.receiveNotificationsButtonPressed (_:)))
         receiveNotificationsItem.tintColor = color
         navigationItem.leftBarButtonItem = receiveNotificationsItem
         
@@ -208,9 +210,9 @@ class DetailController: UIViewController, ChartViewDelegate {
         DiskJockey.loadAndExtendList(withObject: station, andIdentifier: "stations")
         
         banner.dismiss()
-        banner = Banner(title: NSLocalizedString("stationSaved", comment: "Station saved"), subtitle: nil, image: UIImage(named: "save"), backgroundColor: Constants.colors[State.shared.currentType]!)
-        banner.titleLabel.font = Constants.font
+        banner = Banner(title: NSLocalizedString("stationSaved", comment: "Station saved"), subtitle: nil, image: nil, backgroundColor: UIColor.white)
         banner.dismissesOnTap = true
+        banner.titleLabel.textColor = Constants.colors[State.shared.currentType]!
         banner.position = BannerPosition.top
         banner.show(duration: 2.0)
     }

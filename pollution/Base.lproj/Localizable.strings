@@ -51,3 +51,7 @@
 "shortDateFormat" = "MM-dd";
 
 "noData" = "No specific data available for the selected time range or pollutant.";
+
+"currentAirQualityFor" = "Current air quality for";
+
+"cellInformation" = "To add new stations, select a station from the map and save it. It will appear in this list automatically.";

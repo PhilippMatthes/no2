@@ -49,4 +49,9 @@
 "location"="Ort";
 "dateFormat" = "dd.MM.yyyy";
 "shortDateFormat" = "dd.MM.";
+
 "noData" = "Keine Daten für den ausgewählten Zeitraum oder Schadstoff verfügbar.";
+
+"currentAirQualityFor" = "Aktuelle Luftverschmutzung für";
+
+"cellInformation" = "Um eine neue Station hinzuzufügen, wählen Sie diese von der Karte aus. Im Fenster, dass sich öffnet, können Sie die Station speichern. Sie wird dann automatisch in dieser Liste erscheinen.";

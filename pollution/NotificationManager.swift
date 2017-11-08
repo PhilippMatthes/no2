@@ -41,7 +41,7 @@ class NotificationManager {
                     let location = CLLocation(latitude: entry.latitude!, longitude: entry.longitude!)
                     CoordinateWizard.fetchCountryAndCity(location: location) {
                         country, city in
-                        var output = "Current air quality for \(city) (\(country)) \n\n"
+                        var output = "\(NSLocalizedString("currentAirQualityFor", comment: "")) \(city) (\(country)) \n\n"
                         for key in Constants.units {
                             if let measurement = entry.getMostRecentMeasurement(forType: key) {
                                 let percentage = measurement.value! / Constants.maxValues[key]!
