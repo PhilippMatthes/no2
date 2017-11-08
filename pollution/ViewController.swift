@@ -9,8 +9,9 @@
 import UIKit
 import MapKit
 import Foundation
+import SwiftRater
 
-class ViewController: UIViewController, UISearchBarDelegate {
+class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var searchButtonBackground: UIView!
     @IBOutlet weak var unitLabelBackground: UIProgressView!
@@ -42,11 +43,13 @@ class ViewController: UIViewController, UISearchBarDelegate {
         
         mapView.delegate = self
         
+        SwiftRater.check()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         initUI()
-        self.updateAnnotations(withType: State.shared.currentType)
+        updateAnnotations(withType: State.shared.currentType)
     }
 
     
@@ -230,14 +233,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func initUI() {
-
-        let tabBar = tabBarController!.tabBar
-        tabBar.clipsToBounds = true
-        tabBar.tintColor = UIColor.white
-        tabBar.barTintColor = Constants.colors[State.shared.currentType]
-        tabBar.backgroundColor = UIColor.clear
-        tabBar.setTintColor(ofUnselectedItemsWithColor: UIColor.white.withAlphaComponent(0.5),
-                            andSelectedItemsWithColor: UIColor.white)
         
         
         unitLabelBackground.progressViewStyle = .bar
@@ -386,6 +381,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         if segue.identifier == "showDetail" {
             let vc = segue.destination as! DetailController
             vc.annotationThatWasClicked = self.selectedAnnotation
+            vc.previousViewController = self
         }
     }
 

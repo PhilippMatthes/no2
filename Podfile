@@ -9,7 +9,8 @@ target 'pollution' do
   pod 'SwiftSpinner'
   pod 'Charts'
   pod 'Dropper'
-  pod 'MapKitGoogleStyler'
+  pod 'SwiftRater'
+  pod 'BRYXBanner'
   # Pods for pollution
 
 end

@@ -14,7 +14,7 @@ extension UITabBar {
         if let items = items {
             for item in items {
                 item.selectedImage = item.image?.alpha(1.0).withRenderingMode(.alwaysOriginal)
-                item.image =  item.image?.alpha(0.5).withRenderingMode(.alwaysOriginal)
+                item.image =  item.selectedImage?.alpha(0.5).withRenderingMode(.alwaysOriginal)
                 item.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : unselectedColor], for: .normal)
                 item.setTitleTextAttributes([NSAttributedStringKey.foregroundColor : selectedColor], for: .selected)
             }

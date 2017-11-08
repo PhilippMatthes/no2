@@ -28,6 +28,7 @@
 
 "failedToLoad" = "Laden fehl-\ngeschlagen";
 "loadingData" = "Lädt\nDaten";
+"loadingLocation" = "Lädt\nStation";
 "tapToCancel" = "Zum Abbruch antippen";
 "tapToReturn" = "Zum Zurückkehren antippen";
 
@@ -42,9 +43,10 @@
 "information" = "Information";
 
 "station" = "Station";
+"stationSaved" = "Station gespeichert!";
 
 "source"="Quelle";
 "location"="Ort";
 "dateFormat" = "dd.MM.yyyy";
 "shortDateFormat" = "dd.MM.";
-"noData" = "Keine Daten für den ausgewählten Zeitraum verfügbar.";
+"noData" = "Keine Daten für den ausgewählten Zeitraum oder Schadstoff verfügbar.";

@@ -16,10 +16,13 @@
 		BE1F69F91FB1B3B7007A9C1A /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */; };
 		BE1F69FB1FB1CA3B007A9C1A /* NSCoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69FA1FB1CA3B007A9C1A /* NSCoderExtension.swift */; };
 		BE1F69FD1FB220EA007A9C1A /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69FC1FB220EA007A9C1A /* State.swift */; };
+		BE1F69FE1FB2D5B2007A9C1A /* SwiftRater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1F69FF1FB2D5B2007A9C1A /* SwiftRater.framework */; };
+		BE1F6A011FB2D828007A9C1A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F6A001FB2D828007A9C1A /* Notification.swift */; };
+		BE1F6A031FB2D91D007A9C1A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F6A021FB2D91D007A9C1A /* NotificationManager.swift */; };
+		BE1F6A041FB313E1007A9C1A /* BRYXBanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1F6A051FB313E1007A9C1A /* BRYXBanner.framework */; };
 		BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22C2171FA34D2B008D7659 /* Constants.swift */; };
 		BE2BDDF01FB0AC1C0076EF4B /* PollutionDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */; };
 		BE2BDDF11FB0AC1E0076EF4B /* PollutionMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */; };
-		BE2EC6251FAAFED40052BF6A /* MapKitGoogleStyler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2EC6261FAAFED40052BF6A /* MapKitGoogleStyler.framework */; };
 		BE2EC6281FAB61000052BF6A /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2EC6271FAB61000052BF6A /* TabBarController.swift */; };
 		BE2EC6311FAB65B70052BF6A /* TabBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */; };
 		BE4A2DBA1FB061AA00044D90 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4A2DB91FB061AA00044D90 /* NotificationCenter.framework */; };
@@ -90,6 +93,10 @@
 		BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCell.swift; sourceTree = "<group>"; };
 		BE1F69FA1FB1CA3B007A9C1A /* NSCoderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSCoderExtension.swift; sourceTree = "<group>"; };
 		BE1F69FC1FB220EA007A9C1A /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		BE1F69FF1FB2D5B2007A9C1A /* SwiftRater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftRater.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE1F6A001FB2D828007A9C1A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		BE1F6A021FB2D91D007A9C1A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		BE1F6A051FB313E1007A9C1A /* BRYXBanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BRYXBanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE22C2171FA34D2B008D7659 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BE2BDDF41FB0AD130076EF4B /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2EC6261FAAFED40052BF6A /* MapKitGoogleStyler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MapKitGoogleStyler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,7 +156,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE2EC6251FAAFED40052BF6A /* MapKitGoogleStyler.framework in Frameworks */,
+				BE1F6A041FB313E1007A9C1A /* BRYXBanner.framework in Frameworks */,
+				BE1F69FE1FB2D5B2007A9C1A /* SwiftRater.framework in Frameworks */,
 				BE4D90A01FA6177C0080B812 /* Dropper.framework in Frameworks */,
 				BE4D909E1FA5E5D30080B812 /* SwiftSpinner.framework in Frameworks */,
 				BE50FBDF1FA4AB5400187750 /* Charts.framework in Frameworks */,
@@ -188,6 +196,7 @@
 				BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */,
 				BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */,
 				BE1F69F21FB190EE007A9C1A /* Station.swift */,
+				BE1F6A001FB2D828007A9C1A /* Notification.swift */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -251,6 +260,7 @@
 		BEE82D871FA1C35600BEBAF4 /* pollution */ = {
 			isa = PBXGroup;
 			children = (
+				BE1F6A021FB2D91D007A9C1A /* NotificationManager.swift */,
 				BE1F69FC1FB220EA007A9C1A /* State.swift */,
 				BE1F69F41FB196CC007A9C1A /* DiskJockey.swift */,
 				BE22C2171FA34D2B008D7659 /* Constants.swift */,
@@ -272,6 +282,8 @@
 		C355A3DFC11229856E2E997C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE1F6A051FB313E1007A9C1A /* BRYXBanner.framework */,
+				BE1F69FF1FB2D5B2007A9C1A /* SwiftRater.framework */,
 				BE1F69DC1FB0AEB4007A9C1A /* SwiftSpinner.framework */,
 				BE2BDDF41FB0AD130076EF4B /* SwiftSpinner.framework */,
 				BE4A2DE21FB0AB5D00044D90 /* SwiftSpinner.framework */,
@@ -424,16 +436,18 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-pollution/Pods-pollution-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BRYXBanner/BRYXBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/Dropper/Dropper.framework",
-				"${BUILT_PRODUCTS_DIR}/MapKitGoogleStyler/MapKitGoogleStyler.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftRater/SwiftRater.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRYXBanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dropper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapKitGoogleStyler.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRater.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -485,6 +499,7 @@
 				BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */,
 				BE2EC6311FAB65B70052BF6A /* TabBarExtension.swift in Sources */,
 				BE9394B41FA9FFE40017407E /* UIColorExtension.swift in Sources */,
+				BE1F6A031FB2D91D007A9C1A /* NotificationManager.swift in Sources */,
 				BE900FC01FAB84A40023FF05 /* UIImageExtension.swift in Sources */,
 				BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */,
 				BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */,
@@ -495,6 +510,7 @@
 				BE1F69E11FB0AFE1007A9C1A /* DatabaseCaller.swift in Sources */,
 				BE988FB01FA1F015007C24CF /* PollutionDataEntry.swift in Sources */,
 				BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */,
+				BE1F6A011FB2D828007A9C1A /* Notification.swift in Sources */,
 				BE1F69F91FB1B3B7007A9C1A /* StationCell.swift in Sources */,
 				BE1F69F51FB196CC007A9C1A /* DiskJockey.swift in Sources */,
 				BE9394AE1FA9DB220017407E /* CustomMapOverlay.swift in Sources */,

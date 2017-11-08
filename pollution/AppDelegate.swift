@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftRater
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        SwiftRater.daysUntilPrompt = 7
+        SwiftRater.usesUntilPrompt = 10
+        SwiftRater.significantUsesUntilPrompt = 3
+        SwiftRater.daysBeforeReminding = 1
+        SwiftRater.showLaterButton = true
+        SwiftRater.appLaunched()
+        
+        if let controller = self.window?.rootViewController as? TabBarController {
+            controller.tabBar.setTintColor(ofUnselectedItemsWithColor: UIColor.white.withAlphaComponent(0.7), andSelectedItemsWithColor: UIColor.white)
+        }
+        
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
         application.beginBackgroundTask(withName: "showNotification", expirationHandler: nil)
@@ -30,17 +42,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // Perform background fetch. 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if let stations = DiskJockey.getStations() {
+        if let stations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations") {
             for station in stations {
-                createMessage(forStationName: station.name!) {
-                    message in
+                NotificationManager.shared.createMessage(forStationName: station.name!) {
+                    message, entry in
                     if let message = message {
-                        DispatchQueue.main.async {
-                            self.pushNotification(withMessage: message, andStation: station.name!)
-                            completionHandler(.newData)
+                        if let entry = entry {
+                            DispatchQueue.main.async {
+                                self.notificationEntry = entry
+                                NotificationManager.shared.pushNotification(withMessage: message, andStation: station.name!)
+                                completionHandler(.newData)
+                            }
+                        } else {
+                            completionHandler(.noData)
                         }
                     } else {
-                        completionHandler(.failed)
+                        completionHandler(.noData)
                     }
                 }
             }
@@ -60,7 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if let entry = entries.first {
                             let annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
                             viewController.selectedAnnotation = annotation
-                            viewController.performSegue(withIdentifier: "showDetail", sender: self)
+                            DispatchQueue.main.async {
+                                viewController.performSegue(withIdentifier: "showDetail", sender: self)
+                            }
                         }
                     }
                 }
@@ -92,61 +111,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func createMessage(forStationName stationName: String, completionHandler: @escaping (_ message: String?) -> ()) {
-        DatabaseCaller.makeNotificationRequest(forLocation: stationName, withLimit: 100) {
-            entries in
-            if let entry = entries.first {
-                
-                self.notificationEntry = entry
-                
-                var output = "Air quality for \(entry.location!)"
-                if let date = entry.getMostRecentMeasurement()?.date?.dropFirst(11) {
-                    output += " (last updated: \(date))\n\n"
-                }
-                else {
-                    output += ":\n\n"
-                }
-                for key in Constants.units {
-                    if let measurement = entry.getMostRecentMeasurement(forType: key) {
-                        let percentage = measurement.value! / Constants.maxValues[key]!
-                        let roundedPercentage = Double(round(percentage*1000)/10)
-                        output += "\(measurement.value!) \(measurement.unit!) (\(measurement.type!.capitalized)) - \(roundedPercentage) %% of RM\n"
-                    }
-                }
-                output += "\nRM: Recommended Maximum"
-                completionHandler(output)
-            } else {
-                completionHandler(nil)
-            }
-        }
-    }
     
-    func pushNotification(withMessage message: String, andStation station: String) {
-        let viewAction = UIMutableUserNotificationAction()
-        viewAction.identifier = station
-        viewAction.title = "\(station)"
-        viewAction.activationMode = UIUserNotificationActivationMode.background
-        viewAction.isAuthenticationRequired = true
-        viewAction.isDestructive = false
-        viewAction.activationMode = .foreground
-        
-        let viewCategory = UIMutableUserNotificationCategory()
-        viewCategory.identifier = "viewCategory"
-        
-        viewCategory.setActions([viewAction], for: UIUserNotificationActionContext.default)
-        viewCategory.setActions([viewAction], for: UIUserNotificationActionContext.minimal)
-        
-        let settings = UIUserNotificationSettings(types: [.alert, .badge], categories: NSSet(object: viewCategory) as? Set<UIUserNotificationCategory>)
-        UIApplication.shared.registerUserNotificationSettings(settings)
-        
-        let notification = UILocalNotification()
-        notification.alertAction = "View detailled information in the App"
-        notification.alertBody = message
-        notification.alertTitle = station
-        notification.category = "viewCategory"
-        notification.fireDate = Date()
-        UIApplication.shared.scheduleLocalNotification(notification)
-    }
+    
+    
 
 
 }

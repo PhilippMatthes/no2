@@ -26,8 +26,9 @@
 "All Data" = "All Data";
 "365 Days" = "365 Days";
 
-"failedToLoad" = "Failed to\nload data";
-"loadingData" = "Loading\ndata";
+"failedToLoad" = "Failed to\nload Data";
+"loadingData" = "Loading\nData";
+"loadingLocation" = "Loading\nStation";
 "tapToCancel" = "Tap to cancel";
 "tapToReturn" = "Tap to return";
 
@@ -42,10 +43,11 @@
 "information" = "Information";
 
 "station" = "Station";
+"stationSaved" = "Station saved!";
 
 "source" = "Source";
 "location" = "Location";
 "dateFormat" = "yyyy-MM-dd";
 "shortDateFormat" = "MM-dd";
 
-"noData" = "No specific data available for the selected time range.";
+"noData" = "No specific data available for the selected time range or pollutant.";

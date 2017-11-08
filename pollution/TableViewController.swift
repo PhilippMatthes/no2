@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftSpinner
 
 class TableViewController: UITableViewController {
     
@@ -20,12 +21,20 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .singleLineEtched
-        tableView.separatorColor = UIColor.white
-        
-        if let loadedStations = DiskJockey.getStations() {
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        initUI(withColor: Constants.colors[State.shared.currentType]!)
+        if let loadedStations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations") {
             self.stations = loadedStations
         }
-        
+        DispatchQueue.main.async{
+            self.tableView.reloadData()
+        }
+    }
+    
+    func initUI(withColor color: UIColor) {
+        tableView.separatorColor = color
     }
     
     @IBAction func userDidSwipeRight(_ sender: UISwipeGestureRecognizer) {
@@ -75,19 +84,27 @@ class TableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             stations.remove(at: indexPath.row)
-            DiskJockey.setStations(to: stations)
+            DiskJockey.save(object: stations, withIdentifier: "stations")
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedStation = stations[indexPath.row]
+        SwiftSpinner.sharedInstance.innerColor = Constants.colors[State.shared.currentType]!
+        SwiftSpinner.show(NSLocalizedString("loadingLocation", comment: "Loading\nlocation"), animated: true)
         DatabaseCaller.makeNotificationRequest(forLocation: self.selectedStation!.name!, withLimit: 1) {
             entries in
             if let entry = entries.first {
                 self.annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "showDetail", sender: self)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    SwiftSpinner.show(NSLocalizedString("failedToLoad", comment: "Failed to load")).addTapHandler({
+                        SwiftSpinner.hide()
+                    }, subtitle: NSLocalizedString("tapToReturn", comment: "Tap to return."))
                 }
             }
         }
@@ -97,6 +114,7 @@ class TableViewController: UITableViewController {
         if segue.identifier == "showDetail" {
             let vc = segue.destination as! DetailController
             vc.annotationThatWasClicked = self.annotation
+            vc.previousViewController = self
         }
     }
 }

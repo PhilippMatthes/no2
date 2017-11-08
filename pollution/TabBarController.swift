@@ -16,7 +16,10 @@ class TabBarController: UITabBarController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBar.barTintColor = Constants.colors[State.shared.currentType]!
+        tabBar.clipsToBounds = true
+        tabBar.tintColor = UIColor.white
+        tabBar.barTintColor = Constants.colors[State.shared.currentType]
+        tabBar.backgroundColor = UIColor.clear
     }
     
 }

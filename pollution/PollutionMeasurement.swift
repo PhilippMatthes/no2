@@ -73,4 +73,26 @@ class PollutionMeasurement: NSObject, NSCoding {
         let date = dateFormatter.date(from: checkDate)
         return Date().timeIntervalSince(date!) <= 86400
     }
+    
+    func getConvertedDate() -> Date {
+        let dateFormatter = DateFormatter()
+        let checkDate = String(self.date!.prefix(10))
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.date(from: checkDate)!
+    }
+    
+    func getLocalTimeString() -> String {
+        let cutOff = String(self.date!.dropFirst(11))
+        let time = String(cutOff.prefix(5))
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "H:mm"
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        
+        let dt = dateFormatter.date(from: time)
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.dateFormat = "H:mm"
+        
+        return dateFormatter.string(from: dt!)
+    }
 }

@@ -91,7 +91,13 @@ class DatabaseCaller {
         }.resume()
     }
     
-    static func makeLocalRequest(forLocation location: String, withLimit limit: Int, toDate dateTo: String, completionHandler: @escaping (_ entries: [PollutionDataEntry]) -> ()) {
+    static func makeLocalRequest(forLocation location: String, withLimit limit: Int, toDate dateTo: Date, fromDate dateFrom: Date, completionHandler: @escaping (_ entries: [PollutionDataEntry]) -> ()) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let dateToString = dateFormatter.string(from:dateTo as Date)
+        let dateFromString = dateFormatter.string(from:dateFrom as Date)
         
         DispatchQueue.main.async {
             SwiftSpinner.show(NSLocalizedString("loadingData", comment: "Loading\ndata")).addTapHandler({
@@ -104,7 +110,7 @@ class DatabaseCaller {
         let locationEncoded = location.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         
 
-        let urlString = "https://api.openaq.org/v1/measurements?has_geo=true&location=\(locationEncoded)&limit=\(limit)&date_from=\(dateTo)"
+        let urlString = "https://api.openaq.org/v1/measurements?has_geo=true&location=\(locationEncoded)&limit=\(limit)&date_from=\(dateToString)&date_to=\(dateFromString)"
         
         print(urlString)
         

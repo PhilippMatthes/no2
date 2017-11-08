@@ -12,6 +12,7 @@ import SwiftSpinner
 import UIKit
 import Dropper
 import MapKit
+import BRYXBanner
 
 
 class DetailController: UIViewController, ChartViewDelegate {
@@ -30,6 +31,10 @@ class DetailController: UIViewController, ChartViewDelegate {
     var annotationThatWasClicked: PollutionAnnotation?
     var showsIntradayInformation = true
     
+    var previousViewController: UIViewController?
+    
+    var banner = Banner()
+    
     var dropper = Dropper(width: 100, height: 200)
     
     @IBOutlet weak var emissionChart: LineChartView!
@@ -38,29 +43,31 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-        self.initDesign(withColor: Constants.colors[State.shared.currentType]!)
-            
-        self.updateLabels(withSource: self.annotationThatWasClicked!.entry!.measurements!.first!.source,
-                              andLocation: self.annotationThatWasClicked!.entry!.location!)
-            
-        self.getData(fromDaysAgo: 0, intraday: self.showsIntradayInformation)
-    
     }
     
-    func getData(fromDaysAgo days: Int, intraday: Bool) {
-        let date = Calendar.current.date(byAdding: .day, value: -days, to: Date())!
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let dateString = dateFormatter.string(from:date as Date)
+    override func viewWillAppear(_ animated: Bool) {
+        self.initDesign(withColor: Constants.colors[State.shared.currentType]!)
+        
+        self.updateLabels(withSource: self.annotationThatWasClicked!.entry!.measurements!.first!.source,
+                          andLocation: self.annotationThatWasClicked!.entry!.location!)
+        
+        self.getData(withTimeSpanInDays: 1, intraday: self.showsIntradayInformation)
+        
+    }
+    
+    func getData(withTimeSpanInDays days: Int, intraday: Bool) {
+        
+        let mostRecentMeasurement = annotationThatWasClicked?.entry?.getMostRecentMeasurement()
+        let mostRecentDate = mostRecentMeasurement?.getConvertedDate()
+
+        let toDate = Calendar.current.date(byAdding: .day, value: -days, to: mostRecentDate!)!
+        
         DispatchQueue.global(qos: .default).async {
-            DatabaseCaller.makeLocalRequest(forLocation: self.annotationThatWasClicked!.entry!.location!,                                                   withLimit: 10000, toDate:  dateString) {
+            DatabaseCaller.makeLocalRequest(forLocation: self.annotationThatWasClicked!.entry!.location!,                                                   withLimit: 10000, toDate:  toDate, fromDate: mostRecentDate!) {
                 entries in
                 self.measurements = entries
                 DispatchQueue.main.async {
-                    if !self.view.isHidden {
-                        self.setUpChart(withType: State.shared.currentType, intraday: intraday)
-                    }
+                    self.updateChart(withType: State.shared.currentType, intraday: intraday)
                 }
             }
         }
@@ -108,6 +115,22 @@ class DetailController: UIViewController, ChartViewDelegate {
         dropper.cellBackgroundColor = UIColor.white
         dropper.cornerRadius = Constants.cornerRadius
         dropper.delegate = self
+        
+        emissionChart.delegate = self
+        emissionChart.chartDescription?.text = nil
+        emissionChart.leftAxis.axisMinimum = 0
+        emissionChart.rightAxis.enabled = false
+        emissionChart.drawBordersEnabled = false
+        emissionChart.legend.enabled = false
+        emissionChart.leftAxis.drawGridLinesEnabled = true
+        emissionChart.leftAxis.gridColor = UIColor.white
+        emissionChart.leftAxis.labelTextColor = UIColor.white
+        emissionChart.leftAxis.axisLineColor = UIColor.white
+        emissionChart.isUserInteractionEnabled = false
+        emissionChart.xAxis.drawGridLinesEnabled = false
+        emissionChart.xAxis.drawAxisLineEnabled = false
+        emissionChart.noDataTextColor = UIColor.white
+        emissionChart.noDataText = NSLocalizedString("noData", comment: "No Data available")
         
         changeColor(to: color)
     }
@@ -182,10 +205,26 @@ class DetailController: UIViewController, ChartViewDelegate {
         let station = Station(name: annotationThatWasClicked!.entry!.location!,
                               latitude: annotationThatWasClicked!.coordinate.latitude,
                               longitude: annotationThatWasClicked!.coordinate.longitude)
-        DiskJockey.extendStationsBy(station: station)
+        DiskJockey.loadAndExtendList(withObject: station, andIdentifier: "stations")
+        
+        banner.dismiss()
+        banner = Banner(title: NSLocalizedString("stationSaved", comment: "Station saved"), subtitle: nil, image: UIImage(named: "save"), backgroundColor: Constants.colors[State.shared.currentType]!)
+        banner.titleLabel.font = Constants.font
+        banner.dismissesOnTap = true
+        banner.position = BannerPosition.top
+        banner.show(duration: 2.0)
     }
     
     func performSegueToReturnBack()  {
+        
+        if let vc = previousViewController as? ViewController {
+            vc.initUI()
+            vc.updateAnnotations(withType: State.shared.currentType)
+        }
+        if let vc = previousViewController as? TableViewController {
+            vc.initUI(withColor: Constants.colors[State.shared.currentType]!)
+        }
+        
         if let nav = self.navigationController {
             nav.popViewController(animated: true)
         } else {
@@ -207,11 +246,12 @@ class DetailController: UIViewController, ChartViewDelegate {
                 if measurement.type == State.shared.currentType {
                     backgroundLog.append(Constants.maxValues[State.shared.currentType]!)
                     emissionLog.append(measurement.value!)
-                    let cutOff = String(measurement.date!.dropFirst(11))
-                    let time = String(cutOff.prefix(5))
+
+                    let localTime = measurement.getLocalTimeString()
+                    
                     let date = String(measurement.date!.prefix(10))
                     if intraday {
-                        dateLog.append(time)
+                        dateLog.append(localTime)
                     }
                     else {
                         let convertedDateString = DateTranslator.translateDate(fromDateFormat: "yyyy-MM-dd",
@@ -223,6 +263,8 @@ class DetailController: UIViewController, ChartViewDelegate {
             }
         }
         if emissionLog.count == 0 {
+            emissionChart.data = nil
+            emissionChart.notifyDataSetChanged()
             return
         }
         
@@ -294,118 +336,6 @@ class DetailController: UIViewController, ChartViewDelegate {
         
         emissionChart.noDataTextColor = UIColor.white
         emissionChart.noDataText = NSLocalizedString("noData", comment: "No Data available")
-    }
-    
-    func setUpChart(withType type: String, intraday: Bool) {
-        var backgroundLog = [Double]()
-        var emissionLog = [Double]()
-        var dateLog = [String]()
-        
-        for measurementList in measurements! {
-            for measurement in measurementList.measurements! {
-                if measurement.type == State.shared.currentType {
-                    backgroundLog.append(Constants.maxValues[State.shared.currentType]!)
-                    emissionLog.append(measurement.value!)
-                    let cutOff = String(measurement.date!.dropFirst(11))
-                    let time = String(cutOff.prefix(5))
-                    let date = String(measurement.date!.prefix(10))
-                    if intraday {
-                        dateLog.append(time)
-                    }
-                    else {
-                        let convertedDateString = DateTranslator.translateDate(fromDateFormat: "yyyy-MM-dd",
-                                                                               toDateFormat: NSLocalizedString("shortDateFormat", comment: "Date format"),
-                                                                               withDate: date)
-                        dateLog.append(convertedDateString)
-                    }
-                }
-            }
-        }
-        if emissionLog.count == 0 {
-            return
-        }
-        
-        emissionChart.xAxis.valueFormatter = IndexAxisValueFormatter(values:dateLog)
-        emissionChart.xAxis.setLabelCount(5, force: false)
-        emissionChart.xAxis.labelRotationAngle = 0
-        emissionChart.xAxis.labelTextColor = UIColor.white
-        
-        let maxValue = Double(emissionLog.max()!)
-        
-        var yAxisValues = [String]()
-        for i in 0..<Int(max(Constants.maxValues[State.shared.currentType]!, maxValue)) {
-            if i == Int(Constants.maxValues[State.shared.currentType]!) {
-                yAxisValues.append(NSLocalizedString("high", comment: "High"))
-            }
-            else {
-                yAxisValues.append("\(i) µg/m³")
-            }
-        }
-        
-        emissionChart.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
-        emissionChart.leftAxis.setLabelCount(10, force: false)
-        emissionChart.leftAxis.labelTextColor = UIColor.white
-        
-        emissionChart.delegate = self
-        emissionChart.chartDescription?.text = nil
-        emissionChart.leftAxis.axisMinimum = 0
-        emissionChart.rightAxis.enabled = false
-        emissionChart.drawBordersEnabled = false
-        emissionChart.legend.enabled = false
-        emissionChart.leftAxis.drawGridLinesEnabled = true
-        emissionChart.leftAxis.gridColor = UIColor.white
-        emissionChart.leftAxis.labelTextColor = UIColor.white
-        emissionChart.leftAxis.axisLineColor = UIColor.white
-        emissionChart.isUserInteractionEnabled = false
-        emissionChart.leftAxis.axisMaximum = max(Constants.maxValues[State.shared.currentType]!, maxValue)
-        emissionChart.xAxis.drawGridLinesEnabled = false
-        emissionChart.xAxis.drawAxisLineEnabled = false
-        emissionChart.noDataTextColor = UIColor.white
-        emissionChart.noDataText = NSLocalizedString("noData", comment: "No Data available")
-        
-        var barChartEntries = [BarChartDataEntry]()
-        var backgroundChartEntries = [BarChartDataEntry]()
-        var barChartColors = [UIColor]()
-        
-        //        let maxSpeed = speedLog.max(by: {$0.1 < $1.1 })!.1
-        
-        for i in 0..<emissionLog.count {
-            let emission = emissionLog[i]
-            let value = BarChartDataEntry(x: Double(i), y: Double(emission))
-            barChartEntries.insert(value, at: 0)
-            
-            var fraction = CGFloat(0.0)
-            if maxValue != 0.0 {
-                fraction = min(0.7,CGFloat(Double(emission)/maxValue))
-            }
-            let color = UIColor.white.withAlphaComponent(fraction)
-            barChartColors.insert(color, at: 0)
-        }
-        
-        for i in 0..<backgroundLog.count {
-            let backgroundValue = backgroundLog[i]
-            let value = BarChartDataEntry(x: Double(i), y: backgroundValue)
-            backgroundChartEntries.insert(value, at: 0)
-        }
-        
-        
-        let emissionLine = BarChartDataSet(values: barChartEntries, label: nil)
-        emissionLine.colors = barChartColors
-        
-        let backgroundLine = BarChartDataSet(values: backgroundChartEntries, label: nil)
-        backgroundLine.colors = [UIColor.white.withAlphaComponent(0.2)]
-        
-        let data = BarChartData()
-        
-        data.addDataSet(emissionLine)
-        data.addDataSet(backgroundLine)
-        
-        data.setDrawValues(false)
-        
-        emissionChart.animate(xAxisDuration: 2.0, easingOption: ChartEasingOption.easeInOutCubic)
-        
-        emissionChart.data = data
-        emissionChart.notifyDataSetChanged()
     }
     
     @IBAction func infoButtonClicked(_ sender: UIButton) {
@@ -429,7 +359,7 @@ extension DetailController: DropperDelegate {
         else {
             showsIntradayInformation = false
         }
-        getData(fromDaysAgo: Constants.timeSpaces[contents]!, intraday: showsIntradayInformation)
+        getData(withTimeSpanInDays: Constants.timeSpaces[contents]!, intraday: showsIntradayInformation)
         timeLabel.text = contents
     }
 }
