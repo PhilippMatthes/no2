@@ -5,6 +5,14 @@ NO2 is an iOS App for air quality measurements. This App is currently in develop
 
 ![Showcase](Mockup.jpg?raw=true "App")
 
+## Frameworks
+
+* **OpenAQ** - *Data source API* - [Link](https://openaq.org/)
+* **SwiftSpinner** - *Loading indicator* - [GitHub](https://github.com/icanzilb/SwiftSpinner)
+* **Charts** - *Charts framework* - [GitHub](https://github.com/danielgindi/Charts)
+* **Dropper** - *Dropdown selection* - [GitHub](https://github.com/kirkbyo/Dropper)
+* **SwiftRater** - *App rate reminder* - [GitHub](https://github.com/takecian/SwiftRater)
+* **BRYXBanner** - *In app notification* - [GitHub](https://github.com/bryx-inc/BRYXBanner)
 
 ## Authors
 
