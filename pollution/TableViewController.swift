@@ -9,12 +9,15 @@
 import Foundation
 import UIKit
 import SwiftSpinner
+import BRYXBanner
 
 class TableViewController: UITableViewController {
     
     var stations = [Station]()
     var selectedStation: Station?
     var selector = IndexPath()
+    
+    var banner = Banner()
     
     var annotation: PollutionAnnotation?
     
@@ -28,9 +31,22 @@ class TableViewController: UITableViewController {
         if let loadedStations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations") {
             self.stations = loadedStations
         }
+        if stations.isEmpty {
+            banner.dismiss()
+            banner = Banner(title: "Information", subtitle: NSLocalizedString("cellInformation", comment: "Station saved"), image: nil, backgroundColor: Constants.colors[State.shared.currentType]!)
+            banner.dismissesOnTap = false
+            banner.titleLabel.textColor = UIColor.white
+            banner.position = BannerPosition.top
+            banner.show()
+            tableView.separatorStyle = .none
+        }
         DispatchQueue.main.async{
             self.tableView.reloadData()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        banner.dismiss()
     }
     
     func initUI(withColor color: UIColor) {
@@ -62,30 +78,21 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stations.count + 1
+        return stations.count
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return !(indexPath.row == 0)
+        return true
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        if indexPath.row == 0 {
-            return 130
-        }
         return 100
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "InformationCell", for: indexPath) as? InformationCell {
-                cell.informationLabel.text = NSLocalizedString("cellInformation", comment: "")
-                return cell
-            }
-        }
         if let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as? StationCell {
-            let station = stations[indexPath.row - 1]
+            let station = stations[indexPath.row]
             cell.stationLabel.text = station.name
             return cell
         } else {

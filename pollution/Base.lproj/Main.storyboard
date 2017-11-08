@@ -332,35 +332,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="InformationCell" rowHeight="130" id="ewi-LY-nCP" customClass="InformationCell" customModule="pollution" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="130"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ewi-LY-nCP" id="Zb1-RO-71D">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="129.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sD-DG-KEB">
-                                            <rect key="frame" x="8" y="8" width="304" height="113.5"/>
-                                            <string key="text">Um eine neue Station hinzuzufügen, wählen Sie diese von der Karte aus. Im Fenster, dass sich öffnet, können Sie die Station speichern. Sie wird dann automatisch in dieser Liste erscheinen.</string>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="6sD-DG-KEB" secondAttribute="trailing" constant="8" id="2zH-BV-yQb"/>
-                                        <constraint firstItem="6sD-DG-KEB" firstAttribute="leading" secondItem="Zb1-RO-71D" secondAttribute="leading" constant="8" id="e15-tY-aR4"/>
-                                        <constraint firstAttribute="bottom" secondItem="6sD-DG-KEB" secondAttribute="bottom" constant="8" id="q7X-pV-Hds"/>
-                                        <constraint firstItem="6sD-DG-KEB" firstAttribute="top" secondItem="Zb1-RO-71D" secondAttribute="top" constant="8" id="q97-7u-mvv"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <outlet property="informationLabel" destination="6sD-DG-KEB" id="IaW-96-Zpc"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StationCell" rowHeight="100" id="Sik-bu-mSE" customClass="StationCell" customModule="pollution" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="158" width="320" height="100"/>
+                                <rect key="frame" x="0.0" y="28" width="320" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Sik-bu-mSE" id="aEq-Qe-t4h">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
