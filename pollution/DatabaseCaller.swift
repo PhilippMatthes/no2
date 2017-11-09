@@ -64,18 +64,8 @@ class DatabaseCaller {
                                                         measurementEntry.value = value
                                                     }
                                                 }
-                                                if let sourceName = measurementDict["sourceName"] as? String {
-                                                    measurementEntry.source = sourceName
-                                                }
-                                                if let averagingPeriod = measurementDict["averagingPeriod"] as? [String : Any] {
-                                                    if let value = averagingPeriod["value"] as? Double {
-                                                        if let unit = averagingPeriod["unit"] as? String {
-                                                            measurementEntry.rate = String(value)+" "+unit
-                                                        }
-                                                    }
-                                                }
                                             }
-                                            entry.measurements?.append(measurementEntry)
+                                            entry.measurements.append(measurementEntry)
                                         }
                                     }
                                     output.append(entry)
@@ -160,7 +150,7 @@ class DatabaseCaller {
                                             measurement.date = local
                                         }
                                     }
-                                    entry.measurements!.append(measurement)
+                                    entry.measurements.append(measurement)
                                 }
                                 output.append(entry)
                             }
@@ -232,7 +222,7 @@ class DatabaseCaller {
                                             measurement.date = local
                                         }
                                     }
-                                    entry.measurements!.append(measurement)
+                                    entry.measurements.append(measurement)
                                 }
                                 output.append(entry)
                             }
@@ -253,6 +243,7 @@ class DatabaseCaller {
         let annotation = PollutionAnnotation()
         annotation.setCoordinate(newCoordinate: CLLocationCoordinate2D(latitude: entry.latitude!, longitude: entry.longitude!))
         annotation.title = entry.location
+        annotation.subtitle = entry.city
         annotation.entry = entry
         return annotation
     }

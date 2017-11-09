@@ -50,8 +50,7 @@ class DetailController: UIViewController, ChartViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.initDesign(withColor: Constants.colors[State.shared.currentType]!)
         
-        self.updateLabels(withSource: self.annotationThatWasClicked!.entry!.measurements!.first!.source,
-                          andLocation: self.annotationThatWasClicked!.entry!.location!)
+        self.updateLabels(withLocation: self.annotationThatWasClicked!.entry!.location!)
         
         self.getData(withTimeSpanInDays: 1, intraday: self.showsIntradayInformation)
         
@@ -75,19 +74,17 @@ class DetailController: UIViewController, ChartViewDelegate {
         }
     }
     
-    func updateLabels(withSource source: String?, andLocation location: String) {
+    func updateLabels(withLocation location: String?) {
         let coordinateLocation = CLLocation(latitude: annotationThatWasClicked!.coordinate.latitude,
                                   longitude: annotationThatWasClicked!.coordinate.longitude)
         CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
             self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): \(city) (\(country))"
         }
-        if let source = source {
-            self.sourceLabel.text = "\(NSLocalizedString("source", comment: "Source")): \(source)"
+        if let location = location {
             self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(location)"
         }
         else {
-            self.sourceLabel.text = "\(NSLocalizedString("source", comment: "Source")): n/a"
-            self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(location)"
+            self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): n/a"
         }
         
     }
@@ -206,9 +203,12 @@ class DetailController: UIViewController, ChartViewDelegate {
     @objc func receiveNotificationsButtonPressed(_ sender:UITapGestureRecognizer){
         let station = Station(name: annotationThatWasClicked!.entry!.location!,
                               latitude: annotationThatWasClicked!.coordinate.latitude,
-                              longitude: annotationThatWasClicked!.coordinate.longitude)
-        DiskJockey.loadAndExtendList(withObject: station, andIdentifier: "stations")
+                              longitude: annotationThatWasClicked!.coordinate.longitude,
+                              entries: measurements!)
         
+        DiskJockey.loadAndExtendList(withObject: station, andIdentifier: "stations")
+        let stations = DiskJockey.loadObject(ofType: [station], withIdentifier: "stations")
+
         banner.dismiss()
         banner = Banner(title: NSLocalizedString("stationSaved", comment: "Station saved"), subtitle: nil, image: nil, backgroundColor: UIColor.white)
         banner.dismissesOnTap = true
@@ -244,7 +244,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         var dateLog = [String]()
         
         for measurementList in measurements! {
-            for measurement in measurementList.measurements! {
+            for measurement in measurementList.measurements {
                 if measurement.type == State.shared.currentType {
                     backgroundLog.append(Constants.maxValues[State.shared.currentType]!)
                     emissionLog.append(measurement.value!)
@@ -295,8 +295,6 @@ class DetailController: UIViewController, ChartViewDelegate {
         var barChartEntries = [BarChartDataEntry]()
         var backgroundChartEntries = [BarChartDataEntry]()
         var barChartColors = [UIColor]()
-        
-        //        let maxSpeed = speedLog.max(by: {$0.1 < $1.1 })!.1
         
         for i in 0..<emissionLog.count {
             let emission = emissionLog[i]

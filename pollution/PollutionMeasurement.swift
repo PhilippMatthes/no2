@@ -14,16 +14,12 @@ class PollutionMeasurement: NSObject, NSCoding {
     var type: String?
     var value: Double?
     var unit: String?
-    var source: String?
-    var rate: String?
-
-    init(date: String, type: String, value: Double, unit: String, source: String, rate: String) {
+    
+    init(date: String, type: String, value: Double, unit: String) {
         self.date = date
         self.type = type
         self.value = value
         self.unit = unit
-        self.source = source
-        self.rate = rate
     }
     
     override init() {
@@ -35,18 +31,14 @@ class PollutionMeasurement: NSObject, NSCoding {
             let date = aDecoder.decodeObject(forKey: "date") as? String,
             let type = aDecoder.decodeObject(forKey: "type") as? String,
             let value = aDecoder.decodeObject(forKey: "value") as? Double,
-            let unit = aDecoder.decodeObject(forKey: "unit") as? String,
-            let source = aDecoder.decodeObject(forKey: "source") as? String,
-            let rate = aDecoder.decodeObject(forKey: "rate") as? String
+            let unit = aDecoder.decodeObject(forKey: "unit") as? String
             else {
                 return nil
         }
         self.init(date: date,
                   type: type,
                   value: value,
-                  unit: unit,
-                  source: source,
-                  rate: rate)
+                  unit: unit)
     }
     
     func encode(with aCoder: NSCoder) {
@@ -54,8 +46,6 @@ class PollutionMeasurement: NSObject, NSCoding {
         aCoder.encode(type, forKey: "type")
         aCoder.encode(value, forKey: "value")
         aCoder.encode(unit, forKey: "unit")
-        aCoder.encode(source, forKey: "source")
-        aCoder.encode(rate, forKey: "rate")
     }
     
     func timeDifferenceInSeconds(toDate referenceDate: Date) -> Double {

@@ -31,8 +31,8 @@ class NotificationManager {
             entries in
             if let entry = entries.first {
                 
-                let date = entry.getMostRecentMeasurement()!.date!
-                let notification = Notification(stationName: stationName, date: date)
+                let date = entry.getMostRecentMeasurement()!.date
+                let notification = Notification(stationName: stationName, date: date!)
                 
                 if notification.occursIn(list: self.sentNotifications) {
                     completionHandler(nil, nil)

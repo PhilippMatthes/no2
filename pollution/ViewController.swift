@@ -325,8 +325,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
                     self.overlays.removeAll()
                     
                     for annotation in self.map {
-                        for measurement in annotation.entry!.measurements! {
-                            if measurement.type! == type {
+                        for measurement in annotation.entry!.measurements {
+                            if measurement.type == type {
                                 self.addCircle(withRadius: radius/delta,
                                                location: CLLocation(latitude: annotation.coordinate.latitude,
                                                                     longitude: annotation.coordinate.longitude),

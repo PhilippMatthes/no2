@@ -9,7 +9,6 @@
 import Foundation
 
 import MapKit
-import Foundation
 import UIKit
 
 class PollutionAnnotation : NSObject, NSCoding, MKAnnotation {
@@ -36,16 +35,19 @@ class PollutionAnnotation : NSObject, NSCoding, MKAnnotation {
             let longitude = aDecoder.decodeObject(forKey: "longitude") as? Double,
             let latitude = aDecoder.decodeObject(forKey: "latitude") as? Double,
             let _title = aDecoder.decodeObject(forKey: "_title") as? String,
-            let _subtitle = aDecoder.decodeObject(forKey: "_subtitle") as? String,
-            let entry = aDecoder.decodeObject(forKey: "entry") as? PollutionDataEntry
+            let _subtitle = aDecoder.decodeObject(forKey: "_subtitle") as? String
             else {
                 return nil
         }
-        let coord = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        self.init(coord: coord,
-                  title: _title,
-                  subtitle: _subtitle,
-                  entry: entry)
+        if let entry = DiskJockey.loadObject(ofType: PollutionDataEntry(), withIdentifier: "entry") {
+            let coord = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            self.init(coord: coord,
+                      title: _title,
+                      subtitle: _subtitle,
+                      entry: entry)
+        } else {
+            return nil
+        }
     }
     
     func encode(with aCoder: NSCoder) {

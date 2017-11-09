@@ -21,9 +21,34 @@ class TableViewController: UITableViewController {
     
     var annotation: PollutionAnnotation?
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.separatorStyle = .singleLineEtched
+        
+        let navigationItem = UINavigationItem(title: "")
+        
+        let refreshItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector (self.refreshButtonPressed (_:)))
+        refreshItem.tintColor = UIColor.white
+        navigationItem.rightBarButtonItem = refreshItem
+        
+        let changeTypeItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.undo, target: self, action: #selector (self.changeTypeButtonPressed (_:)))
+        changeTypeItem.tintColor = UIColor.white
+        navigationItem.leftBarButtonItem = changeTypeItem
+        
+        navigationBar.setItems([navigationItem], animated: true)
+        
+        navigationBar.barTintColor = Constants.colors[State.shared.currentType]!
+        navigationBar.isTranslucent = false
+        navigationBar.barStyle = .black
+        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+    }
+    
+    @objc func refreshButtonPressed(_ sender:UITapGestureRecognizer){
+    }
+    
+    @objc func changeTypeButtonPressed(_ sender:UITapGestureRecognizer){
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,7 +58,7 @@ class TableViewController: UITableViewController {
         }
         if stations.isEmpty {
             banner.dismiss()
-            banner = Banner(title: "Information", subtitle: NSLocalizedString("cellInformation", comment: "Station saved"), image: nil, backgroundColor: Constants.colors[State.shared.currentType]!)
+            banner = Banner(title: "Information", subtitle: NSLocalizedString("cellInformation", comment: ""), image: nil, backgroundColor: Constants.colors[State.shared.currentType]!)
             banner.dismissesOnTap = false
             banner.titleLabel.textColor = UIColor.white
             banner.position = BannerPosition.top
@@ -87,13 +112,15 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
-        return 100
+        return 150
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as? StationCell {
             let station = stations[indexPath.row]
             cell.stationLabel.text = station.name
+            cell.station = station
+            cell.setUpChart(intraday: true)
             return cell
         } else {
             fatalError()
@@ -111,25 +138,11 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            return
-        }
         selectedStation = stations[indexPath.row]
-        SwiftSpinner.sharedInstance.innerColor = Constants.colors[State.shared.currentType]!
-        SwiftSpinner.show(NSLocalizedString("loadingLocation", comment: "Loading\nlocation"), animated: true)
-        DatabaseCaller.makeNotificationRequest(forLocation: self.selectedStation!.name!, withLimit: 1) {
-            entries in
-            if let entry = entries.first {
-                self.annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "showDetail", sender: self)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    SwiftSpinner.show(NSLocalizedString("failedToLoad", comment: "Failed to load")).addTapHandler({
-                        SwiftSpinner.hide()
-                    }, subtitle: NSLocalizedString("tapToReturn", comment: "Tap to return."))
-                }
+        if let entry = selectedStation!.entries.first {
+            self.annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "showDetail", sender: self)
             }
         }
     }

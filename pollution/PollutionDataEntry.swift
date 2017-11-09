@@ -16,7 +16,7 @@ class PollutionDataEntry: NSObject, NSCoding {
     var country: String?
     var latitude: Double?
     var longitude: Double?
-    var measurements: [PollutionMeasurement]?
+    var measurements = [PollutionMeasurement]()
     
     init(city: String,
          distance: Double,
@@ -43,12 +43,12 @@ class PollutionDataEntry: NSObject, NSCoding {
             let location = aDecoder.decodeObject(forKey: "location") as? String,
             let country = aDecoder.decodeObject(forKey: "country") as? String,
             let latitude = aDecoder.decodeObject(forKey: "latitude") as? Double,
-            let longitude = aDecoder.decodeObject(forKey: "longitude") as? Double
+            let longitude = aDecoder.decodeObject(forKey: "longitude") as? Double,
+            let measurementsArchived = aDecoder.decodeObject(forKey: "measurements") as? NSData
             else {
                 return nil
         }
-        let data = UserDefaults.standard.object(forKey: "measurements") as! NSData
-        if let measurements = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? [PollutionMeasurement] {
+        if let measurements = NSKeyedUnarchiver.unarchiveObject(with: measurementsArchived as Data) as? [PollutionMeasurement] {
             self.init(city: city,
                       distance: distance,
                       location: location,
@@ -56,8 +56,10 @@ class PollutionDataEntry: NSObject, NSCoding {
                       measurements: measurements,
                       latitude: latitude,
                       longitude: longitude)
+        } else {
+            return nil
         }
-        return nil
+        
     }
     
     func encode(with aCoder: NSCoder) {
@@ -67,8 +69,8 @@ class PollutionDataEntry: NSObject, NSCoding {
         aCoder.encode(country, forKey: "country")
         aCoder.encode(latitude, forKey: "latitude")
         aCoder.encode(longitude, forKey: "longitude")
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: measurements!)
-        UserDefaults.standard.set(encodedData, forKey: "measurements")
+        let measurementsArchived = NSKeyedArchiver.archivedData(withRootObject: measurements)
+        aCoder.encode(measurementsArchived, forKey: "measurements")
     }
     
     override public var hashValue: Int {
@@ -82,7 +84,7 @@ class PollutionDataEntry: NSObject, NSCoding {
     func getMostRecentMeasurement() -> PollutionMeasurement? {
         var mostRecentMeasurement: PollutionMeasurement?
         var mostRecentTimeDifference = Date().timeIntervalSince1970
-        for measurement in measurements! {
+        for measurement in measurements {
             let measurementTimeDifference = measurement.timeDifferenceInSeconds(toDate: Date())
             if  measurementTimeDifference < mostRecentTimeDifference {
                 mostRecentTimeDifference = measurementTimeDifference
@@ -95,7 +97,7 @@ class PollutionDataEntry: NSObject, NSCoding {
     func getMostRecentMeasurement(forType type: String) -> PollutionMeasurement? {
         var mostRecentMeasurement: PollutionMeasurement?
         var mostRecentTimeDifference = Date().timeIntervalSince1970
-        for measurement in measurements! {
+        for measurement in measurements {
             if measurement.type == type {
                 let measurementTimeDifference = measurement.timeDifferenceInSeconds(toDate: Date())
                 if  measurementTimeDifference < mostRecentTimeDifference {
