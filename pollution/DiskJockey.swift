@@ -11,7 +11,8 @@ import Foundation
 class DiskJockey {
     
     static func loadObject<T>(ofType type: T, withIdentifier identifier: String) -> T? {
-        if let decoded = UserDefaults.standard.object(forKey: identifier) as? NSData {
+        State.shared.defaults.synchronize()
+        if let decoded = State.shared.defaults.object(forKey: identifier) as? NSData {
             if let object = NSKeyedUnarchiver.unarchiveObject(with: decoded as Data) as? T {
                 return object
             }
@@ -21,7 +22,8 @@ class DiskJockey {
     
     static func save<T>(object: T, withIdentifier identifier: String) {
         let encodedData = NSKeyedArchiver.archivedData(withRootObject: object)
-        UserDefaults.standard.set(encodedData, forKey: identifier)
+        State.shared.defaults.set(encodedData, forKey: identifier)
+        State.shared.defaults.synchronize()
     }
     
     static func loadAndExtendList<T>(withObject object: T, andIdentifier identifier: String) {

@@ -31,6 +31,7 @@ class Station: NSObject, NSCoding  {
         else {
             return nil
         }
+        NSKeyedUnarchiver.setClass(PollutionDataEntry.self, forClassName: "PollutionDataEntry")
         if let entries = NSKeyedUnarchiver.unarchiveObject(with: entriesArchived as Data) as? [PollutionDataEntry] {
             self.init(name: name, latitude: latitude, longitude: longitude, entries: entries)
         } else {
@@ -42,6 +43,7 @@ class Station: NSObject, NSCoding  {
         aCoder.encode(name, forKey: "name")
         aCoder.encode(latitude, forKey: "latitude")
         aCoder.encode(longitude, forKey: "longitude")
+        NSKeyedArchiver.setClassName("PollutionDataEntry", for: PollutionDataEntry.self)
         let entriesArchived = NSKeyedArchiver.archivedData(withRootObject: entries)
         aCoder.encode(entriesArchived, forKey: "entries")
     }

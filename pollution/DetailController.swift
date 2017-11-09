@@ -206,8 +206,9 @@ class DetailController: UIViewController, ChartViewDelegate {
                               longitude: annotationThatWasClicked!.coordinate.longitude,
                               entries: measurements!)
         
+        NSKeyedArchiver.setClassName("Station", for: Station.self)
+        NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
         DiskJockey.loadAndExtendList(withObject: station, andIdentifier: "stations")
-        let stations = DiskJockey.loadObject(ofType: [station], withIdentifier: "stations")
 
         banner.dismiss()
         banner = Banner(title: NSLocalizedString("stationSaved", comment: "Station saved"), subtitle: nil, image: nil, backgroundColor: UIColor.white)
@@ -225,6 +226,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         }
         if let vc = previousViewController as? TableViewController {
             vc.initUI(withColor: Constants.colors[State.shared.currentType]!)
+            vc.initNavBar(withColor: Constants.colors[State.shared.currentType]!)
         }
         
         if let nav = self.navigationController {

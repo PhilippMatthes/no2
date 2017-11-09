@@ -11,7 +11,8 @@ import Foundation
 extension NSCoder {
     
     func decodeComplexObject<T>(ofType: T, forKey key: String) -> T? {
-        if let decoded = UserDefaults.standard.object(forKey: key) as? NSData {
+        State.shared.defaults.synchronize()
+        if let decoded = State.shared.defaults.object(forKey: key) as? NSData {
             if let object = NSKeyedUnarchiver.unarchiveObject(with: decoded as Data) as? T {
                 return object
             }
@@ -21,7 +22,8 @@ extension NSCoder {
     
     func encodeComplex(object: Any, forKey key: String) {
         let encodedData = NSKeyedArchiver.archivedData(withRootObject: object)
-        UserDefaults.standard.set(encodedData, forKey: key)
+        State.shared.defaults.set(encodedData, forKey: key)
+        State.shared.defaults.synchronize()
     }
     
 }

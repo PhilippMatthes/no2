@@ -6,42 +6,55 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table Controller-->
+        <!--Widget Table Controller-->
         <scene sceneID="Kfe-b8-suN">
             <objects>
-                <tableViewController id="KfW-ed-zbh" customClass="TableController" customModule="pollutionTodayExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="KfW-ed-zbh" customClass="WidgetTableController" customModule="pollutionTodayExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vfq-uG-1Xc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MeasurementCell" rowHeight="50" id="gxu-c5-RgK" customClass="MeasurementCell" customModule="pollutionTodayExtension" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="50"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StationCell" rowHeight="100" id="nrC-xQ-28t" customClass="StationCell" customModule="pollution" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gxu-c5-RgK" id="8zu-e2-Jwv">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nrC-xQ-28t" id="mSb-BX-NSu">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLv-dL-gYp">
-                                            <rect key="frame" x="16" y="11" width="343" height="28"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rdA-0a-cEe">
+                                            <rect key="frame" x="8" y="8" width="359" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="Xnz-iI-8la"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3vP-JH-HpL" customClass="BarChartView" customModule="Charts">
+                                            <rect key="frame" x="8" y="36" width="359" height="55.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailingMargin" secondItem="KLv-dL-gYp" secondAttribute="trailing" id="1YK-UR-BdR"/>
-                                        <constraint firstItem="KLv-dL-gYp" firstAttribute="top" secondItem="8zu-e2-Jwv" secondAttribute="topMargin" id="VNw-vs-JCG"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="KLv-dL-gYp" secondAttribute="bottom" id="igg-DC-jZv"/>
-                                        <constraint firstItem="KLv-dL-gYp" firstAttribute="leading" secondItem="8zu-e2-Jwv" secondAttribute="leadingMargin" id="yhC-lJ-SeD"/>
+                                        <constraint firstAttribute="trailing" secondItem="3vP-JH-HpL" secondAttribute="trailing" constant="8" id="C4F-QU-Hvm"/>
+                                        <constraint firstItem="3vP-JH-HpL" firstAttribute="top" secondItem="rdA-0a-cEe" secondAttribute="bottom" constant="8" id="DrZ-56-4qA"/>
+                                        <constraint firstAttribute="trailing" secondItem="rdA-0a-cEe" secondAttribute="trailing" constant="8" id="Oe4-Qp-CsE"/>
+                                        <constraint firstItem="3vP-JH-HpL" firstAttribute="top" secondItem="rdA-0a-cEe" secondAttribute="bottom" constant="8" id="dez-xv-Qm5"/>
+                                        <constraint firstAttribute="bottom" secondItem="3vP-JH-HpL" secondAttribute="bottom" constant="8" id="ktg-EW-QJt"/>
+                                        <constraint firstItem="3vP-JH-HpL" firstAttribute="leading" secondItem="mSb-BX-NSu" secondAttribute="leading" constant="8" id="l8r-N2-B5r"/>
+                                        <constraint firstItem="rdA-0a-cEe" firstAttribute="leading" secondItem="mSb-BX-NSu" secondAttribute="leading" constant="8" id="xaI-V3-3eF"/>
+                                        <constraint firstItem="rdA-0a-cEe" firstAttribute="top" secondItem="mSb-BX-NSu" secondAttribute="top" constant="8" id="zcd-F7-NVo"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
-                                    <outlet property="label" destination="KLv-dL-gYp" id="JkQ-pz-7lA"/>
+                                    <outlet property="emissionChart" destination="3vP-JH-HpL" id="Yl1-cR-4Zr"/>
+                                    <outlet property="stationLabel" destination="rdA-0a-cEe" id="gww-zC-WKh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

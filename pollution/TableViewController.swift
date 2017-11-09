@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SwiftSpinner
 import BRYXBanner
+import MapKit
 
 class TableViewController: UITableViewController {
     
@@ -25,34 +26,64 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.separatorStyle = .singleLineEtched
-        
+    }
+    
+    func initNavBar(withColor color: UIColor) {
         let navigationItem = UINavigationItem(title: "")
         
         let refreshItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector (self.refreshButtonPressed (_:)))
         refreshItem.tintColor = UIColor.white
-        navigationItem.rightBarButtonItem = refreshItem
+        navigationItem.leftBarButtonItem = refreshItem
         
-        let changeTypeItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.undo, target: self, action: #selector (self.changeTypeButtonPressed (_:)))
-        changeTypeItem.tintColor = UIColor.white
-        navigationItem.leftBarButtonItem = changeTypeItem
+        let unitButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
+        unitButton.addTarget(self, action: #selector (self.changeTypeButtonPressed (_:)), for: UIControlEvents.touchUpInside)
+        unitButton.setTitle(State.shared.currentType.capitalized, for: [.normal])
+        unitButton.setTitleColor(UIColor.white, for: [.normal])
+        unitButton.sizeToFit()
+        let unitBarButtonItem:UIBarButtonItem = UIBarButtonItem(customView: unitButton)
+        navigationItem.rightBarButtonItem  = unitBarButtonItem
         
         navigationBar.setItems([navigationItem], animated: true)
         
-        navigationBar.barTintColor = Constants.colors[State.shared.currentType]!
+        navigationBar.barTintColor = color
         navigationBar.isTranslucent = false
         navigationBar.barStyle = .black
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
     }
     
     @objc func refreshButtonPressed(_ sender:UITapGestureRecognizer){
+        
     }
     
     @objc func changeTypeButtonPressed(_ sender:UITapGestureRecognizer){
+        
+        let index = (Constants.units.index(of: State.shared.currentType)! + 1) % Constants.units.count
+        State.shared.currentType = Constants.units[index]
+        
+        let navigationItem = UINavigationItem(title: "")
+        
+        let refreshItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector (self.refreshButtonPressed (_:)))
+        refreshItem.tintColor = UIColor.white
+        navigationItem.leftBarButtonItem = refreshItem
+        
+        let unitButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
+        unitButton.addTarget(self, action: #selector (self.changeTypeButtonPressed (_:)), for: UIControlEvents.touchUpInside)
+        unitButton.setTitle(State.shared.currentType.capitalized, for: [.normal])
+        unitButton.setTitleColor(UIColor.white, for: [.normal])
+        unitButton.sizeToFit()
+        let unitBarButtonItem:UIBarButtonItem = UIBarButtonItem(customView: unitButton)
+        navigationItem.rightBarButtonItem  = unitBarButtonItem
+        
+        navigationBar.setItems([navigationItem], animated: true)
+        
+        changeUIColor(toColor: Constants.colors[State.shared.currentType]!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         initUI(withColor: Constants.colors[State.shared.currentType]!)
+        initNavBar(withColor: Constants.colors[State.shared.currentType]!)
+        
+        NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
         if let loadedStations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations") {
             self.stations = loadedStations
         }
@@ -75,7 +106,15 @@ class TableViewController: UITableViewController {
     }
     
     func initUI(withColor color: UIColor) {
+        tableView.separatorStyle = .singleLineEtched
         tableView.separatorColor = color
+    }
+    
+    func changeUIColor(toColor color: UIColor) {
+        tableView.separatorColor = color
+        tableView.reloadData()
+        navigationBar.animate(toBarTintColor: Constants.colors[State.shared.currentType]!, withDuration: 0.5)
+        tabBarController!.tabBar.animate(toBarTintColor: Constants.colors[State.shared.currentType]!, withDuration: 0.5)
     }
     
     @IBAction func userDidSwipeRight(_ sender: UISwipeGestureRecognizer) {
@@ -118,7 +157,11 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as? StationCell {
             let station = stations[indexPath.row]
-            cell.stationLabel.text = station.name
+            let coordinateLocation = CLLocation(latitude: station.entries.first!.latitude!,
+                                                longitude: station.entries.first!.longitude!)
+            CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
+                cell.stationLabel.text = "\(station.name!) - \(city) (\(country))"
+            }
             cell.station = station
             cell.setUpChart(intraday: true)
             return cell
@@ -132,6 +175,7 @@ class TableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             stations.remove(at: indexPath.row)
+            NSKeyedArchiver.setClassName("Station", for: Station.self)
             DiskJockey.save(object: stations, withIdentifier: "stations")
             tableView.deleteRows(at: [indexPath], with: .fade)
         }

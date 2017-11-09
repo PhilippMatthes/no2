@@ -14,3 +14,8 @@ target 'pollution' do
   # Pods for pollution
 
 end
+
+target 'pollutionTodayExtension' do
+  use_frameworks!
+  pod 'Charts'
+end

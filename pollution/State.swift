@@ -11,9 +11,11 @@ import Foundation
 class State {
     
     static let shared = State()
+    let defaults = UserDefaults(suiteName: "group.pollution")!
+    var currentType = Constants.units.first!
     
     private init() {}
     
-    var currentType = Constants.units.first!
+    
     
 }

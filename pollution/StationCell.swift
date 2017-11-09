@@ -36,7 +36,11 @@ class StationCell: UITableViewCell, ChartViewDelegate {
         emissionChart.rightAxis.enabled = false
         emissionChart.drawBordersEnabled = false
         emissionChart.legend.enabled = false
-        emissionChart.leftAxis.enabled = false
+        emissionChart.leftAxis.enabled = true
+        emissionChart.leftAxis.drawGridLinesEnabled = true
+        emissionChart.leftAxis.gridColor = UIColor.white
+        emissionChart.leftAxis.labelTextColor = UIColor.white
+        emissionChart.leftAxis.axisLineColor = UIColor.white
         emissionChart.rightAxis.enabled = false
         emissionChart.isUserInteractionEnabled = false
         emissionChart.xAxis.drawGridLinesEnabled = false
@@ -56,13 +60,15 @@ class StationCell: UITableViewCell, ChartViewDelegate {
                     let localTime = measurement.getLocalTimeString()
                 
                     let date = String(measurement.date!.prefix(10))
+                    let convertedDateString = DateTranslator.translateDate(fromDateFormat: "yyyy-MM-dd",
+                                                                           toDateFormat: NSLocalizedString("shortDateFormat", comment: "Date format"),
+                                                                           withDate: date)
+                    
                     if intraday {
-                        dateLog.append(localTime)
+                        dateLog.append("\(convertedDateString) \(localTime)")
                     }
                     else {
-                        let convertedDateString = DateTranslator.translateDate(fromDateFormat: "yyyy-MM-dd",
-                                                                                   toDateFormat: NSLocalizedString("shortDateFormat", comment: "Date format"),
-                                                                                   withDate: date)
+                        
                         dateLog.append(convertedDateString)
                     }
                 }
@@ -75,7 +81,7 @@ class StationCell: UITableViewCell, ChartViewDelegate {
         }
         
         emissionChart.xAxis.valueFormatter = IndexAxisValueFormatter(values:dateLog)
-        emissionChart.xAxis.setLabelCount(5, force: false)
+        emissionChart.xAxis.setLabelCount(3, force: false)
         emissionChart.xAxis.labelRotationAngle = 0
         emissionChart.xAxis.labelTextColor = Constants.colors[State.shared.currentType]!
         
@@ -92,8 +98,8 @@ class StationCell: UITableViewCell, ChartViewDelegate {
         }
         
         emissionChart.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
-        emissionChart.leftAxis.setLabelCount(10, force: false)
-        emissionChart.leftAxis.labelTextColor = UIColor.white
+        emissionChart.leftAxis.setLabelCount(3, force: false)
+        emissionChart.leftAxis.labelTextColor = Constants.colors[State.shared.currentType]!
         emissionChart.leftAxis.axisMaximum = max(Constants.maxValues[State.shared.currentType]!, maxValue)
         
         var barChartEntries = [BarChartDataEntry]()
@@ -126,7 +132,7 @@ class StationCell: UITableViewCell, ChartViewDelegate {
         emissionLine.colors = barChartColors
         
         let backgroundLine = BarChartDataSet(values: backgroundChartEntries, label: nil)
-        backgroundLine.colors = [UIColor.white.withAlphaComponent(0.2)]
+        backgroundLine.colors = [Constants.colors[State.shared.currentType]!.withAlphaComponent(0.2)]
         
         let data = BarChartData()
         
