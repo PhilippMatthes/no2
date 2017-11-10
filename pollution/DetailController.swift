@@ -18,7 +18,6 @@ import BRYXBanner
 class DetailController: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var stationLabel: UILabel!
-    @IBOutlet weak var sourceLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var timeLabelButton: UIButton!
     @IBOutlet weak var timeLabelBackground: UIProgressView!

@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        State.shared.load()
+        
         SwiftRater.daysUntilPrompt = 7
         SwiftRater.usesUntilPrompt = 10
         SwiftRater.significantUsesUntilPrompt = 3

@@ -164,22 +164,13 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Oi-LF-Wvh" customClass="BarChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="100" width="288" height="288"/>
+                                <rect key="frame" x="16" y="100" width="288" height="316"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHu-YG-FaH">
-                                <rect key="frame" x="16" y="424" width="288" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="xCb-xp-TMW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Source" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHC-rH-4dH">
                                 <rect key="frame" x="16" y="452" width="288" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="9I7-qY-Fyw"/>
+                                    <constraint firstAttribute="height" constant="20" id="xCb-xp-TMW"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -251,7 +242,7 @@
                                 </constraints>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1R-sB-BKL">
-                                <rect key="frame" x="16" y="396" width="288" height="20"/>
+                                <rect key="frame" x="16" y="424" width="288" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="NNS-bT-8uL"/>
                                 </constraints>
@@ -265,24 +256,21 @@
                         <constraints>
                             <constraint firstItem="G1R-sB-BKL" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leadingMargin" id="164-DG-Mmu"/>
                             <constraint firstItem="pHu-YG-FaH" firstAttribute="top" secondItem="G1R-sB-BKL" secondAttribute="bottom" constant="8" id="3lv-I2-E1K"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="EHC-rH-4dH" secondAttribute="trailing" id="5WY-WX-LDQ"/>
+                            <constraint firstItem="tLx-aS-7vZ" firstAttribute="top" secondItem="pHu-YG-FaH" secondAttribute="bottom" constant="8" id="4u7-Gk-vBe"/>
                             <constraint firstItem="cCo-lx-hog" firstAttribute="leading" secondItem="lX4-GN-kWd" secondAttribute="trailing" constant="8" id="7Of-8l-lGX"/>
                             <constraint firstItem="4Oi-LF-Wvh" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leadingMargin" id="H2x-pB-QAM"/>
                             <constraint firstItem="Kmp-cs-XGv" firstAttribute="top" secondItem="6TY-cI-bwU" secondAttribute="bottom" constant="8" id="MEw-ay-3yR"/>
                             <constraint firstItem="4Oi-LF-Wvh" firstAttribute="top" secondItem="cCo-lx-hog" secondAttribute="bottom" constant="8" id="Na7-jE-3m5"/>
                             <constraint firstItem="6TY-cI-bwU" firstAttribute="top" secondItem="xDX-in-MHe" secondAttribute="top" id="OPT-Rn-fN3"/>
                             <constraint firstItem="G1R-sB-BKL" firstAttribute="top" secondItem="4Oi-LF-Wvh" secondAttribute="bottom" constant="8" id="Q2s-pN-NLh"/>
-                            <constraint firstItem="EHC-rH-4dH" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leadingMargin" id="QQ1-Fv-QD7"/>
                             <constraint firstItem="G1R-sB-BKL" firstAttribute="trailing" secondItem="xDX-in-MHe" secondAttribute="trailingMargin" id="Rkh-Lt-d20"/>
                             <constraint firstItem="lX4-GN-kWd" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leadingMargin" id="XW7-Hu-hil"/>
                             <constraint firstItem="6TY-cI-bwU" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leading" id="Zq3-oQ-J6Y"/>
                             <constraint firstItem="lX4-GN-kWd" firstAttribute="top" secondItem="6TY-cI-bwU" secondAttribute="bottom" constant="8" id="a73-on-Gdi"/>
                             <constraint firstItem="4Oi-LF-Wvh" firstAttribute="top" secondItem="lX4-GN-kWd" secondAttribute="bottom" constant="8" id="aNt-fQ-L06"/>
-                            <constraint firstItem="tLx-aS-7vZ" firstAttribute="top" secondItem="EHC-rH-4dH" secondAttribute="bottom" constant="8" id="czZ-q1-nQg"/>
                             <constraint firstAttribute="trailing" secondItem="6TY-cI-bwU" secondAttribute="trailing" id="ehf-hj-Uxk"/>
                             <constraint firstItem="4Oi-LF-Wvh" firstAttribute="trailing" secondItem="xDX-in-MHe" secondAttribute="trailingMargin" id="gfj-Wf-XeU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Kmp-cs-XGv" secondAttribute="trailing" id="iLo-86-mEl"/>
-                            <constraint firstItem="EHC-rH-4dH" firstAttribute="top" secondItem="pHu-YG-FaH" secondAttribute="bottom" constant="8" id="owp-7q-TUy"/>
                             <constraint firstItem="cCo-lx-hog" firstAttribute="leading" secondItem="lX4-GN-kWd" secondAttribute="trailing" constant="8" id="pD9-mm-sv4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pHu-YG-FaH" secondAttribute="trailing" id="r5d-ab-zu9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cCo-lx-hog" secondAttribute="trailing" id="rNb-FT-fna"/>
@@ -303,7 +291,6 @@
                         <outlet property="infoButton" destination="v1D-EN-v47" id="KBP-Cd-5lG"/>
                         <outlet property="locationLabel" destination="pHu-YG-FaH" id="w4Z-mX-LsB"/>
                         <outlet property="navigationBar" destination="6TY-cI-bwU" id="pp1-5l-Rcu"/>
-                        <outlet property="sourceLabel" destination="EHC-rH-4dH" id="muJ-2K-hvG"/>
                         <outlet property="stationLabel" destination="G1R-sB-BKL" id="CH1-0n-kuK"/>
                         <outlet property="timeLabel" destination="btC-wX-Lf2" id="xMD-Uk-qgr"/>
                         <outlet property="timeLabelBackground" destination="cCo-lx-hog" id="Yrf-d7-EvU"/>
@@ -455,7 +442,7 @@
         <image name="search" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E75-6X-NZL"/>
+        <segue reference="oz0-fV-CNd"/>
         <segue reference="7FI-CM-LZC"/>
     </inferredMetricsTieBreakers>
 </document>

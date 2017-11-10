@@ -18,6 +18,8 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        State.shared.load()
+        
         initUI(withColor: Constants.colors[State.shared.currentType]!)
         
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")

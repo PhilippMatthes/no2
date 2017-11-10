@@ -12,10 +12,24 @@ class State {
     
     static let shared = State()
     let defaults = UserDefaults(suiteName: "group.pollution")!
-    var currentType = Constants.units.first!
+    var currentType: String = Constants.units.first! {
+        willSet(newCurrentType) {
+            State.shared.store(currentType: newCurrentType)
+        }
+    }
     
-    private init() {}
+    private init() {
+        
+    }
     
+    func load() {
+        if let type = DiskJockey.loadObject(ofType: String(), withIdentifier: "currentType") {
+            State.shared.currentType = type
+        }
+    }
     
+    func store(currentType: String) {
+        DiskJockey.save(object: currentType, withIdentifier: "currentType")
+    }
     
 }
