@@ -43,11 +43,11 @@ class DetailController: UIViewController, ChartViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = Constants.colors[State.shared.currentType]!
+        self.view.backgroundColor = State.shared.currentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.initDesign(withColor: Constants.colors[State.shared.currentType]!)
+        self.initDesign(withColor: State.shared.currentColor)
         
         self.updateLabels(withLocation: self.annotationThatWasClicked!.entry!.location!)
         
@@ -137,14 +137,14 @@ class DetailController: UIViewController, ChartViewDelegate {
         
         let index = (Constants.units.index(of: State.shared.currentType)! + 1) % Constants.units.count
         State.shared.currentType = Constants.units[index]
-        changeColor(to: Constants.colors[State.shared.currentType]!)
+        changeColor(to: State.shared.currentColor)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
             self.updateChart(withType: State.shared.currentType, intraday: self.showsIntradayInformation)
         })
         
-        unitLabelBackground.animateButtonPress(withBorderColor: Constants.colors[State.shared.currentType]!, width: 4.0, andDuration: 0.1)
+        unitLabelBackground.animateButtonPress(withBorderColor: State.shared.currentColor, width: 4.0, andDuration: 0.1)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.unitLabelBackground.animateButtonRelease(withBorderColor: Constants.colors[State.shared.currentType]!, width: 4.0, andDuration: 0.1)
+            self.unitLabelBackground.animateButtonRelease(withBorderColor: State.shared.currentColor, width: 4.0, andDuration: 0.1)
         })
     }
     @objc func timeButtonClicked(sender:UITapGestureRecognizer) {
@@ -156,9 +156,9 @@ class DetailController: UIViewController, ChartViewDelegate {
         }
         
         
-        timeLabelBackground.animateButtonPress(withBorderColor: Constants.colors[State.shared.currentType]!, width: 4.0, andDuration: 0.1)
+        timeLabelBackground.animateButtonPress(withBorderColor: State.shared.currentColor, width: 4.0, andDuration: 0.1)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.timeLabelBackground.animateButtonRelease(withBorderColor: Constants.colors[State.shared.currentType]!, width: 4.0, andDuration: 0.1)
+            self.timeLabelBackground.animateButtonRelease(withBorderColor: State.shared.currentColor, width: 4.0, andDuration: 0.1)
         })
     }
     
@@ -212,7 +212,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         banner.dismiss()
         banner = Banner(title: NSLocalizedString("stationSaved", comment: "Station saved"), subtitle: nil, image: nil, backgroundColor: UIColor.white)
         banner.dismissesOnTap = true
-        banner.titleLabel.textColor = Constants.colors[State.shared.currentType]!
+        banner.titleLabel.textColor = State.shared.currentColor
         banner.position = BannerPosition.top
         banner.show(duration: 2.0)
     }
@@ -224,8 +224,9 @@ class DetailController: UIViewController, ChartViewDelegate {
             vc.updateAnnotations(withType: State.shared.currentType)
         }
         if let vc = previousViewController as? TableViewController {
-            vc.initUI(withColor: Constants.colors[State.shared.currentType]!)
-            vc.initNavBar(withColor: Constants.colors[State.shared.currentType]!)
+            vc.initUI(withColor: State.shared.currentColor)
+            vc.initNavBar(withColor: State.shared.currentColor)
+            vc.tableView.reloadData()
         }
         
         if let nav = self.navigationController {
@@ -346,7 +347,7 @@ class DetailController: UIViewController, ChartViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showUnitInformation" {
             let vc = segue.destination as! UnitInformationController
-            vc.initDesign(withColor: Constants.colors[State.shared.currentType]!, andUnit: State.shared.currentType)
+            vc.initDesign(withColor: State.shared.currentColor, andUnit: State.shared.currentType)
         }
     }
     

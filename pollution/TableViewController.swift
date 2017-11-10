@@ -11,12 +11,16 @@ import UIKit
 import SwiftSpinner
 import BRYXBanner
 import MapKit
+import Dropper
+
 
 class TableViewController: UITableViewController {
     
     var stations = [Station]()
     var selectedStation: Station?
     var selector = IndexPath()
+    
+    var currentTimeSpan: String = Constants.timeList.first!
     
     var banner = Banner()
     
@@ -33,7 +37,15 @@ class TableViewController: UITableViewController {
         
         let refreshItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector (self.refreshButtonPressed (_:)))
         refreshItem.tintColor = UIColor.white
-        navigationItem.leftBarButtonItem = refreshItem
+        let timeSpanButton: UIButton = UIButton(type: UIButtonType.custom) as UIButton
+        timeSpanButton.addTarget(self, action: #selector (self.timeSpanButtonPressed (_:)), for: UIControlEvents.touchUpInside)
+        timeSpanButton.setTitle(currentTimeSpan, for: [.normal])
+        timeSpanButton.setTitleColor(UIColor.white, for: [.normal])
+        timeSpanButton.sizeToFit()
+        let timeSpanItem: UIBarButtonItem = UIBarButtonItem(customView: timeSpanButton)
+        
+        
+        navigationItem.leftBarButtonItems = [refreshItem,timeSpanItem]
         
         let unitButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
         unitButton.addTarget(self, action: #selector (self.changeTypeButtonPressed (_:)), for: UIControlEvents.touchUpInside)
@@ -42,6 +54,7 @@ class TableViewController: UITableViewController {
         unitButton.sizeToFit()
         let unitBarButtonItem:UIBarButtonItem = UIBarButtonItem(customView: unitButton)
         navigationItem.rightBarButtonItem  = unitBarButtonItem
+        
         
         navigationBar.setItems([navigationItem], animated: true)
         
@@ -52,19 +65,38 @@ class TableViewController: UITableViewController {
     }
     
     @objc func refreshButtonPressed(_ sender:UITapGestureRecognizer){
-        
+        tableView.reloadData()
+    }
+    
+    @objc func timeSpanButtonPressed(_ sender:UITapGestureRecognizer){
+        let index = (Constants.timeList.index(of: currentTimeSpan)! + 1) % Constants.timeList.count
+        currentTimeSpan = Constants.timeList[index]
+        updateNavBar()
+        tableView.reloadData()
     }
     
     @objc func changeTypeButtonPressed(_ sender:UITapGestureRecognizer){
-        
         let index = (Constants.units.index(of: State.shared.currentType)! + 1) % Constants.units.count
         State.shared.currentType = Constants.units[index]
+        updateNavBar()
+        changeUIColor(toColor: State.shared.currentColor)
+    }
+    
+    func updateNavBar() {
         
         let navigationItem = UINavigationItem(title: "")
         
         let refreshItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector (self.refreshButtonPressed (_:)))
         refreshItem.tintColor = UIColor.white
-        navigationItem.leftBarButtonItem = refreshItem
+        let timeSpanButton: UIButton = UIButton(type: UIButtonType.custom) as UIButton
+        timeSpanButton.addTarget(self, action: #selector (self.timeSpanButtonPressed (_:)), for: UIControlEvents.touchUpInside)
+        timeSpanButton.setTitle(currentTimeSpan, for: [.normal])
+        timeSpanButton.setTitleColor(UIColor.white, for: [.normal])
+        timeSpanButton.sizeToFit()
+        let timeSpanItem: UIBarButtonItem = UIBarButtonItem(customView: timeSpanButton)
+        
+        
+        navigationItem.leftBarButtonItems = [refreshItem,timeSpanItem]
         
         let unitButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
         unitButton.addTarget(self, action: #selector (self.changeTypeButtonPressed (_:)), for: UIControlEvents.touchUpInside)
@@ -76,12 +108,11 @@ class TableViewController: UITableViewController {
         
         navigationBar.setItems([navigationItem], animated: true)
         
-        changeUIColor(toColor: Constants.colors[State.shared.currentType]!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        initUI(withColor: Constants.colors[State.shared.currentType]!)
-        initNavBar(withColor: Constants.colors[State.shared.currentType]!)
+        initUI(withColor: State.shared.currentColor)
+        initNavBar(withColor: State.shared.currentColor)
         
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
         if let loadedStations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations") {
@@ -89,7 +120,7 @@ class TableViewController: UITableViewController {
         }
         if stations.isEmpty {
             banner.dismiss()
-            banner = Banner(title: "Information", subtitle: NSLocalizedString("cellInformation", comment: ""), image: nil, backgroundColor: Constants.colors[State.shared.currentType]!)
+            banner = Banner(title: "Information", subtitle: NSLocalizedString("cellInformation", comment: ""), image: nil, backgroundColor: State.shared.currentColor)
             banner.dismissesOnTap = false
             banner.titleLabel.textColor = UIColor.white
             banner.position = BannerPosition.top
@@ -113,8 +144,8 @@ class TableViewController: UITableViewController {
     func changeUIColor(toColor color: UIColor) {
         tableView.separatorColor = color
         tableView.reloadData()
-        navigationBar.animate(toBarTintColor: Constants.colors[State.shared.currentType]!, withDuration: 0.5)
-        tabBarController!.tabBar.animate(toBarTintColor: Constants.colors[State.shared.currentType]!, withDuration: 0.5)
+        navigationBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 0.5)
+        tabBarController!.tabBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 0.5)
     }
     
     @IBAction func userDidSwipeRight(_ sender: UISwipeGestureRecognizer) {
@@ -163,7 +194,13 @@ class TableViewController: UITableViewController {
                 cell.stationLabel.text = "\(station.name!) - \(city) (\(country))"
             }
             cell.station = station
-            cell.setUpChart(intraday: true)
+            let timeSpanInDays = Constants.timeSpaces[currentTimeSpan]
+            if currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day") {
+                cell.getData(withTimeSpanInDays: timeSpanInDays!, intraday: true)
+            }
+            else {
+                cell.getData(withTimeSpanInDays: timeSpanInDays!, intraday: false)
+            }
             return cell
         } else {
             fatalError()

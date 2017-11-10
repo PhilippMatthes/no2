@@ -28,6 +28,24 @@ class StationCell: UITableViewCell, ChartViewDelegate {
         super.setSelected(selected, animated: animated)
     }
     
+    func getData(withTimeSpanInDays days: Int, intraday: Bool) {
+        
+        let mostRecentMeasurement = station!.entries.first!.getMostRecentMeasurement()
+        let mostRecentDate = mostRecentMeasurement?.getConvertedDate()
+        
+        let toDate = Calendar.current.date(byAdding: .day, value: -days, to: mostRecentDate!)!
+        
+        DispatchQueue.global(qos: .default).async {
+            HiddenDatabaseCaller.makeLocalRequest(forLocation: self.station!.entries.first!.location!,                                                   withLimit: 10000, toDate:  toDate, fromDate: mostRecentDate!) {
+                entries in
+                self.station?.entries = entries
+                DispatchQueue.main.async {
+                    self.setUpChart(intraday: intraday)
+                }
+            }
+        }
+    }
+    
     func setUpChart(intraday: Bool) {
         
         emissionChart.delegate = self
@@ -83,7 +101,7 @@ class StationCell: UITableViewCell, ChartViewDelegate {
         emissionChart.xAxis.valueFormatter = IndexAxisValueFormatter(values:dateLog)
         emissionChart.xAxis.setLabelCount(3, force: false)
         emissionChart.xAxis.labelRotationAngle = 0
-        emissionChart.xAxis.labelTextColor = Constants.colors[State.shared.currentType]!
+        emissionChart.xAxis.labelTextColor = State.shared.currentColor
         
         let maxValue = Double(emissionLog.max()!)
         
@@ -99,7 +117,7 @@ class StationCell: UITableViewCell, ChartViewDelegate {
         
         emissionChart.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
         emissionChart.leftAxis.setLabelCount(3, force: false)
-        emissionChart.leftAxis.labelTextColor = Constants.colors[State.shared.currentType]!
+        emissionChart.leftAxis.labelTextColor = State.shared.currentColor
         emissionChart.leftAxis.axisMaximum = max(Constants.maxValues[State.shared.currentType]!, maxValue)
         
         var barChartEntries = [BarChartDataEntry]()
@@ -117,7 +135,7 @@ class StationCell: UITableViewCell, ChartViewDelegate {
             if maxValue != 0.0 {
                 fraction = min(0.7,CGFloat(Double(emission)/maxValue))
             }
-            let color = Constants.colors[State.shared.currentType]!.withAlphaComponent(fraction)
+            let color = State.shared.currentColor.withAlphaComponent(fraction)
             barChartColors.insert(color, at: 0)
         }
         
@@ -132,7 +150,7 @@ class StationCell: UITableViewCell, ChartViewDelegate {
         emissionLine.colors = barChartColors
         
         let backgroundLine = BarChartDataSet(values: backgroundChartEntries, label: nil)
-        backgroundLine.colors = [Constants.colors[State.shared.currentType]!.withAlphaComponent(0.2)]
+        backgroundLine.colors = [State.shared.currentColor.withAlphaComponent(0.2)]
         
         let data = BarChartData()
         

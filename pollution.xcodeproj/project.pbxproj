@@ -48,6 +48,9 @@
 		BE70FA861FB4AFED006D48A7 /* WidgetTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4A2DCB1FB07B2300044D90 /* WidgetTableController.swift */; };
 		BE70FA871FB4E961006D48A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE56BCDE1FA9274A00303B70 /* Localizable.strings */; };
 		BE70FA891FB4F317006D48A7 /* UINavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70FA881FB4F317006D48A7 /* UINavigationBarExtension.swift */; };
+		BE8A4CFF1FB5EE5400255C2E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */; };
+		BE8A4D021FB60EA600255C2E /* HiddenDatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */; };
+		BE8A4D031FB60F0700255C2E /* HiddenDatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */; };
 		BE900FC01FAB84A40023FF05 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */; };
 		BE9394AE1FA9DB220017407E /* CustomMapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */; };
 		BE9394B01FA9DF7E0017407E /* CustomCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9394AF1FA9DF7E0017407E /* CustomCircleRenderer.swift */; };
@@ -134,6 +137,8 @@
 		BE654B141FB49740003284C6 /* pollutionTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollutionTodayExtension.entitlements; sourceTree = "<group>"; };
 		BE654B151FB4975C003284C6 /* pollution.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollution.entitlements; sourceTree = "<group>"; };
 		BE70FA881FB4F317006D48A7 /* UINavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtension.swift; sourceTree = "<group>"; };
+		BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
+		BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenDatabaseCaller.swift; sourceTree = "<group>"; };
 		BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapOverlay.swift; sourceTree = "<group>"; };
 		BE9394AF1FA9DF7E0017407E /* CustomCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCircleRenderer.swift; sourceTree = "<group>"; };
@@ -230,6 +235,7 @@
 				BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */,
 				BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */,
 				BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */,
+				BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -285,6 +291,7 @@
 				BE1F69F41FB196CC007A9C1A /* DiskJockey.swift */,
 				BE22C2171FA34D2B008D7659 /* Constants.swift */,
 				BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */,
+				BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */,
 				BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */,
 				BE2EC62F1FAB61F20052BF6A /* MapKit */,
 				BE2EC6291FAB61350052BF6A /* Extensions */,
@@ -546,6 +553,7 @@
 				BE4A2DCC1FB07B2300044D90 /* WidgetTableController.swift in Sources */,
 				BE2BDDF11FB0AC1E0076EF4B /* PollutionMeasurement.swift in Sources */,
 				BE4A2DDF1FB0A7AF00044D90 /* UIViewExtension.swift in Sources */,
+				BE8A4D031FB60F0700255C2E /* HiddenDatabaseCaller.swift in Sources */,
 				BE654B0E1FB492CB003284C6 /* StationCell.swift in Sources */,
 				BE0B002F1FB339AB00F2EDD9 /* DiskJockey.swift in Sources */,
 				BE1F69E21FB0CF01007A9C1A /* CoordinateWizard.swift in Sources */,
@@ -576,10 +584,12 @@
 				BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */,
 				BE9394B21FA9FFC00017407E /* UIViewExtension.swift in Sources */,
 				BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */,
+				BE8A4CFF1FB5EE5400255C2E /* SettingsController.swift in Sources */,
 				BE1F69F31FB190EE007A9C1A /* Station.swift in Sources */,
 				BE9394B01FA9DF7E0017407E /* CustomCircleRenderer.swift in Sources */,
 				BE1F69E11FB0AFE1007A9C1A /* DatabaseCaller.swift in Sources */,
 				BE988FB01FA1F015007C24CF /* PollutionDataEntry.swift in Sources */,
+				BE8A4D021FB60EA600255C2E /* HiddenDatabaseCaller.swift in Sources */,
 				BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */,
 				BE1F6A011FB2D828007A9C1A /* Notification.swift in Sources */,
 				BE1F69F91FB1B3B7007A9C1A /* StationCell.swift in Sources */,

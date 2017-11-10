@@ -20,7 +20,7 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
         
         State.shared.load()
         
-        initUI(withColor: Constants.colors[State.shared.currentType]!)
+        initUI(withColor: State.shared.currentColor)
         
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
         State.shared.defaults.synchronize()
@@ -88,6 +88,17 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let myAppUrl = NSURL(string: "OpenApp://")!
+        extensionContext?.open(myAppUrl as URL, completionHandler: { (success) in
+            if (!success) {
+                print("App launch failed!")
+            }
+        })
     }
     
 }

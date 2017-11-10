@@ -66,7 +66,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         searchController.searchBar.barStyle = .default
         searchController.searchBar.searchBarStyle = .default
         searchController.searchBar.showsCancelButton = false
-        searchController.searchBar.tintColor = Constants.colors[State.shared.currentType]!
+        searchController.searchBar.tintColor = State.shared.currentColor
         searchController.searchBar.barTintColor = UIColor.white
         let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
         textFieldInsideSearchBar?.textColor = UIColor.gray
@@ -241,8 +241,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         unitLabelBackground.clipsToBounds = true
         
         unitLabel.text = State.shared.currentType.capitalized
-        unitLabelBackground.layer.backgroundColor = Constants.colors[State.shared.currentType]!.cgColor
-        searchButtonBackground.layer.backgroundColor = Constants.colors[State.shared.currentType]!.cgColor
+        unitLabelBackground.layer.backgroundColor = State.shared.currentColor.cgColor
+        searchButtonBackground.layer.backgroundColor = State.shared.currentColor.cgColor
         maxvalue = Constants.maxValues[State.shared.currentType]
         
         unitLabelBackground.layer.cornerRadius = Constants.cornerRadius
@@ -268,9 +268,9 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         let index = (Constants.units.index(of: State.shared.currentType)! + 1) % Constants.units.count
         State.shared.currentType = Constants.units[index]
         unitLabel.text = State.shared.currentType.capitalized
-        tabBarController!.tabBar.animate(toBarTintColor: Constants.colors[State.shared.currentType]!, withDuration: 2.0)
-        unitLabelBackground.animate(toBackgroundColor: Constants.colors[State.shared.currentType]!, withDuration: 2.0)
-        searchButtonBackground.animate(toBackgroundColor: Constants.colors[State.shared.currentType]!, withDuration: 2.0)
+        tabBarController!.tabBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 2.0)
+        unitLabelBackground.animate(toBackgroundColor: State.shared.currentColor, withDuration: 2.0)
+        searchButtonBackground.animate(toBackgroundColor: State.shared.currentColor, withDuration: 2.0)
         
         updateAnnotations(withType: State.shared.currentType)
         
@@ -303,7 +303,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
                 currentProgress = self.unitLabelBackground.progress
             }
             
-            let limit = 1000
+            let limit = State.shared.numberOfMapResults
             
             DatabaseCaller.makeLatestRequest(forLongitude: self.mapView.region.center.longitude, forLatitude: self.mapView.region.center.latitude, forRadius: Int(radius), withLimit: limit) {
                 entries in
@@ -376,7 +376,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showUnitInformation" {
             let vc = segue.destination as! UnitInformationController
-            vc.initDesign(withColor: Constants.colors[State.shared.currentType]!, andUnit: State.shared.currentType)
+            vc.initDesign(withColor: State.shared.currentColor, andUnit: State.shared.currentType)
         }
         if segue.identifier == "showDetail" {
             let vc = segue.destination as! DetailController

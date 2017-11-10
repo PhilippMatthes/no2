@@ -44,6 +44,7 @@
 
 "station" = "Station";
 "stationSaved" = "Station gespeichert!";
+"done" = "Fertig";
 
 "source"="Quelle";
 "location"="Ort";
