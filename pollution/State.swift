@@ -26,6 +26,8 @@ class State {
         }
     }
     
+    var transferAnnotation: PollutionAnnotation?
+    
     private init() {
         
     }

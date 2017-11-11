@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 class PollutionDataEntry: NSObject, NSCoding {
     
@@ -109,5 +110,14 @@ class PollutionDataEntry: NSObject, NSCoding {
             }
         }
         return mostRecentMeasurement
+    }
+    
+    func generateMapAnnotation() -> PollutionAnnotation {
+        let annotation = PollutionAnnotation()
+        annotation.setCoordinate(newCoordinate: CLLocationCoordinate2D(latitude: self.latitude!, longitude: self.longitude!))
+        annotation.title = self.location
+        annotation.subtitle = self.city
+        annotation.entry = self
+        return annotation
     }
 }

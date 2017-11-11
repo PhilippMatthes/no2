@@ -26,7 +26,7 @@ struct Constants {
                          "so2"  : UIColor(rgb: 0x673AB7, alpha: 1.0),
                          "o3"   : UIColor(rgb: 0x3F51B5, alpha: 1.0)]
     
-    //Source: Umweltbundesamt
+    ///Source: Umweltbundesamt
     static let maxValues = ["no2"  : 40.0 as Double,
                             "co"   : 10000.0 as Double,
                             "pm10" : 40.0 as Double,

@@ -47,6 +47,8 @@ class DetailController: UIViewController, ChartViewDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        self.annotationThatWasClicked = State.shared.transferAnnotation!
+        
         self.initDesign(withColor: State.shared.currentColor)
         
         self.updateLabels(withLocation: self.annotationThatWasClicked!.entry!.location!)

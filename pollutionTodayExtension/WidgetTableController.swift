@@ -92,8 +92,10 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let myAppUrl = NSURL(string: "OpenApp://")!
+        let station = stations[indexPath.row]
+        let stationName = station.name!
+        let stationNameEncoded = stationName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        let myAppUrl = NSURL(string: "OpenApp://?stationName=\(stationNameEncoded)")!
         extensionContext?.open(myAppUrl as URL, completionHandler: { (success) in
             if (!success) {
                 print("App launch failed!")

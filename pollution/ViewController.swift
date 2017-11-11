@@ -33,10 +33,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     fileprivate var locationManager: CLLocationManager!
     fileprivate var isCurrentLocation: Bool = false
     fileprivate var activityIndicator: UIActivityIndicatorView!
-    
-    var selectedAnnotation: PollutionAnnotation?
-    
-    var moveDirectlyToStation: String?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +41,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         mapView.delegate = self
         
         SwiftRater.check()
+        
         
     }
     
@@ -116,7 +114,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
                                     style: UIAlertActionStyle.default
                                 ) {
                                     (action) -> Void in
-                                    self.selectedAnnotation = annotation
+                                    State.shared.transferAnnotation = annotation
                                     self.performSegue(withIdentifier: "showDetail", sender: self)
                                 }
                                 
@@ -315,7 +313,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
                         self.unitLabelBackground.setProgress(currentProgress, animated: false)
                     }
                     
-                    let annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
+                    let annotation = entry.generateMapAnnotation()
                     self.mapView.addAnnotation(annotation)
                     self.map.append(annotation)
                 }
@@ -380,7 +378,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         }
         if segue.identifier == "showDetail" {
             let vc = segue.destination as! DetailController
-            vc.annotationThatWasClicked = self.selectedAnnotation
             vc.previousViewController = self
         }
     }

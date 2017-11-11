@@ -17,18 +17,22 @@ class StationCell: UITableViewCell, ChartViewDelegate {
     @IBOutlet weak var emissionChart: BarChartView!
     
     var station: Station?
+
+    var isLoading = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.masksToBounds = false
-        self.isHidden = false
+        layer.masksToBounds = false
+        isHidden = false
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    func getData(withTimeSpanInDays days: Int, intraday: Bool) {
+    func getDataIfNecessary(withTimeSpanInDays days: Int, intraday: Bool, completionHandler: @escaping () -> ()) {
+        
+        isLoading = true
         
         let mostRecentMeasurement = station!.entries.first!.getMostRecentMeasurement()
         let mostRecentDate = mostRecentMeasurement?.getConvertedDate()
@@ -41,6 +45,8 @@ class StationCell: UITableViewCell, ChartViewDelegate {
                 self.station?.entries = entries
                 DispatchQueue.main.async {
                     self.setUpChart(intraday: intraday)
+                    self.isLoading = false
+                    completionHandler()
                 }
             }
         }

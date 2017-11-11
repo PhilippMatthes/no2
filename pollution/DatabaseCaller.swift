@@ -239,12 +239,4 @@ class DatabaseCaller {
         }.resume()
     }
     
-    static func generateMapAnnotation(entry: PollutionDataEntry) -> PollutionAnnotation {
-        let annotation = PollutionAnnotation()
-        annotation.setCoordinate(newCoordinate: CLLocationCoordinate2D(latitude: entry.latitude!, longitude: entry.longitude!))
-        annotation.title = entry.location
-        annotation.subtitle = entry.city
-        annotation.entry = entry
-        return annotation
-    }
 }

@@ -68,17 +68,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        if let tabBarController = self.window?.rootViewController as? TabBarController {
+            tabBarController.selectedIndex = 0
+            if let viewController = tabBarController.selectedViewController as? ViewController {
+                let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: false)
+                let items = (urlComponents?.queryItems)! as [NSURLQueryItem]
+                if let stationName = items.first!.value {
+                    DatabaseCaller.makeNotificationRequest(forLocation: stationName, withLimit: 1) {
+                        entries in
+                        if let entry = entries.first {
+                            let annotation = entry.generateMapAnnotation()
+                            State.shared.transferAnnotation = annotation
+                            DispatchQueue.main.async {
+                                viewController.performSegue(withIdentifier: "showDetail", sender: self)
+                            }
+                        }
+                    }
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
     
     func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
         if notification.category == "viewCategory" {
             if let tabBarController = self.window?.rootViewController as? TabBarController {
                 tabBarController.selectedIndex = 0
                 if let viewController = tabBarController.selectedViewController as? ViewController {
-                    DatabaseCaller.makeNotificationRequest(forLocation: identifier!, withLimit: 100) {
+                    DatabaseCaller.makeNotificationRequest(forLocation: identifier!, withLimit: 1) {
                         entries in
                         if let entry = entries.first {
-                            let annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
-                            viewController.selectedAnnotation = annotation
+                            let annotation = entry.generateMapAnnotation()
+                            State.shared.transferAnnotation = annotation
                             DispatchQueue.main.async {
                                 viewController.performSegue(withIdentifier: "showDetail", sender: self)
                             }

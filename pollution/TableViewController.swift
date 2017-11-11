@@ -17,14 +17,13 @@ import Dropper
 class TableViewController: UITableViewController {
     
     var stations = [Station]()
+    var cells = [Int: StationCell]()
     var selectedStation: Station?
     var selector = IndexPath()
-    
     var currentTimeSpan: String = Constants.timeList.first!
-    
     var banner = Banner()
-    
     var annotation: PollutionAnnotation?
+    var indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     
@@ -33,10 +32,19 @@ class TableViewController: UITableViewController {
     }
     
     func initNavBar(withColor color: UIColor) {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        refreshControl.backgroundColor = color
+        self.refreshControl = refreshControl
+        
         let navigationItem = UINavigationItem(title: "")
         
         let refreshItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector (self.refreshButtonPressed (_:)))
         refreshItem.tintColor = UIColor.white
+        
+        let activityItem = UIBarButtonItem(customView: indicator)
+        
         let timeSpanButton: UIButton = UIButton(type: UIButtonType.custom) as UIButton
         timeSpanButton.addTarget(self, action: #selector (self.timeSpanButtonPressed (_:)), for: UIControlEvents.touchUpInside)
         timeSpanButton.setTitle(currentTimeSpan, for: [.normal])
@@ -45,7 +53,8 @@ class TableViewController: UITableViewController {
         let timeSpanItem: UIBarButtonItem = UIBarButtonItem(customView: timeSpanButton)
         
         
-        navigationItem.leftBarButtonItems = [refreshItem,timeSpanItem]
+        navigationItem.leftBarButtonItems = [timeSpanItem,refreshItem,activityItem]
+        
         
         let unitButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
         unitButton.addTarget(self, action: #selector (self.changeTypeButtonPressed (_:)), for: UIControlEvents.touchUpInside)
@@ -62,6 +71,10 @@ class TableViewController: UITableViewController {
         navigationBar.isTranslucent = false
         navigationBar.barStyle = .black
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+    }
+    
+    @objc func refresh(refreshControl: UIRefreshControl) {
+        tableView.reloadData()        
     }
     
     @objc func refreshButtonPressed(_ sender:UITapGestureRecognizer){
@@ -88,6 +101,9 @@ class TableViewController: UITableViewController {
         
         let refreshItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector (self.refreshButtonPressed (_:)))
         refreshItem.tintColor = UIColor.white
+        
+        let activityItem = UIBarButtonItem(customView: indicator)
+        
         let timeSpanButton: UIButton = UIButton(type: UIButtonType.custom) as UIButton
         timeSpanButton.addTarget(self, action: #selector (self.timeSpanButtonPressed (_:)), for: UIControlEvents.touchUpInside)
         timeSpanButton.setTitle(currentTimeSpan, for: [.normal])
@@ -96,7 +112,7 @@ class TableViewController: UITableViewController {
         let timeSpanItem: UIBarButtonItem = UIBarButtonItem(customView: timeSpanButton)
         
         
-        navigationItem.leftBarButtonItems = [refreshItem,timeSpanItem]
+        navigationItem.leftBarButtonItems = [timeSpanItem, refreshItem, activityItem]
         
         let unitButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
         unitButton.addTarget(self, action: #selector (self.changeTypeButtonPressed (_:)), for: UIControlEvents.touchUpInside)
@@ -139,11 +155,18 @@ class TableViewController: UITableViewController {
     func initUI(withColor color: UIColor) {
         tableView.separatorStyle = .singleLineEtched
         tableView.separatorColor = color
+        tableView.backgroundColor = color
     }
     
     func changeUIColor(toColor color: UIColor) {
         tableView.separatorColor = color
         tableView.reloadData()
+        tableView.backgroundColor = color
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        refreshControl.tintColor = UIColor.white
+        refreshControl.backgroundColor = color
+        self.refreshControl = refreshControl
         navigationBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 0.5)
         tabBarController!.tabBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 0.5)
     }
@@ -187,6 +210,9 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as? StationCell {
+            indicator.startAnimating()
+            cells[indexPath.row] = cell
+            
             let station = stations[indexPath.row]
             let coordinateLocation = CLLocation(latitude: station.entries.first!.latitude!,
                                                 longitude: station.entries.first!.longitude!)
@@ -195,17 +221,25 @@ class TableViewController: UITableViewController {
             }
             cell.station = station
             let timeSpanInDays = Constants.timeSpaces[currentTimeSpan]
-            if currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day") {
-                cell.getData(withTimeSpanInDays: timeSpanInDays!, intraday: true)
-            }
-            else {
-                cell.getData(withTimeSpanInDays: timeSpanInDays!, intraday: false)
+            
+            let intraday = currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day")
+            cell.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
+                var allReady = true
+                for cell in self.cells {
+                    if cell.value.isLoading {
+                        allReady = false
+                    }
+                }
+                if allReady {
+                    self.indicator.stopAnimating()
+                    self.refreshControl?.endRefreshing()
+                }
             }
             return cell
         } else {
-            fatalError()
+            print("Failed to dequeue reusable cell of type StationCell")
+            return UITableViewCell()
         }
-        
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -221,7 +255,7 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedStation = stations[indexPath.row]
         if let entry = selectedStation!.entries.first {
-            self.annotation = DatabaseCaller.generateMapAnnotation(entry: entry)
+            State.shared.transferAnnotation = entry.generateMapAnnotation()
             DispatchQueue.main.async {
                 self.performSegue(withIdentifier: "showDetail", sender: self)
             }
@@ -231,7 +265,6 @@ class TableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             let vc = segue.destination as! DetailController
-            vc.annotationThatWasClicked = self.annotation
             vc.previousViewController = self
         }
     }

@@ -17,7 +17,7 @@ class SettingsController: UITableViewController {
     override func viewDidLoad() {
         setUpDoneButton(withColor: State.shared.currentColor, onFields: [numberOfResultsField])
         numberOfResultsField.layer.cornerRadius = 2.5
-        
+        numberOfResultsField.text = String(State.shared.numberOfMapResults)
     }
     
     func setUpDoneButton(withColor color: UIColor, onFields fields: [UITextField]) {
@@ -60,6 +60,8 @@ class SettingsController: UITableViewController {
             }
             numberOfResultsField.text = String(numberOfResults)
             State.shared.numberOfMapResults = numberOfResults
+        } else {
+            numberOfResultsField.text = String(State.shared.numberOfMapResults)
         }
     }
     

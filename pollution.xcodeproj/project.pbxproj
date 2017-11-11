@@ -59,7 +59,6 @@
 		BE988FB01FA1F015007C24CF /* PollutionDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */; };
 		BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */; };
 		BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */; };
-		BEBBB2C91FA45977005439EB /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = BEBBB2C81FA45977005439EB /* Icons */; };
 		BEBBB2CB1FA496D9005439EB /* UnitInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */; };
 		BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */; };
 		BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */; };
@@ -148,7 +147,6 @@
 		BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionMeasurement.swift; sourceTree = "<group>"; };
 		BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionAnnotation.swift; sourceTree = "<group>"; };
 		BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseCaller.swift; sourceTree = "<group>"; };
-		BEBBB2C81FA45977005439EB /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 		BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitInformationController.swift; sourceTree = "<group>"; };
 		BEDA11FF1FA22B9100A3EF51 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDA12011FA2324400A3EF51 /* JDSwiftHeatMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JDSwiftHeatMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,7 +262,6 @@
 		BEE82D7C1FA1C35600BEBAF4 = {
 			isa = PBXGroup;
 			children = (
-				BEBBB2C81FA45977005439EB /* Icons */,
 				BEE82D871FA1C35600BEBAF4 /* pollution */,
 				BE4A2DBB1FB061AA00044D90 /* pollutionTodayExtension */,
 				BEE82D861FA1C35600BEBAF4 /* Products */,
@@ -441,7 +438,6 @@
 			files = (
 				BE56BCE01FA9274A00303B70 /* Localizable.strings in Resources */,
 				BEE82D931FA1C35600BEBAF4 /* LaunchScreen.storyboard in Resources */,
-				BEBBB2C91FA45977005439EB /* Icons in Resources */,
 				BEE82D901FA1C35600BEBAF4 /* Assets.xcassets in Resources */,
 				BEE82D8E1FA1C35600BEBAF4 /* Main.storyboard in Resources */,
 			);
