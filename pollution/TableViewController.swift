@@ -74,18 +74,18 @@ class TableViewController: UITableViewController {
     }
     
     @objc func refresh(refreshControl: UIRefreshControl) {
-        tableView.reloadData()        
+        updateCells {}
     }
     
     @objc func refreshButtonPressed(_ sender:UITapGestureRecognizer){
-        tableView.reloadData()
+        updateCells {}
     }
     
     @objc func timeSpanButtonPressed(_ sender:UITapGestureRecognizer){
         let index = (Constants.timeList.index(of: currentTimeSpan)! + 1) % Constants.timeList.count
         currentTimeSpan = Constants.timeList[index]
         updateNavBar()
-        tableView.reloadData()
+        updateCells {}
     }
     
     @objc func changeTypeButtonPressed(_ sender:UITapGestureRecognizer){
@@ -143,9 +143,10 @@ class TableViewController: UITableViewController {
             banner.show()
             tableView.separatorStyle = .none
         }
-        DispatchQueue.main.async{
-            self.tableView.reloadData()
-        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        updateCells {}
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -160,7 +161,7 @@ class TableViewController: UITableViewController {
     
     func changeUIColor(toColor color: UIColor) {
         tableView.separatorColor = color
-        tableView.reloadData()
+        updateCells {}
         tableView.backgroundColor = color
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -169,6 +170,32 @@ class TableViewController: UITableViewController {
         self.refreshControl = refreshControl
         navigationBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 0.5)
         tabBarController!.tabBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 0.5)
+    }
+    
+    func updateCells(completionHandler: @escaping () -> ()) {
+        indicator.startAnimating() 
+        let timeSpanInDays = Constants.timeSpaces[currentTimeSpan]
+        for entry in cells {
+            let cell = entry.value
+            let intraday = currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day")
+            cell.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
+                var allReady = true
+                for cell in self.cells {
+                    if cell.value.isLoading {
+                        allReady = false
+                    }
+                }
+                if allReady {
+                    self.indicator.stopAnimating()
+                    self.refreshControl?.endRefreshing()
+                }
+                DispatchQueue.main.async{
+                    self.tableView.reloadData()
+                }
+                completionHandler()
+            }
+        }
+        
     }
     
     @IBAction func userDidSwipeRight(_ sender: UISwipeGestureRecognizer) {
@@ -210,7 +237,6 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as? StationCell {
-            indicator.startAnimating()
             cells[indexPath.row] = cell
             
             let station = stations[indexPath.row]
@@ -220,21 +246,6 @@ class TableViewController: UITableViewController {
                 cell.stationLabel.text = "\(station.name!) - \(city) (\(country))"
             }
             cell.station = station
-            let timeSpanInDays = Constants.timeSpaces[currentTimeSpan]
-            
-            let intraday = currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day")
-            cell.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
-                var allReady = true
-                for cell in self.cells {
-                    if cell.value.isLoading {
-                        allReady = false
-                    }
-                }
-                if allReady {
-                    self.indicator.stopAnimating()
-                    self.refreshControl?.endRefreshing()
-                }
-            }
             return cell
         } else {
             print("Failed to dequeue reusable cell of type StationCell")

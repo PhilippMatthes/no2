@@ -12,6 +12,7 @@ import UIKit
 class State {
     
     static let shared = State()
+    
     let defaults = UserDefaults(suiteName: "group.pollution")!
     var currentType: String = Constants.units.first! {
         willSet(newCurrentType) {
