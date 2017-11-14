@@ -52,10 +52,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
 
     
     @IBAction func searchButtonAction(_ sender: UIButton) {
-        searchButtonBackground.animateButtonPress(withBorderColor: UIColor.white, width: 4.0, andDuration: 0.1)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.searchButtonBackground.animateButtonRelease(withBorderColor: UIColor.white, width: 4.0, andDuration: 0.1)
-        })
+        searchButtonBackground.animateClick(withBorderColor: UIColor.white, width: 4.0, andDuration: 0.2)
         if searchController == nil {
             searchController = UISearchController(searchResultsController: nil)
         }
@@ -272,10 +269,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         
         updateAnnotations(withType: State.shared.currentType)
         
-        unitLabelBackground.animateButtonPress(withBorderColor: UIColor.white, width: 4.0, andDuration: 0.1)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.unitLabelBackground.animateButtonRelease(withBorderColor: UIColor.white, width: 4.0, andDuration: 0.1)
-        })
+        unitLabelBackground.animateClick(withBorderColor: UIColor.white, width: 4.0, andDuration: 0.2)
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {

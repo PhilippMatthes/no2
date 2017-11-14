@@ -91,6 +91,8 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
     }
     
     
+    
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let station = stations[indexPath.row]
         let stationName = station.name!

@@ -130,10 +130,7 @@ class DetailController: UIViewController, ChartViewDelegate {
             self.emissionChart.updateChart(intraday: self.showsIntradayInformation, entries: self.measurements!, type: .whiteOnColor)
         })
         
-        unitLabelBackground.animateButtonPress(withBorderColor: State.shared.currentColor, width: 4.0, andDuration: 0.1)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.unitLabelBackground.animateButtonRelease(withBorderColor: State.shared.currentColor, width: 4.0, andDuration: 0.1)
-        })
+        unitLabelBackground.animateClick(withBorderColor: State.shared.currentColor, width: 4.0, andDuration: 0.2)
     }
     @objc func timeButtonClicked(sender:UITapGestureRecognizer) {
         
@@ -143,11 +140,7 @@ class DetailController: UIViewController, ChartViewDelegate {
             dropper.hideWithAnimation(0.1)
         }
         
-        
-        timeLabelBackground.animateButtonPress(withBorderColor: State.shared.currentColor, width: 4.0, andDuration: 0.1)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-            self.timeLabelBackground.animateButtonRelease(withBorderColor: State.shared.currentColor, width: 4.0, andDuration: 0.1)
-        })
+        timeLabelBackground.animateClick(withBorderColor: State.shared.currentColor, width: 4.0, andDuration: 0.2)
     }
     
     func changeColor(to color: UIColor) {

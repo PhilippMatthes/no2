@@ -32,6 +32,14 @@ extension UIView {
         self.layer.borderWidth = 0.0
     }
     
+    func animateClick(withBorderColor color: UIColor, width: Double, andDuration duration: Double) {
+        let halfDuration = duration/2
+        animateButtonPress(withBorderColor: color, width: width, andDuration: halfDuration)
+        DispatchQueue.main.asyncAfter(deadline: .now() + halfDuration) {
+            self.animateButtonRelease(withBorderColor: color, width: width, andDuration: halfDuration)
+        }
+    }
+    
     func animate(toBackgroundColor color: UIColor, withDuration duration: CFTimeInterval){
         UIView.animate(withDuration: 1, animations: { () -> Void in
             self.layer.backgroundColor = color.cgColor
