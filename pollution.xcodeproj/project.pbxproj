@@ -60,6 +60,7 @@
 		BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */; };
 		BE9CD6191FBAF60C00D410B0 /* ChartsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */; };
 		BE9CD61A1FBAF9A800D410B0 /* ChartsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */; };
+		BE9CD61C1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */; };
 		BEBBB2CB1FA496D9005439EB /* UnitInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */; };
 		BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */; };
 		BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */; };
@@ -148,6 +149,7 @@
 		BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionAnnotation.swift; sourceTree = "<group>"; };
 		BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseCaller.swift; sourceTree = "<group>"; };
 		BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsExtension.swift; sourceTree = "<group>"; };
+		BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoordinateRegionExtension.swift; sourceTree = "<group>"; };
 		BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitInformationController.swift; sourceTree = "<group>"; };
 		BEDA11FF1FA22B9100A3EF51 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDA12011FA2324400A3EF51 /* JDSwiftHeatMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JDSwiftHeatMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,6 +231,7 @@
 			children = (
 				BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */,
 				BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */,
+				BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */,
 				BE2EC6271FAB61000052BF6A /* TabBarController.swift */,
 				BE50FBE31FA4AC3F00187750 /* DetailController.swift */,
 				BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */,
@@ -581,6 +584,7 @@
 				BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */,
 				BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */,
 				BE9CD6191FBAF60C00D410B0 /* ChartsExtension.swift in Sources */,
+				BE9CD61C1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift in Sources */,
 				BE9394B21FA9FFC00017407E /* UIViewExtension.swift in Sources */,
 				BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */,
 				BE8A4CFF1FB5EE5400255C2E /* SettingsController.swift in Sources */,

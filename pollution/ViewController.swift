@@ -283,7 +283,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         
         unitLabelBackground.setProgress(0.8, animated: true)
         
-        let radius = getRadius(ofRegion: mapView.region)
+        let radius = mapView.region.getRadius()
         let span = mapView.region.span
         let delta = (span.latitudeDelta + span.longitudeDelta)
         
@@ -337,20 +337,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         }
     }
     
-    func getRadius(ofRegion region: MKCoordinateRegion) -> Double {
-        let center = region.center
-        let span = region.span
-        
-        let loc1 = CLLocation(latitude: center.latitude - span.latitudeDelta * 0.5, longitude: center.longitude)
-        let loc2 = CLLocation(latitude: center.latitude + span.latitudeDelta * 0.5, longitude: center.longitude)
-        let loc3 = CLLocation(latitude: center.latitude, longitude: center.longitude - span.longitudeDelta * 0.5)
-        let loc4 = CLLocation(latitude: center.latitude, longitude: center.longitude + span.longitudeDelta * 0.5)
-        
-        let metersInLatitude = loc1.distance(from: loc2)
-        let metersInLongitude = loc3.distance(from: loc4)
-        
-        return max(metersInLatitude, metersInLongitude)/2
-    }
+    
     
     func addCircle(withRadius radius: Double, location: CLLocation, andPercentage percentage: Double, andType type: String){
         let circle = MKCircle(center: location.coordinate, radius: radius)
