@@ -13,7 +13,15 @@ import MapKit
 
 class WidgetTableController: UITableViewController, NCWidgetProviding {
     
+    
+    @IBOutlet weak var topBarView: UIView!
+    @IBOutlet weak var progressView: UIProgressView!
+    
     var stations = [Station]()
+    
+    var timer: Timer?
+    
+    var index = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +38,10 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
             }
         }
         
+        if self.stations.count * 150 > Int(view.frame.height) {
+            timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(scroll), userInfo: nil, repeats: true)
+        }
+        
         DispatchQueue.main.async{
             self.tableView.reloadData()
         }
@@ -43,7 +55,11 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
         }
     }
     
+    
     func initUI(withColor color: UIColor) {
+        progressView.progressTintColor = color
+        progressView.backgroundColor = UIColor.clear
+        progressView.trackTintColor = UIColor.clear
         tableView.separatorStyle = .singleLineEtched
         tableView.separatorColor = color
     }
@@ -58,8 +74,29 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
         }
     }
     
+    @objc func scroll() {
+        UIView.animate(withDuration: 3, animations: { () -> Void in
+            self.progressView.setProgress(1.0, animated: true)
+        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            self.progressView.setProgress(0.0, animated: true)
+            self.index += 1
+            let currentRow = (self.index + 1) % (self.stations.count - 1)
+            let indexPath = NSIndexPath(row: currentRow, section: 0)
+            self.tableView.scrollToRow(at: indexPath as IndexPath, at: .bottom, animated: true)
+        }
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+    }
+    
+    
+    @IBAction func timeButtonPressed(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func unitButtonPressed(_ sender: UIButton) {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

@@ -139,7 +139,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="9re-JI-YZQ">
                     <connections>
-                        <action selector="didTypMapView:" destination="BYZ-38-t0r" id="Qcv-Qf-DNX"/>
+                        <action selector="didTapMapView:" destination="BYZ-38-t0r" id="fZn-mF-qab"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -374,6 +374,7 @@
                     <tabBarItem key="tabBarItem" title="Stations" image="radio" id="VlE-bf-Pdr"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="biu-62-KHf">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
@@ -383,7 +384,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aV6-uX-4iY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1391.25" y="-737.5"/>
+            <point key="canvasLocation" x="1389" y="-738"/>
         </scene>
         <!--Settings-->
         <scene sceneID="dAw-34-1Lk">
@@ -575,7 +576,7 @@ https://github.com/PhilippMatthes/no2</string>
         <image name="settings" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oz0-fV-CNd"/>
+        <segue reference="E75-6X-NZL"/>
         <segue reference="7FI-CM-LZC"/>
     </inferredMetricsTieBreakers>
 </document>

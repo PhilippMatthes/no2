@@ -115,9 +115,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         dropper.cellBackgroundColor = UIColor.white
         dropper.cornerRadius = Constants.cornerRadius
         dropper.delegate = self
-        
-        
-        
+
         changeColor(to: color)
     }
     

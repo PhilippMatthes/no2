@@ -210,6 +210,7 @@
 				BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */,
 				BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */,
 				BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */,
+				BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -231,7 +232,6 @@
 			children = (
 				BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */,
 				BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */,
-				BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */,
 				BE2EC6271FAB61000052BF6A /* TabBarController.swift */,
 				BE50FBE31FA4AC3F00187750 /* DetailController.swift */,
 				BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */,

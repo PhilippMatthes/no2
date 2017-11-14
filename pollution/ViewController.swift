@@ -68,7 +68,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         present(searchController, animated: true, completion: nil)
     }
     
-    @IBAction func didTypMapView(_ sender: UITapGestureRecognizer) {
+    @IBAction func didTapMapView(_ sender: UITapGestureRecognizer) {
         let touchLocation = sender.location(in: mapView)
         let locationCoordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
         
@@ -228,8 +228,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     }
     
     func initUI() {
-        
-        
         unitLabelBackground.progressViewStyle = .bar
         unitLabelBackground.setProgress(0.0, animated: false)
         unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
@@ -336,7 +334,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
             }
         }
     }
-    
     
     
     func addCircle(withRadius radius: Double, location: CLLocation, andPercentage percentage: Double, andType type: String){
