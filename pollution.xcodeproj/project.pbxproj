@@ -15,7 +15,6 @@
 		BE1F69F51FB196CC007A9C1A /* DiskJockey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F41FB196CC007A9C1A /* DiskJockey.swift */; };
 		BE1F69F71FB1B1CB007A9C1A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */; };
 		BE1F69F91FB1B3B7007A9C1A /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */; };
-		BE1F69FB1FB1CA3B007A9C1A /* NSCoderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69FA1FB1CA3B007A9C1A /* NSCoderExtension.swift */; };
 		BE1F69FD1FB220EA007A9C1A /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69FC1FB220EA007A9C1A /* State.swift */; };
 		BE1F69FE1FB2D5B2007A9C1A /* SwiftRater.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE1F69FF1FB2D5B2007A9C1A /* SwiftRater.framework */; };
 		BE1F6A011FB2D828007A9C1A /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F6A001FB2D828007A9C1A /* Notification.swift */; };
@@ -59,6 +58,8 @@
 		BE988FB01FA1F015007C24CF /* PollutionDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */; };
 		BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */; };
 		BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */; };
+		BE9CD6191FBAF60C00D410B0 /* ChartsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */; };
+		BE9CD61A1FBAF9A800D410B0 /* ChartsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */; };
 		BEBBB2CB1FA496D9005439EB /* UnitInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */; };
 		BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */; };
 		BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */; };
@@ -104,7 +105,6 @@
 		BE1F69F41FB196CC007A9C1A /* DiskJockey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskJockey.swift; sourceTree = "<group>"; };
 		BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCell.swift; sourceTree = "<group>"; };
-		BE1F69FA1FB1CA3B007A9C1A /* NSCoderExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSCoderExtension.swift; sourceTree = "<group>"; };
 		BE1F69FC1FB220EA007A9C1A /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
 		BE1F69FF1FB2D5B2007A9C1A /* SwiftRater.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftRater.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1F6A001FB2D828007A9C1A /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -147,6 +147,7 @@
 		BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionMeasurement.swift; sourceTree = "<group>"; };
 		BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollutionAnnotation.swift; sourceTree = "<group>"; };
 		BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseCaller.swift; sourceTree = "<group>"; };
+		BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsExtension.swift; sourceTree = "<group>"; };
 		BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitInformationController.swift; sourceTree = "<group>"; };
 		BEDA11FF1FA22B9100A3EF51 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDA12011FA2324400A3EF51 /* JDSwiftHeatMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JDSwiftHeatMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +207,7 @@
 				BE70FA881FB4F317006D48A7 /* UINavigationBarExtension.swift */,
 				BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */,
 				BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */,
-				BE1F69FA1FB1CA3B007A9C1A /* NSCoderExtension.swift */,
+				BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -548,6 +549,7 @@
 				BE4A2DDD1FB0A5E500044D90 /* Constants.swift in Sources */,
 				BE4A2DCC1FB07B2300044D90 /* WidgetTableController.swift in Sources */,
 				BE2BDDF11FB0AC1E0076EF4B /* PollutionMeasurement.swift in Sources */,
+				BE9CD61A1FBAF9A800D410B0 /* ChartsExtension.swift in Sources */,
 				BE4A2DDF1FB0A7AF00044D90 /* UIViewExtension.swift in Sources */,
 				BE8A4D031FB60F0700255C2E /* HiddenDatabaseCaller.swift in Sources */,
 				BE654B0E1FB492CB003284C6 /* StationCell.swift in Sources */,
@@ -578,6 +580,7 @@
 				BE900FC01FAB84A40023FF05 /* UIImageExtension.swift in Sources */,
 				BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */,
 				BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */,
+				BE9CD6191FBAF60C00D410B0 /* ChartsExtension.swift in Sources */,
 				BE9394B21FA9FFC00017407E /* UIViewExtension.swift in Sources */,
 				BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */,
 				BE8A4CFF1FB5EE5400255C2E /* SettingsController.swift in Sources */,
@@ -594,7 +597,6 @@
 				BE50FBE41FA4AC3F00187750 /* DetailController.swift in Sources */,
 				BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */,
 				BE56BCE51FA92C1C00303B70 /* DateTranslator.swift in Sources */,
-				BE1F69FB1FB1CA3B007A9C1A /* NSCoderExtension.swift in Sources */,
 				BE1F69FD1FB220EA007A9C1A /* State.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

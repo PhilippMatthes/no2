@@ -8,6 +8,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Widget Table Controller-->
         <scene sceneID="Kfe-b8-suN">
@@ -17,9 +22,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="xfs-hI-xvs">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVS-r0-W86">
+                                    <rect key="frame" x="8" y="0.0" width="62" height="44"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                    <state key="normal" title="NO2">
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjg-eZ-Q5M">
+                                    <rect key="frame" x="289" y="0.0" width="78" height="44"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                    <state key="normal" title="1 Day">
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="mjg-eZ-Q5M" secondAttribute="bottom" id="BUx-ac-GhQ"/>
+                                <constraint firstAttribute="trailing" secondItem="mjg-eZ-Q5M" secondAttribute="trailing" constant="8" id="Kmd-aA-DWW"/>
+                                <constraint firstAttribute="bottom" secondItem="AVS-r0-W86" secondAttribute="bottom" id="OmZ-ke-e4O"/>
+                                <constraint firstItem="AVS-r0-W86" firstAttribute="top" secondItem="xfs-hI-xvs" secondAttribute="top" id="auD-B0-xts"/>
+                                <constraint firstItem="mjg-eZ-Q5M" firstAttribute="top" secondItem="xfs-hI-xvs" secondAttribute="top" id="ekb-WN-IRR"/>
+                                <constraint firstItem="mjg-eZ-Q5M" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AVS-r0-W86" secondAttribute="trailing" id="ics-m8-WAY"/>
+                                <constraint firstItem="AVS-r0-W86" firstAttribute="leading" secondItem="xfs-hI-xvs" secondAttribute="leading" constant="8" id="yMt-ZZ-Hgn"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="StationCell" rowHeight="100" id="nrC-xQ-28t" customClass="StationCell" customModule="pollutionTodayExtension" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nrC-xQ-28t" id="mSb-BX-NSu">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>

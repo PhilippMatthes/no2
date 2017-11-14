@@ -79,7 +79,7 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
                 cell.stationLabel.text = "\(station.name!) - \(city) (\(country))"
             }
             cell.station = station
-            cell.setUpChart(intraday: true)
+            cell.emissionChart.setUpChart(intraday: true, entries: cell.station!.entries, type: .colorOnWhite)
             return cell
         } else {
             fatalError()
