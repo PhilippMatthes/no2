@@ -85,7 +85,8 @@ extension BarChartView {
         }
         
         self.xAxis.valueFormatter = IndexAxisValueFormatter(values:dateLog)
-        self.xAxis.setLabelCount(3, force: false)
+        let labelCountInXDirection = Int(self.frame.width/(self.xAxis.labelWidth * 3))
+        self.xAxis.setLabelCount(labelCountInXDirection, force: false)
         self.xAxis.labelRotationAngle = 0
         
         let maxValue = Double(emissionLog.max()!)
@@ -101,7 +102,8 @@ extension BarChartView {
         }
         
         self.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
-        self.leftAxis.setLabelCount(5, force: false)
+        let labelCountInYDirection = Int(self.frame.height/(self.xAxis.labelHeight * 3))
+        self.leftAxis.setLabelCount(labelCountInYDirection, force: false)
         self.leftAxis.axisMaximum = max(Constants.maxValues[State.shared.currentType]!, maxValue)
         
         var barChartEntries = [BarChartDataEntry]()

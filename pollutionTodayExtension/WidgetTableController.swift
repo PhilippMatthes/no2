@@ -11,11 +11,23 @@ import UIKit
 import NotificationCenter
 import MapKit
 
-class WidgetTableController: UITableViewController, NCWidgetProviding {
+enum cellHeight : Int {
+    case expanded = 150
+    case compact = 85
+}
+
+class WidgetTableController: UIViewController, NCWidgetProviding, UITableViewDelegate, UITableViewDataSource {
     
     
+    @IBOutlet weak var unitButton: UIButton!
+    @IBOutlet weak var timeButton: UIButton!
+    @IBOutlet weak var indicator: UIActivityIndicatorView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topBarView: UIView!
     @IBOutlet weak var progressView: UIProgressView!
+    
+    var currentTimeSpan: String = Constants.timeList.first!
+    var cells = [Int: StationCell]()
     
     var stations = [Station]()
     
@@ -23,8 +35,13 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
     
     var index = 0
     
+    var currentCellHeight: cellHeight = .expanded
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         State.shared.load()
         
@@ -38,8 +55,8 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
             }
         }
         
-        if self.stations.count * 150 > Int(view.frame.height) {
-            timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(scroll), userInfo: nil, repeats: true)
+        if self.stations.count * currentCellHeight.rawValue > Int(view.frame.height) {
+            timer = Timer.scheduledTimer(timeInterval: 6.0, target: self, selector: #selector(scroll), userInfo: nil, repeats: true)
         }
         
         DispatchQueue.main.async{
@@ -68,22 +85,31 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
     @available(iOSApplicationExtension 10.0, *)
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
         if activeDisplayMode == .expanded {
-            self.preferredContentSize = CGSize(width: maxSize.width, height:CGFloat(150*stations.count))
+            self.preferredContentSize = CGSize(width: maxSize.width, height:CGFloat(cellHeight.expanded.rawValue*stations.count))
+            self.currentCellHeight = .expanded
+            self.tableView.reloadData()
         } else if activeDisplayMode == .compact{
-            self.preferredContentSize = CGSize(width: maxSize.width, height: 150)
+            self.preferredContentSize = CGSize(width: maxSize.width, height:CGFloat(cellHeight.compact.rawValue))
+            self.currentCellHeight = .compact
+            self.tableView.reloadData()
         }
     }
     
+    @available(iOS, obsoleted: 10.0)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(currentCellHeight.rawValue)
+    }
+    
     @objc func scroll() {
-        UIView.animate(withDuration: 3, animations: { () -> Void in
+        UIView.animate(withDuration: 5, animations: { () -> Void in
             self.progressView.setProgress(1.0, animated: true)
         })
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             self.progressView.setProgress(0.0, animated: true)
             self.index += 1
             let currentRow = (self.index + 1) % (self.stations.count - 1)
             let indexPath = NSIndexPath(row: currentRow, section: 0)
-            self.tableView.scrollToRow(at: indexPath as IndexPath, at: .bottom, animated: true)
+            self.tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
         }
     }
     
@@ -91,24 +117,60 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
         super.viewDidLayoutSubviews()
     }
     
-    
-    @IBAction func timeButtonPressed(_ sender: UIButton) {
+    func updateCells(completionHandler: @escaping () -> ()) {
+        indicator.startAnimating()
+        let timeSpanInDays = Constants.timeSpaces[currentTimeSpan]
+        for entry in cells {
+            let cell = entry.value
+            let intraday = currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day")
+            cell.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
+                var allReady = true
+                for cell in self.cells {
+                    if cell.value.isLoading {
+                        allReady = false
+                    }
+                }
+                if allReady {
+                    self.indicator.stopAnimating()
+                }
+                DispatchQueue.main.async{
+                    self.tableView.reloadData()
+                }
+                completionHandler()
+            }
+        }
         
     }
     
-    @IBAction func unitButtonPressed(_ sender: UIButton) {
+    
+    @IBAction func timeButtonPressed(_ sender: UIButton) {
+        let index = (Constants.timeList.index(of: currentTimeSpan)! + 1) % Constants.timeList.count
+        currentTimeSpan = Constants.timeList[index]
+        timeButton.setTitle(currentTimeSpan, for: [.normal])
+        updateCells {}
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    @IBAction func unitButtonPressed(_ sender: UIButton) {
+        let index = (Constants.units.index(of: State.shared.currentType)! + 1) % Constants.units.count
+        State.shared.currentType = Constants.units[index]
+        initUI(withColor: State.shared.currentColor)
+        unitButton.setTitle(State.shared.currentType.capitalized, for: [.normal])
+        updateCells {}
+    }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return stations.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as? StationCell {
+            cells[indexPath.row] = cell
             let station = stations[indexPath.row]
             let coordinateLocation = CLLocation(latitude: station.entries.first!.latitude!,
                                                 longitude: station.entries.first!.longitude!)
@@ -123,11 +185,7 @@ class WidgetTableController: UITableViewController, NCWidgetProviding {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let station = stations[indexPath.row]
         let stationName = station.name!
         let stationNameEncoded = stationName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
