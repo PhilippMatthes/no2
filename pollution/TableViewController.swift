@@ -240,11 +240,15 @@ class TableViewController: UITableViewController {
             cells[indexPath.row] = cell
             
             let station = stations[indexPath.row]
-            let coordinateLocation = CLLocation(latitude: station.entries.first!.latitude!,
-                                                longitude: station.entries.first!.longitude!)
-            CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
-                cell.stationLabel.text = "\(station.name!) - \(city) (\(country))"
+            if let latitude = station.entries.first!.latitude, let longitude = station.entries.first!.longitude {
+                let coordinateLocation = CLLocation(latitude: latitude, longitude: longitude)
+                CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
+                    cell.stationLabel.text = "\(station.name!) - \(city) (\(country))"
+                }
+            } else {
+               cell.stationLabel.text = "\(station.name!)"
             }
+            
             cell.station = station
             return cell
         } else {
