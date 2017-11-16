@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import Foundation
 import SwiftRater
+import RevealingSplashView
 
 class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentationControllerDelegate {
     
@@ -39,9 +40,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         super.viewDidLoad()
         
         mapView.delegate = self
-        
-        SwiftRater.check()
-        
+               
         
     }
     

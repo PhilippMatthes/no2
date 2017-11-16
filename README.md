@@ -13,7 +13,7 @@ NO2 is an iOS App for air quality measurements. This App is currently in develop
 * **Dropper** - *Dropdown selection* - [GitHub](https://github.com/kirkbyo/Dropper)
 * **SwiftRater** - *App rate reminder* - [GitHub](https://github.com/takecian/SwiftRater)
 * **BRYXBanner** - *In app notification* - [GitHub](https://github.com/bryx-inc/BRYXBanner)
-
+* **RevealingSplashView** - *Loading splash screen* _ [GitHub](https://github.com/PiXeL16/RevealingSplashView)
 ## Authors
 
 * **Philipp Matthes** - *Initial work* - [Homepage](https://philippmatth.es)

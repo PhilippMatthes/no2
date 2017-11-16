@@ -11,6 +11,7 @@ target 'pollution' do
   pod 'Dropper'
   pod 'SwiftRater'
   pod 'BRYXBanner'
+  pod 'RevealingSplashView'
   # Pods for pollution
 
 end

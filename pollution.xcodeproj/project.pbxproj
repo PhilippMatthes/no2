@@ -61,6 +61,7 @@
 		BE9CD6191FBAF60C00D410B0 /* ChartsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */; };
 		BE9CD61A1FBAF9A800D410B0 /* ChartsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */; };
 		BE9CD61C1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */; };
+		BE9CD61D1FBDA9F000D410B0 /* RevealingSplashView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9CD61E1FBDA9F000D410B0 /* RevealingSplashView.framework */; };
 		BEBBB2CB1FA496D9005439EB /* UnitInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */; };
 		BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */; };
 		BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */; };
@@ -150,6 +151,7 @@
 		BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseCaller.swift; sourceTree = "<group>"; };
 		BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsExtension.swift; sourceTree = "<group>"; };
 		BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoordinateRegionExtension.swift; sourceTree = "<group>"; };
+		BE9CD61E1FBDA9F000D410B0 /* RevealingSplashView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RevealingSplashView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitInformationController.swift; sourceTree = "<group>"; };
 		BEDA11FF1FA22B9100A3EF51 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDA12011FA2324400A3EF51 /* JDSwiftHeatMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JDSwiftHeatMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE9CD61D1FBDA9F000D410B0 /* RevealingSplashView.framework in Frameworks */,
 				BE1F6A041FB313E1007A9C1A /* BRYXBanner.framework in Frameworks */,
 				BE1F69FE1FB2D5B2007A9C1A /* SwiftRater.framework in Frameworks */,
 				BE4D90A01FA6177C0080B812 /* Dropper.framework in Frameworks */,
@@ -310,6 +313,7 @@
 		C355A3DFC11229856E2E997C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE9CD61E1FBDA9F000D410B0 /* RevealingSplashView.framework */,
 				BE654B111FB493DC003284C6 /* Charts.framework */,
 				BE1F6A051FB313E1007A9C1A /* BRYXBanner.framework */,
 				BE1F69FF1FB2D5B2007A9C1A /* SwiftRater.framework */,
@@ -496,6 +500,7 @@
 				"${BUILT_PRODUCTS_DIR}/BRYXBanner/BRYXBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/Dropper/Dropper.framework",
+				"${BUILT_PRODUCTS_DIR}/RevealingSplashView/RevealingSplashView.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftRater/SwiftRater.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftSpinner/SwiftSpinner.framework",
 			);
@@ -504,6 +509,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRYXBanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dropper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealingSplashView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRater.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftSpinner.framework",
 			);
