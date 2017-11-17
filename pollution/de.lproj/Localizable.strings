@@ -33,6 +33,15 @@
 "tapToReturn" = "Zum Zurückkehren antippen";
 "loading" = "Lädt...";
 
+"instantly" = "Sofort";
+"daily" = "Täglich";
+"weekly" = "Wöchentlich";
+"monthly" = "Monatlich";
+"never" = "Deaktiviert";
+
+"notificationSelection" = "Meldungen konfigurieren";
+"selectNotification" = "Wählen Sie einen Zeitintervall, um Neuigkeiten zu erhalten.";
+
 "measurementSelection" = "Messungen auswählen";
 "selectMeasurement" = "Wählen Sie eine Messung aus, um mehr Informationen anzuzeigen";
 "today" = "Heute";
@@ -45,6 +54,7 @@
 
 "station" = "Station";
 "stationSaved" = "Station gespeichert!";
+"stationUpdated" = "Einstellungen aktualisiert!";
 "done" = "Fertig";
 
 "source"="Quelle";

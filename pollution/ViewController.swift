@@ -48,7 +48,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         initUI()
         updateAnnotations(withType: State.shared.currentType)
     }
-
     
     @IBAction func searchButtonAction(_ sender: UIButton) {
         searchButtonBackground.animateClick(withBorderColor: UIColor.white, width: 4.0, andDuration: 0.2)
@@ -76,7 +75,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         
         let alertController = UIAlertController(title: NSLocalizedString("measurementSelection", comment: "Measurement selection."), message: NSLocalizedString("selectMeasurement", comment: "Select the corresponding measurement to display more information."), preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        alertController.view.tintColor = UIColor.gray
+        alertController.view.tintColor = State.shared.currentColor
         
         var alertsWithDistances = [(UIAlertAction, Double)]()
         
@@ -227,6 +226,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     }
     
     func initUI() {
+        view.layoutIfNeeded()
         unitLabelBackground.progressViewStyle = .bar
         unitLabelBackground.setProgress(0.0, animated: false)
         unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
@@ -236,9 +236,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         unitLabelBackground.layer.backgroundColor = State.shared.currentColor.cgColor
         searchButtonBackground.layer.backgroundColor = State.shared.currentColor.cgColor
         maxvalue = Constants.maxValues[State.shared.currentType]
-        
-        unitLabelBackground.layer.cornerRadius = Constants.cornerRadius
-        searchButtonBackground.layer.cornerRadius = Constants.cornerRadius
         
         let unitButtonRecognizer = UITapGestureRecognizer(target: self, action:  #selector (self.unitButtonClicked(sender:)))
         unitLabelBackground.addGestureRecognizer(unitButtonRecognizer)

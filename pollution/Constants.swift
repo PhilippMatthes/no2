@@ -44,6 +44,24 @@ struct Constants {
                              NSLocalizedString("7 Days", comment: "7 Days"): 7,
                              NSLocalizedString("30 Days", comment: "30 Days"): 30]
     
+    static let notificationTimes = [NSLocalizedString("instantly", comment: ""),
+                                   NSLocalizedString("daily", comment: ""),
+                                   NSLocalizedString("weekly", comment: ""),
+                                   NSLocalizedString("monthly", comment: ""),
+                                   NSLocalizedString("never", comment: "")]
+    
+    static let notificationTimeIntervalsList = [0,
+                                                86400,
+                                                604800,
+                                                18144000,
+                                                Int.max]
+    
+    static let notificationTimeIntervals = [0 : NSLocalizedString("instantly", comment: ""),
+                                            86400 : NSLocalizedString("daily", comment: ""),
+                                            604800 : NSLocalizedString("weekly", comment: ""),
+                                            18144000 : NSLocalizedString("monthly", comment: ""),
+                                            Int.max : NSLocalizedString("never", comment: "")]
+    
     static let font = UIFont(name: "Futura", size: 22.0)
     
     static let information = ["no2"  : NSLocalizedString("no2info", comment: "Information about no2"),

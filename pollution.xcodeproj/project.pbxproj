@@ -68,6 +68,7 @@
 		BEE82D8E1FA1C35600BEBAF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE82D8C1FA1C35600BEBAF4 /* Main.storyboard */; };
 		BEE82D901FA1C35600BEBAF4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEE82D8F1FA1C35600BEBAF4 /* Assets.xcassets */; };
 		BEE82D931FA1C35600BEBAF4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE82D911FA1C35600BEBAF4 /* LaunchScreen.storyboard */; };
+		BEF3FA641FBEF0C000365A0A /* BadgeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF3FA631FBEF0C000365A0A /* BadgeExtension.swift */; };
 		D888903BA101AA0D840D59CF /* Pods_pollutionTodayExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D170178BDC76829245DA4F7 /* Pods_pollutionTodayExtension.framework */; };
 		F316DA5655435BED9DC5FF47 /* Pods_pollution.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78997E7465D6932446FC3389 /* Pods_pollution.framework */; };
 /* End PBXBuildFile section */
@@ -162,6 +163,8 @@
 		BEE82D8F1FA1C35600BEBAF4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEE82D921FA1C35600BEBAF4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEE82D941FA1C35600BEBAF4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BEF3FA621FBEEC6B00365A0A /* ENMBadgedBarButtonItem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ENMBadgedBarButtonItem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEF3FA631FBEF0C000365A0A /* BadgeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeExtension.swift; sourceTree = "<group>"; };
 		F95E6C92C1F242651009C969 /* Pods-pollution.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pollution.release.xcconfig"; path = "Pods/Target Support Files/Pods-pollution/Pods-pollution.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -214,6 +217,7 @@
 				BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */,
 				BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */,
 				BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */,
+				BEF3FA631FBEF0C000365A0A /* BadgeExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -313,6 +317,7 @@
 		C355A3DFC11229856E2E997C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEF3FA621FBEEC6B00365A0A /* ENMBadgedBarButtonItem.framework */,
 				BE9CD61E1FBDA9F000D410B0 /* RevealingSplashView.framework */,
 				BE654B111FB493DC003284C6 /* Charts.framework */,
 				BE1F6A051FB313E1007A9C1A /* BRYXBanner.framework */,
@@ -608,6 +613,7 @@
 				BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */,
 				BE56BCE51FA92C1C00303B70 /* DateTranslator.swift in Sources */,
 				BE1F69FD1FB220EA007A9C1A /* State.swift in Sources */,
+				BEF3FA641FBEF0C000365A0A /* BadgeExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

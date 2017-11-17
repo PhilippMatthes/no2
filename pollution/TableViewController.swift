@@ -34,8 +34,8 @@ class TableViewController: UITableViewController {
     func initNavBar(withColor color: UIColor) {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        refreshControl.tintColor = UIColor.white
-        refreshControl.backgroundColor = color
+        refreshControl.tintColor = color
+        refreshControl.backgroundColor = UIColor.white
         self.refreshControl = refreshControl
         
         let navigationItem = UINavigationItem(title: "")
@@ -156,17 +156,16 @@ class TableViewController: UITableViewController {
     func initUI(withColor color: UIColor) {
         tableView.separatorStyle = .singleLineEtched
         tableView.separatorColor = color
-        tableView.backgroundColor = color
+        tableView.backgroundColor = UIColor.white
     }
     
     func changeUIColor(toColor color: UIColor) {
         tableView.separatorColor = color
         updateCells {}
-        tableView.backgroundColor = color
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        refreshControl.tintColor = UIColor.white
-        refreshControl.backgroundColor = color
+        refreshControl.tintColor = color
+        refreshControl.backgroundColor = UIColor.white
         self.refreshControl = refreshControl
         navigationBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 0.5)
         tabBarController!.tabBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 0.5)

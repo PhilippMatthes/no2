@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum ListStates {
+    case wasUpdated
+    case wasAdded
+}
+
 class DiskJockey {
     
     static func loadObject<T>(ofType type: T, withIdentifier identifier: String) -> T? {
@@ -33,6 +38,38 @@ class DiskJockey {
         } else {
             DiskJockey.save(object: [object], withIdentifier: identifier)
         }
+    }
+    
+    static func updateStationList(withStation station: Station) -> ListStates {
+        NSKeyedArchiver.setClassName("Station", for: Station.self)
+        NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
+        let stations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations")
+        if var stations = stations {
+            for stationInList in stations {
+                if stationInList.equals(station: station) {
+                    let index = stations.index(of: stationInList)!
+                    stations[index] = station
+                    DiskJockey.save(object: stations, withIdentifier: "stations")
+                    return .wasUpdated
+                }
+            }
+        }
+        DiskJockey.loadAndExtendList(withObject: station, andIdentifier: "stations")
+        return .wasAdded
+    }
+    
+    static func callFromStations(stationWithName stationName: String) -> Station? {
+        NSKeyedArchiver.setClassName("Station", for: Station.self)
+        NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
+        let stations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations")
+        if let stations = stations {
+            for station in stations {
+                if station.name! == stationName {
+                    return station
+                }
+            }
+        }
+        return nil
     }
     
 }

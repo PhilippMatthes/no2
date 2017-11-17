@@ -33,6 +33,8 @@ class DetailController: UIViewController, ChartViewDelegate {
     @IBOutlet weak var unitLabelBackground: UIProgressView!
     @IBOutlet var viewBackground: UIView!
     @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var emissionChart: BarChartView!
+    
     var annotationThatWasClicked: PollutionAnnotation?
     var stationThatWasClicked: Station?
     var showsIntradayInformation = true
@@ -43,7 +45,6 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     var dropper = Dropper(width: 100, height: 200)
     
-    @IBOutlet weak var emissionChart: BarChartView!
     
     var measurements: [PollutionDataEntry]?
     
@@ -57,9 +58,10 @@ class DetailController: UIViewController, ChartViewDelegate {
         self.annotationThatWasClicked = State.shared.transferAnnotation!
         
         self.updateLabels(.beforeLoading)
+        self.updateNavBar(.beforeLoading, withColor: State.shared.currentColor)
         
         self.initDesign(withColor: State.shared.currentColor)
-        
+
         self.getData(withTimeSpanInDays: 1, intraday: self.showsIntradayInformation) {
             let coordinateLocation = CLLocation(latitude: self.annotationThatWasClicked!.coordinate.latitude,
                                                 longitude: self.annotationThatWasClicked!.coordinate.longitude)
@@ -70,7 +72,12 @@ class DetailController: UIViewController, ChartViewDelegate {
                                                      entries: self.measurements!,
                                                      city: city,
                                                      country: country)
+                if let savedStation = DiskJockey.callFromStations(stationWithName: self.annotationThatWasClicked!.entry!.location!) {
+                    self.stationThatWasClicked!.pushNotificationIntervalInSeconds = savedStation.pushNotificationIntervalInSeconds
+                    self.stationThatWasClicked!.pushNotificationAfterDate = savedStation.pushNotificationAfterDate
+                }
                 self.updateLabels(.afterLoading)
+                self.updateNavBar(.afterLoading, withColor: State.shared.currentColor)
             }
         }
     }
@@ -96,35 +103,76 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     func updateLabels(_ state: GeoCoderLoadingState) {
         switch state {
-        case .afterLoading:
-            if let station = stationThatWasClicked {
-                if let city = station.city, let country = station.country {
-                    self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(station.name!)"
-                    self.locationLabel.text = "\(city) - \(country)"
+            case .afterLoading:
+                if let station = stationThatWasClicked {
+                    if let city = station.city, let country = station.country {
+                        self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(station.name!)"
+                        self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): \(city) - \(country)"
+                    } else {
+                        self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(station.name!)"
+                        self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): n/a"
+                    }
                 } else {
-                    self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(station.name!)"
+                    self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): n/a"
                     self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): n/a"
                 }
-            } else {
-                self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): n/a"
-                self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): n/a"
-            }
-        case .beforeLoading:
-            if let station = stationThatWasClicked {
-                self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(station.name!)"
-                self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): \(NSLocalizedString("loading", comment: "Loading..."))"
-            } else {
-                self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): n/a"
-                self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): n/a"
-            }
+            case .beforeLoading:
+                if let station = stationThatWasClicked {
+                    self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(station.name!)"
+                    self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): \(NSLocalizedString("loading", comment: "Loading..."))"
+                } else {
+                    self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): n/a"
+                    self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): n/a"
+                }
         }
+    }
+    
+    func updateNavBar(_ state: GeoCoderLoadingState, withColor color: UIColor) {
+        let navigationItem = UINavigationItem(title: NSLocalizedString("detailViewTitle", comment: "Detail"))
+        
+        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.stop, target: self, action: #selector (self.closeButtonPressed (_:)))
+        doneItem.tintColor = color
+        
+        let notificationButton: UIButton = UIButton(type: UIButtonType.detailDisclosure) as UIButton
+        notificationButton.addTarget(self, action: #selector (self.notificationButtonPressed (_:)), for: UIControlEvents.touchUpInside)
+        notificationButton.sizeToFit()
+        let notificationButtonItem: UIBarButtonItem = UIBarButtonItem(customView: notificationButton)
+        notificationButtonItem.tintColor = color
+        let badgeOffset = CGPoint(x: -5, y: 0)
+        switch state {
+            case .afterLoading:
+                if let station = stationThatWasClicked {
+                    if let interval = station.pushNotificationIntervalInSeconds {
+                        if let badgeText = Constants.notificationTimeIntervals[interval] {
+                            notificationButtonItem.setBadge(text: badgeText,
+                                                            withOffsetFromTopRight: badgeOffset,
+                                                            andColor: State.shared.currentColor,
+                                                            andFilled: true)
+                        }
+                    }
+                }
+            case .beforeLoading:
+                break
+        }
+        
+        let receiveNotificationsItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector (self.receiveNotificationsButtonPressed (_:)))
+        receiveNotificationsItem.tintColor = color
+        
+        navigationItem.rightBarButtonItems = [doneItem, receiveNotificationsItem]
+        navigationItem.leftBarButtonItems = [notificationButtonItem]
+        
+        navigationBar.setItems([navigationItem], animated: true)
+        
+        navigationBar.tintColor = color
+        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:color]
     }
     
     func initDesign(withColor color: UIColor) {
         view.addSubview(navigationBar)
+        view.layoutIfNeeded()
+        
         let unitButtonRecognizer = UITapGestureRecognizer(target: self, action:  #selector (self.unitButtonClicked(sender:)))
         unitLabelBackground.addGestureRecognizer(unitButtonRecognizer)
-        unitLabelBackground.layer.cornerRadius = Constants.cornerRadius
         unitLabelBackground.progressViewStyle = .bar
         unitLabelBackground.setProgress(0.0, animated: true)
         unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
@@ -132,7 +180,6 @@ class DetailController: UIViewController, ChartViewDelegate {
         
         let timeButtonRecognizer = UITapGestureRecognizer(target: self, action:  #selector (self.timeButtonClicked(sender:)))
         timeLabelBackground.addGestureRecognizer(timeButtonRecognizer)
-        timeLabelBackground.layer.cornerRadius = Constants.cornerRadius
         timeLabelBackground.progressViewStyle = .bar
         timeLabelBackground.setProgress(0.0, animated: true)
         timeLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
@@ -182,38 +229,57 @@ class DetailController: UIViewController, ChartViewDelegate {
         infoButton.animate(toBackgroundColor: color, withDuration: 2.0)
         
         SwiftSpinner.sharedInstance.innerColor = color
-        let navigationItem = UINavigationItem(title: NSLocalizedString("detailViewTitle", comment: "Detail"))
-        
-        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.stop, target: self, action: #selector (self.closeButtonPressed (_:)))
-        doneItem.tintColor = color
-        navigationItem.rightBarButtonItem = doneItem
-        
-        let receiveNotificationsItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector (self.receiveNotificationsButtonPressed (_:)))
-        receiveNotificationsItem.tintColor = color
-        navigationItem.leftBarButtonItem = receiveNotificationsItem
-        
-        navigationBar.setItems([navigationItem], animated: true)
-        
-        navigationBar.tintColor = color
-        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor:color]
         
         viewBackground.animate(toBackgroundColor: color, withDuration: 2.0)
+        
+        updateNavBar(.afterLoading, withColor: State.shared.currentColor)
     }
     
     @IBAction func userSwipedDown(_ sender: UISwipeGestureRecognizer) {
 //        performSegueToReturnBack()
     }
     
-    @objc func closeButtonPressed(_ sender:UITapGestureRecognizer){
+    @objc func notificationButtonPressed(_ sender:UITapGestureRecognizer) {
+        if stationThatWasClicked != nil {
+            
+            let alert = UIAlertController(title: NSLocalizedString("notificationSelection", comment: ""), message: NSLocalizedString("selectNotification", comment: ""), preferredStyle: .actionSheet)
+            alert.view.tintColor = State.shared.currentColor
+            
+            for notificationInterval in Constants.notificationTimeIntervalsList {
+                let menuAction = UIAlertAction (
+                    title: Constants.notificationTimeIntervals[notificationInterval]!,
+                    style: .default
+                ) {
+                    (action) -> Void in
+                    self.stationThatWasClicked!.pushNotificationIntervalInSeconds = notificationInterval
+                    self.updateNavBar(.afterLoading, withColor: State.shared.currentColor)
+                    _ = DiskJockey.updateStationList(withStation: self.stationThatWasClicked!)
+                }
+                alert.addAction(menuAction)
+            }
+            let cancelAction = UIAlertAction (
+                title: NSLocalizedString("cancel", comment: ""),
+                style: .cancel
+            ) {
+                (action) -> Void in
+            }
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func closeButtonPressed(_ sender:UITapGestureRecognizer) {
         performSegueToReturnBack()
     }
     
     @objc func receiveNotificationsButtonPressed(_ sender:UITapGestureRecognizer) {
-        NSKeyedArchiver.setClassName("Station", for: Station.self)
-        NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
-        DiskJockey.loadAndExtendList(withObject: stationThatWasClicked!, andIdentifier: "stations")
         banner.dismiss()
-        banner = Banner(title: NSLocalizedString("stationSaved", comment: "Station saved"), subtitle: nil, image: nil, backgroundColor: UIColor.white)
+        switch DiskJockey.updateStationList(withStation: stationThatWasClicked!) {
+        case .wasAdded:
+            banner = Banner(title: NSLocalizedString("stationSaved", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.white)
+        case .wasUpdated:
+            banner = Banner(title: NSLocalizedString("stationUpdated", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.white)
+        }
         banner.dismissesOnTap = true
         banner.titleLabel.textColor = State.shared.currentColor
         banner.position = BannerPosition.top

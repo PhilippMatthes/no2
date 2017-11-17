@@ -33,6 +33,15 @@
 "tapToReturn" = "Tap to return";
 "loading" = "Loading...";
 
+"instantly" = "Instantly";
+"daily" = "Daily";
+"weekly" = "Weekly";
+"monthly" = "Monthly";
+"never" = "Deactivated";
+
+"notificationSelection" = "Notification configuration";
+"selectNotification" = "Choose a time interval to receive timed notifications.";
+
 "measurementSelection" = "Measurement selection";
 "selectMeasurement" = "Select the corresponding measurement to display more information.";
 "today" = "Today";
@@ -45,6 +54,7 @@
 
 "station" = "Station";
 "stationSaved" = "Station saved!";
+"stationUpdated" = "Settings updated!";
 "done" = "Done";
 
 "source" = "Source";
