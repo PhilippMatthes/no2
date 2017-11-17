@@ -31,6 +31,7 @@
 "loadingLocation" = "Loading\nStation";
 "tapToCancel" = "Tap to cancel";
 "tapToReturn" = "Tap to return";
+"loading" = "Loading...";
 
 "measurementSelection" = "Measurement selection";
 "selectMeasurement" = "Select the corresponding measurement to display more information.";

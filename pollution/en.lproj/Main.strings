@@ -12,7 +12,7 @@
 "Hsw-5r-Hi7.title" = "Detail";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "LsO-Th-lB8"; */
-"LsO-Th-lB8.text" = "Label";
+"LsO-Th-lB8.text" = "Loading...";
 
 /* Class = "UITabBarController"; title = "TabBarController"; ObjectID = "MB2-id-E9Y"; */
 "MB2-id-E9Y.title" = "TabBarController";

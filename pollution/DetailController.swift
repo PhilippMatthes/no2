@@ -15,6 +15,12 @@ import MapKit
 import BRYXBanner
 
 
+enum GeoCoderLoadingState {
+    case beforeLoading
+    case afterLoading
+}
+
+
 class DetailController: UIViewController, ChartViewDelegate {
     
     @IBOutlet weak var stationLabel: UILabel!
@@ -28,6 +34,7 @@ class DetailController: UIViewController, ChartViewDelegate {
     @IBOutlet var viewBackground: UIView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     var annotationThatWasClicked: PollutionAnnotation?
+    var stationThatWasClicked: Station?
     var showsIntradayInformation = true
     
     var previousViewController: UIViewController?
@@ -49,15 +56,26 @@ class DetailController: UIViewController, ChartViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.annotationThatWasClicked = State.shared.transferAnnotation!
         
+        self.updateLabels(.beforeLoading)
+        
         self.initDesign(withColor: State.shared.currentColor)
         
-        self.updateLabels(withLocation: self.annotationThatWasClicked!.entry!.location!)
-        
-        self.getData(withTimeSpanInDays: 1, intraday: self.showsIntradayInformation)
-        
+        self.getData(withTimeSpanInDays: 1, intraday: self.showsIntradayInformation) {
+            let coordinateLocation = CLLocation(latitude: self.annotationThatWasClicked!.coordinate.latitude,
+                                                longitude: self.annotationThatWasClicked!.coordinate.longitude)
+            CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
+                self.stationThatWasClicked = Station(name: self.annotationThatWasClicked!.entry!.location!,
+                                                     latitude: self.annotationThatWasClicked!.coordinate.latitude,
+                                                     longitude: self.annotationThatWasClicked!.coordinate.longitude,
+                                                     entries: self.measurements!,
+                                                     city: city,
+                                                     country: country)
+                self.updateLabels(.afterLoading)
+            }
+        }
     }
     
-    func getData(withTimeSpanInDays days: Int, intraday: Bool) {
+    func getData(withTimeSpanInDays days: Int, intraday: Bool, completion: @escaping () -> ()) {
         
         let mostRecentMeasurement = annotationThatWasClicked?.entry?.getMostRecentMeasurement()
         let mostRecentDate = mostRecentMeasurement?.getConvertedDate()
@@ -70,24 +88,36 @@ class DetailController: UIViewController, ChartViewDelegate {
                 self.measurements = entries
                 DispatchQueue.main.async {
                     self.emissionChart.setUpChart(intraday: intraday, entries: self.measurements!, type: .whiteOnColor)
+                    completion()
                 }
             }
         }
     }
     
-    func updateLabels(withLocation location: String?) {
-        let coordinateLocation = CLLocation(latitude: annotationThatWasClicked!.coordinate.latitude,
-                                  longitude: annotationThatWasClicked!.coordinate.longitude)
-        CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
-            self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): \(city) (\(country))"
+    func updateLabels(_ state: GeoCoderLoadingState) {
+        switch state {
+        case .afterLoading:
+            if let station = stationThatWasClicked {
+                if let city = station.city, let country = station.country {
+                    self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(station.name!)"
+                    self.locationLabel.text = "\(city) - \(country)"
+                } else {
+                    self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(station.name!)"
+                    self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): n/a"
+                }
+            } else {
+                self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): n/a"
+                self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): n/a"
+            }
+        case .beforeLoading:
+            if let station = stationThatWasClicked {
+                self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(station.name!)"
+                self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): \(NSLocalizedString("loading", comment: "Loading..."))"
+            } else {
+                self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): n/a"
+                self.locationLabel.text = "\(NSLocalizedString("location", comment: "Location")): n/a"
+            }
         }
-        if let location = location {
-            self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): \(location)"
-        }
-        else {
-            self.stationLabel.text = "\(NSLocalizedString("station", comment: "Station")): n/a"
-        }
-        
     }
     
     func initDesign(withColor color: UIColor) {
@@ -178,16 +208,10 @@ class DetailController: UIViewController, ChartViewDelegate {
         performSegueToReturnBack()
     }
     
-    @objc func receiveNotificationsButtonPressed(_ sender:UITapGestureRecognizer){
-        let station = Station(name: annotationThatWasClicked!.entry!.location!,
-                              latitude: annotationThatWasClicked!.coordinate.latitude,
-                              longitude: annotationThatWasClicked!.coordinate.longitude,
-                              entries: measurements!)
-        
+    @objc func receiveNotificationsButtonPressed(_ sender:UITapGestureRecognizer) {
         NSKeyedArchiver.setClassName("Station", for: Station.self)
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
-        DiskJockey.loadAndExtendList(withObject: station, andIdentifier: "stations")
-
+        DiskJockey.loadAndExtendList(withObject: stationThatWasClicked!, andIdentifier: "stations")
         banner.dismiss()
         banner = Banner(title: NSLocalizedString("stationSaved", comment: "Station saved"), subtitle: nil, image: nil, backgroundColor: UIColor.white)
         banner.dismissesOnTap = true
@@ -242,7 +266,9 @@ extension DetailController: DropperDelegate {
         else {
             showsIntradayInformation = false
         }
-        getData(withTimeSpanInDays: Constants.timeSpaces[contents]!, intraday: showsIntradayInformation)
+        getData(withTimeSpanInDays: Constants.timeSpaces[contents]!, intraday: showsIntradayInformation) {
+            
+        }
         timeLabel.text = contents
     }
 }

@@ -8,8 +8,21 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 class SettingsController: UITableViewController {
+    
+    
+    @IBOutlet weak var openAQCell: UITableViewCell!
+    @IBOutlet weak var swiftSpinnerCell: UITableViewCell!
+    @IBOutlet weak var chartsCell: UITableViewCell!
+    @IBOutlet weak var dropperCell: UITableViewCell!
+    @IBOutlet weak var swiftRaterCell: UITableViewCell!
+    @IBOutlet weak var bryxBannerCell: UITableViewCell!
+    @IBOutlet weak var revealingSplashViewCell: UITableViewCell!
+    
+    @IBOutlet weak var gitHubCell: UITableViewCell!
+    @IBOutlet weak var issueCell: UITableViewCell!
     
     
     @IBOutlet weak var numberOfResultsField: UITextField!
@@ -63,6 +76,47 @@ class SettingsController: UITableViewController {
         } else {
             numberOfResultsField.text = String(State.shared.numberOfMapResults)
         }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var url: URL
+        guard let cell = tableView.cellForRow(at: indexPath) else {
+            return
+        }
+        switch cell {
+            case openAQCell:
+                url = URL(string: "https://openaq.org/")!
+            case swiftSpinnerCell:
+                url = URL(string: "https://github.com/icanzilb/SwiftSpinner")!
+            case chartsCell:
+                url = URL(string: "https://github.com/danielgindi/Charts")!
+            case dropperCell:
+                url = URL(string: "https://github.com/kirkbyo/Dropper")!
+            case swiftRaterCell:
+                url = URL(string: "https://github.com/takecian/SwiftRater")!
+            case bryxBannerCell:
+                url = URL(string: "https://github.com/bryx-inc/BRYXBanner")!
+            case revealingSplashViewCell:
+                url = URL(string: "https://github.com/PiXeL16/RevealingSplashView")!
+            case gitHubCell:
+                url = URL(string: "https://github.com/PhilippMatthes/no2")!
+            case issueCell:
+                url = URL(string: "https://github.com/PhilippMatthes/no2/issues")!
+            default:
+                return
+        }
+        let svc = SFSafariViewController(url: url)
+        if #available(iOS 10.0, *) {
+            svc.preferredControlTintColor = State.shared.currentColor
+        }
+        present(svc, animated: true, completion: {
+            
+        })
+        self.tableView.cellForRow(at: indexPath)?.setSelected(false, animated: true)
     }
     
     

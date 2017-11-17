@@ -14,12 +14,32 @@ class Station: NSObject, NSCoding  {
     var latitude: Double?
     var longitude: Double?
     var entries = [PollutionDataEntry]()
+    var city: String?
+    var country: String?
     
-    init(name: String, latitude: Double, longitude: Double, entries: [PollutionDataEntry]) {
+    var pushNotificationAfterDate: Date?
+    var pushNotificationIntervalInSeconds: Int?
+    
+    init(name: String, latitude: Double, longitude: Double, entries: [PollutionDataEntry], city: String?, country: String?) {
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
         self.entries = entries
+        self.city = city
+        self.country = country
+        pushNotificationAfterDate = Date()
+        pushNotificationIntervalInSeconds = Int.max
+    }
+    
+    init(name: String, latitude: Double, longitude: Double, entries: [PollutionDataEntry], city: String?, country: String?, pushNotificationAfterDate: Date, pushNotificationIntervalInSeconds: Int) {
+        self.name = name
+        self.latitude = latitude
+        self.longitude = longitude
+        self.entries = entries
+        self.city = city
+        self.country = country
+        self.pushNotificationAfterDate = pushNotificationAfterDate
+        self.pushNotificationIntervalInSeconds = pushNotificationIntervalInSeconds
     }
     
     convenience required init?(coder aDecoder: NSCoder) {
@@ -27,13 +47,32 @@ class Station: NSObject, NSCoding  {
             let name = aDecoder.decodeObject(forKey: "name") as? String,
             let latitude = aDecoder.decodeObject(forKey: "latitude") as? Double,
             let longitude = aDecoder.decodeObject(forKey: "longitude") as? Double,
-            let entriesArchived = aDecoder.decodeObject(forKey: "entries") as? NSData
-        else {
-            return nil
-        }
+            let entriesArchived = aDecoder.decodeObject(forKey: "entries") as? NSData,
+            let city = aDecoder.decodeObject(forKey: "city") as? String?,
+            let country = aDecoder.decodeObject(forKey: "country") as? String?
+            else {
+                return nil
+            }
         NSKeyedUnarchiver.setClass(PollutionDataEntry.self, forClassName: "PollutionDataEntry")
         if let entries = NSKeyedUnarchiver.unarchiveObject(with: entriesArchived as Data) as? [PollutionDataEntry] {
-            self.init(name: name, latitude: latitude, longitude: longitude, entries: entries)
+            if let pushNotificationAfterDate = aDecoder.decodeObject(forKey: "pushNotificationAfterDate") as? Date,
+                let pushNotificationIntervalInSeconds = aDecoder.decodeObject(forKey: "pushNotificationIntervalInSeconds") as? Int {
+                self.init(name: name,
+                          latitude: latitude,
+                          longitude: longitude,
+                          entries: entries,
+                          city: city,
+                          country: country,
+                          pushNotificationAfterDate: pushNotificationAfterDate,
+                          pushNotificationIntervalInSeconds: pushNotificationIntervalInSeconds)
+            } else {
+               self.init(name: name,
+                         latitude: latitude,
+                         longitude: longitude,
+                         entries: entries,
+                         city: city,
+                         country: country)
+            }
         } else {
             return nil
         }
@@ -46,6 +85,10 @@ class Station: NSObject, NSCoding  {
         NSKeyedArchiver.setClassName("PollutionDataEntry", for: PollutionDataEntry.self)
         let entriesArchived = NSKeyedArchiver.archivedData(withRootObject: entries)
         aCoder.encode(entriesArchived, forKey: "entries")
+        aCoder.encode(city, forKey: "city")
+        aCoder.encode(country, forKey: "country")
+        aCoder.encode(pushNotificationAfterDate, forKey: "pushNotificationAfterDate")
+        aCoder.encode(pushNotificationIntervalInSeconds, forKey: "pushNotificationIntervalInSeconds")
     }
     
     func equals(station: Station) -> Bool {

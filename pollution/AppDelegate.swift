@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
         if let stations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations") {
             for station in stations {
-                NotificationManager.shared.createMessage(forStationName: station.name!) {
+                NotificationManager.shared.createMessage(forStation: station) {
                     message, entry in
                     if let message = message {
                         if let entry = entry {

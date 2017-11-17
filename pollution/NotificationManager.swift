@@ -26,35 +26,36 @@ class NotificationManager {
         }
     }
     
-    func createMessage(forStationName stationName: String, completionHandler: @escaping (_ message: String?, _ entry: PollutionDataEntry?) -> ()) {
-        DatabaseCaller.makeNotificationRequest(forLocation: stationName, withLimit: 100) {
+    func createMessage(forStation station: Station, completionHandler: @escaping (_ message: String?, _ entry: PollutionDataEntry?) -> ()) {
+        DatabaseCaller.makeNotificationRequest(forLocation: station.name!, withLimit: 100) {
             entries in
             if let entry = entries.first {
                 
                 let date = entry.getMostRecentMeasurement()!.date
-                let notification = Notification(stationName: stationName, date: date!)
+                let notification = Notification(stationName: station.name!, date: date!)
                 
                 if notification.occursIn(list: self.sentNotifications) {
                     completionHandler(nil, nil)
                 }
                 else {
-                    let location = CLLocation(latitude: entry.latitude!, longitude: entry.longitude!)
-                    CoordinateWizard.fetchCountryAndCity(location: location) {
-                        country, city in
-                        var output = "\(NSLocalizedString("currentAirQualityFor", comment: "")) \(city) (\(country)) \n\n"
-                        for key in Constants.units {
-                            if let measurement = entry.getMostRecentMeasurement(forType: key) {
-                                let percentage = measurement.value! / Constants.maxValues[key]!
-                                let roundedPercentage = Double(round(percentage*1000)/10)
-                                output += "\(measurement.value!) \(measurement.unit!) (\(measurement.type!.capitalized)) - \(roundedPercentage) %%\n"
-                            }
-                        }
-                        
-                        self.sentNotifications.append(notification)
-                        DiskJockey.save(object: self.sentNotifications, withIdentifier: "notifications")
-                        
-                        completionHandler(output, entry)
+                    var output: String
+                    if let city = station.city, let country = station.country {
+                        output = "\(NSLocalizedString("currentAirQualityFor", comment: "")) \(city) (\(country)) \n\n"
+                    } else {
+                        output = "\(NSLocalizedString("currentAirQualityFor", comment: "")) \(station.name!) \n\n"
                     }
+                    for key in Constants.units {
+                        if let measurement = entry.getMostRecentMeasurement(forType: key) {
+                            let percentage = measurement.value! / Constants.maxValues[key]!
+                            let roundedPercentage = Double(round(percentage*1000)/10)
+                            output += "\(measurement.value!) \(measurement.unit!) (\(measurement.type!.capitalized)) - \(roundedPercentage) %%\n"
+                        }
+                    }
+                    
+                    self.sentNotifications.append(notification)
+                    DiskJockey.save(object: self.sentNotifications, withIdentifier: "notifications")
+                    
+                    completionHandler(output, entry)
                 }
             } else {
                 completionHandler(nil, nil)

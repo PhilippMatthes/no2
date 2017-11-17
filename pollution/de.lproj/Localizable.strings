@@ -31,6 +31,7 @@
 "loadingLocation" = "Lädt\nStation";
 "tapToCancel" = "Zum Abbruch antippen";
 "tapToReturn" = "Zum Zurückkehren antippen";
+"loading" = "Lädt...";
 
 "measurementSelection" = "Messungen auswählen";
 "selectMeasurement" = "Wählen Sie eine Messung aus, um mehr Informationen anzuzeigen";

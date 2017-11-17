@@ -175,25 +175,29 @@ class TableViewController: UITableViewController {
     func updateCells(completionHandler: @escaping () -> ()) {
         indicator.startAnimating() 
         let timeSpanInDays = Constants.timeSpaces[currentTimeSpan]
+        var delay = 0.0
         for entry in cells {
             let cell = entry.value
             let intraday = currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day")
-            cell.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
-                var allReady = true
-                for cell in self.cells {
-                    if cell.value.isLoading {
-                        allReady = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
+                cell.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
+                    var allReady = true
+                    for cell in self.cells {
+                        if cell.value.isLoading {
+                            allReady = false
+                        }
                     }
+                    if allReady {
+                        self.indicator.stopAnimating()
+                        self.refreshControl?.endRefreshing()
+                    }
+                    DispatchQueue.main.async{
+                        self.tableView.reloadData()
+                    }
+                    completionHandler()
                 }
-                if allReady {
-                    self.indicator.stopAnimating()
-                    self.refreshControl?.endRefreshing()
-                }
-                DispatchQueue.main.async{
-                    self.tableView.reloadData()
-                }
-                completionHandler()
-            }
+            })
+            delay += 1
         }
         
     }
@@ -240,11 +244,8 @@ class TableViewController: UITableViewController {
             cells[indexPath.row] = cell
             
             let station = stations[indexPath.row]
-            if let latitude = station.entries.first!.latitude, let longitude = station.entries.first!.longitude {
-                let coordinateLocation = CLLocation(latitude: latitude, longitude: longitude)
-                CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
-                    cell.stationLabel.text = "\(station.name!) - \(city) (\(country))"
-                }
+            if let city = station.city, let country = station.country {
+                cell.stationLabel.text = "\(station.name!) - \(city) (\(country))"
             } else {
                cell.stationLabel.text = "\(station.name!)"
             }

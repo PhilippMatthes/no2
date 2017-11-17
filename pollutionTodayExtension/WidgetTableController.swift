@@ -172,10 +172,10 @@ class WidgetTableController: UIViewController, NCWidgetProviding, UITableViewDel
         if let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as? StationCell {
             cells[indexPath.row] = cell
             let station = stations[indexPath.row]
-            let coordinateLocation = CLLocation(latitude: station.entries.first!.latitude!,
-                                                longitude: station.entries.first!.longitude!)
-            CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
+            if let city = station.city, let country = station.country {
                 cell.stationLabel.text = "\(station.name!) - \(city) (\(country))"
+            } else {
+                cell.stationLabel.text = "\(station.name!)"
             }
             cell.station = station
             cell.emissionChart.setUpChart(intraday: true, entries: cell.station!.entries, type: .colorOnWhite)
