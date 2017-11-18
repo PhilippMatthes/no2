@@ -6,6 +6,7 @@
 target 'pollution' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  pod 'DTMHeatmap', :git => 'https://github.com/PhilippMatthes/DTMHeatmap.git'
   pod 'SwiftSpinner'
   pod 'Charts'
   pod 'Dropper'

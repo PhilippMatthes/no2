@@ -39,6 +39,7 @@
 		BE56BCE01FA9274A00303B70 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE56BCDE1FA9274A00303B70 /* Localizable.strings */; };
 		BE56BCE51FA92C1C00303B70 /* DateTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */; };
 		BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */; };
+		BE62263F1FC05C7800D0C2B0 /* DTMHeatmap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6226401FC05C7800D0C2B0 /* DTMHeatmap.framework */; };
 		BE654B0E1FB492CB003284C6 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */; };
 		BE654B0F1FB4930D003284C6 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F21FB190EE007A9C1A /* Station.swift */; };
 		BE654B101FB493DC003284C6 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE654B111FB493DC003284C6 /* Charts.framework */; };
@@ -135,6 +136,8 @@
 		BE56BCE31FA9275C00303B70 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTranslator.swift; sourceTree = "<group>"; };
 		BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateWizard.swift; sourceTree = "<group>"; };
+		BE62263C1FC04CA800D0C2B0 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE6226401FC05C7800D0C2B0 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE654B111FB493DC003284C6 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE654B141FB49740003284C6 /* pollutionTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollutionTodayExtension.entitlements; sourceTree = "<group>"; };
 		BE654B151FB4975C003284C6 /* pollution.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollution.entitlements; sourceTree = "<group>"; };
@@ -183,6 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE62263F1FC05C7800D0C2B0 /* DTMHeatmap.framework in Frameworks */,
 				BE9CD61D1FBDA9F000D410B0 /* RevealingSplashView.framework in Frameworks */,
 				BE1F6A041FB313E1007A9C1A /* BRYXBanner.framework in Frameworks */,
 				BE1F69FE1FB2D5B2007A9C1A /* SwiftRater.framework in Frameworks */,
@@ -317,6 +321,8 @@
 		C355A3DFC11229856E2E997C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE6226401FC05C7800D0C2B0 /* DTMHeatmap.framework */,
+				BE62263C1FC04CA800D0C2B0 /* DTMHeatmap.framework */,
 				BEF3FA621FBEEC6B00365A0A /* ENMBadgedBarButtonItem.framework */,
 				BE9CD61E1FBDA9F000D410B0 /* RevealingSplashView.framework */,
 				BE654B111FB493DC003284C6 /* Charts.framework */,
@@ -504,6 +510,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-pollution/Pods-pollution-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BRYXBanner/BRYXBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/DTMHeatmap/DTMHeatmap.framework",
 				"${BUILT_PRODUCTS_DIR}/Dropper/Dropper.framework",
 				"${BUILT_PRODUCTS_DIR}/RevealingSplashView/RevealingSplashView.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftRater/SwiftRater.framework",
@@ -513,6 +520,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRYXBanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTMHeatmap.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Dropper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RevealingSplashView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRater.framework",

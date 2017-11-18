@@ -11,6 +11,7 @@ import MapKit
 import Foundation
 import SwiftRater
 import RevealingSplashView
+import DTMHeatmap
 
 class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentationControllerDelegate {
     
@@ -18,6 +19,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     @IBOutlet weak var unitLabelBackground: UIProgressView!
     @IBOutlet weak var unitLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
+    
+    var heatMap = DTMHeatmap()
     
     var map = [PollutionAnnotation]()
     var overlays = [MKCircle]()
@@ -40,7 +43,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         super.viewDidLoad()
         
         mapView.delegate = self
-               
         
     }
     
@@ -275,11 +277,17 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         self.mapView.removeAnnotations(self.map)
         self.map.removeAll()
         
+        var heatmapdata:[NSObject: Double] = [:]
+        let components = State.shared.currentColor.getRGB()!
+        heatMap.colorProvider.red(CGFloat(components.red),
+                                  green: CGFloat(components.green),
+                                  blue: CGFloat(components.blue))
+        
         unitLabelBackground.setProgress(0.8, animated: true)
         
         let radius = mapView.region.getRadius()
         let span = mapView.region.span
-        let delta = (span.latitudeDelta + span.longitudeDelta)
+        let delta = pow((span.latitudeDelta + span.longitudeDelta),0.7) * 10
         
         
         DispatchQueue.global(qos: .default).async {
@@ -318,9 +326,19 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
                                                                     longitude: annotation.coordinate.longitude),
                                                andPercentage: measurement.value!/self.maxvalue!,
                                                andType: type)
+                                
+                                let coordinate = CLLocationCoordinate2D(latitude: annotation.coordinate.latitude,
+                                                                        longitude: annotation.coordinate.longitude)
+                                var point = MKMapPointForCoordinate(coordinate)
+                                let type = "{MKMapPoint=dd}"
+                                let value = NSValue(bytes: &point, objCType: type)
+                                heatmapdata[value] = measurement.value!/self.maxvalue!
                             }
                         }
                     }
+                    
+                    self.heatMap.setData(heatmapdata as [NSObject : AnyObject])
+                    self.mapView.add(self.heatMap)
                     
                     self.requestSent = false
                 }
@@ -409,12 +427,7 @@ extension ViewController: MKMapViewDelegate {
             circle.lineWidth = 1
             return circle
         } else {
-            if Constants.drawCustomMap {
-                return tileRenderer!
-            }
-            else {
-                return MKOverlayRenderer()
-            }
+            return DTMHeatmapRenderer.init(overlay: overlay)
         }
     }
 }

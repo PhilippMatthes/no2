@@ -22,7 +22,7 @@ class CustomCircleRenderer: MKCircleRenderer {
         let rect: CGRect = path.boundingBox
         context.addPath(path)
         context.clip()
-        let gradientLocations: [CGFloat]  = [0.0,0.1,0.1,1.0]
+        let gradientLocations: [CGFloat]  = [1.0,1.0,1.0,1.0]
         let gradientColors: [CGColor] = [gradientFillColor!.cgColor,
                                          gradientFillColor!.cgColor,
                                          gradientFillColor!.withAlphaComponent(0.05).cgColor,
