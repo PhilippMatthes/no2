@@ -154,11 +154,23 @@ class DetailController: UIViewController, ChartViewDelegate {
             case .beforeLoading:
                 break
         }
+        var receiveNotificationsItem: UIBarButtonItem?
+        if let annotation = annotationThatWasClicked {
+            if let entry = annotation.entry {
+                if let location = entry.location {
+                    if let _ = DiskJockey.callFromStations(stationWithName: location) {} else {
+                        receiveNotificationsItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector (self.receiveNotificationsButtonPressed (_:)))
+                        receiveNotificationsItem!.tintColor = color
+                    }
+                }
+            }
+        }
         
-        let receiveNotificationsItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector (self.receiveNotificationsButtonPressed (_:)))
-        receiveNotificationsItem.tintColor = color
-        
-        navigationItem.rightBarButtonItems = [doneItem, receiveNotificationsItem]
+        if let receiveNotificationsItem = receiveNotificationsItem {
+            navigationItem.rightBarButtonItems = [doneItem, receiveNotificationsItem]
+        } else {
+            navigationItem.rightBarButtonItems = [doneItem]
+        }
         navigationItem.leftBarButtonItems = [notificationButtonItem]
         
         navigationBar.setItems([navigationItem], animated: true)
@@ -253,7 +265,7 @@ class DetailController: UIViewController, ChartViewDelegate {
                     (action) -> Void in
                     self.stationThatWasClicked!.pushNotificationIntervalInSeconds = notificationInterval
                     self.updateNavBar(.afterLoading, withColor: State.shared.currentColor)
-                    _ = DiskJockey.updateStationList(withStation: self.stationThatWasClicked!)
+                    self.saveStation()
                 }
                 alert.addAction(menuAction)
             }
@@ -273,10 +285,15 @@ class DetailController: UIViewController, ChartViewDelegate {
     }
     
     @objc func receiveNotificationsButtonPressed(_ sender:UITapGestureRecognizer) {
+        saveStation()
+    }
+    
+    func saveStation() {
         banner.dismiss()
         switch DiskJockey.updateStationList(withStation: stationThatWasClicked!) {
         case .wasAdded:
             banner = Banner(title: NSLocalizedString("stationSaved", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.white)
+            updateNavBar(.afterLoading, withColor: State.shared.currentColor)
         case .wasUpdated:
             banner = Banner(title: NSLocalizedString("stationUpdated", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.white)
         }
