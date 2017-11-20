@@ -19,6 +19,8 @@ class TabBarController: UITabBarController {
         //Initialize a revealing Splash with with the iconImage, the initial size and the background color
         let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "NoShadowAppIcon")!,iconInitialSize: CGSize(width: 70, height: 70), backgroundColor: UIColor(rgb: 0x373737, alpha: 1.0))
         
+        self.tabBar.roundCorners([.topLeft, .topRight], withRadius: Constants.cornerRadius)
+        
         revealingSplashView.animationType = .twitter
         
         
@@ -34,13 +36,6 @@ class TabBarController: UITabBarController {
         revealingSplashView.startAnimation(){
             SwiftRater.check()
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        tabBar.clipsToBounds = true
-        tabBar.tintColor = UIColor.white
-        tabBar.barTintColor = Constants.colors[State.shared.currentType]
-        tabBar.backgroundColor = UIColor.clear
     }
     
 }

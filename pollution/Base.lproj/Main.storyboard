@@ -20,7 +20,7 @@
             <objects>
                 <tabBarController title="TabBarController" id="MB2-id-E9Y" customClass="TabBarController" customModule="pollution" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="1xc-2y-Uyx">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="1xc-2y-Uyx" customClass="BlurryTabBar" customModule="pollution" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.2627450980392157" blue="0.21176470588235294" alpha="0.0" colorSpace="calibratedRGB"/>

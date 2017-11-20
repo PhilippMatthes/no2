@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             controller.tabBar.setTintColor(ofUnselectedItemsWithColor: UIColor.white.withAlphaComponent(0.7), andSelectedItemsWithColor: UIColor.white)
         }
         
+        print(UIApplicationBackgroundFetchIntervalMinimum)
+        
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
         application.beginBackgroundTask(withName: "showNotification", expirationHandler: nil)
@@ -45,23 +47,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
         if let stations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations") {
+            var notificationsSent = 0
             for station in stations {
-                NotificationManager.shared.createMessage(forStation: station) {
-                    message, entry in
-                    if let message = message {
-                        if let entry = entry {
-                            DispatchQueue.main.async {
-                                self.notificationEntry = entry
-                                NotificationManager.shared.pushNotification(withMessage: message, andStation: station.name!)
-                                completionHandler(.newData)
+                if let pushNotificationAfterDate = station.pushNotificationAfterDate, let pushNotificationInterval = station.pushNotificationIntervalInSeconds {
+                    if Date().seconds(from: pushNotificationAfterDate) >= pushNotificationInterval {
+                        NotificationManager.shared.createMessage(forStation: station) {
+                            message, entry in
+                            if let message = message, let entry = entry {
+                                DispatchQueue.main.async {
+                                    self.notificationEntry = entry
+                                    NotificationManager.shared.pushNotification(withMessage: message, andStation: station.name!)
+                                    station.pushNotificationAfterDate = Date()
+                                    notificationsSent += 1
+                                }
                             }
-                        } else {
-                            completionHandler(.noData)
                         }
-                    } else {
-                        completionHandler(.noData)
                     }
                 }
+            }
+            if notificationsSent == 0 {
+                completionHandler(.noData)
+            } else {
+                completionHandler(.newData)
             }
         } else {
             completionHandler(.failed)

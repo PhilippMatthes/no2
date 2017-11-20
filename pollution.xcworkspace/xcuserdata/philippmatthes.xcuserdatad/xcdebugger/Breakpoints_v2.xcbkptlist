@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "532788923.545895"
+            timestampString = "532890368.01544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "360"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "532788923.545999"
+            timestampString = "532890368.015742"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "532788923.546073"
+            timestampString = "532890368.015817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "532788923.546145"
+            timestampString = "532890368.015885"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "84"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "532788923.546217"
+            timestampString = "532890368.015948"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "85"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "532788923.546294"
+            timestampString = "532890368.016012"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "425"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "532788923.546378"
+            timestampString = "532890368.016075"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "100"
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/TabBarExtension.swift"
-            timestampString = "531952763.931567"
+            timestampString = "532890368.016144"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.736096"
+            timestampString = "532890368.016308"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "application(_:didFinishLaunchingWithOptions:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -690,11 +690,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.736882"
+            timestampString = "532890368.017324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "application(_:handleActionWithIdentifier:for:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -706,11 +706,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.736971"
+            timestampString = "532890368.017579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "application(_:handleActionWithIdentifier:for:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -722,11 +722,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.737053"
+            timestampString = "532890368.017818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "application(_:handleActionWithIdentifier:for:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -738,11 +738,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.737135"
+            timestampString = "532890368.018043"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "application(_:handleActionWithIdentifier:for:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -754,11 +754,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.737221"
+            timestampString = "532890368.018282"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "application(_:handleActionWithIdentifier:for:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -770,11 +770,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.737297"
+            timestampString = "532890368.018632"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "application(_:handleActionWithIdentifier:for:completionHandler:)"
             landmarkType = "7">
             <Locations>
@@ -818,11 +818,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.737369"
+            timestampString = "532890368.018923"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "application(_:handleActionWithIdentifier:for:completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1010,7 +1010,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/NotificationManager.swift"
-            timestampString = "532633147.737862"
+            timestampString = "532876649.248387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -1026,7 +1026,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/NotificationManager.swift"
-            timestampString = "532633147.737935"
+            timestampString = "532876649.248561"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "38"
@@ -1074,7 +1074,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DetailController.swift"
-            timestampString = "532788923.547011"
+            timestampString = "532890368.019439"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
@@ -1106,7 +1106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "532788923.547373"
+            timestampString = "532890368.019636"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "238"
@@ -1122,7 +1122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "532788923.547444"
+            timestampString = "532890368.019709"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "239"
@@ -1186,7 +1186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ViewController.swift"
-            timestampString = "532788923.547546"
+            timestampString = "532890368.019862"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "356"
@@ -1826,7 +1826,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DetailController.swift"
-            timestampString = "532788923.547954"
+            timestampString = "532890368.020751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "288"
@@ -1985,11 +1985,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.742545"
+            timestampString = "532890368.020944"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2001,11 +2001,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.742594"
+            timestampString = "532890368.021243"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2017,11 +2017,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.742636"
+            timestampString = "532890368.021525"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2033,11 +2033,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.742679"
+            timestampString = "532890368.0218"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2049,11 +2049,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.742722"
+            timestampString = "532890368.022088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2065,11 +2065,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.742781"
+            timestampString = "532890368.022345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
             <Locations>
@@ -2113,11 +2113,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.742859"
+            timestampString = "532890368.022595"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2129,11 +2129,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.742934"
+            timestampString = "532890368.022839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2145,23 +2145,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.742992"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "application(_:open:options:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.743053"
+            timestampString = "532890368.023088"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
@@ -2177,11 +2161,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.743101"
+            timestampString = "532890368.023338"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2193,11 +2177,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.743164"
+            timestampString = "532890368.023579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "application(_:open:options:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.023808"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
             <Locations>
@@ -2241,11 +2241,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/AppDelegate.swift"
-            timestampString = "532633147.743213"
+            timestampString = "532890368.024032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "application(_:open:options:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2337,7 +2337,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ChartsExtension.swift"
-            timestampString = "532528219.039123"
+            timestampString = "532890368.024359"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
@@ -2353,7 +2353,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ChartsExtension.swift"
-            timestampString = "532528219.039176"
+            timestampString = "532890368.024535"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "109"
@@ -2369,7 +2369,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ChartsExtension.swift"
-            timestampString = "532528219.03922"
+            timestampString = "532890368.024579"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "91"
@@ -2385,7 +2385,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/ChartsExtension.swift"
-            timestampString = "532528219.039346"
+            timestampString = "532890368.024618"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "108"
@@ -2449,7 +2449,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DetailController.swift"
-            timestampString = "532788923.548529"
+            timestampString = "532890368.024718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "266"
@@ -2465,7 +2465,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DetailController.swift"
-            timestampString = "532788923.548763"
+            timestampString = "532890368.02476"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "267"
@@ -2481,7 +2481,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DetailController.swift"
-            timestampString = "532788923.548987"
+            timestampString = "532890368.024804"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "268"
@@ -2493,7 +2493,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/Station.swift"
@@ -2509,7 +2509,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/Station.swift"
@@ -2605,7 +2605,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DiskJockey.swift"
@@ -2621,7 +2621,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DiskJockey.swift"
@@ -2637,7 +2637,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DiskJockey.swift"
@@ -2653,7 +2653,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DiskJockey.swift"
@@ -2753,7 +2753,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DetailController.swift"
-            timestampString = "532788923.549375"
+            timestampString = "532890368.025196"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "145"
@@ -2765,11 +2765,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DetailController.swift"
-            timestampString = "532788923.5496"
+            timestampString = "532890368.02524"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "146"
@@ -2781,16 +2781,287 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DetailController.swift"
-            timestampString = "532788923.549817"
+            timestampString = "532890368.025278"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "147"
             endingLineNumber = "147"
             landmarkName = "updateNavBar(_:withColor:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.025318"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.025546"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "pollution.AppDelegate.application(__ObjC.UIApplication, performFetchWithCompletionHandler: (__C.UIBackgroundFetchResult) -&gt; ()) -&gt; ()"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/AppDelegate.swift"
+                  timestampString = "532890272.383093"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "440">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;pollution.PollutionDataEntry&gt;) -&gt; () in pollution.AppDelegate.application(__ObjC.UIApplication, performFetchWithCompletionHandler: (__C.UIBackgroundFetchResult) -&gt; ()) -&gt; ()"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/AppDelegate.swift"
+                  timestampString = "532890272.384439"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;pollution.PollutionDataEntry&gt;) -&gt; () in pollution.AppDelegate.application(__ObjC.UIApplication, performFetchWithCompletionHandler: (__C.UIBackgroundFetchResult) -&gt; ()) -&gt; ()"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/AppDelegate.swift"
+                  timestampString = "532890272.386131"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.025768"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.025983"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.026198"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.02641"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;pollution.PollutionDataEntry&gt;) -&gt; () in pollution.AppDelegate.application(__ObjC.UIApplication, performFetchWithCompletionHandler: (__C.UIBackgroundFetchResult) -&gt; ()) -&gt; ()"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/AppDelegate.swift"
+                  timestampString = "532890275.797453"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "236">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Optional&lt;Swift.String&gt;, Swift.Optional&lt;pollution.PollutionDataEntry&gt;) -&gt; () in pollution.AppDelegate.application(__ObjC.UIApplication, performFetchWithCompletionHandler: (__C.UIBackgroundFetchResult) -&gt; ()) -&gt; ()"
+                  moduleName = "pollution"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/philippmatthes/Desktop/pollution/pollution/AppDelegate.swift"
+                  timestampString = "532890275.799121"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.026624"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.026836"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.027051"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.027265"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.027478"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "pollution/AppDelegate.swift"
+            timestampString = "532890368.027692"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "application(_:performFetchWithCompletionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

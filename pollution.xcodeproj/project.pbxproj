@@ -40,6 +40,8 @@
 		BE56BCE51FA92C1C00303B70 /* DateTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */; };
 		BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */; };
 		BE62263F1FC05C7800D0C2B0 /* DTMHeatmap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6226401FC05C7800D0C2B0 /* DTMHeatmap.framework */; };
+		BE6226421FC3098D00D0C2B0 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6226411FC3098D00D0C2B0 /* DateExtension.swift */; };
+		BE6226441FC30F8700D0C2B0 /* BlurryTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6226431FC30F8700D0C2B0 /* BlurryTabBar.swift */; };
 		BE654B0E1FB492CB003284C6 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */; };
 		BE654B0F1FB4930D003284C6 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F21FB190EE007A9C1A /* Station.swift */; };
 		BE654B101FB493DC003284C6 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE654B111FB493DC003284C6 /* Charts.framework */; };
@@ -138,6 +140,8 @@
 		BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateWizard.swift; sourceTree = "<group>"; };
 		BE62263C1FC04CA800D0C2B0 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE6226401FC05C7800D0C2B0 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE6226411FC3098D00D0C2B0 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		BE6226431FC30F8700D0C2B0 /* BlurryTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurryTabBar.swift; sourceTree = "<group>"; };
 		BE654B111FB493DC003284C6 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE654B141FB49740003284C6 /* pollutionTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollutionTodayExtension.entitlements; sourceTree = "<group>"; };
 		BE654B151FB4975C003284C6 /* pollution.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollution.entitlements; sourceTree = "<group>"; };
@@ -222,6 +226,8 @@
 				BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */,
 				BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */,
 				BEF3FA631FBEF0C000365A0A /* BadgeExtension.swift */,
+				BE6226411FC3098D00D0C2B0 /* DateExtension.swift */,
+				BE6226431FC30F8700D0C2B0 /* BlurryTabBar.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -601,6 +607,7 @@
 				BE1F6A031FB2D91D007A9C1A /* NotificationManager.swift in Sources */,
 				BE900FC01FAB84A40023FF05 /* UIImageExtension.swift in Sources */,
 				BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */,
+				BE6226441FC30F8700D0C2B0 /* BlurryTabBar.swift in Sources */,
 				BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */,
 				BE9CD6191FBAF60C00D410B0 /* ChartsExtension.swift in Sources */,
 				BE9CD61C1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift in Sources */,
@@ -618,6 +625,7 @@
 				BE1F69F51FB196CC007A9C1A /* DiskJockey.swift in Sources */,
 				BE9394AE1FA9DB220017407E /* CustomMapOverlay.swift in Sources */,
 				BE50FBE41FA4AC3F00187750 /* DetailController.swift in Sources */,
+				BE6226421FC3098D00D0C2B0 /* DateExtension.swift in Sources */,
 				BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */,
 				BE56BCE51FA92C1C00303B70 /* DateTranslator.swift in Sources */,
 				BE1F69FD1FB220EA007A9C1A /* State.swift in Sources */,
