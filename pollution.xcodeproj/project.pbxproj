@@ -48,7 +48,6 @@
 		BE62265B1FC4297800D0C2B0 /* BadgeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62265A1FC4297800D0C2B0 /* BadgeExtension.swift */; };
 		BE62265D1FC42F0800D0C2B0 /* BannerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62265C1FC42F0800D0C2B0 /* BannerExtension.swift */; };
 		BE654B0F1FB4930D003284C6 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F21FB190EE007A9C1A /* Station.swift */; };
-		BE654B101FB493DC003284C6 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE654B111FB493DC003284C6 /* Charts.framework */; };
 		BE654B121FB494D6003284C6 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69FC1FB220EA007A9C1A /* State.swift */; };
 		BE70FA861FB4AFED006D48A7 /* WidgetTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4A2DCB1FB07B2300044D90 /* WidgetTableController.swift */; };
 		BE70FA871FB4E961006D48A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE56BCDE1FA9274A00303B70 /* Localizable.strings */; };
@@ -68,7 +67,6 @@
 		BE9CD61A1FBAF9A800D410B0 /* BarChartViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD6181FBAF60C00D410B0 /* BarChartViewExtension.swift */; };
 		BE9CD61C1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */; };
 		BE9CD61D1FBDA9F000D410B0 /* RevealingSplashView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9CD61E1FBDA9F000D410B0 /* RevealingSplashView.framework */; };
-		BEBBB2CB1FA496D9005439EB /* UnitInformationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */; };
 		BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */; };
 		BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */; };
 		BEE82D8E1FA1C35600BEBAF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE82D8C1FA1C35600BEBAF4 /* Main.storyboard */; };
@@ -165,7 +163,6 @@
 		BE9CD6181FBAF60C00D410B0 /* BarChartViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartViewExtension.swift; sourceTree = "<group>"; };
 		BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKCoordinateRegionExtension.swift; sourceTree = "<group>"; };
 		BE9CD61E1FBDA9F000D410B0 /* RevealingSplashView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RevealingSplashView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitInformationController.swift; sourceTree = "<group>"; };
 		BEDA11FF1FA22B9100A3EF51 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDA12011FA2324400A3EF51 /* JDSwiftHeatMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JDSwiftHeatMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE82D851FA1C35600BEBAF4 /* pollution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pollution.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,7 +181,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE654B101FB493DC003284C6 /* Charts.framework in Frameworks */,
 				BE4A2DBA1FB061AA00044D90 /* NotificationCenter.framework in Frameworks */,
 				D888903BA101AA0D840D59CF /* Pods_pollutionTodayExtension.framework in Frameworks */,
 			);
@@ -259,7 +255,6 @@
 				BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */,
 				BE2EC6271FAB61000052BF6A /* TabBarController.swift */,
 				BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */,
-				BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */,
 				BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */,
 			);
 			name = Controllers;
@@ -621,7 +616,6 @@
 				BE1F69F71FB1B1CB007A9C1A /* TableViewController.swift in Sources */,
 				BE70FA891FB4F317006D48A7 /* UINavigationBarExtension.swift in Sources */,
 				BE70FA861FB4AFED006D48A7 /* WidgetTableController.swift in Sources */,
-				BEBBB2CB1FA496D9005439EB /* UnitInformationController.swift in Sources */,
 				BE2EC6281FAB61000052BF6A /* TabBarController.swift in Sources */,
 				BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */,
 				BE2EC6311FAB65B70052BF6A /* UITabBarExtension.swift in Sources */,

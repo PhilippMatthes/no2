@@ -29,12 +29,12 @@ extension Banner {
     
     func with(type: BannerType) -> Banner {
         switch type {
-        case .information:
-            return Banner(title: "Information", subtitle: NSLocalizedString("cellInformation", comment: ""), image: nil, backgroundColor: UIColor.clear)
-        case .stationSaved:
-            return Banner(title: NSLocalizedString("stationSaved", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.clear)
-        case .stationUpdated:
-            return Banner(title: NSLocalizedString("stationUpdated", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.clear)
+            case .information:
+                return Banner(title: "Information", subtitle: NSLocalizedString("cellInformation", comment: ""), image: nil, backgroundColor: UIColor.clear)
+            case .stationSaved:
+                return Banner(title: NSLocalizedString("stationSaved", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.clear)
+            case .stationUpdated:
+                return Banner(title: NSLocalizedString("stationUpdated", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.clear)
         }
         
     }

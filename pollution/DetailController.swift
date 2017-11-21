@@ -13,6 +13,7 @@ import UIKit
 import Dropper
 import MapKit
 import BRYXBanner
+import SafariServices
 
 
 enum GeoCoderLoadingState {
@@ -324,14 +325,14 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     
     @IBAction func infoButtonClicked(_ sender: UIButton) {
-        performSegue(withIdentifier: "showUnitInformation", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showUnitInformation" {
-            let vc = segue.destination as! UnitInformationController
-            vc.initDesign(withColor: State.shared.currentColor, andUnit: State.shared.currentType)
+        let url: URL = URL(string: NSLocalizedString(State.shared.currentType+"info", comment: "Link"))!
+        let svc = SFSafariViewController(url: url)
+        if #available(iOS 10.0, *) {
+            svc.preferredControlTintColor = State.shared.currentColor
         }
+        present(svc, animated: true, completion: {
+            
+        })
     }
     
 }

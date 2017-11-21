@@ -12,6 +12,7 @@ import Foundation
 import SwiftRater
 import RevealingSplashView
 import DTMHeatmap
+import SafariServices
 
 class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentationControllerDelegate {
     
@@ -179,7 +180,14 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     }
 
     @IBAction func infoButtonClicked(_ sender: UIButton) {
-        performSegue(withIdentifier: "showUnitInformation", sender: sender)
+        let url: URL = URL(string: NSLocalizedString(State.shared.currentType+"info", comment: "Link"))!
+        let svc = SFSafariViewController(url: url)
+        if #available(iOS 10.0, *) {
+            svc.preferredControlTintColor = State.shared.currentColor
+        }
+        present(svc, animated: true, completion: {
+            
+        })
     }
     
     @objc func calloutTapped(sender:UITapGestureRecognizer) {
@@ -326,10 +334,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showUnitInformation" {
-            let vc = segue.destination as! UnitInformationController
-            vc.initDesign(withColor: State.shared.currentColor, andUnit: State.shared.currentType)
-        }
         if segue.identifier == "showDetail" {
             let vc = segue.destination as! DetailController
             vc.previousViewController = self
