@@ -320,6 +320,7 @@ class DetailController: UIViewController, ChartViewDelegate {
             vc.initUI(withColor: State.shared.currentColor)
             vc.initNavBar(withColor: State.shared.currentColor)
             vc.tableView.reloadData()
+            vc.tabBarController!.tabBar.layer.backgroundColor = State.shared.currentColor.cgColor
         }
         
         if let nav = self.navigationController {
