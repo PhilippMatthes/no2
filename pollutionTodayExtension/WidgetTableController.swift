@@ -154,7 +154,7 @@ class WidgetTableController: UIViewController, NCWidgetProviding, UITableViewDel
         let index = (Constants.units.index(of: State.shared.currentType)! + 1) % Constants.units.count
         State.shared.currentType = Constants.units[index]
         initUI(withColor: State.shared.currentColor)
-        unitButton.setTitle(State.shared.currentType.capitalized, for: [.normal])
+        unitButton.setTitle(State.shared.currentType.uppercased(), for: [.normal])
         updateCells {}
     }
     

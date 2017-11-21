@@ -204,7 +204,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
         unitLabelBackground.clipsToBounds = true
         
-        unitLabel.text = State.shared.currentType.capitalized
+        unitLabel.text = State.shared.currentType.uppercased()
         unitLabelBackground.layer.backgroundColor = State.shared.currentColor.withAlphaComponent(Constants.transparency).cgColor
         searchButtonBackground.layer.backgroundColor = State.shared.currentColor.withAlphaComponent(Constants.transparency).cgColor
         maxvalue = Constants.maxValues[State.shared.currentType]
@@ -227,7 +227,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         
         let index = (Constants.units.index(of: State.shared.currentType)! + 1) % Constants.units.count
         State.shared.currentType = Constants.units[index]
-        unitLabel.text = State.shared.currentType.capitalized
+        unitLabel.text = State.shared.currentType.uppercased()
         tabBarController!.tabBar.animate(toBackgroundColor: State.shared.currentColor.withAlphaComponent(Constants.transparency),
                                          withDuration: 2.0)
         unitLabelBackground.animate(toBackgroundColor: State.shared.currentColor.withAlphaComponent(Constants.transparency), withDuration: 2.0)

@@ -58,7 +58,7 @@ class TableViewController: UITableViewController {
         
         let unitButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
         unitButton.addTarget(self, action: #selector (self.changeTypeButtonPressed (_:)), for: UIControlEvents.touchUpInside)
-        unitButton.setTitle(State.shared.currentType.capitalized, for: [.normal])
+        unitButton.setTitle(State.shared.currentType.uppercased(), for: [.normal])
         unitButton.setTitleColor(UIColor.white, for: [.normal])
         unitButton.sizeToFit()
         let unitBarButtonItem:UIBarButtonItem = UIBarButtonItem(customView: unitButton)
@@ -116,7 +116,7 @@ class TableViewController: UITableViewController {
         
         let unitButton:UIButton = UIButton(type: UIButtonType.custom) as UIButton
         unitButton.addTarget(self, action: #selector (self.changeTypeButtonPressed (_:)), for: UIControlEvents.touchUpInside)
-        unitButton.setTitle(State.shared.currentType.capitalized, for: [.normal])
+        unitButton.setTitle(State.shared.currentType.uppercased(), for: [.normal])
         unitButton.setTitleColor(UIColor.white, for: [.normal])
         unitButton.sizeToFit()
         let unitBarButtonItem:UIBarButtonItem = UIBarButtonItem(customView: unitButton)

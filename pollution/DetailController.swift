@@ -246,7 +246,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         dropper.tintColor = color
         dropper.refresh()
         
-        unitLabel.text = State.shared.currentType.capitalized
+        unitLabel.text = State.shared.currentType.uppercased()
         unitLabel.textColor = color
         timeLabel.textColor = color
         stationLabel.textColor = color
