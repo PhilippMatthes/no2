@@ -18,13 +18,19 @@ extension UISearchController {
     func initStyle(_ style: UISearchControllerStyle, withDelegate delegate: UISearchBarDelegate) {
         self.hidesNavigationBarDuringPresentation = false
         self.searchBar.delegate = delegate
-        self.searchBar.barStyle = .default
-        self.searchBar.searchBarStyle = .default
-        self.searchBar.showsCancelButton = false
-        self.searchBar.tintColor = State.shared.currentColor
-        self.searchBar.barTintColor = UIColor.white
         let textFieldInsideSearchBar = self.searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.textColor = UIColor.gray
+        
+        switch style {
+            case .whiteClean:
+                self.searchBar.barStyle = .default
+                self.searchBar.searchBarStyle = .default
+                self.searchBar.showsCancelButton = false
+                self.searchBar.tintColor = State.shared.currentColor
+                self.searchBar.barTintColor = UIColor.white
+                textFieldInsideSearchBar?.textColor = UIColor.gray
+        }
+        
+        
     }
     
 }

@@ -135,12 +135,7 @@ class TableViewController: UITableViewController {
             self.stations = loadedStations
         }
         if stations.isEmpty {
-            banner.dismiss()
-            banner = Banner(title: "Information", subtitle: NSLocalizedString("cellInformation", comment: ""), image: nil, backgroundColor: State.shared.currentColor)
-            banner.dismissesOnTap = false
-            banner.titleLabel.textColor = UIColor.white
-            banner.position = BannerPosition.top
-            banner.show()
+            banner = banner.dismissInAllocation().with(type: .information).andShow(.whiteTextOnColor)
             tableView.separatorStyle = .none
         }
     }
@@ -196,7 +191,7 @@ class TableViewController: UITableViewController {
                     completionHandler()
                 }
             })
-            delay += 1
+            delay += 0.1
         }
         
     }

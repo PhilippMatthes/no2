@@ -45,6 +45,8 @@
 		BE6226511FC423B800D0C2B0 /* MKMapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6226501FC423B800D0C2B0 /* MKMapViewExtension.swift */; };
 		BE6226581FC425CE00D0C2B0 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6226411FC3098D00D0C2B0 /* DateExtension.swift */; };
 		BE6226591FC425DE00D0C2B0 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */; };
+		BE62265B1FC4297800D0C2B0 /* BadgeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62265A1FC4297800D0C2B0 /* BadgeExtension.swift */; };
+		BE62265D1FC42F0800D0C2B0 /* BannerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62265C1FC42F0800D0C2B0 /* BannerExtension.swift */; };
 		BE654B0F1FB4930D003284C6 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F21FB190EE007A9C1A /* Station.swift */; };
 		BE654B101FB493DC003284C6 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE654B111FB493DC003284C6 /* Charts.framework */; };
 		BE654B121FB494D6003284C6 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69FC1FB220EA007A9C1A /* State.swift */; };
@@ -143,6 +145,8 @@
 		BE62264C1FC4191400D0C2B0 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		BE62264E1FC4203D00D0C2B0 /* UISearchControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchControllerExtension.swift; sourceTree = "<group>"; };
 		BE6226501FC423B800D0C2B0 /* MKMapViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMapViewExtension.swift; sourceTree = "<group>"; };
+		BE62265A1FC4297800D0C2B0 /* BadgeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeExtension.swift; sourceTree = "<group>"; };
+		BE62265C1FC42F0800D0C2B0 /* BannerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerExtension.swift; sourceTree = "<group>"; };
 		BE654B111FB493DC003284C6 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE654B141FB49740003284C6 /* pollutionTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollutionTodayExtension.entitlements; sourceTree = "<group>"; };
 		BE654B151FB4975C003284C6 /* pollution.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollution.entitlements; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 		BE2EC6291FAB61350052BF6A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BE62265A1FC4297800D0C2B0 /* BadgeExtension.swift */,
 				BE9CD6181FBAF60C00D410B0 /* BarChartViewExtension.swift */,
 				BE6226411FC3098D00D0C2B0 /* DateExtension.swift */,
 				BE6226501FC423B800D0C2B0 /* MKMapViewExtension.swift */,
@@ -229,6 +234,7 @@
 				BE62264E1FC4203D00D0C2B0 /* UISearchControllerExtension.swift */,
 				BE9394B11FA9FFC00017407E /* UIViewExtension.swift */,
 				BE1F69F41FB196CC007A9C1A /* UserDefaultsExtension.swift */,
+				BE62265C1FC42F0800D0C2B0 /* BannerExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -619,6 +625,7 @@
 				BE2EC6281FAB61000052BF6A /* TabBarController.swift in Sources */,
 				BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */,
 				BE2EC6311FAB65B70052BF6A /* UITabBarExtension.swift in Sources */,
+				BE62265D1FC42F0800D0C2B0 /* BannerExtension.swift in Sources */,
 				BE9394B41FA9FFE40017407E /* UIColorExtension.swift in Sources */,
 				BE62264D1FC4191400D0C2B0 /* CustomTabBar.swift in Sources */,
 				BE1F6A031FB2D91D007A9C1A /* NotificationManager.swift in Sources */,
@@ -631,6 +638,7 @@
 				BE9394B21FA9FFC00017407E /* UIViewExtension.swift in Sources */,
 				BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */,
 				BE8A4CFF1FB5EE5400255C2E /* SettingsController.swift in Sources */,
+				BE62265B1FC4297800D0C2B0 /* BadgeExtension.swift in Sources */,
 				BE6226511FC423B800D0C2B0 /* MKMapViewExtension.swift in Sources */,
 				BE1F69F31FB190EE007A9C1A /* Station.swift in Sources */,
 				BE9394B01FA9DF7E0017407E /* CustomCircleRenderer.swift in Sources */,

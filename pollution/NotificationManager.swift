@@ -66,7 +66,7 @@ class NotificationManager {
     func pushNotification(withMessage message: String, andStation station: String) {
         let viewAction = UIMutableUserNotificationAction()
         viewAction.identifier = station
-        viewAction.title = "\(station)"
+        viewAction.title = NSLocalizedString("stations", comment: "")
         viewAction.activationMode = UIUserNotificationActivationMode.background
         viewAction.isAuthenticationRequired = true
         viewAction.isDestructive = false
@@ -88,6 +88,35 @@ class NotificationManager {
         notification.category = "viewCategory"
         notification.fireDate = Date()
         UIApplication.shared.scheduleLocalNotification(notification)
+    }
+    
+    static func sendNotifications() -> UIBackgroundFetchResult {
+        if let stations = UserDefaults.loadObject(ofType: [Station](), withIdentifier: "stations") {
+            var notificationsSent = 0
+            for station in stations {
+                if let pushNotificationAfterDate = station.pushNotificationAfterDate, let pushNotificationInterval = station.pushNotificationIntervalInSeconds {
+                    if Date().seconds(from: pushNotificationAfterDate) >= pushNotificationInterval {
+                        NotificationManager.shared.createMessage(forStation: station) {
+                            message, entry in
+                            if let message = message {
+                                DispatchQueue.main.async {
+                                    NotificationManager.shared.pushNotification(withMessage: message, andStation: station.name!)
+                                    station.pushNotificationAfterDate = Date()
+                                    notificationsSent += 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if notificationsSent == 0 {
+                return .noData
+            } else {
+                return .newData
+            }
+        } else {
+            return .failed
+        }
     }
     
 }

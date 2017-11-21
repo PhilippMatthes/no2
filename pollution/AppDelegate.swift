@@ -14,8 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var notificationEntry: PollutionDataEntry?
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -46,79 +44,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Perform background fetch. 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
-        if let stations = UserDefaults.loadObject(ofType: [Station](), withIdentifier: "stations") {
-            var notificationsSent = 0
-            for station in stations {
-                if let pushNotificationAfterDate = station.pushNotificationAfterDate, let pushNotificationInterval = station.pushNotificationIntervalInSeconds {
-                    if Date().seconds(from: pushNotificationAfterDate) >= pushNotificationInterval {
-                        NotificationManager.shared.createMessage(forStation: station) {
-                            message, entry in
-                            if let message = message, let entry = entry {
-                                DispatchQueue.main.async {
-                                    self.notificationEntry = entry
-                                    NotificationManager.shared.pushNotification(withMessage: message, andStation: station.name!)
-                                    station.pushNotificationAfterDate = Date()
-                                    notificationsSent += 1
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            if notificationsSent == 0 {
-                completionHandler(.noData)
-            } else {
-                completionHandler(.newData)
-            }
-        } else {
-            completionHandler(.failed)
-        }
+        completionHandler(NotificationManager.sendNotifications())
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         if let tabBarController = self.window?.rootViewController as? TabBarController {
-            tabBarController.selectedIndex = 0
-            if let viewController = tabBarController.selectedViewController as? ViewController {
-                let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: false)
-                let items = (urlComponents?.queryItems)! as [NSURLQueryItem]
-                if let stationName = items.first!.value {
-                    DatabaseCaller.makeNotificationRequest(forLocation: stationName, withLimit: 1) {
-                        entries in
-                        if let entry = entries.first {
-                            let annotation = entry.generateMapAnnotation()
-                            State.shared.transferAnnotation = annotation
-                            DispatchQueue.main.async {
-                                viewController.performSegue(withIdentifier: "showDetail", sender: self)
-                            }
-                        }
-                    }
-                    return true
-                }
-            }
+            return tabBarController.open(url)
         }
         return false
     }
     
     
     func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, for notification: UILocalNotification, completionHandler: @escaping () -> Void) {
-        if notification.category == "viewCategory" {
-            if let tabBarController = self.window?.rootViewController as? TabBarController {
-                tabBarController.selectedIndex = 0
-                if let viewController = tabBarController.selectedViewController as? ViewController {
-                    DatabaseCaller.makeNotificationRequest(forLocation: identifier!, withLimit: 1) {
-                        entries in
-                        if let entry = entries.first {
-                            let annotation = entry.generateMapAnnotation()
-                            State.shared.transferAnnotation = annotation
-                            DispatchQueue.main.async {
-                                viewController.performSegue(withIdentifier: "showDetail", sender: self)
-                            }
-                        }
-                    }
-                }
-            }
+        if notification.category == "viewCategory", let tabBarController = self.window?.rootViewController as? TabBarController {
+            tabBarController.selectedIndex = 1
+            completionHandler()
+        } else {
+            completionHandler()
         }
-        completionHandler()
     }
     
 

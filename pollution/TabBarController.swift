@@ -39,4 +39,26 @@ class TabBarController: UITabBarController {
         }
     }
     
+    func open(_ url: URL) -> Bool {
+        self.selectedIndex = 0
+        if let viewController = self.selectedViewController as? ViewController {
+            let urlComponents = NSURLComponents(url: url, resolvingAgainstBaseURL: false)
+            let items = (urlComponents?.queryItems)! as [NSURLQueryItem]
+            if let stationName = items.first!.value {
+                DatabaseCaller.makeNotificationRequest(forLocation: stationName, withLimit: 1) {
+                    entries in
+                    if let entry = entries.first {
+                        let annotation = entry.generateMapAnnotation()
+                        State.shared.transferAnnotation = annotation
+                        DispatchQueue.main.async {
+                            viewController.performSegue(withIdentifier: "showDetail", sender: self)
+                        }
+                    }
+                }
+                return true
+            }
+        }
+        return false
+    }
+    
 }

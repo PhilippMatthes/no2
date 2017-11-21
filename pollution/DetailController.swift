@@ -289,18 +289,13 @@ class DetailController: UIViewController, ChartViewDelegate {
     }
     
     func saveStation() {
-        banner.dismiss()
         switch UserDefaults.updateStationList(withStation: stationThatWasClicked!) {
-        case .wasAdded:
-            banner = Banner(title: NSLocalizedString("stationSaved", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.white)
-            updateNavBar(.afterLoading, withColor: State.shared.currentColor)
-        case .wasUpdated:
-            banner = Banner(title: NSLocalizedString("stationUpdated", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.white)
+            case .wasAdded:
+                banner = banner.dismissInAllocation().with(type: .stationSaved).andShow(.coloredTextOnWhite, duration: 2.0)
+                updateNavBar(.afterLoading, withColor: State.shared.currentColor)
+            case .wasUpdated:
+                banner = banner.dismissInAllocation().with(type: .stationUpdated).andShow(.coloredTextOnWhite, duration: 2.0)
         }
-        banner.dismissesOnTap = true
-        banner.titleLabel.textColor = State.shared.currentColor
-        banner.position = BannerPosition.top
-        banner.show(duration: 2.0)
     }
     
     func performSegueToReturnBack()  {
