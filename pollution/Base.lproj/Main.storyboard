@@ -20,7 +20,7 @@
             <objects>
                 <tabBarController title="TabBarController" id="MB2-id-E9Y" customClass="TabBarController" customModule="pollution" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="1xc-2y-Uyx" customClass="BlurryTabBar" customModule="pollution" customModuleProvider="target">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="1xc-2y-Uyx" customClass="CustomTabBar" customModule="pollution" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.95686274509803915" green="0.2627450980392157" blue="0.21176470588235294" alpha="0.0" colorSpace="calibratedRGB"/>
@@ -50,7 +50,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fFv-zX-PMu">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="479"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="9re-JI-YZQ" appends="YES" id="5td-GB-y4d"/>
@@ -116,7 +116,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="igJ-G7-Stq" firstAttribute="top" secondItem="fFv-zX-PMu" secondAttribute="bottom" id="PjB-uW-Xcd"/>
+                            <constraint firstItem="igJ-G7-Stq" firstAttribute="top" secondItem="fFv-zX-PMu" secondAttribute="bottom" constant="-48" id="PjB-uW-Xcd"/>
                             <constraint firstAttribute="trailing" secondItem="fFv-zX-PMu" secondAttribute="trailing" id="arB-v6-B4b"/>
                             <constraint firstItem="xKh-y5-aYs" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="c0h-lw-oPr"/>
                             <constraint firstItem="DgQ-ZZ-KgM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gsh-eh-uta"/>
@@ -129,9 +129,9 @@
                     <tabBarItem key="tabBarItem" title="Map" image="marker" id="Ufk-lE-7l0"/>
                     <connections>
                         <outlet property="mapView" destination="fFv-zX-PMu" id="Pop-sj-u4g"/>
-                        <outlet property="searchButtonBackground" destination="xKh-y5-aYs" id="oLs-Li-KIl"/>
+                        <outlet property="searchButtonBackground" destination="xKh-y5-aYs" id="f3X-b6-oHr"/>
                         <outlet property="unitLabel" destination="pqW-vF-Y15" id="Xvo-KL-dcx"/>
-                        <outlet property="unitLabelBackground" destination="DgQ-ZZ-KgM" id="YhG-Dr-dgs"/>
+                        <outlet property="unitLabelBackground" destination="DgQ-ZZ-KgM" id="7x8-zM-sdg"/>
                         <segue destination="hdF-k9-pUe" kind="show" identifier="showUnitInformation" id="E75-6X-NZL"/>
                         <segue destination="O3A-Es-cBn" kind="presentation" identifier="showDetail" modalTransitionStyle="crossDissolve" id="vWE-UL-rNF"/>
                     </connections>

@@ -72,7 +72,7 @@ class DetailController: UIViewController, ChartViewDelegate {
                                                      entries: self.measurements!,
                                                      city: city,
                                                      country: country)
-                if let savedStation = DiskJockey.callFromStations(stationWithName: self.annotationThatWasClicked!.entry!.location!) {
+                if let savedStation = UserDefaults.callFromStations(stationWithName: self.annotationThatWasClicked!.entry!.location!) {
                     self.stationThatWasClicked!.pushNotificationIntervalInSeconds = savedStation.pushNotificationIntervalInSeconds
                     self.stationThatWasClicked!.pushNotificationAfterDate = savedStation.pushNotificationAfterDate
                 }
@@ -158,7 +158,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         if let annotation = annotationThatWasClicked {
             if let entry = annotation.entry {
                 if let location = entry.location {
-                    if let _ = DiskJockey.callFromStations(stationWithName: location) {} else {
+                    if let _ = UserDefaults.callFromStations(stationWithName: location) {} else {
                         receiveNotificationsItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector (self.receiveNotificationsButtonPressed (_:)))
                         receiveNotificationsItem!.tintColor = color
                     }
@@ -290,7 +290,7 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     func saveStation() {
         banner.dismiss()
-        switch DiskJockey.updateStationList(withStation: stationThatWasClicked!) {
+        switch UserDefaults.updateStationList(withStation: stationThatWasClicked!) {
         case .wasAdded:
             banner = Banner(title: NSLocalizedString("stationSaved", comment: ""), subtitle: nil, image: nil, backgroundColor: UIColor.white)
             updateNavBar(.afterLoading, withColor: State.shared.currentColor)

@@ -21,7 +21,7 @@ class NotificationManager {
     }
     
     func loadSentNotifications() {
-        if let notifications = DiskJockey.loadObject(ofType: [Notification](), withIdentifier: "notifications") {
+        if let notifications = UserDefaults.loadObject(ofType: [Notification](), withIdentifier: "notifications") {
             self.sentNotifications = notifications
         }
     }
@@ -53,7 +53,7 @@ class NotificationManager {
                     }
                     
                     self.sentNotifications.append(notification)
-                    DiskJockey.save(object: self.sentNotifications, withIdentifier: "notifications")
+                    UserDefaults.save(object: self.sentNotifications, withIdentifier: "notifications")
                     
                     completionHandler(output, entry)
                 }

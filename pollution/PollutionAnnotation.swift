@@ -39,7 +39,7 @@ class PollutionAnnotation : NSObject, NSCoding, MKAnnotation {
             else {
                 return nil
         }
-        if let entry = DiskJockey.loadObject(ofType: PollutionDataEntry(), withIdentifier: "entry") {
+        if let entry = UserDefaults.loadObject(ofType: PollutionDataEntry(), withIdentifier: "entry") {
             let coord = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
             self.init(coord: coord,
                       title: _title,

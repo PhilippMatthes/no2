@@ -13,13 +13,14 @@ import SwiftRater
 
 class TabBarController: UITabBarController {
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Initialize a revealing Splash with with the iconImage, the initial size and the background color
         let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "NoShadowAppIcon")!,iconInitialSize: CGSize(width: 70, height: 70), backgroundColor: UIColor(rgb: 0x373737, alpha: 1.0))
         
-        self.tabBar.roundCorners([.topLeft, .topRight], withRadius: Constants.cornerRadius)
+        tabBar.roundCorners([.topLeft, .topRight], withRadius: Constants.cornerRadius)
         
         revealingSplashView.animationType = .twitter
         

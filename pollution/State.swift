@@ -34,20 +34,20 @@ class State {
     }
     
     func load() {
-        if let type = DiskJockey.loadObject(ofType: String(), withIdentifier: "currentType") {
+        if let type = UserDefaults.loadObject(ofType: String(), withIdentifier: "currentType") {
             State.shared.currentType = type
         }
-        if let number = DiskJockey.loadObject(ofType: Int(), withIdentifier: "numberOfMapResults") {
+        if let number = UserDefaults.loadObject(ofType: Int(), withIdentifier: "numberOfMapResults") {
             State.shared.numberOfMapResults = number
         }
     }
     
     func store(currentType: String) {
-        DiskJockey.save(object: currentType, withIdentifier: "currentType")
+        UserDefaults.save(object: currentType, withIdentifier: "currentType")
     }
     
     func store(numberOfMapResults: Int) {
-        DiskJockey.save(object: numberOfMapResults, withIdentifier: "numberOfMapResults")
+        UserDefaults.save(object: numberOfMapResults, withIdentifier: "numberOfMapResults")
     }
     
 }

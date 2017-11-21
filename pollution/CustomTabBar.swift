@@ -1,23 +1,21 @@
 //
-//  BlurryTabBar.swift
+//  CustomTabBar.swift
 //  pollution
 //
-//  Created by Philipp Matthes on 20.11.17.
+//  Created by Philipp Matthes on 21.11.17.
 //  Copyright © 2017 Philipp Matthes. All rights reserved.
 //
 
 import Foundation
-
-
 import UIKit
 
-class BlurryTabBar: UITabBar {
+class CustomTabBar: UITabBar {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-//        let frost = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-//        frost.frame = bounds
-//        frost.autoresizingMask = .flexibleWidth
-//        insertSubview(frost, at: 0)
+        //        let frost = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        //        frost.frame = bounds
+        //        frost.autoresizingMask = .flexibleWidth
+        //        insertSubview(frost, at: 0)
         
         State.shared.load()
         

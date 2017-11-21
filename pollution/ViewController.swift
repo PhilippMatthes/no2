@@ -15,6 +15,8 @@ import DTMHeatmap
 
 class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentationControllerDelegate {
     
+    
+    
     @IBOutlet weak var searchButtonBackground: UIView!
     @IBOutlet weak var unitLabelBackground: UIProgressView!
     @IBOutlet weak var unitLabel: UILabel!
@@ -29,9 +31,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     var tileRenderer: MKTileOverlayRenderer?
     
     fileprivate var searchController: UISearchController!
-    fileprivate var localSearchRequest: MKLocalSearchRequest!
-    fileprivate var localSearch: MKLocalSearch!
-    fileprivate var localSearchResponse: MKLocalSearchResponse!
     
     fileprivate var annotation: MKAnnotation!
     fileprivate var locationManager: CLLocationManager!
@@ -51,20 +50,17 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         updateAnnotations(withType: State.shared.currentType)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        unitLabelBackground.roundCorners([.bottomLeft, .bottomRight], withRadius: Constants.cornerRadius)
+        searchButtonBackground.roundCorners([.bottomLeft, .bottomRight], withRadius: Constants.cornerRadius)
+    }
+    
     @IBAction func searchButtonAction(_ sender: UIButton) {
         searchButtonBackground.animateClick(withBorderColor: UIColor.white, width: 4.0, andDuration: 0.2)
         if searchController == nil {
             searchController = UISearchController(searchResultsController: nil)
         }
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.delegate = self
-        searchController.searchBar.barStyle = .default
-        searchController.searchBar.searchBarStyle = .default
-        searchController.searchBar.showsCancelButton = false
-        searchController.searchBar.tintColor = State.shared.currentColor
-        searchController.searchBar.barTintColor = UIColor.white
-        let textFieldInsideSearchBar = searchController.searchBar.value(forKey: "searchField") as? UITextField
-        textFieldInsideSearchBar?.textColor = UIColor.gray
+        searchController.initStyle(.whiteClean, withDelegate: self)
         present(searchController, animated: true, completion: nil)
     }
     
@@ -97,7 +93,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
                                 let preciseDistance = annotationLocation.distance(from: tapLocation)
                                 let distance = round(preciseDistance/100)/10
                                 let dateString = String(mostRecentMeasurement.date!.prefix(10))
-                                let convertedDateString = DateTranslator.translateDate(fromDateFormat: "yyyy-MM-dd",
+                                let convertedDateString = Date.translateDate(fromDateFormat: "yyyy-MM-dd",
                                                                                        toDateFormat: NSLocalizedString("dateFormat", comment: "Date format"),
                                                                                        withDate: dateString)
                                 
@@ -174,41 +170,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        dismiss(animated: true, completion: nil)
-        
-        if self.mapView.annotations.count != 0 {
-            annotation = self.mapView.annotations[0]
-            self.mapView.removeAnnotation(annotation)
-        }
-        
-        localSearchRequest = MKLocalSearchRequest()
-        localSearchRequest.naturalLanguageQuery = searchBar.text
-        localSearch = MKLocalSearch(request: localSearchRequest)
-        localSearch.start { [weak self] (localSearchResponse, error) -> Void in
-            
-            if localSearchResponse == nil {
-                let alertController = UIAlertController(title: NSLocalizedString("noLocationFound", comment: "No location found."), message: NSLocalizedString("searchQueryDidNotResult", comment: "Your search query did not result in any locations to be displayed. Please try again."), preferredStyle: UIAlertControllerStyle.alert) //Replace UIAlertControllerStyle.Alert by UIAlertControllerStyle.alert
-                
-                // Replace UIAlertActionStyle.Default by UIAlertActionStyle.default
-                
-                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel) {
-                    (result : UIAlertAction) -> Void in
-                }
-                
-                alertController.addAction(okAction)
-                self?.present(alertController, animated: true, completion: nil)
-                return
-            }
-            
-            let pointAnnotation = MKPointAnnotation()
-            pointAnnotation.title = searchBar.text
-            pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse!.boundingRegion.center.latitude, longitude: localSearchResponse!.boundingRegion.center.longitude)
-            
-            let pinAnnotationView = MKPinAnnotationView(annotation: pointAnnotation, reuseIdentifier: nil)
-            self!.mapView.setCenter(pointAnnotation.coordinate, animated: true)
-            self!.mapView.addAnnotation(pinAnnotationView.annotation!)
-        }
+        mapView.performLocalSearch(forSearchBar: searchBar, onController: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -251,7 +213,6 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         mapView.addSubview(unitLabelBackground)
         mapView.addSubview(searchButtonBackground)
     }
-    
     
     
     @objc func unitButtonClicked(sender:UITapGestureRecognizer) {

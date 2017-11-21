@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE0B002F1FB339AB00F2EDD9 /* DiskJockey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F41FB196CC007A9C1A /* DiskJockey.swift */; };
+		BE0B002F1FB339AB00F2EDD9 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F41FB196CC007A9C1A /* UserDefaultsExtension.swift */; };
 		BE1F69E01FB0AFBE007A9C1A /* PollutionAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */; };
 		BE1F69E11FB0AFE1007A9C1A /* DatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */; };
 		BE1F69E21FB0CF01007A9C1A /* CoordinateWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */; };
 		BE1F69F31FB190EE007A9C1A /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F21FB190EE007A9C1A /* Station.swift */; };
-		BE1F69F51FB196CC007A9C1A /* DiskJockey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F41FB196CC007A9C1A /* DiskJockey.swift */; };
+		BE1F69F51FB196CC007A9C1A /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F41FB196CC007A9C1A /* UserDefaultsExtension.swift */; };
 		BE1F69F71FB1B1CB007A9C1A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */; };
 		BE1F69F91FB1B3B7007A9C1A /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */; };
 		BE1F69FD1FB220EA007A9C1A /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69FC1FB220EA007A9C1A /* State.swift */; };
@@ -37,16 +37,17 @@
 		BE50FBDF1FA4AB5400187750 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE50FBE01FA4AB5400187750 /* Charts.framework */; };
 		BE50FBE41FA4AC3F00187750 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50FBE31FA4AC3F00187750 /* DetailController.swift */; };
 		BE56BCE01FA9274A00303B70 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE56BCDE1FA9274A00303B70 /* Localizable.strings */; };
-		BE56BCE51FA92C1C00303B70 /* DateTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */; };
 		BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */; };
 		BE62263F1FC05C7800D0C2B0 /* DTMHeatmap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6226401FC05C7800D0C2B0 /* DTMHeatmap.framework */; };
 		BE6226421FC3098D00D0C2B0 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6226411FC3098D00D0C2B0 /* DateExtension.swift */; };
-		BE6226441FC30F8700D0C2B0 /* BlurryTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6226431FC30F8700D0C2B0 /* BlurryTabBar.swift */; };
-		BE654B0E1FB492CB003284C6 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */; };
+		BE62264D1FC4191400D0C2B0 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62264C1FC4191400D0C2B0 /* CustomTabBar.swift */; };
+		BE62264F1FC4203D00D0C2B0 /* UISearchControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62264E1FC4203D00D0C2B0 /* UISearchControllerExtension.swift */; };
+		BE6226511FC423B800D0C2B0 /* MapViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6226501FC423B800D0C2B0 /* MapViewExtension.swift */; };
+		BE6226581FC425CE00D0C2B0 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6226411FC3098D00D0C2B0 /* DateExtension.swift */; };
+		BE6226591FC425DE00D0C2B0 /* StationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */; };
 		BE654B0F1FB4930D003284C6 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F21FB190EE007A9C1A /* Station.swift */; };
 		BE654B101FB493DC003284C6 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE654B111FB493DC003284C6 /* Charts.framework */; };
 		BE654B121FB494D6003284C6 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69FC1FB220EA007A9C1A /* State.swift */; };
-		BE654B131FB4951B003284C6 /* DateTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */; };
 		BE70FA861FB4AFED006D48A7 /* WidgetTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4A2DCB1FB07B2300044D90 /* WidgetTableController.swift */; };
 		BE70FA871FB4E961006D48A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE56BCDE1FA9274A00303B70 /* Localizable.strings */; };
 		BE70FA891FB4F317006D48A7 /* UINavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70FA881FB4F317006D48A7 /* UINavigationBarExtension.swift */; };
@@ -108,7 +109,7 @@
 		B7C8E0F75A7FB48BDCBF5DD4 /* Pods-pollutionTodayExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-pollutionTodayExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-pollutionTodayExtension/Pods-pollutionTodayExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		BE1F69DC1FB0AEB4007A9C1A /* SwiftSpinner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SwiftSpinner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1F69F21FB190EE007A9C1A /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
-		BE1F69F41FB196CC007A9C1A /* DiskJockey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskJockey.swift; sourceTree = "<group>"; };
+		BE1F69F41FB196CC007A9C1A /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCell.swift; sourceTree = "<group>"; };
 		BE1F69FC1FB220EA007A9C1A /* State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
@@ -136,12 +137,13 @@
 		BE56BCDF1FA9274A00303B70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BE56BCE21FA9275C00303B70 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BE56BCE31FA9275C00303B70 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTranslator.swift; sourceTree = "<group>"; };
 		BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateWizard.swift; sourceTree = "<group>"; };
 		BE62263C1FC04CA800D0C2B0 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE6226401FC05C7800D0C2B0 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE6226411FC3098D00D0C2B0 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
-		BE6226431FC30F8700D0C2B0 /* BlurryTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurryTabBar.swift; sourceTree = "<group>"; };
+		BE62264C1FC4191400D0C2B0 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		BE62264E1FC4203D00D0C2B0 /* UISearchControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchControllerExtension.swift; sourceTree = "<group>"; };
+		BE6226501FC423B800D0C2B0 /* MapViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewExtension.swift; sourceTree = "<group>"; };
 		BE654B111FB493DC003284C6 /* Charts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Charts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE654B141FB49740003284C6 /* pollutionTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollutionTodayExtension.entitlements; sourceTree = "<group>"; };
 		BE654B151FB4975C003284C6 /* pollution.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollution.entitlements; sourceTree = "<group>"; };
@@ -218,43 +220,43 @@
 		BE2EC6291FAB61350052BF6A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				BE9394B31FA9FFE40017407E /* UIColorExtension.swift */,
-				BE9394B11FA9FFC00017407E /* UIViewExtension.swift */,
-				BE70FA881FB4F317006D48A7 /* UINavigationBarExtension.swift */,
-				BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */,
-				BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */,
-				BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */,
-				BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */,
 				BEF3FA631FBEF0C000365A0A /* BadgeExtension.swift */,
+				BE9CD6181FBAF60C00D410B0 /* ChartsExtension.swift */,
 				BE6226411FC3098D00D0C2B0 /* DateExtension.swift */,
-				BE6226431FC30F8700D0C2B0 /* BlurryTabBar.swift */,
+				BE6226501FC423B800D0C2B0 /* MapViewExtension.swift */,
+				BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */,
+				BE2EC6301FAB65B70052BF6A /* TabBarExtension.swift */,
+				BE9394B31FA9FFE40017407E /* UIColorExtension.swift */,
+				BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */,
+				BE70FA881FB4F317006D48A7 /* UINavigationBarExtension.swift */,
+				BE62264E1FC4203D00D0C2B0 /* UISearchControllerExtension.swift */,
+				BE9394B11FA9FFC00017407E /* UIViewExtension.swift */,
+				BE1F69F41FB196CC007A9C1A /* UserDefaultsExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
 		};
-		BE2EC62D1FAB61B50052BF6A /* DataModels */ = {
+		BE2EC62D1FAB61B50052BF6A /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
 				BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */,
 				BE988FAF1FA1F015007C24CF /* PollutionDataEntry.swift */,
 				BE988FB11FA1F0FE007C24CF /* PollutionMeasurement.swift */,
 				BE1F69F21FB190EE007A9C1A /* Station.swift */,
-				BE1F6A001FB2D828007A9C1A /* Notification.swift */,
 			);
-			name = DataModels;
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 		BE2EC62E1FAB61DC0052BF6A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */,
-				BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */,
-				BE2EC6271FAB61000052BF6A /* TabBarController.swift */,
 				BE50FBE31FA4AC3F00187750 /* DetailController.swift */,
-				BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */,
-				BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */,
-				BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */,
 				BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */,
+				BE2EC6271FAB61000052BF6A /* TabBarController.swift */,
+				BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */,
+				BEBBB2CA1FA496D9005439EB /* UnitInformationController.swift */,
+				BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -263,8 +265,8 @@
 			isa = PBXGroup;
 			children = (
 				BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */,
-				BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */,
 				BE9394AF1FA9DF7E0017407E /* CustomCircleRenderer.swift */,
+				BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */,
 			);
 			name = MapKit;
 			sourceTree = "<group>";
@@ -278,6 +280,24 @@
 				BE4A2DC11FB061AA00044D90 /* Info.plist */,
 			);
 			path = pollutionTodayExtension;
+			sourceTree = "<group>";
+		};
+		BE6226531FC424CB00D0C2B0 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				BE1F6A001FB2D828007A9C1A /* Notification.swift */,
+				BE1F6A021FB2D91D007A9C1A /* NotificationManager.swift */,
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
+		BE6226571FC4251A00D0C2B0 /* Custom UI Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BE62264C1FC4191400D0C2B0 /* CustomTabBar.swift */,
+				BE1F69F81FB1B3B7007A9C1A /* StationCell.swift */,
+			);
+			name = "Custom UI Classes";
 			sourceTree = "<group>";
 		};
 		BEE82D7C1FA1C35600BEBAF4 = {
@@ -304,17 +324,16 @@
 			isa = PBXGroup;
 			children = (
 				BE654B151FB4975C003284C6 /* pollution.entitlements */,
-				BE1F6A021FB2D91D007A9C1A /* NotificationManager.swift */,
 				BE1F69FC1FB220EA007A9C1A /* State.swift */,
-				BE1F69F41FB196CC007A9C1A /* DiskJockey.swift */,
 				BE22C2171FA34D2B008D7659 /* Constants.swift */,
 				BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */,
 				BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */,
-				BE56BCE41FA92C1C00303B70 /* DateTranslator.swift */,
+				BE6226531FC424CB00D0C2B0 /* Notifications */,
+				BE6226571FC4251A00D0C2B0 /* Custom UI Classes */,
 				BE2EC62F1FAB61F20052BF6A /* MapKit */,
 				BE2EC6291FAB61350052BF6A /* Extensions */,
 				BE2EC62E1FAB61DC0052BF6A /* Controllers */,
-				BE2EC62D1FAB61B50052BF6A /* DataModels */,
+				BE2EC62D1FAB61B50052BF6A /* Data Models */,
 				BEE82D8C1FA1C35600BEBAF4 /* Main.storyboard */,
 				BE56BCDE1FA9274A00303B70 /* Localizable.strings */,
 				BEE82D8F1FA1C35600BEBAF4 /* Assets.xcassets */,
@@ -575,20 +594,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE4A2DDD1FB0A5E500044D90 /* Constants.swift in Sources */,
+				BE6226581FC425CE00D0C2B0 /* DateExtension.swift in Sources */,
 				BE4A2DCC1FB07B2300044D90 /* WidgetTableController.swift in Sources */,
 				BE2BDDF11FB0AC1E0076EF4B /* PollutionMeasurement.swift in Sources */,
 				BE9CD61A1FBAF9A800D410B0 /* ChartsExtension.swift in Sources */,
+				BE6226591FC425DE00D0C2B0 /* StationCell.swift in Sources */,
 				BE4A2DDF1FB0A7AF00044D90 /* UIViewExtension.swift in Sources */,
 				BE8A4D031FB60F0700255C2E /* HiddenDatabaseCaller.swift in Sources */,
-				BE654B0E1FB492CB003284C6 /* StationCell.swift in Sources */,
-				BE0B002F1FB339AB00F2EDD9 /* DiskJockey.swift in Sources */,
+				BE0B002F1FB339AB00F2EDD9 /* UserDefaultsExtension.swift in Sources */,
 				BE1F69E21FB0CF01007A9C1A /* CoordinateWizard.swift in Sources */,
 				BE2BDDF01FB0AC1C0076EF4B /* PollutionDataEntry.swift in Sources */,
 				BE654B0F1FB4930D003284C6 /* Station.swift in Sources */,
 				BE1F69E01FB0AFBE007A9C1A /* PollutionAnnotation.swift in Sources */,
 				BE4A2DDE1FB0A60900044D90 /* UIColorExtension.swift in Sources */,
 				BE654B121FB494D6003284C6 /* State.swift in Sources */,
-				BE654B131FB4951B003284C6 /* DateTranslator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,16 +623,18 @@
 				BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */,
 				BE2EC6311FAB65B70052BF6A /* TabBarExtension.swift in Sources */,
 				BE9394B41FA9FFE40017407E /* UIColorExtension.swift in Sources */,
+				BE62264D1FC4191400D0C2B0 /* CustomTabBar.swift in Sources */,
 				BE1F6A031FB2D91D007A9C1A /* NotificationManager.swift in Sources */,
 				BE900FC01FAB84A40023FF05 /* UIImageExtension.swift in Sources */,
 				BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */,
-				BE6226441FC30F8700D0C2B0 /* BlurryTabBar.swift in Sources */,
 				BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */,
 				BE9CD6191FBAF60C00D410B0 /* ChartsExtension.swift in Sources */,
 				BE9CD61C1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift in Sources */,
+				BE62264F1FC4203D00D0C2B0 /* UISearchControllerExtension.swift in Sources */,
 				BE9394B21FA9FFC00017407E /* UIViewExtension.swift in Sources */,
 				BE992FC01FA2079A00727BC0 /* PollutionAnnotation.swift in Sources */,
 				BE8A4CFF1FB5EE5400255C2E /* SettingsController.swift in Sources */,
+				BE6226511FC423B800D0C2B0 /* MapViewExtension.swift in Sources */,
 				BE1F69F31FB190EE007A9C1A /* Station.swift in Sources */,
 				BE9394B01FA9DF7E0017407E /* CustomCircleRenderer.swift in Sources */,
 				BE1F69E11FB0AFE1007A9C1A /* DatabaseCaller.swift in Sources */,
@@ -622,12 +643,11 @@
 				BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */,
 				BE1F6A011FB2D828007A9C1A /* Notification.swift in Sources */,
 				BE1F69F91FB1B3B7007A9C1A /* StationCell.swift in Sources */,
-				BE1F69F51FB196CC007A9C1A /* DiskJockey.swift in Sources */,
+				BE1F69F51FB196CC007A9C1A /* UserDefaultsExtension.swift in Sources */,
 				BE9394AE1FA9DB220017407E /* CustomMapOverlay.swift in Sources */,
 				BE50FBE41FA4AC3F00187750 /* DetailController.swift in Sources */,
 				BE6226421FC3098D00D0C2B0 /* DateExtension.swift in Sources */,
 				BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */,
-				BE56BCE51FA92C1C00303B70 /* DateTranslator.swift in Sources */,
 				BE1F69FD1FB220EA007A9C1A /* State.swift in Sources */,
 				BEF3FA641FBEF0C000365A0A /* BadgeExtension.swift in Sources */,
 			);

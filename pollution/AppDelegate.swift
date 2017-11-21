@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Perform background fetch. 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
-        if let stations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations") {
+        if let stations = UserDefaults.loadObject(ofType: [Station](), withIdentifier: "stations") {
             var notificationsSent = 0
             for station in stations {
                 if let pushNotificationAfterDate = station.pushNotificationAfterDate, let pushNotificationInterval = station.pushNotificationIntervalInSeconds {

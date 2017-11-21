@@ -11,6 +11,16 @@ import Foundation
 
 
 extension Date {
+    
+    static func translateDate(fromDateFormat fromFormat: String, toDateFormat toFormat: String, withDate date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = fromFormat
+        let date = dateFormatter.date(from:date)
+        dateFormatter.dateFormat = toFormat
+        let dateString = dateFormatter.string(from:date!)
+        return dateString
+    }
+    
     /// Returns the amount of years from another date
     func years(from date: Date) -> Int {
         return Calendar.current.dateComponents([.year], from: date, to: self).year ?? 0

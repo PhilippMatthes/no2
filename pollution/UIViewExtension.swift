@@ -40,7 +40,7 @@ extension UIView {
         }
     }
     
-    func animate(toBackgroundColor color: UIColor, withDuration duration: CFTimeInterval){
+    func animate(toBackgroundColor color: UIColor, withDuration duration: CFTimeInterval) {
         UIView.animate(withDuration: 1, animations: { () -> Void in
             self.layer.backgroundColor = color.cgColor
         }) { (success) -> Void in
@@ -57,4 +57,5 @@ extension UIView {
                                       cornerRadii: CGSize(width: radius, height: radius)).cgPath
         self.layer.mask = rectShape
     }
+    
 }

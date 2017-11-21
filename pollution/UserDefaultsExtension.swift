@@ -1,5 +1,5 @@
 //
-//  DiskJockey.swift
+//  UserDefaultsExtension.swift
 //  pollution
 //
 //  Created by Philipp Matthes on 07.11.17.
@@ -13,7 +13,7 @@ enum ListStates {
     case wasAdded
 }
 
-class DiskJockey {
+extension UserDefaults {
     
     static func loadObject<T>(ofType type: T, withIdentifier identifier: String) -> T? {
         State.shared.defaults.synchronize()
@@ -32,36 +32,36 @@ class DiskJockey {
     }
     
     static func loadAndExtendList<T>(withObject object: T, andIdentifier identifier: String) {
-        if var list = DiskJockey.loadObject(ofType: [T](), withIdentifier: identifier) {
+        if var list = UserDefaults.loadObject(ofType: [T](), withIdentifier: identifier) {
             list.append(object)
-            DiskJockey.save(object: list, withIdentifier: identifier)
+            UserDefaults.save(object: list, withIdentifier: identifier)
         } else {
-            DiskJockey.save(object: [object], withIdentifier: identifier)
+            UserDefaults.save(object: [object], withIdentifier: identifier)
         }
     }
     
     static func updateStationList(withStation station: Station) -> ListStates {
         NSKeyedArchiver.setClassName("Station", for: Station.self)
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
-        let stations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations")
+        let stations = UserDefaults.loadObject(ofType: [Station](), withIdentifier: "stations")
         if var stations = stations {
             for stationInList in stations {
                 if stationInList.equals(station: station) {
                     let index = stations.index(of: stationInList)!
                     stations[index] = station
-                    DiskJockey.save(object: stations, withIdentifier: "stations")
+                    UserDefaults.save(object: stations, withIdentifier: "stations")
                     return .wasUpdated
                 }
             }
         }
-        DiskJockey.loadAndExtendList(withObject: station, andIdentifier: "stations")
+        UserDefaults.loadAndExtendList(withObject: station, andIdentifier: "stations")
         return .wasAdded
     }
     
     static func callFromStations(stationWithName stationName: String) -> Station? {
         NSKeyedArchiver.setClassName("Station", for: Station.self)
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
-        let stations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations")
+        let stations = UserDefaults.loadObject(ofType: [Station](), withIdentifier: "stations")
         if let stations = stations {
             for station in stations {
                 if station.name! == stationName {

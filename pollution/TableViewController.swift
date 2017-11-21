@@ -131,7 +131,7 @@ class TableViewController: UITableViewController {
         initNavBar(withColor: State.shared.currentColor)
         
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
-        if let loadedStations = DiskJockey.loadObject(ofType: [Station](), withIdentifier: "stations") {
+        if let loadedStations = UserDefaults.loadObject(ofType: [Station](), withIdentifier: "stations") {
             self.stations = loadedStations
         }
         if stations.isEmpty {
@@ -262,7 +262,7 @@ class TableViewController: UITableViewController {
             // Delete the row from the data source
             stations.remove(at: indexPath.row)
             NSKeyedArchiver.setClassName("Station", for: Station.self)
-            DiskJockey.save(object: stations, withIdentifier: "stations")
+            UserDefaults.save(object: stations, withIdentifier: "stations")
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
