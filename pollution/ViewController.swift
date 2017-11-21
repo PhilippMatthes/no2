@@ -50,7 +50,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         updateAnnotations(withType: State.shared.currentType)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidLayoutSubviews() {
         unitLabelBackground.roundCorners([.bottomLeft, .bottomRight], withRadius: Constants.cornerRadius)
         searchButtonBackground.roundCorners([.bottomLeft, .bottomRight], withRadius: Constants.cornerRadius)
     }
@@ -197,8 +197,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         unitLabelBackground.clipsToBounds = true
         
         unitLabel.text = State.shared.currentType.capitalized
-        unitLabelBackground.layer.backgroundColor = State.shared.currentColor.cgColor
-        searchButtonBackground.layer.backgroundColor = State.shared.currentColor.cgColor
+        unitLabelBackground.layer.backgroundColor = State.shared.currentColor.withAlphaComponent(Constants.transparency).cgColor
+        searchButtonBackground.layer.backgroundColor = State.shared.currentColor.withAlphaComponent(Constants.transparency).cgColor
         maxvalue = Constants.maxValues[State.shared.currentType]
         
         let unitButtonRecognizer = UITapGestureRecognizer(target: self, action:  #selector (self.unitButtonClicked(sender:)))
@@ -220,9 +220,10 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         let index = (Constants.units.index(of: State.shared.currentType)! + 1) % Constants.units.count
         State.shared.currentType = Constants.units[index]
         unitLabel.text = State.shared.currentType.capitalized
-        tabBarController!.tabBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 2.0)
-        unitLabelBackground.animate(toBackgroundColor: State.shared.currentColor, withDuration: 2.0)
-        searchButtonBackground.animate(toBackgroundColor: State.shared.currentColor, withDuration: 2.0)
+        tabBarController!.tabBar.animate(toBackgroundColor: State.shared.currentColor.withAlphaComponent(Constants.transparency),
+                                         withDuration: 2.0)
+        unitLabelBackground.animate(toBackgroundColor: State.shared.currentColor.withAlphaComponent(Constants.transparency), withDuration: 2.0)
+        searchButtonBackground.animate(toBackgroundColor: State.shared.currentColor.withAlphaComponent(Constants.transparency), withDuration: 2.0)
         
         updateAnnotations(withType: State.shared.currentType)
         

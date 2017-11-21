@@ -54,7 +54,7 @@ extension UIView {
         rectShape.position = self.center
         rectShape.path = UIBezierPath(roundedRect: self.bounds,
                                       byRoundingCorners: corners,
-                                      cornerRadii: CGSize(width: radius, height: radius)).cgPath
+                                      cornerRadii: CGSize(width: radius, height: radius)).cgPath        
         self.layer.mask = rectShape
     }
     

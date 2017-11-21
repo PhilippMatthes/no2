@@ -12,17 +12,15 @@ import UIKit
 class CustomTabBar: UITabBar {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        //        let frost = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        //        frost.frame = bounds
-        //        frost.autoresizingMask = .flexibleWidth
-        //        insertSubview(frost, at: 0)
         
         State.shared.load()
         
-        self.isTranslucent = false
+        self.backgroundImage = UIImage(color: UIColor.clear)
+        
+        self.isTranslucent = true
         self.clipsToBounds = true
         self.tintColor = UIColor.white
-        self.barTintColor = Constants.colors[State.shared.currentType]
-        self.backgroundColor = UIColor.clear
+        self.barTintColor = UIColor.clear
+        self.backgroundColor = State.shared.currentColor.withAlphaComponent(Constants.transparency)
     }
 }

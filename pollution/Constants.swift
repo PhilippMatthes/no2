@@ -12,6 +12,8 @@ import UIKit
 struct Constants {
     static let cornerRadius = CGFloat(10.0)
     
+    static let transparency = 0.9 as CGFloat
+    
     static let drawCustomMap = true
     
     static let colorLowStroke = UIColor(rgb: 0xFFFFFF, alpha: 0.5)

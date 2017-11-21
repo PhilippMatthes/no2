@@ -30,8 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             controller.tabBar.setTintColor(ofUnselectedItemsWithColor: UIColor.white.withAlphaComponent(0.7), andSelectedItemsWithColor: UIColor.white)
         }
         
-        print(UIApplicationBackgroundFetchIntervalMinimum)
-        
         UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
         application.beginBackgroundTask(withName: "showNotification", expirationHandler: nil)

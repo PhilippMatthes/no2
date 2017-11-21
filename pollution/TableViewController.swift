@@ -163,7 +163,8 @@ class TableViewController: UITableViewController {
         refreshControl.backgroundColor = UIColor.white
         self.refreshControl = refreshControl
         navigationBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 0.5)
-        tabBarController!.tabBar.animate(toBarTintColor: State.shared.currentColor, withDuration: 0.5)
+        tabBarController!.tabBar.animate(toBackgroundColor: State.shared.currentColor.withAlphaComponent(Constants.transparency),
+                                         withDuration: 0.5)
     }
     
     func updateCells(completionHandler: @escaping () -> ()) {
