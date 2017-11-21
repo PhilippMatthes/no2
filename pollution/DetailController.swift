@@ -65,7 +65,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         self.getData(withTimeSpanInDays: 1, intraday: self.showsIntradayInformation) {
             let coordinateLocation = CLLocation(latitude: self.annotationThatWasClicked!.coordinate.latitude,
                                                 longitude: self.annotationThatWasClicked!.coordinate.longitude)
-            CoordinateWizard.fetchCountryAndCity(location: coordinateLocation) { country, city in
+            coordinateLocation.fetchCountryAndCity { country, city in
                 self.stationThatWasClicked = Station(name: self.annotationThatWasClicked!.entry!.location!,
                                                      latitude: self.annotationThatWasClicked!.coordinate.latitude,
                                                      longitude: self.annotationThatWasClicked!.coordinate.longitude,

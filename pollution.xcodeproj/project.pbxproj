@@ -10,7 +10,7 @@
 		BE0B002F1FB339AB00F2EDD9 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F41FB196CC007A9C1A /* UserDefaultsExtension.swift */; };
 		BE1F69E01FB0AFBE007A9C1A /* PollutionAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FBF1FA2079A00727BC0 /* PollutionAnnotation.swift */; };
 		BE1F69E11FB0AFE1007A9C1A /* DatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE992FC11FA20B4000727BC0 /* DatabaseCaller.swift */; };
-		BE1F69E21FB0CF01007A9C1A /* CoordinateWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */; };
+		BE1F69E21FB0CF01007A9C1A /* CLLocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE61FA93A0000303B70 /* CLLocationExtension.swift */; };
 		BE1F69F31FB190EE007A9C1A /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F21FB190EE007A9C1A /* Station.swift */; };
 		BE1F69F51FB196CC007A9C1A /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F41FB196CC007A9C1A /* UserDefaultsExtension.swift */; };
 		BE1F69F71FB1B1CB007A9C1A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1F69F61FB1B1CB007A9C1A /* TableViewController.swift */; };
@@ -37,7 +37,7 @@
 		BE50FBDF1FA4AB5400187750 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE50FBE01FA4AB5400187750 /* Charts.framework */; };
 		BE50FBE41FA4AC3F00187750 /* DetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE50FBE31FA4AC3F00187750 /* DetailController.swift */; };
 		BE56BCE01FA9274A00303B70 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE56BCDE1FA9274A00303B70 /* Localizable.strings */; };
-		BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */; };
+		BE56BCE71FA93A0000303B70 /* CLLocationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE56BCE61FA93A0000303B70 /* CLLocationExtension.swift */; };
 		BE62263F1FC05C7800D0C2B0 /* DTMHeatmap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE6226401FC05C7800D0C2B0 /* DTMHeatmap.framework */; };
 		BE6226421FC3098D00D0C2B0 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE6226411FC3098D00D0C2B0 /* DateExtension.swift */; };
 		BE62264D1FC4191400D0C2B0 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE62264C1FC4191400D0C2B0 /* CustomTabBar.swift */; };
@@ -138,7 +138,7 @@
 		BE56BCDF1FA9274A00303B70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BE56BCE21FA9275C00303B70 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		BE56BCE31FA9275C00303B70 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
-		BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateWizard.swift; sourceTree = "<group>"; };
+		BE56BCE61FA93A0000303B70 /* CLLocationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationExtension.swift; sourceTree = "<group>"; };
 		BE62263C1FC04CA800D0C2B0 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE6226401FC05C7800D0C2B0 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE6226411FC3098D00D0C2B0 /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
@@ -223,18 +223,19 @@
 			isa = PBXGroup;
 			children = (
 				BE62265A1FC4297800D0C2B0 /* BadgeExtension.swift */,
+				BE62265C1FC42F0800D0C2B0 /* BannerExtension.swift */,
 				BE9CD6181FBAF60C00D410B0 /* BarChartViewExtension.swift */,
+				BE56BCE61FA93A0000303B70 /* CLLocationExtension.swift */,
 				BE6226411FC3098D00D0C2B0 /* DateExtension.swift */,
-				BE6226501FC423B800D0C2B0 /* MKMapViewExtension.swift */,
 				BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */,
-				BE2EC6301FAB65B70052BF6A /* UITabBarExtension.swift */,
+				BE6226501FC423B800D0C2B0 /* MKMapViewExtension.swift */,
 				BE9394B31FA9FFE40017407E /* UIColorExtension.swift */,
 				BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */,
 				BE70FA881FB4F317006D48A7 /* UINavigationBarExtension.swift */,
 				BE62264E1FC4203D00D0C2B0 /* UISearchControllerExtension.swift */,
+				BE2EC6301FAB65B70052BF6A /* UITabBarExtension.swift */,
 				BE9394B11FA9FFC00017407E /* UIViewExtension.swift */,
 				BE1F69F41FB196CC007A9C1A /* UserDefaultsExtension.swift */,
-				BE62265C1FC42F0800D0C2B0 /* BannerExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -264,14 +265,13 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		BE2EC62F1FAB61F20052BF6A /* MapKit */ = {
+		BE2EC62F1FAB61F20052BF6A /* Custom Map */ = {
 			isa = PBXGroup;
 			children = (
-				BE56BCE61FA93A0000303B70 /* CoordinateWizard.swift */,
 				BE9394AF1FA9DF7E0017407E /* CustomCircleRenderer.swift */,
 				BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */,
 			);
-			name = MapKit;
+			name = "Custom Map";
 			sourceTree = "<group>";
 		};
 		BE4A2DBB1FB061AA00044D90 /* pollutionTodayExtension */ = {
@@ -333,7 +333,7 @@
 				BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */,
 				BE6226531FC424CB00D0C2B0 /* Notifications */,
 				BE6226571FC4251A00D0C2B0 /* Custom UI Classes */,
-				BE2EC62F1FAB61F20052BF6A /* MapKit */,
+				BE2EC62F1FAB61F20052BF6A /* Custom Map */,
 				BE2EC6291FAB61350052BF6A /* Extensions */,
 				BE2EC62E1FAB61DC0052BF6A /* Controllers */,
 				BE2EC62D1FAB61B50052BF6A /* Data Models */,
@@ -605,7 +605,7 @@
 				BE4A2DDF1FB0A7AF00044D90 /* UIViewExtension.swift in Sources */,
 				BE8A4D031FB60F0700255C2E /* HiddenDatabaseCaller.swift in Sources */,
 				BE0B002F1FB339AB00F2EDD9 /* UserDefaultsExtension.swift in Sources */,
-				BE1F69E21FB0CF01007A9C1A /* CoordinateWizard.swift in Sources */,
+				BE1F69E21FB0CF01007A9C1A /* CLLocationExtension.swift in Sources */,
 				BE2BDDF01FB0AC1C0076EF4B /* PollutionDataEntry.swift in Sources */,
 				BE654B0F1FB4930D003284C6 /* Station.swift in Sources */,
 				BE1F69E01FB0AFBE007A9C1A /* PollutionAnnotation.swift in Sources */,
@@ -631,7 +631,7 @@
 				BE1F6A031FB2D91D007A9C1A /* NotificationManager.swift in Sources */,
 				BE900FC01FAB84A40023FF05 /* UIImageExtension.swift in Sources */,
 				BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */,
-				BE56BCE71FA93A0000303B70 /* CoordinateWizard.swift in Sources */,
+				BE56BCE71FA93A0000303B70 /* CLLocationExtension.swift in Sources */,
 				BE9CD6191FBAF60C00D410B0 /* BarChartViewExtension.swift in Sources */,
 				BE9CD61C1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift in Sources */,
 				BE62264F1FC4203D00D0C2B0 /* UISearchControllerExtension.swift in Sources */,

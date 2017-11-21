@@ -248,7 +248,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         
         let radius = mapView.region.getRadius()
         let span = mapView.region.span
-        let delta = pow((span.latitudeDelta + span.longitudeDelta),0.7) * 10
+        let delta = pow((span.latitudeDelta + span.longitudeDelta),0.7) * 5
         
         
         DispatchQueue.global(qos: .default).async {

@@ -1,5 +1,5 @@
 //
-//  CoordinateWizard.swift
+//  CLLocationExtension.swift
 //  pollution
 //
 //  Created by Philipp Matthes on 01.11.17.
@@ -9,10 +9,10 @@
 import Foundation
 import MapKit
 
-class CoordinateWizard {
-    static func fetchCountryAndCity(location: CLLocation, completion: @escaping (String?, String?) -> ()) {
+extension CLLocation {
+    func fetchCountryAndCity(completion: @escaping (String?, String?) -> ()) {
         print("Fetching country and city")
-        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
+        CLGeocoder().reverseGeocodeLocation(self) { placemarks, error in
             if let error = error {
                 print(error)
                 completion(nil, nil)
