@@ -55,6 +55,7 @@
 		BE8A4CFF1FB5EE5400255C2E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */; };
 		BE8A4D021FB60EA600255C2E /* HiddenDatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */; };
 		BE8A4D031FB60F0700255C2E /* HiddenDatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */; };
+		BE8CB8A01FC48EE3001688CE /* SwiftRaterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8CB89F1FC48EE3001688CE /* SwiftRaterExtension.swift */; };
 		BE900FC01FAB84A40023FF05 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */; };
 		BE9394AE1FA9DB220017407E /* CustomMapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */; };
 		BE9394B01FA9DF7E0017407E /* CustomCircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9394AF1FA9DF7E0017407E /* CustomCircleRenderer.swift */; };
@@ -151,6 +152,7 @@
 		BE70FA881FB4F317006D48A7 /* UINavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtension.swift; sourceTree = "<group>"; };
 		BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenDatabaseCaller.swift; sourceTree = "<group>"; };
+		BE8CB89F1FC48EE3001688CE /* SwiftRaterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRaterExtension.swift; sourceTree = "<group>"; };
 		BE900FBF1FAB84A40023FF05 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		BE9394AD1FA9DB220017407E /* CustomMapOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMapOverlay.swift; sourceTree = "<group>"; };
 		BE9394AF1FA9DF7E0017407E /* CustomCircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCircleRenderer.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				BE2EC6301FAB65B70052BF6A /* UITabBarExtension.swift */,
 				BE9394B11FA9FFC00017407E /* UIViewExtension.swift */,
 				BE1F69F41FB196CC007A9C1A /* UserDefaultsExtension.swift */,
+				BE8CB89F1FC48EE3001688CE /* SwiftRaterExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 				BE1F69F51FB196CC007A9C1A /* UserDefaultsExtension.swift in Sources */,
 				BE9394AE1FA9DB220017407E /* CustomMapOverlay.swift in Sources */,
 				BE50FBE41FA4AC3F00187750 /* DetailController.swift in Sources */,
+				BE8CB8A01FC48EE3001688CE /* SwiftRaterExtension.swift in Sources */,
 				BE6226421FC3098D00D0C2B0 /* DateExtension.swift in Sources */,
 				BE22C2181FA34D2B008D7659 /* Constants.swift in Sources */,
 				BE1F69FD1FB220EA007A9C1A /* State.swift in Sources */,

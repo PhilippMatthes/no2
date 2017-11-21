@@ -19,12 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         State.shared.load()
         
-        SwiftRater.daysUntilPrompt = 7
-        SwiftRater.usesUntilPrompt = 10
-        SwiftRater.significantUsesUntilPrompt = 3
-        SwiftRater.daysBeforeReminding = 1
-        SwiftRater.showLaterButton = true
-        SwiftRater.appLaunched()
+        SwiftRater.setUpFor(.testing)
         
         if let controller = self.window?.rootViewController as? TabBarController {
             controller.tabBar.setTintColor(ofUnselectedItemsWithColor: UIColor.white.withAlphaComponent(0.7), andSelectedItemsWithColor: UIColor.white)

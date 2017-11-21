@@ -165,18 +165,9 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Oi-LF-Wvh" customClass="BarChartView" customModule="Charts">
-                                <rect key="frame" x="16" y="96" width="288" height="320"/>
+                                <rect key="frame" x="16" y="96" width="288" height="312"/>
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHu-YG-FaH">
-                                <rect key="frame" x="16" y="452" width="288" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="xCb-xp-TMW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lX4-GN-kWd" customClass="UIProgressView">
                                 <rect key="frame" x="0.0" y="48" width="206.5" height="40"/>
                                 <subviews>
@@ -241,29 +232,50 @@
                                     <constraint firstAttribute="height" constant="40" id="iVR-gT-mWN"/>
                                 </constraints>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1R-sB-BKL">
-                                <rect key="frame" x="16" y="424" width="288" height="20"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tkm-7U-Lg4">
+                                <rect key="frame" x="0.0" y="416" width="320" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Station" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1R-sB-BKL">
+                                        <rect key="frame" x="16" y="36" width="288" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="ulQ-pZ-h9D"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" red="0.092719184027777776" green="0.10462782118055555" blue="0.11143663194444445" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHu-YG-FaH">
+                                        <rect key="frame" x="16" y="8" width="288" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="BLC-HX-MuK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" red="0.15787760416666666" green="0.1474338107638889" blue="0.13099500868055555" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="NNS-bT-8uL"/>
+                                    <constraint firstItem="pHu-YG-FaH" firstAttribute="top" secondItem="Tkm-7U-Lg4" secondAttribute="top" constant="8" id="2Vs-4O-a0R"/>
+                                    <constraint firstAttribute="bottom" secondItem="G1R-sB-BKL" secondAttribute="bottom" constant="8" id="3t3-yn-gPt"/>
+                                    <constraint firstItem="pHu-YG-FaH" firstAttribute="leading" secondItem="Tkm-7U-Lg4" secondAttribute="leading" constant="16" id="6s6-oH-58I"/>
+                                    <constraint firstAttribute="trailing" secondItem="pHu-YG-FaH" secondAttribute="trailing" constant="16" id="7N8-jf-O49"/>
+                                    <constraint firstItem="G1R-sB-BKL" firstAttribute="top" secondItem="pHu-YG-FaH" secondAttribute="bottom" constant="8" id="8oW-xW-mQX"/>
+                                    <constraint firstItem="G1R-sB-BKL" firstAttribute="top" secondItem="pHu-YG-FaH" secondAttribute="bottom" constant="8" id="cU8-BQ-zcx"/>
+                                    <constraint firstItem="G1R-sB-BKL" firstAttribute="leading" secondItem="Tkm-7U-Lg4" secondAttribute="leading" constant="16" id="k7b-8b-PBd"/>
+                                    <constraint firstAttribute="trailing" secondItem="G1R-sB-BKL" secondAttribute="trailing" constant="16" id="vIV-YO-pUc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.21568627450980393" green="0.21568627450980393" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="G1R-sB-BKL" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leadingMargin" id="164-DG-Mmu"/>
-                            <constraint firstItem="pHu-YG-FaH" firstAttribute="top" secondItem="G1R-sB-BKL" secondAttribute="bottom" constant="8" id="3lv-I2-E1K"/>
-                            <constraint firstItem="tLx-aS-7vZ" firstAttribute="top" secondItem="pHu-YG-FaH" secondAttribute="bottom" constant="8" id="4u7-Gk-vBe"/>
                             <constraint firstItem="cCo-lx-hog" firstAttribute="leading" secondItem="lX4-GN-kWd" secondAttribute="trailing" constant="4" id="7Of-8l-lGX"/>
                             <constraint firstItem="4Oi-LF-Wvh" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leadingMargin" id="H2x-pB-QAM"/>
+                            <constraint firstAttribute="trailing" secondItem="Tkm-7U-Lg4" secondAttribute="trailing" id="IxS-mZ-gMx"/>
                             <constraint firstItem="Kmp-cs-XGv" firstAttribute="top" secondItem="6TY-cI-bwU" secondAttribute="bottom" constant="4" id="MEw-ay-3yR"/>
                             <constraint firstItem="4Oi-LF-Wvh" firstAttribute="top" secondItem="cCo-lx-hog" secondAttribute="bottom" constant="8" id="Na7-jE-3m5"/>
                             <constraint firstItem="6TY-cI-bwU" firstAttribute="top" secondItem="xDX-in-MHe" secondAttribute="top" id="OPT-Rn-fN3"/>
-                            <constraint firstItem="G1R-sB-BKL" firstAttribute="top" secondItem="4Oi-LF-Wvh" secondAttribute="bottom" constant="8" id="Q2s-pN-NLh"/>
-                            <constraint firstItem="G1R-sB-BKL" firstAttribute="trailing" secondItem="xDX-in-MHe" secondAttribute="trailingMargin" id="Rkh-Lt-d20"/>
                             <constraint firstItem="lX4-GN-kWd" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leading" id="XW7-Hu-hil"/>
                             <constraint firstItem="6TY-cI-bwU" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leading" id="Zq3-oQ-J6Y"/>
                             <constraint firstItem="lX4-GN-kWd" firstAttribute="top" secondItem="6TY-cI-bwU" secondAttribute="bottom" constant="4" id="a73-on-Gdi"/>
@@ -271,10 +283,11 @@
                             <constraint firstAttribute="trailing" secondItem="6TY-cI-bwU" secondAttribute="trailing" id="ehf-hj-Uxk"/>
                             <constraint firstItem="4Oi-LF-Wvh" firstAttribute="trailing" secondItem="xDX-in-MHe" secondAttribute="trailingMargin" id="gfj-Wf-XeU"/>
                             <constraint firstAttribute="trailing" secondItem="Kmp-cs-XGv" secondAttribute="trailing" id="iLo-86-mEl"/>
+                            <constraint firstItem="Tkm-7U-Lg4" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leading" id="iRE-4d-33y"/>
+                            <constraint firstItem="Tkm-7U-Lg4" firstAttribute="top" secondItem="4Oi-LF-Wvh" secondAttribute="bottom" constant="8" id="oYL-0v-133"/>
                             <constraint firstItem="cCo-lx-hog" firstAttribute="leading" secondItem="lX4-GN-kWd" secondAttribute="trailing" constant="4" id="pD9-mm-sv4"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="pHu-YG-FaH" secondAttribute="trailing" id="r5d-ab-zu9"/>
                             <constraint firstAttribute="trailing" secondItem="cCo-lx-hog" secondAttribute="trailing" id="rNb-FT-fna"/>
-                            <constraint firstItem="pHu-YG-FaH" firstAttribute="leading" secondItem="xDX-in-MHe" secondAttribute="leadingMargin" id="sjw-Qt-aIw"/>
+                            <constraint firstItem="tLx-aS-7vZ" firstAttribute="top" secondItem="Tkm-7U-Lg4" secondAttribute="bottom" id="sVa-Yr-emx"/>
                             <constraint firstItem="4Oi-LF-Wvh" firstAttribute="top" secondItem="Kmp-cs-XGv" secondAttribute="bottom" constant="8" id="vcw-Rp-a5D"/>
                             <constraint firstItem="cCo-lx-hog" firstAttribute="top" secondItem="6TY-cI-bwU" secondAttribute="bottom" constant="4" id="w7n-zC-7MB"/>
                             <constraint firstItem="Kmp-cs-XGv" firstAttribute="leading" secondItem="lX4-GN-kWd" secondAttribute="trailing" id="wWD-6J-21E"/>
@@ -287,6 +300,7 @@
                         <color key="badgeColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="bottomBackground" destination="Tkm-7U-Lg4" id="Olc-W0-1mz"/>
                         <outlet property="emissionChart" destination="4Oi-LF-Wvh" id="T1K-4L-oki"/>
                         <outlet property="infoButton" destination="v1D-EN-v47" id="KBP-Cd-5lG"/>
                         <outlet property="locationLabel" destination="pHu-YG-FaH" id="w4Z-mX-LsB"/>
@@ -308,7 +322,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1393" y="222"/>
+            <point key="canvasLocation" x="1391.25" y="221.25"/>
         </scene>
         <!--Stations-->
         <scene sceneID="3D6-EE-zdP">
@@ -761,7 +775,7 @@
         <image name="settings" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E75-6X-NZL"/>
+        <segue reference="oz0-fV-CNd"/>
         <segue reference="vWE-UL-rNF"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -24,6 +24,7 @@ enum GeoCoderLoadingState {
 
 class DetailController: UIViewController, ChartViewDelegate {
     
+    @IBOutlet weak var bottomBackground: UIView!
     @IBOutlet weak var stationLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var timeLabelButton: UIButton!
@@ -53,6 +54,12 @@ class DetailController: UIViewController, ChartViewDelegate {
         super.viewDidLoad()
         
         self.view.backgroundColor = State.shared.currentColor
+    }
+    
+    override func viewDidLayoutSubviews() {
+        unitLabelBackground.roundCorners([.bottomLeft], withRadius: Constants.cornerRadius)
+        timeLabelBackground.roundCorners([.bottomRight], withRadius: Constants.cornerRadius)
+        bottomBackground.roundCorners([.topLeft, .topRight], withRadius: Constants.cornerRadius)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -201,6 +208,9 @@ class DetailController: UIViewController, ChartViewDelegate {
         infoButton.layer.cornerRadius = 12
         view.addSubview(unitLabelBackground)
         
+        stationLabel.textColor = State.shared.currentColor
+        locationLabel.textColor = State.shared.currentColor
+        
         dropper.items = Constants.timeList
         dropper.cellBackgroundColor = UIColor.white
         dropper.cornerRadius = Constants.cornerRadius
@@ -239,6 +249,8 @@ class DetailController: UIViewController, ChartViewDelegate {
         unitLabel.text = State.shared.currentType.capitalized
         unitLabel.textColor = color
         timeLabel.textColor = color
+        stationLabel.textColor = color
+        locationLabel.textColor = color
         infoButton.animate(toBackgroundColor: color, withDuration: 2.0)
         
         SwiftSpinner.sharedInstance.innerColor = color
@@ -300,7 +312,6 @@ class DetailController: UIViewController, ChartViewDelegate {
     }
     
     func performSegueToReturnBack()  {
-        
         if let vc = previousViewController as? ViewController {
             vc.initUI()
             vc.updateAnnotations(withType: State.shared.currentType)
