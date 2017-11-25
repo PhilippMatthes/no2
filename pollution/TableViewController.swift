@@ -31,6 +31,10 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    override func viewWillLayoutSubviews() {
+        navigationBar.roundCorners([.bottomLeft, .bottomRight], withRadius: State.shared.cornerRadius)
+    }
+    
     func initNavBar(withColor color: UIColor) {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)

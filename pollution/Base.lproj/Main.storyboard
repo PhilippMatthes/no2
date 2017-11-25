@@ -382,6 +382,7 @@
                             <outlet property="delegate" destination="q5C-k5-V1D" id="TJo-2i-yaj"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Stations" image="radio" id="VlE-bf-Pdr"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="biu-62-KHf">
