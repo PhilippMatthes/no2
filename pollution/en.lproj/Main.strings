@@ -1,21 +1,45 @@
 
-/* Class = "UINavigationItem"; title = "Information"; ObjectID = "4BN-Bf-rLD"; */
-"4BN-Bf-rLD.title" = "Information";
+/* Class = "UITableViewSection"; headerTitle = "Services"; ObjectID = "21r-QS-Pw3"; */
+"21r-QS-Pw3.headerTitle" = "Services";
 
-/* Class = "UILabel"; text = "Source"; ObjectID = "EHC-rH-4dH"; */
-"EHC-rH-4dH.text" = "Source";
+/* Class = "UILabel"; text = "Charts"; ObjectID = "2YC-21-dRB"; */
+"2YC-21-dRB.text" = "Charts";
+
+/* Class = "UILabel"; text = "Swing and zoom out"; ObjectID = "6Xa-vF-gAY"; */
+"6Xa-vF-gAY.text" = "Swing and zoom out";
+
+/* Class = "UILabel"; text = "Number of results"; ObjectID = "ARh-d0-UT2"; */
+"ARh-d0-UT2.text" = "Number of results";
+
+/* Class = "UITableViewSection"; headerTitle = "Startup Animation"; ObjectID = "E9X-pG-vAs"; */
+"E9X-pG-vAs.headerTitle" = "Startup Animation";
+
+/* Class = "UILabel"; text = "Wobble and zoom out"; ObjectID = "FUO-gq-iHJ"; */
+"FUO-gq-iHJ.text" = "Wobble and zoom out";
 
 /* Class = "UILabel"; text = "Station"; ObjectID = "G1R-sB-BKL"; */
 "G1R-sB-BKL.text" = "Station";
 
+/* Class = "UITableViewSection"; headerTitle = "Map"; ObjectID = "HLu-wh-Ngd"; */
+"HLu-wh-Ngd.headerTitle" = "Map";
+
 /* Class = "UINavigationItem"; title = "Detail"; ObjectID = "Hsw-5r-Hi7"; */
 "Hsw-5r-Hi7.title" = "Detail";
 
-/* Class = "UILabel"; text = "Label"; ObjectID = "LsO-Th-lB8"; */
+/* Class = "UILabel"; text = "Dropper"; ObjectID = "L7i-Gk-Kpu"; */
+"L7i-Gk-Kpu.text" = "Dropper";
+
+/* Class = "UILabel"; text = "Loading..."; ObjectID = "LsO-Th-lB8"; */
 "LsO-Th-lB8.text" = "Loading...";
 
 /* Class = "UITabBarController"; title = "TabBarController"; ObjectID = "MB2-id-E9Y"; */
 "MB2-id-E9Y.title" = "TabBarController";
+
+/* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "RHt-jf-zGw"; */
+"RHt-jf-zGw.headerTitle" = "General";
+
+/* Class = "UITextField"; text = "1000"; ObjectID = "SWJ-QB-piL"; */
+"SWJ-QB-piL.text" = "1000";
 
 /* Class = "UITabBarItem"; title = "Map"; ObjectID = "Ufk-lE-7l0"; */
 "Ufk-lE-7l0.title" = "Map";
@@ -26,17 +50,65 @@
 /* Class = "UITabBarItem"; title = "Detail"; ObjectID = "WZl-EJ-GpZ"; */
 "WZl-EJ-GpZ.title" = "Detail";
 
+/* Class = "UILabel"; text = "Pop and zoom out"; ObjectID = "XDd-Wj-6i4"; */
+"XDd-Wj-6i4.text" = "Pop and zoom out";
+
+/* Class = "UILabel"; text = "Heatmap overlay"; ObjectID = "aD4-a3-NuM"; */
+"aD4-a3-NuM.text" = "Heatmap overlay";
+
+/* Class = "UILabel"; text = "DTM Heatmap"; ObjectID = "aYv-LH-lPC"; */
+"aYv-LH-lPC.text" = "DTM Heatmap";
+
 /* Class = "UILabel"; text = "1 Day"; ObjectID = "btC-wX-Lf2"; */
 "btC-wX-Lf2.text" = "1 Day";
+
+/* Class = "UILabel"; text = "OpenAQ API"; ObjectID = "cxG-KE-clc"; */
+"cxG-KE-clc.text" = "OpenAQ API";
+
+/* Class = "UILabel"; text = "Report an Issue"; ObjectID = "dad-1m-UEI"; */
+"dad-1m-UEI.text" = "Report an Issue";
+
+/* Class = "UILabel"; text = "Squeeze and zoom out"; ObjectID = "eHd-cW-KBA"; */
+"eHd-cW-KBA.text" = "Squeeze and zoom out";
 
 /* Class = "UILabel"; text = "NO2"; ObjectID = "fEM-h9-hUO"; */
 "fEM-h9-hUO.text" = "NO2";
 
-/* Class = "UIViewController"; title = "UnitInformation"; ObjectID = "hdF-k9-pUe"; */
-"hdF-k9-pUe.title" = "UnitInformation";
+/* Class = "UILabel"; text = "SwiftSpinner"; ObjectID = "g71-T8-pAW"; */
+"g71-T8-pAW.text" = "SwiftSpinner";
+
+/* Class = "UITableViewSection"; headerTitle = "Thank you for using NO2!"; ObjectID = "iIb-d5-fOW"; */
+"iIb-d5-fOW.headerTitle" = "Thank you for using NO2!";
+
+/* Class = "UILabel"; text = "GitHub"; ObjectID = "jnx-hV-oyy"; */
+"jnx-hV-oyy.text" = "GitHub";
+
+/* Class = "UILabel"; text = "Rotate out"; ObjectID = "mxO-BQ-IQu"; */
+"mxO-BQ-IQu.text" = "Rotate out";
+
+/* Class = "UINavigationItem"; title = "NavigationBar"; ObjectID = "oB1-Dm-Ygc"; */
+"oB1-Dm-Ygc.title" = "NavigationBar";
 
 /* Class = "UILabel"; text = "Location"; ObjectID = "pHu-YG-FaH"; */
 "pHu-YG-FaH.text" = "Location";
 
 /* Class = "UILabel"; text = "NO2"; ObjectID = "pqW-vF-Y15"; */
 "pqW-vF-Y15.text" = "NO2";
+
+/* Class = "UILabel"; text = "Twitter"; ObjectID = "rdO-OP-7F8"; */
+"rdO-OP-7F8.text" = "Twitter";
+
+/* Class = "UILabel"; text = "RevealingSplashView"; ObjectID = "rn2-ou-d63"; */
+"rn2-ou-d63.text" = "RevealingSplashView";
+
+/* Class = "UILabel"; text = "Rounded design"; ObjectID = "toA-Y7-DmF"; */
+"toA-Y7-DmF.text" = "Rounded design";
+
+/* Class = "UILabel"; text = "BRYXBanner"; ObjectID = "xHD-e2-kpv"; */
+"xHD-e2-kpv.text" = "BRYXBanner";
+
+/* Class = "UILabel"; text = "SwiftRater"; ObjectID = "yfc-dG-dzg"; */
+"yfc-dG-dzg.text" = "SwiftRater";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "yyh-W7-s8I"; */
+"yyh-W7-s8I.title" = "Settings";
