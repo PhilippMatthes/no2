@@ -20,5 +20,5 @@ end
 target 'pollutionTodayExtension' do
   use_frameworks!
   pod 'Charts'
-
+  pod 'RevealingSplashView'
 end

@@ -18,9 +18,9 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         //Initialize a revealing Splash with with the iconImage, the initial size and the background color
-        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "NoShadowAppIcon")!,iconInitialSize: CGSize(width: 70, height: 70), backgroundColor: UIColor(rgb: 0x373737, alpha: 1.0))
-        
-        revealingSplashView.animationType = .twitter
+        let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "NoShadowAppIcon")!,
+                                                      iconInitialSize: CGSize(width: 70, height: 70),
+                                                      backgroundColor: UIColor(rgb: 0x373737, alpha: 1.0)).withPresetAnimationType()
         
         
         //Adds the revealing splash view as a sub view

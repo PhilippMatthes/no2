@@ -72,8 +72,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         let point = MKMapPointForCoordinate(locationCoordinate)
         let mapRect = MKMapRectMake(point.x, point.y, 0, 0)
         
-        let alertController = UIAlertController(title: NSLocalizedString("measurementSelection", comment: "Measurement selection."), message: NSLocalizedString("selectMeasurement", comment: "Select the corresponding measurement to display more information."), preferredStyle: UIAlertControllerStyle.actionSheet)
-        
+        let alertController = UIAlertController(title: NSLocalizedString("measurementSelection", comment: ""), message: NSLocalizedString("selectMeasurement", comment: ""), preferredStyle: UIAlertControllerStyle.actionSheet)
         alertController.view.tintColor = State.shared.currentColor
         
         var alertsWithDistances = [(UIAlertAction, Double)]()
@@ -181,13 +180,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
 
     @IBAction func infoButtonClicked(_ sender: UIButton) {
         let url: URL = URL(string: NSLocalizedString(State.shared.currentType+"info", comment: "Link"))!
-        let svc = SFSafariViewController(url: url)
-        if #available(iOS 10.0, *) {
-            svc.preferredControlTintColor = State.shared.currentColor
-        }
-        present(svc, animated: true, completion: {
-            
-        })
+        let svc = SFSafariViewController(url: url, tintColor: State.shared.currentColor)
+        present(svc, animated: true, completion: nil)
     }
     
     @objc func calloutTapped(sender:UITapGestureRecognizer) {
@@ -199,27 +193,26 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     
     func initUI() {
         view.layoutIfNeeded()
+        
         unitLabelBackground.progressViewStyle = .bar
         unitLabelBackground.setProgress(0.0, animated: false)
         unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
         unitLabelBackground.clipsToBounds = true
         
         unitLabel.text = State.shared.currentType.uppercased()
-        unitLabelBackground.layer.backgroundColor = State.shared.currentColor.withAlphaComponent(Constants.transparency).cgColor
-        searchButtonBackground.layer.backgroundColor = State.shared.currentColor.withAlphaComponent(Constants.transparency).cgColor
+        
         maxvalue = Constants.maxValues[State.shared.currentType]
         
         let unitButtonRecognizer = UITapGestureRecognizer(target: self, action:  #selector (self.unitButtonClicked(sender:)))
         unitLabelBackground.addGestureRecognizer(unitButtonRecognizer)
         
-        view.addSubview(unitLabelBackground)
-        
-        unitLabelBackground.layer.zPosition = 100
-        searchButtonBackground.layer.zPosition = 100
-        
         view.addSubview(mapView)
-        mapView.addSubview(unitLabelBackground)
-        mapView.addSubview(searchButtonBackground)
+        
+        for background in [unitLabelBackground!, searchButtonBackground!] {
+            background.layer.backgroundColor = State.shared.currentColor.withAlphaComponent(Constants.transparency).cgColor
+            background.layer.zPosition = 100
+            mapView.addSubview(background)
+        }
     }
     
     

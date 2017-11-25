@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import enum RevealingSplashView.SplashAnimationType
 
 struct Constants {
     static let cornerRadius = CGFloat(10.0)
@@ -47,10 +48,10 @@ struct Constants {
                              NSLocalizedString("30 Days", comment: "30 Days"): 30]
     
     static let notificationTimes = [NSLocalizedString("instantly", comment: ""),
-                                   NSLocalizedString("daily", comment: ""),
-                                   NSLocalizedString("weekly", comment: ""),
-                                   NSLocalizedString("monthly", comment: ""),
-                                   NSLocalizedString("never", comment: "")]
+                                    NSLocalizedString("daily", comment: ""),
+                                    NSLocalizedString("weekly", comment: ""),
+                                    NSLocalizedString("monthly", comment: ""),
+                                    NSLocalizedString("never", comment: "")]
     
     static let notificationTimeIntervalsList = [0,
                                                 86400,
@@ -58,11 +59,11 @@ struct Constants {
                                                 18144000,
                                                 Int.max]
     
-    static let notificationTimeIntervals = [0 : NSLocalizedString("instantly", comment: ""),
-                                            86400 : NSLocalizedString("daily", comment: ""),
-                                            604800 : NSLocalizedString("weekly", comment: ""),
-                                            18144000 : NSLocalizedString("monthly", comment: ""),
-                                            Int.max : NSLocalizedString("never", comment: "")]
+    static let notificationTimeIntervals = [0           : NSLocalizedString("instantly", comment: ""),
+                                            86400       : NSLocalizedString("daily", comment: ""),
+                                            604800      : NSLocalizedString("weekly", comment: ""),
+                                            18144000    : NSLocalizedString("monthly", comment: ""),
+                                            Int.max     : NSLocalizedString("never", comment: "")]
     
     static let font = UIFont(name: "Futura", size: 22.0)
     
@@ -72,6 +73,21 @@ struct Constants {
                               "pm25" : NSLocalizedString("pm25info", comment: "Information about pm25"),
                               "so2"  : NSLocalizedString("so2info", comment: "Information about so2"),
                               "o3"   : NSLocalizedString("o3info", comment: "Information about o3")]
+    
+    static let stringToAnimationType: [String : SplashAnimationType] = ["popAndZoomOut"     : .popAndZoomOut,
+                                                                        "rotateOut"         : .rotateOut,
+                                                                        "squeezeAndZoomOut" : .squeezeAndZoomOut,
+                                                                        "swingAndZoomOut"   : .swingAndZoomOut,
+                                                                        "twitter"           : .twitter,
+                                                                        "woobleAndZoomOut"  : .woobleAndZoomOut]
+    
+    static let animationTypeToString: [SplashAnimationType : String] = [.popAndZoomOut     : "popAndZoomOut",
+                                                                        .rotateOut         : "rotateOut",
+                                                                        .squeezeAndZoomOut : "squeezeAndZoomOut",
+                                                                        .swingAndZoomOut   : "swingAndZoomOut",
+                                                                        .twitter           : "twitter",
+                                                                        .woobleAndZoomOut  : "woobleAndZoomOut"]
+    
     
 }
 

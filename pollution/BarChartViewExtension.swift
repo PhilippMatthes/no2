@@ -73,8 +73,9 @@ extension BarChartView {
                     }
                     else {
                         let convertedDateString = Date.translateDate(fromDateFormat: "yyyy-MM-dd",
-                                                                               toDateFormat: NSLocalizedString("shortDateFormat", comment: "Date format"),
-                                                                               withDate: date)
+                                                                     toDateFormat: NSLocalizedString("shortDateFormat",
+                                                                                                     comment: "Date format"),
+                                                                     withDate: date)
                         dateLog.append(convertedDateString)
                     }
                 }

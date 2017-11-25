@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RevealingSplashView
 
 class State {
     
@@ -26,6 +27,11 @@ class State {
             State.shared.store(numberOfMapResults: newNumber)
         }
     }
+    var splashAnimationType: SplashAnimationType = .twitter {
+        willSet(newAnimationType) {
+            State.shared.store(animationType: newAnimationType)
+        }
+    }
     
     var transferAnnotation: PollutionAnnotation?
     
@@ -40,6 +46,9 @@ class State {
         if let number = UserDefaults.loadObject(ofType: Int(), withIdentifier: "numberOfMapResults") {
             State.shared.numberOfMapResults = number
         }
+        if let animationType = UserDefaults.loadObject(ofType: String(), withIdentifier: "animationType") {
+            State.shared.splashAnimationType = Constants.stringToAnimationType[animationType]!
+        }
     }
     
     func store(currentType: String) {
@@ -48,6 +57,11 @@ class State {
     
     func store(numberOfMapResults: Int) {
         UserDefaults.save(object: numberOfMapResults, withIdentifier: "numberOfMapResults")
+    }
+    
+    func store(animationType: SplashAnimationType) {
+        let stringAnimationType = Constants.animationTypeToString[animationType]!
+        UserDefaults.save(object: stringAnimationType, withIdentifier: "animationType")
     }
     
 }

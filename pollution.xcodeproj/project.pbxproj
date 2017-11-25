@@ -52,6 +52,9 @@
 		BE70FA861FB4AFED006D48A7 /* WidgetTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4A2DCB1FB07B2300044D90 /* WidgetTableController.swift */; };
 		BE70FA871FB4E961006D48A7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE56BCDE1FA9274A00303B70 /* Localizable.strings */; };
 		BE70FA891FB4F317006D48A7 /* UINavigationBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70FA881FB4F317006D48A7 /* UINavigationBarExtension.swift */; };
+		BE84CF9C1FC96836004CECAF /* MKLocalSearchRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE84CF9B1FC96836004CECAF /* MKLocalSearchRequestExtension.swift */; };
+		BE84CF9E1FC96C66004CECAF /* SFSafariViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE84CF9D1FC96C66004CECAF /* SFSafariViewControllerExtension.swift */; };
+		BE84CFA01FC97455004CECAF /* RevealingSplashViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE84CF9F1FC97455004CECAF /* RevealingSplashViewExtension.swift */; };
 		BE8A4CFF1FB5EE5400255C2E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */; };
 		BE8A4D021FB60EA600255C2E /* HiddenDatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */; };
 		BE8A4D031FB60F0700255C2E /* HiddenDatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */; };
@@ -150,6 +153,9 @@
 		BE654B141FB49740003284C6 /* pollutionTodayExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollutionTodayExtension.entitlements; sourceTree = "<group>"; };
 		BE654B151FB4975C003284C6 /* pollution.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = pollution.entitlements; sourceTree = "<group>"; };
 		BE70FA881FB4F317006D48A7 /* UINavigationBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBarExtension.swift; sourceTree = "<group>"; };
+		BE84CF9B1FC96836004CECAF /* MKLocalSearchRequestExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKLocalSearchRequestExtension.swift; sourceTree = "<group>"; };
+		BE84CF9D1FC96C66004CECAF /* SFSafariViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariViewControllerExtension.swift; sourceTree = "<group>"; };
+		BE84CF9F1FC97455004CECAF /* RevealingSplashViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealingSplashViewExtension.swift; sourceTree = "<group>"; };
 		BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenDatabaseCaller.swift; sourceTree = "<group>"; };
 		BE8CB89F1FC48EE3001688CE /* SwiftRaterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRaterExtension.swift; sourceTree = "<group>"; };
@@ -235,6 +241,9 @@
 				BE9394B11FA9FFC00017407E /* UIViewExtension.swift */,
 				BE1F69F41FB196CC007A9C1A /* UserDefaultsExtension.swift */,
 				BE8CB89F1FC48EE3001688CE /* SwiftRaterExtension.swift */,
+				BE84CF9B1FC96836004CECAF /* MKLocalSearchRequestExtension.swift */,
+				BE84CF9D1FC96C66004CECAF /* SFSafariViewControllerExtension.swift */,
+				BE84CF9F1FC97455004CECAF /* RevealingSplashViewExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -620,6 +629,7 @@
 				BE70FA891FB4F317006D48A7 /* UINavigationBarExtension.swift in Sources */,
 				BE70FA861FB4AFED006D48A7 /* WidgetTableController.swift in Sources */,
 				BE2EC6281FAB61000052BF6A /* TabBarController.swift in Sources */,
+				BE84CF9C1FC96836004CECAF /* MKLocalSearchRequestExtension.swift in Sources */,
 				BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */,
 				BE2EC6311FAB65B70052BF6A /* UITabBarExtension.swift in Sources */,
 				BE62265D1FC42F0800D0C2B0 /* BannerExtension.swift in Sources */,
@@ -630,6 +640,7 @@
 				BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */,
 				BE56BCE71FA93A0000303B70 /* CLLocationExtension.swift in Sources */,
 				BE9CD6191FBAF60C00D410B0 /* BarChartViewExtension.swift in Sources */,
+				BE84CFA01FC97455004CECAF /* RevealingSplashViewExtension.swift in Sources */,
 				BE9CD61C1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift in Sources */,
 				BE62264F1FC4203D00D0C2B0 /* UISearchControllerExtension.swift in Sources */,
 				BE9394B21FA9FFC00017407E /* UIViewExtension.swift in Sources */,
@@ -642,6 +653,7 @@
 				BE1F69E11FB0AFE1007A9C1A /* DatabaseCaller.swift in Sources */,
 				BE988FB01FA1F015007C24CF /* PollutionDataEntry.swift in Sources */,
 				BE8A4D021FB60EA600255C2E /* HiddenDatabaseCaller.swift in Sources */,
+				BE84CF9E1FC96C66004CECAF /* SFSafariViewControllerExtension.swift in Sources */,
 				BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */,
 				BE1F6A011FB2D828007A9C1A /* Notification.swift in Sources */,
 				BE1F69F91FB1B3B7007A9C1A /* StationCell.swift in Sources */,

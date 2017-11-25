@@ -193,17 +193,16 @@ class DetailController: UIViewController, ChartViewDelegate {
         
         let unitButtonRecognizer = UITapGestureRecognizer(target: self, action:  #selector (self.unitButtonClicked(sender:)))
         unitLabelBackground.addGestureRecognizer(unitButtonRecognizer)
-        unitLabelBackground.progressViewStyle = .bar
-        unitLabelBackground.setProgress(0.0, animated: true)
-        unitLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
-        unitLabelBackground.clipsToBounds = true
         
         let timeButtonRecognizer = UITapGestureRecognizer(target: self, action:  #selector (self.timeButtonClicked(sender:)))
         timeLabelBackground.addGestureRecognizer(timeButtonRecognizer)
-        timeLabelBackground.progressViewStyle = .bar
-        timeLabelBackground.setProgress(0.0, animated: true)
-        timeLabelBackground.progressTintColor = UIColor.white.withAlphaComponent(0.5)
-        timeLabelBackground.clipsToBounds = true
+        
+        for background in [unitLabelBackground!, timeLabelBackground!] {
+            background.progressViewStyle = .bar
+            background.setProgress(0.0, animated: true)
+            background.progressTintColor = UIColor.white.withAlphaComponent(0.5)
+            background.clipsToBounds = true
+        }
         
         infoButton.layer.cornerRadius = 12
         view.addSubview(unitLabelBackground)
@@ -338,13 +337,8 @@ class DetailController: UIViewController, ChartViewDelegate {
     
     @IBAction func infoButtonClicked(_ sender: UIButton) {
         let url: URL = URL(string: NSLocalizedString(State.shared.currentType+"info", comment: "Link"))!
-        let svc = SFSafariViewController(url: url)
-        if #available(iOS 10.0, *) {
-            svc.preferredControlTintColor = State.shared.currentColor
-        }
-        present(svc, animated: true, completion: {
-            
-        })
+        let svc = SFSafariViewController(url: url, tintColor: State.shared.currentColor)
+        present(svc, animated: true, completion: nil)
     }
     
 }
