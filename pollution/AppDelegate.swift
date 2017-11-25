@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         State.shared.load()
         
-        SwiftRater.setUpFor(.testing)
+        SwiftRater.setUpFor(.distributing)
         
         if let controller = self.window?.rootViewController as? TabBarController {
             controller.tabBar.setTintColor(ofUnselectedItemsWithColor: UIColor.white.withAlphaComponent(0.7), andSelectedItemsWithColor: UIColor.white)
