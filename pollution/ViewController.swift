@@ -52,8 +52,8 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
     }
     
     override func viewDidLayoutSubviews() {
-        unitLabelBackground.roundCorners([.bottomLeft, .bottomRight], withRadius: Constants.cornerRadius)
-        searchButtonBackground.roundCorners([.bottomLeft, .bottomRight], withRadius: Constants.cornerRadius)
+        unitLabelBackground.roundCorners([.bottomLeft, .bottomRight], withRadius: State.shared.cornerRadius)
+        searchButtonBackground.roundCorners([.bottomLeft, .bottomRight], withRadius: State.shared.cornerRadius)
     }
     
     @IBAction func searchButtonAction(_ sender: UIButton) {

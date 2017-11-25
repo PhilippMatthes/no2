@@ -34,15 +34,15 @@ class StationCell: UITableViewCell, ChartViewDelegate {
         
         isLoading = true
         
-        let mostRecentMeasurement = station!.entries.first!.getMostRecentMeasurement()
-        let mostRecentDate = mostRecentMeasurement?.getConvertedDate()
+        let mostRecentDate = Date()
         
-        let toDate = Calendar.current.date(byAdding: .day, value: -days, to: mostRecentDate!)!
+        let toDate = Calendar.current.date(byAdding: .day, value: -days, to: mostRecentDate)!
         
         DispatchQueue.global(qos: .default).async {
-            HiddenDatabaseCaller.makeLocalRequest(forLocation: self.station!.entries.first!.location!,                                                   withLimit: 10000, toDate:  toDate, fromDate: mostRecentDate!) {
+            HiddenDatabaseCaller.makeLocalRequest(forLocation: self.station!.entries.first!.location!,                                                   withLimit: 10000, toDate:  toDate, fromDate: mostRecentDate) {
                 entries in
-                self.station?.entries = entries
+                self.station!.entries = entries
+                _ = UserDefaults.updateStationList(withStation: self.station!)
                 DispatchQueue.main.async {
                     self.layoutIfNeeded()
                     self.emissionChart.setUpChart(intraday: days == 1,

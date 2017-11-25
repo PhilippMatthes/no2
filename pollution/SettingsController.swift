@@ -13,6 +13,7 @@ import RevealingSplashView
 
 class SettingsController: UITableViewController {
     
+    @IBOutlet weak var roundedDesignSwitch: UISwitch!
     
     @IBOutlet weak var openAQCell: UITableViewCell!
     @IBOutlet weak var swiftSpinnerCell: UITableViewCell!
@@ -39,11 +40,22 @@ class SettingsController: UITableViewController {
         setUpDoneButton(withColor: State.shared.currentColor, onFields: [numberOfResultsField])
         numberOfResultsField.layer.cornerRadius = 2.5
         numberOfResultsField.text = String(State.shared.numberOfMapResults)
+        roundedDesignSwitch.tintColor = State.shared.currentColor
+        roundedDesignSwitch.onTintColor = State.shared.currentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         switchAnimationTypeCellsVisually(toAnimationType: State.shared.splashAnimationType)
+    }
+    
+    @IBAction func roundedDesignSwitchChanged(_ sender: UISwitch) {
+        if sender.isOn {
+            State.shared.cornerRadius = CGFloat(10)
+        } else {
+            State.shared.cornerRadius = CGFloat(0)
+        }
+        tabBarController!.tabBar.roundCorners([.topLeft, .topRight], withRadius: State.shared.cornerRadius)
     }
     
     func switchAnimationTypeCellsVisually(toAnimationType type: SplashAnimationType) {

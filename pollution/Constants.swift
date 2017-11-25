@@ -11,7 +11,6 @@ import UIKit
 import enum RevealingSplashView.SplashAnimationType
 
 struct Constants {
-    static let cornerRadius = CGFloat(10.0)
     
     static let transparency = 0.9 as CGFloat
     

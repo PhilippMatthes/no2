@@ -32,6 +32,11 @@ class State {
             State.shared.store(animationType: newAnimationType)
         }
     }
+    var cornerRadius: CGFloat = CGFloat(10.0) {
+        willSet(newCornerRadius) {
+            State.shared.store(cornerRadius: newCornerRadius)
+        }
+    }
     
     var transferAnnotation: PollutionAnnotation?
     
@@ -49,6 +54,9 @@ class State {
         if let animationType = UserDefaults.loadObject(ofType: String(), withIdentifier: "animationType") {
             State.shared.splashAnimationType = Constants.stringToAnimationType[animationType]!
         }
+        if let cornerRadius = UserDefaults.loadObject(ofType: CGFloat(), withIdentifier: "cornerRadius") {
+            State.shared.cornerRadius = cornerRadius
+        }
     }
     
     func store(currentType: String) {
@@ -62,6 +70,10 @@ class State {
     func store(animationType: SplashAnimationType) {
         let stringAnimationType = Constants.animationTypeToString[animationType]!
         UserDefaults.save(object: stringAnimationType, withIdentifier: "animationType")
+    }
+    
+    func store(cornerRadius: CGFloat) {
+        UserDefaults.save(object: cornerRadius, withIdentifier: "cornerRadius")
     }
     
 }

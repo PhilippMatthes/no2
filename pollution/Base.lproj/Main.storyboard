@@ -418,8 +418,11 @@
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f9g-Cj-vBH">
                                                     <rect key="frame" x="255" y="9.5" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.2156862745" green="0.2156862745" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <connections>
+                                                        <action selector="roundedDesignSwitchChanged:" destination="HQj-5x-oug" eventType="valueChanged" id="ZNw-xN-0lT"/>
+                                                    </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toA-Y7-DmF">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rounded design" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="toA-Y7-DmF">
                                                     <rect key="frame" x="16" y="11" width="239" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -866,6 +869,7 @@
                         <outlet property="popAndZoomOutCell" destination="1lK-t7-V7t" id="Ms1-ai-u9t"/>
                         <outlet property="revealingSplashViewCell" destination="EKG-fZ-FTG" id="A79-yi-I91"/>
                         <outlet property="rotateOutCell" destination="iwa-BL-Lkb" id="jai-2O-GQu"/>
+                        <outlet property="roundedDesignSwitch" destination="f9g-Cj-vBH" id="o3R-oi-x7o"/>
                         <outlet property="squeezeAndZoomOutCell" destination="ZN3-qI-bM5" id="MDw-9T-4QA"/>
                         <outlet property="swiftRaterCell" destination="O1G-uh-6v8" id="0bO-bJ-OH7"/>
                         <outlet property="swiftSpinnerCell" destination="9Y5-hh-PZf" id="KQx-aT-Igh"/>
@@ -886,6 +890,6 @@
         <image name="settings" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vWE-UL-rNF"/>
+        <segue reference="7FI-CM-LZC"/>
     </inferredMetricsTieBreakers>
 </document>

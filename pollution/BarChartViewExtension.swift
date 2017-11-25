@@ -68,14 +68,14 @@ extension BarChartView {
                     let localTime = measurement.getLocalTimeString()
                     
                     let date = String(measurement.date!.prefix(10))
+                    let convertedDateString = Date.translateDate(fromDateFormat: "yyyy-MM-dd",
+                                                                 toDateFormat: NSLocalizedString("shortDateFormat",
+                                                                                                 comment: "Date format"),
+                                                                 withDate: date)
                     if intraday {
-                        dateLog.append(localTime)
+                        dateLog.append("\(convertedDateString) \(localTime)")
                     }
                     else {
-                        let convertedDateString = Date.translateDate(fromDateFormat: "yyyy-MM-dd",
-                                                                     toDateFormat: NSLocalizedString("shortDateFormat",
-                                                                                                     comment: "Date format"),
-                                                                     withDate: date)
                         dateLog.append(convertedDateString)
                     }
                 }

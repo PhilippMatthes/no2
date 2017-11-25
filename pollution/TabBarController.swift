@@ -39,7 +39,7 @@ class TabBarController: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        tabBar.roundCorners([.topLeft, .topRight], withRadius: Constants.cornerRadius)
+        tabBar.roundCorners([.topLeft, .topRight], withRadius: State.shared.cornerRadius)
     }
     
     func open(_ url: URL) -> Bool {

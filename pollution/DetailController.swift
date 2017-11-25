@@ -57,9 +57,9 @@ class DetailController: UIViewController, ChartViewDelegate {
     }
     
     override func viewDidLayoutSubviews() {
-        unitLabelBackground.roundCorners([.bottomLeft], withRadius: Constants.cornerRadius)
-        timeLabelBackground.roundCorners([.bottomRight], withRadius: Constants.cornerRadius)
-        bottomBackground.roundCorners([.topLeft, .topRight], withRadius: Constants.cornerRadius)
+        unitLabelBackground.roundCorners([.bottomLeft], withRadius: State.shared.cornerRadius)
+        timeLabelBackground.roundCorners([.bottomRight], withRadius: State.shared.cornerRadius)
+        bottomBackground.roundCorners([.topLeft, .topRight], withRadius: State.shared.cornerRadius)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -212,7 +212,7 @@ class DetailController: UIViewController, ChartViewDelegate {
         
         dropper.items = Constants.timeList
         dropper.cellBackgroundColor = UIColor.white
-        dropper.cornerRadius = Constants.cornerRadius
+        dropper.cornerRadius = State.shared.cornerRadius
         dropper.delegate = self
 
         changeColor(to: color)
