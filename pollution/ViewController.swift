@@ -300,8 +300,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
                         }
                     }
                     
-                    self.heatMap.setData(heatmapdata as [NSObject : AnyObject])
-                    self.mapView.add(self.heatMap)
+                    if State.shared.isHeatmapOn {
+                        self.heatMap.setData(heatmapdata as [NSObject : AnyObject])
+                        self.mapView.add(self.heatMap)
+                    } else {
+                        self.mapView.remove(self.heatMap)
+                    }
                     
                     self.requestSent = false
                 }

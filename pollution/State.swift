@@ -37,6 +37,11 @@ class State {
             State.shared.store(cornerRadius: newCornerRadius)
         }
     }
+    var isHeatmapOn: Bool = true {
+        willSet(change) {
+            State.shared.store(isHeatmapOn: change)
+        }
+    }
     
     var transferAnnotation: PollutionAnnotation?
     
@@ -57,6 +62,9 @@ class State {
         if let cornerRadius = UserDefaults.loadObject(ofType: CGFloat(), withIdentifier: "cornerRadius") {
             State.shared.cornerRadius = cornerRadius
         }
+        if let isHeatmapOn = UserDefaults.loadObject(ofType: Bool(), withIdentifier: "isHeatmapOn") {
+            State.shared.isHeatmapOn = isHeatmapOn
+        }
     }
     
     func store(currentType: String) {
@@ -74,6 +82,10 @@ class State {
     
     func store(cornerRadius: CGFloat) {
         UserDefaults.save(object: cornerRadius, withIdentifier: "cornerRadius")
+    }
+    
+    func store(isHeatmapOn: Bool) {
+        UserDefaults.save(object: isHeatmapOn, withIdentifier: "isHeatmapOn")
     }
     
 }

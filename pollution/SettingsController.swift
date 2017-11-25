@@ -13,7 +13,10 @@ import RevealingSplashView
 
 class SettingsController: UITableViewController {
     
+  
+    
     @IBOutlet weak var roundedDesignSwitch: UISwitch!
+    @IBOutlet weak var heatmapOverlaySwitch: UISwitch!
     
     @IBOutlet weak var openAQCell: UITableViewCell!
     @IBOutlet weak var swiftSpinnerCell: UITableViewCell!
@@ -37,16 +40,31 @@ class SettingsController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpDoneButton(withColor: State.shared.currentColor, onFields: [numberOfResultsField])
         numberOfResultsField.layer.cornerRadius = 2.5
         numberOfResultsField.text = String(State.shared.numberOfMapResults)
-        roundedDesignSwitch.tintColor = State.shared.currentColor
-        roundedDesignSwitch.onTintColor = State.shared.currentColor
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         switchAnimationTypeCellsVisually(toAnimationType: State.shared.splashAnimationType)
+        
+        for designSwitch in [roundedDesignSwitch!, heatmapOverlaySwitch!] {
+            designSwitch.tintColor = State.shared.currentColor
+            designSwitch.onTintColor = State.shared.currentColor
+        }
+        
+        setUpDoneButton(withColor: State.shared.currentColor, onFields: [numberOfResultsField])
+        tableView.reloadData()
+        
+        heatmapOverlaySwitch.setOn(State.shared.isHeatmapOn, animated: true)
+        roundedDesignSwitch.setOn(State.shared.cornerRadius == CGFloat(10), animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        view.isOpaque = false
+        view.layer.backgroundColor = State.shared.currentColor.cgColor
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.white
     }
     
     @IBAction func roundedDesignSwitchChanged(_ sender: UISwitch) {
@@ -56,6 +74,15 @@ class SettingsController: UITableViewController {
             State.shared.cornerRadius = CGFloat(0)
         }
         tabBarController!.tabBar.roundCorners([.topLeft, .topRight], withRadius: State.shared.cornerRadius)
+    }
+    
+    
+    @IBAction func heatMapOverlay(_ sender: UISwitch) {
+        if sender.isOn {
+            State.shared.isHeatmapOn = true
+        } else {
+            State.shared.isHeatmapOn = false
+        }
     }
     
     func switchAnimationTypeCellsVisually(toAnimationType type: SplashAnimationType) {
