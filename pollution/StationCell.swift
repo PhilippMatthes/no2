@@ -24,35 +24,11 @@ class StationCell: UITableViewCell, ChartViewDelegate {
         super.awakeFromNib()
         layer.masksToBounds = false
         isHidden = false
+        self.layoutIfNeeded()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-    }
-    
-    func getDataIfNecessary(withTimeSpanInDays days: Int, intraday: Bool, completionHandler: @escaping () -> ()) {
-        
-        isLoading = true
-        
-        let mostRecentDate = Date()
-        
-        let toDate = Calendar.current.date(byAdding: .day, value: -days, to: mostRecentDate)!
-        
-        DispatchQueue.global(qos: .default).async {
-            HiddenDatabaseCaller.makeLocalRequest(forLocation: self.station!.entries.first!.location!,                                                   withLimit: 10000, toDate:  toDate, fromDate: mostRecentDate) {
-                entries in
-                self.station!.entries = entries
-                _ = UserDefaults.updateStationList(withStation: self.station!)
-                DispatchQueue.main.async {
-                    self.layoutIfNeeded()
-                    self.emissionChart.setUpChart(intraday: days == 1,
-                                                  entries: entries,
-                                                  type: .colorOnWhite)
-                    self.isLoading = false
-                    completionHandler()
-                }
-            }
-        }
     }
     
 }

@@ -62,7 +62,7 @@ extension BarChartView {
         for measurementList in entries {
             for measurement in measurementList.measurements {
                 if measurement.type == State.shared.currentType {
-                    backgroundLog.append(Constants.maxValues[State.shared.currentType]!)
+                    backgroundLog.append(Constants.maxValues["µg/m³"]![State.shared.currentType]!)
                     emissionLog.append(measurement.value!)
                     
                     let localTime = measurement.getLocalTimeString()
@@ -97,8 +97,8 @@ extension BarChartView {
         let maxValue = Double(emissionLog.max()!)
         
         var yAxisValues = [String]()
-        for i in 0..<Int(max(Constants.maxValues[State.shared.currentType]!, maxValue)) {
-            if i == Int(Constants.maxValues[State.shared.currentType]!) {
+        for i in 0..<Int(max(Constants.maxValues["µg/m³"]![State.shared.currentType]!, maxValue)) {
+            if i == Int(Constants.maxValues["µg/m³"]![State.shared.currentType]!) {
                 yAxisValues.append(NSLocalizedString("high", comment: "High"))
             }
             else {
@@ -109,7 +109,7 @@ extension BarChartView {
         self.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
         let labelCountInYDirection = Int(self.frame.height/(labelHeight * 3))
         self.leftAxis.setLabelCount(labelCountInYDirection, force: false)
-        self.leftAxis.axisMaximum = max(Constants.maxValues[State.shared.currentType]!, maxValue)
+        self.leftAxis.axisMaximum = max(Constants.maxValues["µg/m³"]![State.shared.currentType]!, maxValue)
         
         var barChartEntries = [BarChartDataEntry]()
         var backgroundChartEntries = [BarChartDataEntry]()
@@ -147,7 +147,27 @@ extension BarChartView {
         
         data.setDrawValues(false)
         
-        self.animate(xAxisDuration: 2.0, easingOption: ChartEasingOption.easeInOutCubic)
+        animate(xAxisDuration: 1.0, yAxisDuration: 2.0, easingOption: .easeOutBack)
+        
+        let limit = Constants.maxValues["µg/m³"]![State.shared.currentType]!
+        let limitAsString = String(Constants.maxValues["µg/m³"]![State.shared.currentType]!)
+        let limitLabel = "\(NSLocalizedString("limit", comment: "")) \(limitAsString) µg/m³"
+        let limitLine = ChartLimitLine(limit: limit, label: limitLabel)
+        limitLine.labelPosition = .rightBottom
+        
+        switch type {
+            case .colorOnWhite:
+                limitLine.lineColor = UIColor.black
+                limitLine.valueTextColor = UIColor.black
+            case .whiteOnColor:
+                limitLine.lineColor = UIColor.white
+                limitLine.valueTextColor = UIColor.white
+            
+        }
+        for line in leftAxis.limitLines {
+            leftAxis.removeLimitLine(line)
+        }
+        leftAxis.addLimitLine(limitLine)
         
         self.data = data
         self.notifyDataSetChanged()

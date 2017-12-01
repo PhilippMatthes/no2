@@ -17,7 +17,6 @@ import Dropper
 class TableViewController: UITableViewController {
     
     var stations = [Station]()
-    var cells = [Int: StationCell]()
     var selectedStation: Station?
     var selector = IndexPath()
     var currentTimeSpan: String = Constants.timeList.first!
@@ -145,7 +144,7 @@ class TableViewController: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        updateCells {}
+        self.tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -160,7 +159,7 @@ class TableViewController: UITableViewController {
     
     func changeUIColor(toColor color: UIColor) {
         tableView.separatorColor = color
-        updateCells {}
+        self.tableView.reloadData()
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         refreshControl.tintColor = color
@@ -172,31 +171,34 @@ class TableViewController: UITableViewController {
     }
     
     func updateCells(completionHandler: @escaping () -> ()) {
-        indicator.startAnimating() 
         let timeSpanInDays = Constants.timeSpaces[currentTimeSpan]
         var delay = 0.0
-        for entry in cells {
-            let cell = entry.value
+        
+        self.indicator.startAnimating()
+        
+        for station in stations {
             let intraday = currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day")
             DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
-                cell.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
+                station.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
+                    DispatchQueue.main.async{
+                        self.tableView.reloadData()
+                    }
                     var allReady = true
-                    for cell in self.cells {
-                        if cell.value.isLoading {
+                    for station in self.stations {
+                        if !station.isReady {
                             allReady = false
                         }
                     }
                     if allReady {
-                        self.indicator.stopAnimating()
-                        self.refreshControl?.endRefreshing()
-                    }
-                    DispatchQueue.main.async{
-                        self.tableView.reloadData()
+                        DispatchQueue.main.async {
+                            self.indicator.stopAnimating()
+                            self.refreshControl!.endRefreshing()
+                        }
                     }
                     completionHandler()
                 }
             })
-            delay += 0.1
+            delay += 0.0
         }
         
     }
@@ -240,16 +242,19 @@ class TableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "StationCell", for: indexPath) as? StationCell {
-            cells[indexPath.row] = cell
-            
             let station = stations[indexPath.row]
+            
             if let city = station.city, let country = station.country {
                 cell.stationLabel.text = "\(station.name!) - \(city) (\(country))"
             } else {
                cell.stationLabel.text = "\(station.name!)"
             }
-            
             cell.station = station
+            
+            cell.emissionChart.setUpChart(intraday: currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day"),
+                entries: station.entries,
+                type: .colorOnWhite)
+            
             return cell
         } else {
             print("Failed to dequeue reusable cell of type StationCell")
@@ -261,6 +266,7 @@ class TableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             stations.remove(at: indexPath.row)
+            
             NSKeyedArchiver.setClassName("Station", for: Station.self)
             UserDefaults.save(object: stations, withIdentifier: "stations")
             tableView.deleteRows(at: [indexPath], with: .fade)

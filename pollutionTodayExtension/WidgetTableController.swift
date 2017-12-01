@@ -120,24 +120,22 @@ class WidgetTableController: UIViewController, NCWidgetProviding, UITableViewDel
     func updateCells(completionHandler: @escaping () -> ()) {
         indicator.startAnimating()
         let timeSpanInDays = Constants.timeSpaces[currentTimeSpan]
-        for entry in cells {
-            let cell = entry.value
+        var delay = 0.0
+        for station in stations {
             let intraday = currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day")
-            cell.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
-                var allReady = true
-                for cell in self.cells {
-                    if cell.value.isLoading {
-                        allReady = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
+                station.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
+                    let allReady = true
+                    if allReady {
+                        self.indicator.stopAnimating()
                     }
+                    DispatchQueue.main.async{
+                        self.tableView.reloadData()
+                    }
+                    completionHandler()
                 }
-                if allReady {
-                    self.indicator.stopAnimating()
-                }
-                DispatchQueue.main.async{
-                    self.tableView.reloadData()
-                }
-                completionHandler()
-            }
+            })
+            delay += 0.1
         }
         
     }

@@ -17,6 +17,10 @@ class Station: NSObject, NSCoding  {
     var city: String?
     var country: String?
     
+    var isReady: Bool = true
+    
+    var intraday: Bool = true
+    
     var pushNotificationAfterDate: Date?
     var pushNotificationIntervalInSeconds: Int?
     
@@ -93,6 +97,34 @@ class Station: NSObject, NSCoding  {
     
     func equals(station: Station) -> Bool {
         return station.name! == self.name!
+    }
+    
+    func getDataIfNecessary(withTimeSpanInDays days: Int, intraday: Bool, completionHandler: @escaping () -> ()) {
+        
+        self.isReady = false
+        
+        let mostRecentDate = Date()
+        
+        self.intraday = intraday
+        
+        let toDate = Calendar.current.date(byAdding: .day, value: -days, to: mostRecentDate)!
+        
+        DispatchQueue.global(qos: .default).async {
+            guard
+                let first = self.entries.first,
+                let location = first.location
+                else {
+                    completionHandler()
+                    return
+            }
+            HiddenDatabaseCaller.makeLocalRequest(forLocation: location,                                                   withLimit: 10000, toDate: toDate, fromDate: mostRecentDate) {
+                entries in
+                self.entries = entries
+                _ = UserDefaults.updateStationList(withStation: self)
+                self.isReady = true
+                completionHandler()
+            }
+        }
     }
     
 }

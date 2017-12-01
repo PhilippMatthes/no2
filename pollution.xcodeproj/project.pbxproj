@@ -55,6 +55,7 @@
 		BE84CF9C1FC96836004CECAF /* MKLocalSearchRequestExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE84CF9B1FC96836004CECAF /* MKLocalSearchRequestExtension.swift */; };
 		BE84CF9E1FC96C66004CECAF /* SFSafariViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE84CF9D1FC96C66004CECAF /* SFSafariViewControllerExtension.swift */; };
 		BE84CFA01FC97455004CECAF /* RevealingSplashViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE84CF9F1FC97455004CECAF /* RevealingSplashViewExtension.swift */; };
+		BE89CBA61FCC099100C57C01 /* IntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE89CBA51FCC099100C57C01 /* IntExtension.swift */; };
 		BE8A4CFF1FB5EE5400255C2E /* SettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */; };
 		BE8A4D021FB60EA600255C2E /* HiddenDatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */; };
 		BE8A4D031FB60F0700255C2E /* HiddenDatabaseCaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */; };
@@ -156,6 +157,7 @@
 		BE84CF9F1FC97455004CECAF /* RevealingSplashViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealingSplashViewExtension.swift; sourceTree = "<group>"; };
 		BE84CFA21FC9C5DD004CECAF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		BE84CFA41FC9C5DE004CECAF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		BE89CBA51FCC099100C57C01 /* IntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtension.swift; sourceTree = "<group>"; };
 		BE8A4CFE1FB5EE5400255C2E /* SettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsController.swift; sourceTree = "<group>"; };
 		BE8A4D011FB60EA600255C2E /* HiddenDatabaseCaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenDatabaseCaller.swift; sourceTree = "<group>"; };
 		BE8CB89F1FC48EE3001688CE /* SwiftRaterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRaterExtension.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				BE84CF9B1FC96836004CECAF /* MKLocalSearchRequestExtension.swift */,
 				BE84CF9D1FC96C66004CECAF /* SFSafariViewControllerExtension.swift */,
 				BE84CF9F1FC97455004CECAF /* RevealingSplashViewExtension.swift */,
+				BE89CBA51FCC099100C57C01 /* IntExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				BE1F6A031FB2D91D007A9C1A /* NotificationManager.swift in Sources */,
 				BE900FC01FAB84A40023FF05 /* UIImageExtension.swift in Sources */,
 				BE988FB21FA1F0FE007C24CF /* PollutionMeasurement.swift in Sources */,
+				BE89CBA61FCC099100C57C01 /* IntExtension.swift in Sources */,
 				BE56BCE71FA93A0000303B70 /* CLLocationExtension.swift in Sources */,
 				BE9CD6191FBAF60C00D410B0 /* BarChartViewExtension.swift in Sources */,
 				BE84CFA01FC97455004CECAF /* RevealingSplashViewExtension.swift in Sources */,

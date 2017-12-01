@@ -29,12 +29,18 @@ struct Constants {
                          "o3"   : UIColor(rgb: 0x3F51B5, alpha: 1.0)]
     
     ///Source: Umweltbundesamt
-    static let maxValues = ["no2"  : 40.0 as Double,
-                            "co"   : 10000.0 as Double,
-                            "pm10" : 40.0 as Double,
-                            "pm25" : 25.0 as Double,
-                            "so2"  : 20.0 as Double,
-                            "o3"   : 80.0 as Double]
+    static let maxValues: [String : [String : Double]] = ["µg/m³" : ["no2"  : 40.0 as Double,
+                                                                    "co"   : 10000.0 as Double,
+                                                                    "pm10" : 40.0 as Double,
+                                                                    "pm25" : 25.0 as Double,
+                                                                    "so2"  : 20.0 as Double,
+                                                                    "o3"   : 80.0 as Double],
+                                                          "ppm" : ["no2"  : 40.0 as Double,
+                                                                   "co"   : 10000.0 as Double,
+                                                                   "pm10" : 40.0 as Double,
+                                                                   "pm25" : 25.0 as Double,
+                                                                   "so2"  : 20.0 as Double,
+                                                                   "o3"   : 80.0 as Double]]
     
     static let timeList = [NSLocalizedString("1 Day", comment: "1 Day"),
                            NSLocalizedString("3 Days", comment: "3 Days"),

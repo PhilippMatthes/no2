@@ -41,6 +41,7 @@
 
 "notificationSelection" = "Meldungen konfigurieren";
 "selectNotification" = "Wählen Sie einen Zeitintervall, um Neuigkeiten zu erhalten.";
+"limit" = "Tagesgrenzwert:";
 
 "measurementSelection" = "Messungen auswählen";
 "selectMeasurement" = "Wählen Sie eine Messung aus, um mehr Informationen anzuzeigen";

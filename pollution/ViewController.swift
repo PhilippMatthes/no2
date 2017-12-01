@@ -201,7 +201,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         
         unitLabel.text = State.shared.currentType.uppercased()
         
-        maxvalue = Constants.maxValues[State.shared.currentType]
+        maxvalue = Constants.maxValues["µg/m³"]![State.shared.currentType]
         
         let unitButtonRecognizer = UITapGestureRecognizer(target: self, action:  #selector (self.unitButtonClicked(sender:)))
         unitLabelBackground.addGestureRecognizer(unitButtonRecognizer)

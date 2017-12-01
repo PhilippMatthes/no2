@@ -46,7 +46,7 @@ class NotificationManager {
                     }
                     for key in Constants.units {
                         if let measurement = entry.getMostRecentMeasurement(forType: key) {
-                            let percentage = measurement.value! / Constants.maxValues[key]!
+                            let percentage = measurement.value! / Constants.maxValues["µg/m³"]![key]!
                             let roundedPercentage = Double(round(percentage*1000)/10)
                             output += "\(measurement.value!) \(measurement.unit!) (\(measurement.type!.uppercased())) - \(roundedPercentage) %%\n"
                         }

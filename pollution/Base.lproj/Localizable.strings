@@ -41,6 +41,7 @@
 
 "notificationSelection" = "Notification configuration";
 "selectNotification" = "Choose a time interval to receive timed notifications.";
+"limit" = "Daily limit:";
 
 "measurementSelection" = "Measurement selection";
 "selectMeasurement" = "Select the corresponding measurement to display more information.";
