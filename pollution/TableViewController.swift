@@ -249,6 +249,21 @@ class TableViewController: UITableViewController {
             } else {
                cell.stationLabel.text = "\(station.name!)"
             }
+            
+            if let label = cell.refreshLabel {
+                if let interval = station.pushNotificationIntervalInSeconds {
+                    if let text = Constants.notificationTimeIntervals[interval] {
+                        label.text = "\(NSLocalizedString("rate", comment: "")): \(text)"
+                    } else {
+                        print("TVC: Wrong interval sent to Constants.notificationTimeIntervals")
+                    }
+                } else {
+                    print("TVC: No pushNotificationInterval sent")
+                }
+            } else {
+                print("TVC: Label could not be loaded")
+            }
+            
             cell.station = station
             
             cell.emissionChart.setUpChart(intraday: currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day"),

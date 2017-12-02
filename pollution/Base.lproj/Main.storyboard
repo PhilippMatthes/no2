@@ -345,34 +345,43 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="149.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LsO-Th-lB8">
-                                            <rect key="frame" x="8" y="8" width="304" height="20"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LsO-Th-lB8">
+                                            <rect key="frame" x="8" y="2" width="304" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="a30-Qp-UU8"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uB9-iY-75M" customClass="BarChartView" customModule="Charts">
-                                            <rect key="frame" x="8" y="36" width="304" height="105.5"/>
+                                            <rect key="frame" x="8" y="43" width="304" height="98"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZz-GZ-pQK">
+                                            <rect key="frame" x="8" y="24" width="304" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="uB9-iY-75M" firstAttribute="top" secondItem="LsO-Th-lB8" secondAttribute="bottom" constant="8" id="1Td-AD-DSb"/>
                                         <constraint firstAttribute="trailing" secondItem="LsO-Th-lB8" secondAttribute="trailing" constant="8" id="39P-5i-PkZ"/>
                                         <constraint firstAttribute="trailing" secondItem="uB9-iY-75M" secondAttribute="trailing" constant="8" id="3Ue-6A-XJ8"/>
                                         <constraint firstAttribute="bottom" secondItem="uB9-iY-75M" secondAttribute="bottom" constant="8" id="AE5-yG-vbb"/>
+                                        <constraint firstItem="bZz-GZ-pQK" firstAttribute="top" secondItem="LsO-Th-lB8" secondAttribute="bottom" constant="2" id="AIV-Sc-1z3"/>
                                         <constraint firstItem="LsO-Th-lB8" firstAttribute="leading" secondItem="aEq-Qe-t4h" secondAttribute="leading" constant="8" id="ERg-J1-7KX"/>
-                                        <constraint firstItem="LsO-Th-lB8" firstAttribute="top" secondItem="aEq-Qe-t4h" secondAttribute="top" constant="8" id="GZJ-YS-7Q5"/>
+                                        <constraint firstItem="LsO-Th-lB8" firstAttribute="top" secondItem="aEq-Qe-t4h" secondAttribute="top" constant="2" id="GZJ-YS-7Q5"/>
                                         <constraint firstItem="uB9-iY-75M" firstAttribute="leading" secondItem="aEq-Qe-t4h" secondAttribute="leading" constant="8" id="Q7Z-1C-wwd"/>
-                                        <constraint firstItem="uB9-iY-75M" firstAttribute="top" secondItem="LsO-Th-lB8" secondAttribute="bottom" constant="8" id="vzd-0o-swh"/>
+                                        <constraint firstItem="bZz-GZ-pQK" firstAttribute="leading" secondItem="aEq-Qe-t4h" secondAttribute="leading" constant="8" id="Tum-x3-DlB"/>
+                                        <constraint firstAttribute="trailing" secondItem="bZz-GZ-pQK" secondAttribute="trailing" constant="8" id="VFY-Ab-H6m"/>
+                                        <constraint firstItem="uB9-iY-75M" firstAttribute="top" secondItem="bZz-GZ-pQK" secondAttribute="bottom" constant="2" id="hMu-cI-h9H"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="emissionChart" destination="uB9-iY-75M" id="BYO-km-o0h"/>
+                                    <outlet property="refreshLabel" destination="bZz-GZ-pQK" id="Xsm-EX-OFQ"/>
                                     <outlet property="stationLabel" destination="LsO-Th-lB8" id="xJB-8B-z3K"/>
                                 </connections>
                             </tableViewCell>

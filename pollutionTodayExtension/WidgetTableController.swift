@@ -47,6 +47,8 @@ class WidgetTableController: UIViewController, NCWidgetProviding, UITableViewDel
         
         initUI(withColor: State.shared.currentColor)
         
+        unitButton.setTitle(State.shared.currentType.uppercased(), for: .normal)
+        
         NSKeyedUnarchiver.setClass(Station.self, forClassName: "Station")
         State.shared.defaults.synchronize()
         if let decoded = State.shared.defaults.object(forKey: "stations") as? NSData {
@@ -118,24 +120,33 @@ class WidgetTableController: UIViewController, NCWidgetProviding, UITableViewDel
     }
     
     func updateCells(completionHandler: @escaping () -> ()) {
-        indicator.startAnimating()
         let timeSpanInDays = Constants.timeSpaces[currentTimeSpan]
         var delay = 0.0
+        
+        self.indicator.startAnimating()
+        
         for station in stations {
             let intraday = currentTimeSpan == NSLocalizedString("1 Day", comment: "1 Day")
             DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
                 station.getDataIfNecessary(withTimeSpanInDays: timeSpanInDays!, intraday: intraday) {
-                    let allReady = true
-                    if allReady {
-                        self.indicator.stopAnimating()
-                    }
                     DispatchQueue.main.async{
                         self.tableView.reloadData()
+                    }
+                    var allReady = true
+                    for station in self.stations {
+                        if !station.isReady {
+                            allReady = false
+                        }
+                    }
+                    if allReady {
+                        DispatchQueue.main.async {
+                            self.indicator.stopAnimating()
+                        }
                     }
                     completionHandler()
                 }
             })
-            delay += 0.1
+            delay += 0.0
         }
         
     }

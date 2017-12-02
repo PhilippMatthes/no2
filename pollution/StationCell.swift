@@ -13,6 +13,7 @@ import Charts
 
 class StationCell: UITableViewCell, ChartViewDelegate {
     
+    @IBOutlet weak var refreshLabel: UILabel!
     @IBOutlet weak var stationLabel: UILabel!
     @IBOutlet weak var emissionChart: BarChartView!
     

@@ -208,6 +208,12 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         
         view.addSubview(mapView)
         
+        if let controller = self.tabBarController {
+            controller.tabBar.backgroundColor = State.shared.currentColor
+        } else {
+            print("Tab Bar Controller could not be unwrapped.")
+        }
+        
         for background in [unitLabelBackground!, searchButtonBackground!] {
             background.layer.backgroundColor = State.shared.currentColor.withAlphaComponent(Constants.transparency).cgColor
             background.layer.zPosition = 100
