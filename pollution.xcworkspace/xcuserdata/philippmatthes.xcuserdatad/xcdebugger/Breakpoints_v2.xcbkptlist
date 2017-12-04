@@ -866,7 +866,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/DatabaseCaller.swift"
-            timestampString = "533396004.652845"
+            timestampString = "533921180.711545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
@@ -1714,13 +1714,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/State.swift"
-            timestampString = "533396004.654244"
+            timestampString = "533921180.712069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "load()"
-            landmarkType = "7">
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1730,13 +1730,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/State.swift"
-            timestampString = "533396004.654288"
+            timestampString = "533921180.712116"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "store(currentType:)"
-            landmarkType = "7">
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1746,13 +1746,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/State.swift"
-            timestampString = "533396004.654329"
+            timestampString = "533921180.712155"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "load()"
-            landmarkType = "7">
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1778,13 +1778,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "pollution/State.swift"
-            timestampString = "533396004.654488"
+            timestampString = "533921180.712206"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
             endingLineNumber = "15"
-            landmarkName = "State"
-            landmarkType = "3">
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
                   shouldBeEnabled = "No"

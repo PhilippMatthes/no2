@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import RevealingSplashView
 import SwiftRater
+import BFPaperTabBarController
 
-class TabBarController: UITabBarController {
+class TabBarController: BFPaperTabBarController {
     
     
     override func viewDidLoad() {

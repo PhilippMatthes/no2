@@ -62,8 +62,36 @@ extension BarChartView {
         for measurementList in entries {
             for measurement in measurementList.measurements {
                 if measurement.type == State.shared.currentType {
-                    backgroundLog.append(Constants.maxValues["µg/m³"]![State.shared.currentType]!)
-                    emissionLog.append(measurement.value!)
+                    guard
+                        var value = measurement.value,
+                        let unit = measurement.unit
+                    else {
+                        print("BCVE: Value or unit could not be extracted")
+                        return
+                    }
+                    
+                    if !Constants.supportedUnits.contains(unit) {
+                        print("BCVE: Unrecognized unit parsed: \(unit)")
+                        return
+                    }
+                    
+                    backgroundLog.append(Constants.maxValues[unit]![State.shared.currentType]!)
+                    
+                    switch unit {
+                        case State.shared.currentUnit:
+                            break
+                        default:
+                            guard
+                                let coefficients = Constants.coefficients[unit],
+                                let coefficient = coefficients[State.shared.currentUnit]
+                            else {
+                                print("BCVE: Trying to transform unrecognized units: \(unit) to \(State.shared.currentUnit)")
+                                return
+                            }
+                            value *= coefficient
+                    }
+                    emissionLog.append(value)
+                    
                     
                     let localTime = measurement.getLocalTimeString()
                     
@@ -97,19 +125,19 @@ extension BarChartView {
         let maxValue = Double(emissionLog.max()!)
         
         var yAxisValues = [String]()
-        for i in 0..<Int(max(Constants.maxValues["µg/m³"]![State.shared.currentType]!, maxValue)) {
-            if i == Int(Constants.maxValues["µg/m³"]![State.shared.currentType]!) {
+        for i in 0..<Int(max(Constants.maxValues[State.shared.currentUnit]![State.shared.currentType]!, maxValue)) {
+            if i == Int(Constants.maxValues[State.shared.currentUnit]![State.shared.currentType]!) {
                 yAxisValues.append(NSLocalizedString("high", comment: "High"))
             }
             else {
-                yAxisValues.append("\(i) µg/m³")
+                yAxisValues.append("\(i) \(State.shared.currentUnit)")
             }
         }
         
         self.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
         let labelCountInYDirection = Int(self.frame.height/(labelHeight * 3))
         self.leftAxis.setLabelCount(labelCountInYDirection, force: false)
-        self.leftAxis.axisMaximum = max(Constants.maxValues["µg/m³"]![State.shared.currentType]!, maxValue)
+        self.leftAxis.axisMaximum = max(Constants.maxValues[State.shared.currentUnit]![State.shared.currentType]!, maxValue)
         
         var barChartEntries = [BarChartDataEntry]()
         var backgroundChartEntries = [BarChartDataEntry]()
@@ -149,9 +177,9 @@ extension BarChartView {
         
         animate(xAxisDuration: 1.0, yAxisDuration: 2.0, easingOption: .easeOutBack)
         
-        let limit = Constants.maxValues["µg/m³"]![State.shared.currentType]!
-        let limitAsString = String(Constants.maxValues["µg/m³"]![State.shared.currentType]!)
-        let limitLabel = "\(NSLocalizedString("limit", comment: "")) \(limitAsString) µg/m³"
+        let limit = Constants.maxValues[State.shared.currentUnit]![State.shared.currentType]!
+        let limitAsString = String(Constants.maxValues[State.shared.currentUnit]![State.shared.currentType]!)
+        let limitLabel = "\(NSLocalizedString("limit", comment: "")) \(limitAsString) \(State.shared.currentUnit)"
         let limitLine = ChartLimitLine(limit: limit, label: limitLabel)
         limitLine.labelPosition = .rightBottom
         

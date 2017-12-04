@@ -13,6 +13,7 @@ target 'pollution' do
   pod 'SwiftRater'
   pod 'BRYXBanner'
   pod 'RevealingSplashView'
+  pod 'BFPaperTabBarController'
   # Pods for pollution
 
 end

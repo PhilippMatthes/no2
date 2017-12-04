@@ -72,6 +72,7 @@
 		BE9CD61A1FBAF9A800D410B0 /* BarChartViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD6181FBAF60C00D410B0 /* BarChartViewExtension.swift */; };
 		BE9CD61C1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9CD61B1FBB71F000D410B0 /* MKCoordinateRegionExtension.swift */; };
 		BE9CD61D1FBDA9F000D410B0 /* RevealingSplashView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE9CD61E1FBDA9F000D410B0 /* RevealingSplashView.framework */; };
+		BEDFABC51FD5CC3E007FE22B /* BFPaperTabBarController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDFABC61FD5CC3E007FE22B /* BFPaperTabBarController.framework */; };
 		BEE82D891FA1C35600BEBAF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */; };
 		BEE82D8B1FA1C35600BEBAF4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */; };
 		BEE82D8E1FA1C35600BEBAF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE82D8C1FA1C35600BEBAF4 /* Main.storyboard */; };
@@ -175,6 +176,7 @@
 		BE9CD61E1FBDA9F000D410B0 /* RevealingSplashView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RevealingSplashView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDA11FF1FA22B9100A3EF51 /* DTMHeatmap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = DTMHeatmap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDA12011FA2324400A3EF51 /* JDSwiftHeatMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JDSwiftHeatMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEDFABC61FD5CC3E007FE22B /* BFPaperTabBarController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = BFPaperTabBarController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE82D851FA1C35600BEBAF4 /* pollution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pollution.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE82D881FA1C35600BEBAF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEE82D8A1FA1C35600BEBAF4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEDFABC51FD5CC3E007FE22B /* BFPaperTabBarController.framework in Frameworks */,
 				BE62263F1FC05C7800D0C2B0 /* DTMHeatmap.framework in Frameworks */,
 				BE9CD61D1FBDA9F000D410B0 /* RevealingSplashView.framework in Frameworks */,
 				BE1F6A041FB313E1007A9C1A /* BRYXBanner.framework in Frameworks */,
@@ -359,6 +362,7 @@
 		C355A3DFC11229856E2E997C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEDFABC61FD5CC3E007FE22B /* BFPaperTabBarController.framework */,
 				BE6226401FC05C7800D0C2B0 /* DTMHeatmap.framework */,
 				BE62263C1FC04CA800D0C2B0 /* DTMHeatmap.framework */,
 				BEF3FA621FBEEC6B00365A0A /* ENMBadgedBarButtonItem.framework */,
@@ -546,6 +550,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-pollution/Pods-pollution-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BFPaperTabBarController/BFPaperTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/BRYXBanner/BRYXBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/DTMHeatmap/DTMHeatmap.framework",
@@ -556,6 +561,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BFPaperTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BRYXBanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTMHeatmap.framework",

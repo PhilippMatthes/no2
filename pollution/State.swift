@@ -21,6 +21,11 @@ class State {
             State.shared.currentColor = Constants.colors[newCurrentType]!
         }
     }
+    var currentUnit: String = Constants.supportedUnits.first! {
+        willSet(newCurrentUnit) {
+            State.shared.store(currentUnit: newCurrentUnit)
+        }
+    }
     var currentColor: UIColor = Constants.colors[Constants.units.first!]!
     var numberOfMapResults: Int = 1000 {
         willSet(newNumber) {
@@ -53,6 +58,9 @@ class State {
         if let type = UserDefaults.loadObject(ofType: String(), withIdentifier: "currentType") {
             State.shared.currentType = type
         }
+        if let unit = UserDefaults.loadObject(ofType: String(), withIdentifier: "currentUnit") {
+            State.shared.currentUnit = unit
+        }
         if let number = UserDefaults.loadObject(ofType: Int(), withIdentifier: "numberOfMapResults") {
             State.shared.numberOfMapResults = number
         }
@@ -69,6 +77,10 @@ class State {
     
     func store(currentType: String) {
         UserDefaults.save(object: currentType, withIdentifier: "currentType")
+    }
+    
+    func store(currentUnit: String) {
+        UserDefaults.save(object: currentUnit, withIdentifier: "currentUnit")
     }
     
     func store(numberOfMapResults: Int) {
