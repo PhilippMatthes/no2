@@ -63,7 +63,7 @@ extension BarChartView {
             for measurement in measurementList.measurements {
                 if measurement.type == State.shared.currentType {
                     guard
-                        var value = measurement.value,
+                        let value = measurement.value,
                         let unit = measurement.unit
                     else {
                         print("BCVE: Value or unit could not be extracted")
@@ -77,19 +77,6 @@ extension BarChartView {
                     
                     backgroundLog.append(Constants.maxValues[unit]![State.shared.currentType]!)
                     
-                    switch unit {
-                        case State.shared.currentUnit:
-                            break
-                        default:
-                            guard
-                                let coefficients = Constants.coefficients[unit],
-                                let coefficient = coefficients[State.shared.currentUnit]
-                            else {
-                                print("BCVE: Trying to transform unrecognized units: \(unit) to \(State.shared.currentUnit)")
-                                return
-                            }
-                            value *= coefficient
-                    }
                     emissionLog.append(value)
                     
                     

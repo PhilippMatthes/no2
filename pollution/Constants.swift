@@ -30,9 +30,6 @@ struct Constants {
     
     static let supportedUnits: [String] = ["µg/m³", "ppm"]
     
-    static let coefficients: [String : [String : Double]] = ["µg/m³"    : ["ppm"    : 1],
-                                                             "ppm"      : ["µg/m³"  : 1]]
-    
     ///Source: Umweltbundesamt
     static let maxValues: [String : [String : Double]] = ["µg/m³" : ["no2" : 40.0,
                                                                     "co"   : 10000.0,
@@ -41,11 +38,11 @@ struct Constants {
                                                                     "so2"  : 20.0,
                                                                     "o3"   : 80.0],
                                                           "ppm" : ["no2"  : 0.2128,
-                                                                   "co"   : 10000.0,
-                                                                   "pm10" : 40.0,
-                                                                   "pm25" : 25.0,
-                                                                   "so2"  : 20.0,
-                                                                   "o3"   : 80.0]]
+                                                                   "co"   : 30.0,
+                                                                   "pm10" : 10,
+                                                                   "pm25" : 7.5,
+                                                                   "so2"  : 2.0,
+                                                                   "o3"   : 10.0]]
     
     static let timeList = [NSLocalizedString("1 Day", comment: "1 Day"),
                            NSLocalizedString("3 Days", comment: "3 Days"),
