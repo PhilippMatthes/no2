@@ -26,6 +26,7 @@ class SettingsController: UITableViewController {
     @IBOutlet weak var bryxBannerCell: UITableViewCell!
     @IBOutlet weak var revealingSplashViewCell: UITableViewCell!
     @IBOutlet weak var dtmHeatmapCell: UITableViewCell!
+    @IBOutlet weak var bfPaperTabBarControllerCell: UITableViewCell!
     @IBOutlet weak var gitHubCell: UITableViewCell!
     @IBOutlet weak var issueCell: UITableViewCell!
     
@@ -201,6 +202,8 @@ class SettingsController: UITableViewController {
                 url = URL(string: "https://github.com/PiXeL16/RevealingSplashView")!
             case dtmHeatmapCell:
                 url = URL(string: "https://github.com/PhilippMatthes/DTMHeatmap")!
+            case bfPaperTabBarControllerCell:
+                url = URL(string: "https://github.com/bfeher/BFPaperTabBarController")!
             case gitHubCell:
                 url = URL(string: "https://github.com/PhilippMatthes/no2")!
             case issueCell:
