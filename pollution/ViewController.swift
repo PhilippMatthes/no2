@@ -149,7 +149,7 @@ class ViewController: UIViewController, UISearchBarDelegate, UIPopoverPresentati
         
         let popOver = alertController.popoverPresentationController
         popOver?.sourceView = view
-        popOver?.sourceRect = view.bounds
+        popOver?.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
         popOver?.permittedArrowDirections = UIPopoverArrowDirection.any
 
         if presentedViewController == nil {
