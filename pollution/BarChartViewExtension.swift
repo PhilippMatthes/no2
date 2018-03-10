@@ -28,6 +28,7 @@ extension BarChartView {
         self.leftAxis.gridColor = UIColor.white
         self.leftAxis.labelTextColor = UIColor.white
         self.leftAxis.axisLineColor = UIColor.white
+        self.leftAxis.enabled = true
         self.isUserInteractionEnabled = false
         self.xAxis.drawGridLinesEnabled = false
         self.xAxis.drawAxisLineEnabled = false
@@ -37,9 +38,6 @@ extension BarChartView {
     }
     
     func updateChart(intraday: Bool, entries: [PollutionDataEntry], type: BarChartStyle) {
-        
-        let labelWidth = 27 as CGFloat
-        let labelHeight = 12 as CGFloat
         
         var barColor: UIColor?
         switch type {
@@ -103,11 +101,11 @@ extension BarChartView {
             return
         }
         
-        self.xAxis.valueFormatter = IndexAxisValueFormatter(values:dateLog)
-        let labelCountInXDirection = Int(self.frame.width/(labelWidth * 3))
+        self.xAxis.valueFormatter = IndexAxisValueFormatter(values: dateLog)
+        let labelCountInXDirection = 5
 
-        self.xAxis.setLabelCount(labelCountInXDirection, force: false)
-        self.xAxis.labelRotationAngle = 0
+        self.xAxis.setLabelCount(labelCountInXDirection, force: true)
+        self.xAxis.labelRotationAngle = 20
         
         let maxValue = Double(emissionLog.max()!)
         
@@ -121,9 +119,9 @@ extension BarChartView {
             }
         }
         
-        self.leftAxis.valueFormatter = IndexAxisValueFormatter(values:yAxisValues)
-        let labelCountInYDirection = Int(self.frame.height/(labelHeight * 3))
-        self.leftAxis.setLabelCount(labelCountInYDirection, force: false)
+        self.leftAxis.valueFormatter = IndexAxisValueFormatter(values: yAxisValues)
+        let labelCountInYDirection = 5
+        self.leftAxis.setLabelCount(labelCountInYDirection, force: true)
         self.leftAxis.axisMaximum = max(Constants.maxValues[State.shared.currentUnit]![State.shared.currentType]!, maxValue)
         
         var barChartEntries = [BarChartDataEntry]()

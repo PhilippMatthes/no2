@@ -33,9 +33,8 @@ class TabBarController: BFPaperTabBarController {
         //Starts animation
         revealingSplashView.animate(toBackgroundColor: State.shared.currentColor, withDuration: 2.0)
         revealingSplashView.duration = 2.0
-        revealingSplashView.startAnimation(){
-            SwiftRater.check()
-        }
+        revealingSplashView.startAnimation(){}
+        SwiftRater.check()
     }
     
     override func viewDidLayoutSubviews() {
